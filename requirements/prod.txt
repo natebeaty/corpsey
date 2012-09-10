@@ -1,0 +1,5 @@
+-r common.txt
+cssmin==0.1.4
+django-compressor==1.1.2
+django-htmlmin==0.5.1
+
