@@ -85,3 +85,6 @@ nav li a:hover,
 .comic h1 {
     font: 18px/1.2em 'Orienta', helvetica, sans-serif;
 }
+.comic {
+    margin-bottom: 60px;
+}
