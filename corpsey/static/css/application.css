@@ -4,8 +4,9 @@ Corpsey
 
 html, body { height: 100%; }
 body {
-    background: #eee;
-    font: 14px/1.3em helvetica, sans-serif;
+    background: #fff;
+    font: 14px/1.4em 'Orienta', helvetica, sans-serif;
+    color: #444;
 }
 /* Contain floats: nicolasgallagher.com/micro-clearfix-hack/ */
 .clearfix:before, .clearfix:after { content: ""; display: table; }
@@ -14,5 +15,73 @@ body {
 
 /* general typography */
 
+h1 {
+    font: 24px/1.2em 'Orienta', helvetica, sans-serif;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+}
+h2 {
+    font: 18px/1.2em 'Orienta', helvetica, sans-serif;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+}
+
 /* general layout */
 
+header.main { background: #eee; }
+header.main .wrap {
+    width: 1170px;
+    margin:0 auto 40px;
+    padding:20px;
+    text-align: center;
+}
+header.main h2 {
+    text-transform: uppercase;
+}
+header.main .intro {
+    width: 550px;
+    margin: 1em auto; 
+    font: 16px/1.3em 'Orienta', helvetica, sans-serif;
+}
+#logo { 
+    width: 655px;
+    height: 275px;
+    background: url('/static/img/logo-01.png') no-repeat;
+    text-indent: -9999em;
+    margin:8px auto; 
+}
+
+.button, nav li a {
+    font: 18px/1.2em 'Orienta', helvetica, sans-serif;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    background:#444; 
+    color: #eee;
+    padding: 8px 16px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    white-space: nowrap;
+    display:inline-block;
+    margin-bottom:4px;
+    text-decoration: none;
+    border:0;
+    cursor:pointer;
+}
+nav li a:hover,
+.button:hover { 
+    text-decoration:none; 
+    background:#555; 
+}
+
+.recent-contributors {
+    width: 1150px;
+    margin: 10px auto;
+    text-transform: uppercase;
+}
+.recent-contributors h2 {
+    text-align: center;
+    color: #ccc;
+}
+.comic h1 {
+    font: 18px/1.2em 'Orienta', helvetica, sans-serif;
+}
