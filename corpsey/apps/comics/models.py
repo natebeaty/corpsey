@@ -1,10 +1,11 @@
 from django.db import models
 from corpsey.apps.artists.models import Artist
 from easy_thumbnails.fields import ThumbnailerImageField
+from mptt.models import MPTTModel, TreeForeignKey
 
 # Create your models here.
-class Comic(models.Model):
-    parent = models.ForeignKey('self', null=True, blank=True, related_name='children')
+class Comic(MPTTModel):
+    parent = TreeForeignKey('self', null=True, blank=True, related_name='children')
     artist = models.ForeignKey(Artist, null=True, blank=True, related_name='artists')
     notes = models.TextField(blank=True)
     date = models.DateTimeField(auto_now_add=True, blank=True)
@@ -16,3 +17,6 @@ class Comic(models.Model):
 
     def __unicode__(self):
         return "%s - %s" % (self.artist.name, self.date)
+
+    class MPTTMeta:
+        order_insertion_by = ['date']
