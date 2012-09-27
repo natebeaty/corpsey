@@ -1,9 +1,9 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>{{ flatpage.title }}</title>
-</head>
-<body>
-{{ flatpage.content }}
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block body_id %}static-page{% endblock %}
+{% block title %}{{ flatpage.title }}{% endblock %}
+
+{% block content %}
+    <h1>{{ flatpage.title }}</h1>
+    {{ flatpage.content }}
+{% endblock content %}
