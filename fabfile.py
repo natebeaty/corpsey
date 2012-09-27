@@ -7,4 +7,16 @@ def deploy():
     with cd('/home/natebeaty/webapps/django14/corpsey/'):
         run('git pull origin master')
         run('python manage.py collectstatic --noinput')
-        run('../apache2/bin/restart')
+        restart()
+
+def syncdb():
+    with cd('/home/natebeaty/webapps/django14/corpsey/'):
+        run('python manage.py syncdb')
+        # run('../apache2/bin/restart')
+
+def migrate():
+    with cd('/home/natebeaty/webapps/django14/corpsey/'):
+        run('python manage.py migrate')
+
+def restart():
+    run('/home/natebeaty/webapps/django14/apache2/bin/restart')
