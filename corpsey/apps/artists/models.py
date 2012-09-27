@@ -1,5 +1,6 @@
 from django.db import models
 from easy_thumbnails.fields import ThumbnailerImageField
+import re 
 
 # Create your models here.
 class Artist(models.Model):
@@ -11,3 +12,11 @@ class Artist(models.Model):
     
     def __unicode__(self):
         return self.name
+
+    def save(self, *args, **kwargs):
+		# generate first/last name from full name
+        if self.name and not self.first_name and not self.last_name:
+			foo = self.name.split(' ');
+			self.last_name = foo[-1]
+			self.first_name = re.sub(foo[-1], "",self.name).strip()
+        super(Artist, self).save(*args, **kwargs)
