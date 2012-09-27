@@ -1,5 +1,6 @@
-$.corpsey = (function() {
+// trubble club codes for pleasure
 
+$.corpsey = (function() {
 
     function _init() {
         // placeholder helper for IE, et al (see jquery.placeholder.min.js)

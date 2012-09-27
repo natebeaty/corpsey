@@ -11,7 +11,7 @@ admin.autodiscover()
 urlpatterns = patterns('',
     # Examples:
     url(r'^$', 'corpsey.views.home', name='home'),
-    # url(r'^corpsey/', include('corpsey.foo.urls')),
+    url(r'^catacomb/', 'corpsey.apps.comics.views.home', name='catacomb'),
     
     url(r'^admin/filebrowser/', include(site.urls)),
 
