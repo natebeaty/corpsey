@@ -7,5 +7,6 @@ from django.template import RequestContext
 def home(request):
     page = get_object_or_404(FlatPage,url='/catacomb/')
     return render_to_response('comics/home.html',  {
-        'page': page,
-        }, RequestContext(request))
+	    'page': page,
+	    'comics': Comic.objects.all(),
+	    }, RequestContext(request))
