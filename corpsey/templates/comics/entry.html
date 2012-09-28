@@ -23,11 +23,21 @@
       <li>{% if comic_2.panel3 %}<img class="panel3" src="{{ comic_2.panel3.midsize.url }}">{% endif %}</li>
     </ul>
   </article>
-{% else %}
   {% if comic_links %}
+  <h2>Next:</h2>
   <ul class="next-comic">
     {% for comic in comic_links %}
-      <li><a href="{{ comic.get_absolute_url }}">{{ comic.artist.last_name }}</a></li>      
+      <li><a class="button" href="/catacombs/{{ comic_2.id }}/{{ comic.id }}/">{{ comic.artist.last_name }}</a></li>      
+    {% endfor %}
+  </ul>
+  {% endif %}
+
+{% else %}
+  {% if comic_links %}
+  <h2>Next:</h2>
+  <ul class="next-comic">
+    {% for comic in comic_links %}
+      <li><a class="button" href="/catacombs/{{ comic_1.id }}/{{ comic.id }}/">{{ comic.artist.last_name }}</a></li>      
     {% endfor %}
   </ul>
   {% endif %}

@@ -22,5 +22,5 @@ class Comic(MPTTModel):
     def __unicode__(self):
         return "%s - %s" % (self.artist.name, self.date)
 
-    class MPTTMeta:
-        order_insertion_by = ['date']
+    # class MPTTMeta:
+    #     order_insertion_by = ['date']

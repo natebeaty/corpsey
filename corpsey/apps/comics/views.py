@@ -18,15 +18,25 @@ def random(request):
 def entry(request, comic_1, comic_2=None):
     comic_links = []
     comic_1 = get_object_or_404(Comic,pk=comic_1)
+    
     if comic_2:
         comic_2 = get_object_or_404(Comic,pk=comic_2)
+        next_sib = comic_2.get_next_sibling()
+        if next_sib:
+            comic_links.append(next_sib)
+        children = comic_2.get_children()
+        if children:
+            comic_links.append(children[0])
     else:
         # build next/child comic nav if possible
-        comic_links.append(comic_1.get_next_sibling())
+        next_sib = comic_1.get_next_sibling()
+        if next_sib:
+            comic_links.append(next_sib)
         children = comic_1.get_children()
         if children:
             comic_links.append(children[0])
         comic_2 = None
+
     return render_to_response('comics/entry.html',  {
         'comic_1': comic_1,
         'comic_2': comic_2,
