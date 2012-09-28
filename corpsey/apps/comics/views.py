@@ -16,12 +16,13 @@ def random(request):
     return redirect(comic_to)
 
 def entry(request, comic_1, comic_2=None):
+    comic_links = []
     comic_1 = get_object_or_404(Comic,pk=comic_1)
     if comic_2:
         comic_2 = get_object_or_404(Comic,pk=comic_2)
     else:
         # build next/child comic nav if possible
-        comic_links = [comic_1.get_next_sibling()]
+        comic_links.append(comic_1.get_next_sibling())
         children = comic_1.get_children()
         if children:
             comic_links.append(children[0])
