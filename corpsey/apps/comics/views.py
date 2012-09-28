@@ -20,10 +20,16 @@ def entry(request, comic_1, comic_2=None):
     if comic_2:
         comic_2 = get_object_or_404(Comic,pk=comic_2)
     else:
+        # build next/child comic nav if possible
+        comic_links = [comic_1.get_next_sibling()]
+        children = comic_1.get_children()
+        if children:
+            comic_links.append(children[0])
         comic_2 = None
     return render_to_response('comics/entry.html',  {
         'comic_1': comic_1,
         'comic_2': comic_2,
+        'comic_links': comic_links,
         'active_comics': [comic_1, comic_2],
         'comics': Comic.objects.all(),
         }, RequestContext(request))
