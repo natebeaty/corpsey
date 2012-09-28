@@ -121,36 +121,37 @@ a#clixel {
 
 /* homepage */
 
-#home-page #content { margin-left: 0; }
-#home-page nav li a {
+#homepage #content { margin-left: 0; }
+#homepage nav li a {
     font: 18px/1.2em 'Arbutus Slab', helvetica, sans-serif;
     padding: 8px 16px;
 }
-#home-page header.main {
+#homepage header.main {
     float: none;
     width: auto;
 }
-#home-page header.main .wrap {
+#homepage header.main .wrap {
     width: 1170px;
     margin:0 auto 40px;
     padding:20px;
     text-align: center;
 }
-#home-page header.main h2 {
+#homepage header.main h2 {
     text-transform: uppercase;
 }
-#home-page header.main .intro {
+#homepage header.main .intro {
     width: 550px;
     margin: 1em auto; 
     font: 16px/1.3em 'Arbutus Slab', helvetica, sans-serif;
 }
-#home-page #logo { 
+#homepage #logo { 
     width: 655px;
     height: 275px;
     background: url('/static/img/logo-01.png') no-repeat;
     text-indent: -9999em;
     margin:8px auto; 
 }
+#homepage 
 .recent-contributors {
     width: 1150px;
     margin: 10px auto;
@@ -160,11 +161,15 @@ a#clixel {
     text-align: center;
     color: #ccc;
 }
+.recent-contributors article:nth-child(2) { opacity: .8; }
+.recent-contributors article:nth-child(3) { opacity: .6; }
+.recent-contributors article:nth-child(4) { opacity: .4; }
+.recent-contributors article:nth-child(5) { opacity: .2; }
 .comic h1 {
     font: 18px/1.2em 'Arbutus Slab', helvetica, sans-serif;
     margin: .5em 0 0;
 }
-#home-page .comic {
+#homepage .comic {
     margin-bottom: 60px;
 }
 
@@ -195,3 +200,4 @@ a#clixel {
     bottom: 200px;
     white-space: nowrap;
 }
+
