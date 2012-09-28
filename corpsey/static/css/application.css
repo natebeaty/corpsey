@@ -28,6 +28,8 @@ h2 {
     margin: 1em 0;
 }
 
+/* multiple usables */
+
 .button, nav li a {
     font: 12px/1.2em 'Arbutus Slab', helvetica, sans-serif;
     letter-spacing: .2em;
@@ -56,16 +58,34 @@ nav ul li {
     display: inline-block;
 }
 
+.tree { text-align: left; padding-left: 190px; }
+.tree a {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    background: #ccc;
+    text-indent: -9999em;
+    margin: 4px;
+}
+.tree a:hover,
+.tree li.active>a {
+    background: #666;
+}
+.tree ul { 
+    display: inline-block; 
+}
+
 /* general layout */
+
 #wrapper { overflow: hidden; }
-#content { margin-left: 470px; }
+#content { margin-left: 440px; }
 header.main { 
-    width: 450px;
+    width: 430px;
     float: left;
     background: #eee;
 }
 header.main .wrapper {
-    padding:20px;
+    padding:20px 0;
     text-align: center;
     min-height: 500px;
 }
@@ -81,7 +101,26 @@ header.main .wrapper {
     width: 100%;
     height: 100%;
 }
+
+footer.main {
+    position: relative;
+    height: 580px;
+    background: url('/static/img/footer.png') bottom center no-repeat;
+}
+a#clixel {
+    position: absolute;
+    bottom: 20px;
+    right:10%;
+    width: 53px;
+    height: 20px;
+    text-indent: -9999em;
+    display: block;
+    background: url('/static/img/clixel.gif') no-repeat;
+}
+
+
 /* homepage */
+
 #home-page #content { margin-left: 0; }
 #home-page nav li a {
     font: 18px/1.2em 'Arbutus Slab', helvetica, sans-serif;
@@ -112,7 +151,6 @@ header.main .wrapper {
     text-indent: -9999em;
     margin:8px auto; 
 }
-
 .recent-contributors {
     width: 1150px;
     margin: 10px auto;
@@ -126,39 +164,34 @@ header.main .wrapper {
     font: 18px/1.2em 'Arbutus Slab', helvetica, sans-serif;
     margin: .5em 0 0;
 }
-.comic {
+#home-page .comic {
     margin-bottom: 60px;
 }
 
-footer.main {
-    position: relative;
-    height: 580px;
-    background: url('/static/img/footer.png') bottom center no-repeat;
-}
-a#clixel {
-    position: absolute;
-    bottom: 20px;
-    right:10%;
-    width: 53px;
-    height: 20px;
-    text-indent: -9999em;
-    display: block;
-    background: url('/static/img/clixel.gif') no-repeat;
-}
+/* catacombs */
 
-.tree { text-align: left; padding-left: 190px; }
-.tree a {
-    display: inline-block;
-    width: 15px;
-    height: 15px;
-    background: #ccc;
-    text-indent: -9999em;
-    margin: 4px;
+#catacombs { position: relative; }
+.comic ul,
+.comic li { display: inline; }
+.comic.single { display: inline;}
+.comic.single h1 { position: absolute;}
+#catacombs { padding-left: 20px; margin: 30px 0 0 10px; }
+#catacombs .comic h1 { color: #999; }
+#catacombs .comic_1 h1 {
+    -webkit-transform: rotate(270deg); 
+    -webkit-transform-origin: right top;
+    transform: rotate(270deg); 
+    transform-origin: right top;
+    right: 100%;
+    top: 80px;
+    white-space: nowrap;
 }
-.tree a:hover,
-.tree li.active>a {
-    background: #666;
-}
-.tree ul { 
-    display: inline-block; 
+#catacombs .comic_2 h1 {
+    -webkit-transform: rotate(90deg); 
+    -webkit-transform-origin: left top;
+    transform: rotate(90deg); 
+    transform-origin: left top;
+    left: 810px;
+    bottom: 200px;
+    white-space: nowrap;
 }

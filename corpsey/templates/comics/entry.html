@@ -2,9 +2,10 @@
 {% load thumbnail %}
 
 {% block content %}
+<section id="catacombs">
 {% if comic_1 %}
-  <article class="comic">
-    <h1>{{ comic_1.artist }}</h1>
+  <article class="comic single comic_1">
+    <h1>{{ comic_1.artist.last_name }}</h1>
     <ul>
       <li>{% if comic_1.panel1 %}<img class="panel1" src="{{ comic_1.panel1.midsize.url }}">{% endif %}</li>
       <li>{% if comic_1.panel2 %}<img class="panel2" src="{{ comic_1.panel2.midsize.url }}">{% endif %}</li>
@@ -14,8 +15,8 @@
 {% endif %}
 
 {% if comic_2 %}
-  <article class="comic">
-    <h1>{{ comic_2.artist }}</h1>
+  <article class="comic single comic_2">
+    <h1>{{ comic_2.artist.last_name }}</h1>
     <ul>
       <li>{% if comic_2.panel1 %}<img class="panel1" src="{{ comic_2.panel1.midsize.url }}">{% endif %}</li>
       <li>{% if comic_2.panel2 %}<img class="panel2" src="{{ comic_2.panel2.midsize.url }}">{% endif %}</li>
@@ -23,6 +24,7 @@
     </ul>
   </article>
 {% endif %}
+</section>
 
 {% endblock content %}
 
