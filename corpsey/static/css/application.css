@@ -58,6 +58,7 @@ nav ul li {
 
 /* general layout */
 #wrapper { overflow: hidden; }
+#content { margin-left: 470px; }
 header.main { 
     width: 450px;
     float: left;
@@ -81,6 +82,7 @@ header.main .wrapper {
     height: 100%;
 }
 /* homepage */
+#home-page #content { margin-left: 0; }
 #home-page nav li a {
     font: 18px/1.2em 'Arbutus Slab', helvetica, sans-serif;
     padding: 8px 16px;
@@ -142,4 +144,21 @@ a#clixel {
     text-indent: -9999em;
     display: block;
     background: url('/static/img/clixel.gif') no-repeat;
+}
+
+.tree { text-align: left; padding-left: 190px; }
+.tree a {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    background: #ccc;
+    text-indent: -9999em;
+    margin: 4px;
+}
+.tree a:hover,
+.tree li.active>a {
+    background: #666;
+}
+.tree ul { 
+    display: inline-block; 
 }
