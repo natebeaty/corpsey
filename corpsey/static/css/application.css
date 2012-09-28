@@ -161,10 +161,10 @@ a#clixel {
     text-align: center;
     color: #ccc;
 }
-.recent-contributors article:nth-child(2) { opacity: .8; }
-.recent-contributors article:nth-child(3) { opacity: .6; }
-.recent-contributors article:nth-child(4) { opacity: .4; }
-.recent-contributors article:nth-child(5) { opacity: .2; }
+.recent-contributors article:nth-child(3) { opacity: .8; }
+.recent-contributors article:nth-child(4) { opacity: .6; }
+.recent-contributors article:nth-child(5) { opacity: .4; }
+.recent-contributors article:nth-child(6) { opacity: .2; }
 .comic h1 {
     font: 18px/1.2em 'Arbutus Slab', helvetica, sans-serif;
     margin: .5em 0 0;
