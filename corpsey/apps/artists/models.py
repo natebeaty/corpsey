@@ -13,6 +13,10 @@ class Artist(models.Model):
     def __unicode__(self):
         return self.name
 
+    @models.permalink
+    def get_absolute_url(self):
+        return ('artist.views.entry', [str(self.slug)])
+
     def save(self, *args, **kwargs):
 		# generate first/last name from full name
         if self.name and not self.first_name and not self.last_name:
