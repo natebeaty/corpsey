@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+
+{% block content %}
+<p>Upload!</p>
+<form action="{% url list %}" method="post" enctype="multipart/form-data">
+	{% csrf_token %}
+	<p>{{ form.non_field_errors }}</p>
+	<p>{{ form.panel1.label_tag }} {{ form.panel1.help_text }}</p>
+	<p>
+		{{ form.docfile.errors }}
+		{{ form.docfile }}
+	</p>
+	<p><input type="submit" value="Upload" /></p>
+</form>
+{% endblock content %}
+
+{% block extra_javascript %}
+  <script src="{{ STATIC_URL }}js/contribute.js" type="text/javascript"></script>
+{% endblock extra_javascript %}
