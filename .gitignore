@@ -1,3 +1,7 @@
 .venv/
 *.pyc
-/static/
+static/
+wrk/
+virtualenv.py
+src/
+.DS_Store
