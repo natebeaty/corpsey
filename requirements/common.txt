@@ -10,3 +10,4 @@ django-taggit==0.9.3
 django-taggit-autosuggest==0.2
 easy-thumbnails==1.1
 wsgiref==0.1.2
+# -e git+ssh://git@github.com/mauler/django-jcrop.git#egg=django-jcrop
