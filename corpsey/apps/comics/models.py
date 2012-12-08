@@ -15,8 +15,12 @@ class Comic(MPTTModel):
     panel2 = ThumbnailerImageField(upload_to='comics', blank=True)
     panel3 = ThumbnailerImageField(upload_to='comics', blank=True)
 
+    @models.permalink
+    def get_absolute_url(self):
+        return ('corpsey.apps.comics.views.entry', [str(self.id)])
+
     def __unicode__(self):
         return "%s - %s" % (self.artist.name, self.date)
 
-    class MPTTMeta:
-        order_insertion_by = ['date']
+    # class MPTTMeta:
+    #     order_insertion_by = ['date']

@@ -11,8 +11,13 @@ admin.autodiscover()
 urlpatterns = patterns('',
     # Examples:
     url(r'^$', 'corpsey.views.home', name='home'),
+    url(r'^catacombs/(?P<comic_1>[\d]+)/(?P<comic_2>\d+)/$', 'corpsey.apps.comics.views.entry', name='comic'),
+    url(r'^catacombs/(?P<comic_1>[\d]+)/$', 'corpsey.apps.comics.views.entry', name='comic'),
     url(r'^catacombs/', 'corpsey.apps.comics.views.home', name='catacombs'),
+    url(r'^random/', 'corpsey.apps.comics.views.random', name='random'),
     
+    url(r'^artist/([\d]+)/$', 'corpsey.apps.artists.views.entry', name='artist'),
+            
     url(r'^admin/filebrowser/', include(site.urls)),
 
     # Uncomment the admin/doc line below to enable admin documentation:

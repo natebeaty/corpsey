@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+
+{% block content %}
+<section id="catacombs">
+{% if comic_1 %}
+  <article class="comic single comic_1">
+    <h1>{{ comic_1.artist.last_name }}</h1>
+    <ul>
+      <li>{% if comic_1.panel1 %}<img class="panel1" src="{{ comic_1.panel1.midsize.url }}">{% endif %}</li>
+      <li>{% if comic_1.panel2 %}<img class="panel2" src="{{ comic_1.panel2.midsize.url }}">{% endif %}</li>
+      <li>{% if comic_1.panel3 %}<img class="panel3" src="{{ comic_1.panel3.midsize.url }}">{% endif %}</li>
+    </ul>
+  </article>
+{% endif %}
+
+{% if comic_2 %}
+  <article class="comic single comic_2">
+    <h1>{{ comic_2.artist.last_name }}</h1>
+    <ul>
+      <li>{% if comic_2.panel1 %}<img class="panel1" src="{{ comic_2.panel1.midsize.url }}">{% endif %}</li>
+      <li>{% if comic_2.panel2 %}<img class="panel2" src="{{ comic_2.panel2.midsize.url }}">{% endif %}</li>
+      <li>{% if comic_2.panel3 %}<img class="panel3" src="{{ comic_2.panel3.midsize.url }}">{% endif %}</li>
+    </ul>
+  </article>
+  {% if comic_links %}
+  <h2>Next:</h2>
+  <ul class="next-comic">
+    {% for comic in comic_links %}
+      <li><a class="button" href="/catacombs/{{ comic_2.id }}/{{ comic.id }}/">{{ comic.artist.last_name }}</a></li>      
+    {% endfor %}
+  </ul>
+  {% endif %}
+
+{% else %}
+  {% if comic_links %}
+  <h2>Next:</h2>
+  <ul class="next-comic">
+    {% for comic in comic_links %}
+      <li><a class="button" href="/catacombs/{{ comic_1.id }}/{{ comic.id }}/">{{ comic.artist.last_name }}</a></li>      
+    {% endfor %}
+  </ul>
+  {% endif %}
+{% endif %}
+</section>
+
+{% endblock content %}
+
+{% block extra_javascript %}
+  <script src="{{ STATIC_URL }}js/catacomb.js" type="text/javascript"></script>
+{% endblock extra_javascript %}

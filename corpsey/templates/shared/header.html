@@ -1,3 +1,5 @@
+{% load mptt_tags %}
+
 <header class="main"><div class="wrapper">
     <h2 class="tc-presents">Trubble Club Presents</h2>
     <h1 id="logo"><a href="/">Corpsey</a></h1>
@@ -8,12 +10,12 @@
             <li><a href="/random/" title="Random">Random</a></li>
         </ul>
     </nav>
-    {% comment %}
-     {% load mptt_tags %}
-    <ul>
+
+    <ul class="tree">
+        {% if comics %}
         {% recursetree comics %}
-            <li>
-                {{ node.title }}
+            <li {% if active_comics and node in active_comics %}class="active"{% endif %}>
+                <a href="{{ node.get_absolute_url }}">{{ node }}</a>
                 {% if not node.is_leaf_node %}
                     <ul class="children">
                         {{ children }}
@@ -21,6 +23,6 @@
                 {% endif %}
             </li>
         {% endrecursetree %}
+        {% endif %}
     </ul>
-    {% endcomment %}
 </div></header>
