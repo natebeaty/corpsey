@@ -13,12 +13,16 @@ class UploadForm(forms.Form):
         label='Select a file',
         help_text='max. 42 megabytes'
     )
+    # parent_id = forms.CharField(
+    #     required=False
+    # )
     name = forms.CharField(
-    	label='Your Name'
+        label='Your Name'
     )
     email = forms.CharField(
-    	label='Your email'
+        label='Your email'
     )
     website = forms.CharField(
-    	label='Your website'
+        label='Your website',
+        required=False
     )

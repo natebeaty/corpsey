@@ -201,3 +201,30 @@ a#clixel {
     white-space: nowrap;
 }
 
+/* contribute */
+label {
+    display: block;
+    font: 14px/1.2em "myriad pro", helvetica, sans-serif;
+    text-transform: uppercase;
+    margin: 1em 0 0;
+}
+.contribute input[type=text] {
+    font: 16px/1.2em "myriad pro", helvetica, sans-serif;
+    color: #fff;
+    width: 300px;
+    background: #000;
+    border:0;
+    padding: 6px; 
+}
+.contribute input[type=submit] {
+    font: 16px/1em "myriad pro", helvetica, sans-serif;
+    padding: 10px 60px 8px;
+    background: #666;
+    color: #fff;
+    border: 0;
+    text-transform: uppercase;
+    margin: 1em 0;
+}
+.contribute input[type=submit]:hover {
+    background: #7a7a7a;
+}

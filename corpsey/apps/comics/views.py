@@ -52,23 +52,47 @@ from django.core.urlresolvers import reverse
 from corpsey.apps.comics.forms import UploadForm
 
 def contribute(request):
+    message = ''
     if request.method == 'POST':
         form = UploadForm(request.POST, request.FILES)
         if form.is_valid():
+            # parent sent?
+            # if form.parent_id:
+            #     parent = Comic(pk=form.cleaned_data.parent_id)
+            # else:
+            #     parent = null
+
+            # look for artist or add new
+            try:
+                artist = Artist.objects.get(name=form.cleaned_data['name'])
+            except DoesNotExist:
+                artist = Artist(name=form.cleaned_data['name'])
+            artist.email=form.cleaned_data['email']
+            if form.cleaned_data['website']:
+                artist.website=form.cleaned_data['website']
+            artist.save()
+
             comic = Comic(
                 panel1 = request.FILES['panel1'],
-                panel2 = request.FILES['panel2'],
-                panel3 = request.FILES['panel3']
+                artist = artist
+                # panel2 = request.FILES['panel2'],
+                # panel3 = request.FILES['panel3']
             )
             comic.save()
-            # return HttpResponseRedirect(reverse('myapp.views.list'))
+            message = "Comic saved ok! %s" % comic.get_absolute_url()
+            # return HttpResponseRedirect(reverse('myapp.views.contribute'))
+        else:
+            message = "oh no!"
     else:
         form = UploadForm()
 
 
     # Render list page with the documents and the form
     return render_to_response(
-        'corpsey/comics/contribute.html',
-        {'form': form},
+        'comics/contribute.html',
+        {
+            'form': form,
+            'message': message
+        },
         context_instance=RequestContext(request)
     )

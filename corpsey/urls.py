@@ -15,6 +15,7 @@ urlpatterns = patterns('',
     url(r'^catacombs/(?P<comic_1>[\d]+)/$', 'corpsey.apps.comics.views.entry', name='comic'),
     url(r'^catacombs/', 'corpsey.apps.comics.views.home', name='catacombs'),
     url(r'^random/', 'corpsey.apps.comics.views.random', name='random'),
+    url(r'^contribute/', 'corpsey.apps.comics.views.contribute', name='contribute'),
     
     url(r'^artist/([\d]+)/$', 'corpsey.apps.artists.views.entry', name='artist'),
             

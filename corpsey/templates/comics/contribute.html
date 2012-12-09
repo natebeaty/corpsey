@@ -2,16 +2,30 @@
 {% load thumbnail %}
 
 {% block content %}
-<p>Upload!</p>
-<form action="{% url list %}" method="post" enctype="multipart/form-data">
-	{% csrf_token %}
-	<p>{{ form.non_field_errors }}</p>
-	<p>{{ form.panel1.label_tag }} {{ form.panel1.help_text }}</p>
-	<p>
-		{{ form.docfile.errors }}
-		{{ form.docfile }}
-	</p>
-	<p><input type="submit" value="Upload" /></p>
+<h1>Upload!</h1>
+{{ message }}
+<form class="contribute" action="{% url contribute %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+        {{ form.non_field_errors }}
+        <label for="id_panel1" class="required">{{ form.panel1.label_tag }}</label> 
+        {{ form.panel1.errors }}
+        {{ form.panel1 }}
+
+        {{ form.name.errors }}
+        <label for="id_name" class="required">{{ form.name.label_tag }}</label> 
+        {{ form.name }}
+
+        {{ form.email.errors }}
+        <label for="id_email" class="required">{{ form.email.label_tag }}</label> 
+        {{ form.email }}
+
+        {{ form.website.errors }}
+        <label for="id_website">{{ form.website.label_tag }}</label> 
+        {{ form.website }}
+
+        {{ form.parent_id.as_hidden }}
+
+    <div class="actions"><input type="submit" value="Upload" /></div>
 </form>
 {% endblock content %}
 
