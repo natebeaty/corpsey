@@ -9,7 +9,7 @@ class ComicForm(forms.ModelForm):
 
 class ComicAdmin(TreeAdmin):
     # list_display = ('__unicode__', 'active_toggle')
-    # exclude = ['name']
+    exclude = ('full_image',)
     form = ComicForm
 
 admin.site.register(Comic, ComicAdmin)
