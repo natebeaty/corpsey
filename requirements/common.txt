@@ -14,3 +14,4 @@ easy-thumbnails==1.1
 wsgiref==0.1.2
 ssh==1.7.14
 # -e git+ssh://git@github.com/mauler/django-jcrop.git#egg=django-jcrop
+django-cleanup
