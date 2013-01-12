@@ -20,7 +20,7 @@ class Comic(MPTTModel):
         return ('corpsey.apps.comics.views.entry', [str(self.id)])
 
     def __unicode__(self):
-        return "%s - %s" % (self.artist, self.date)
+        return u"%s - %s" % (self.artist, self.date)
 
     # class MPTTMeta:
     #     order_insertion_by = ['date']
