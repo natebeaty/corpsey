@@ -2,16 +2,16 @@ from django import forms
 
 class UploadForm(forms.Form):
     panel1 = forms.FileField(
-        label='Select a file',
-        help_text='max. 42 megabytes'
+        label='Select jpg for panel 1',
+        # help_text='max. 42 megabytes'
     )
     panel2 = forms.FileField(
-        label='Select a file',
-        help_text='max. 42 megabytes'
+        label='Select jpg for panel 2',
+        # help_text='max. 42 megabytes'
     )
     panel3 = forms.FileField(
-        label='Select a file',
-        help_text='max. 42 megabytes'
+        label='Select jpg for panel 3',
+        # help_text='max. 42 megabytes'
     )
     # parent_id = forms.CharField(
     #     required=False

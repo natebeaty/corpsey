@@ -14,6 +14,9 @@ class Artist(models.Model):
     def __unicode__(self):
         return self.name
 
+    class Meta:
+        ordering = ['last_name', 'first_name']
+
     @models.permalink
     def get_absolute_url(self):
         return ('artist.views.entry', [str(self.slug)])

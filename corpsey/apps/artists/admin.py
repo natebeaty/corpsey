@@ -8,7 +8,7 @@ class ArtistForm(forms.ModelForm):
 
 class ArtistAdmin(admin.ModelAdmin):
     # list_display = ('__unicode__', 'active_toggle')
-    # exclude = ['name']
+    # exclude = ['first_name','last_name']
     form = ArtistForm
 
 admin.site.register(Artist, ArtistAdmin)
