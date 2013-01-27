@@ -25,5 +25,19 @@ class Comic(MPTTModel):
     def __unicode__(self):
         return u"%s - %s" % (self.artist, self.date.strftime('%b %d \'%y'))
 
-    # class MPTTMeta:
-    #     order_insertion_by = ['date']
+    def prev_sib(self):
+        return self.get_previous_sibling(active=True)
+
+    def next_sib(self):
+        return self.get_next_sibling(active=True)
+
+    def children(self):
+        return self.get_children().filter(active=True)
+
+    def get_comic_links(self):
+        comic_links = []
+        if self.next_sib():
+            comic_links.append(self.next_sib())
+        if self.children:
+            comic_links.extend(self.children.all())
+        return comic_links

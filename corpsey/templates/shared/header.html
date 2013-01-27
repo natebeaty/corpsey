@@ -14,8 +14,8 @@
     <ul class="tree">
         {% if comics %}
         {% recursetree comics %}
-            <li {% if active_comics and node in active_comics %}class="active"{% endif %}>
-                <a href="{{ node.get_absolute_url }}">{{ node }}</a>
+            <li {% if active_comics and node in active_comics %}class="active"{% endif %} data-comic-id="{{ node.id }}">
+                <a href="{{ node.get_absolute_url }}" title="{{ node.artist.name }}">{{ node }}</a>
                 {% if not node.is_leaf_node %}
                     <ul class="children">
                         {{ children }}
