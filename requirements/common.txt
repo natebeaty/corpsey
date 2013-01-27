@@ -9,7 +9,7 @@ django-dajaxice==0.5.5
 django-filebrowser==3.5.0
 django-filer==0.8.7
 django-grappelli==2.4.0
-django-mptt==0.5.-dev
+django-mptt==0.5.4
 django-taggit==0.9.3
 django-taggit-autosuggest==0.2
 django-treeadmin==0.1
