@@ -1,6 +1,7 @@
 .venv/
 *.pyc
 static/
+!corpsey/static
 wrk/
 virtualenv.py
 src/
