@@ -45,6 +45,16 @@ $.corpsey.catacombs = (function() {
 
         }
         _move_titles();
+        _show_active_comics();
+    }
+
+
+    function _show_active_comics() {
+        $('ul.tree li').removeClass('active');
+        $('.comic.single').each(function() {
+            var id = $(this).data('comic-id');
+            $('ul.tree li[data-comic-id='+id+']').addClass('active');
+        });
     }
 
     function _move_titles() {
