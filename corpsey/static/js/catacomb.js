@@ -7,12 +7,12 @@ $.corpsey.catacombs = (function() {
         var State = History.getState();
 
         // Log Initial State
-        History.log('initial:', State.data, State.title, State.url);
+        // History.log('initial:', State.data, State.title, State.url);
 
         // Bind to State Change
         History.Adapter.bind(window,'statechange',function(){
             var State = History.getState();
-            History.log('statechange:', State.data, State.title, State.url);
+            // History.log('statechange:', State.data, State.title, State.url);
         });
 
         // isotopize
@@ -32,11 +32,14 @@ $.corpsey.catacombs = (function() {
     function _draw_panels(data){
         // build comic icanhaz template
         var comic = ich.comic_single(data);
+        
         // clear out nav
         $('.next-comic-nav').remove();
+
         // drop in comic
         $('#catacombs').append(comic);
         // $('#catacombs').isotope('insert', comic);
+        
         // any nav to add?
         if (data.comic_links.length>0) {
             var nav = ich.comic_nav(data);
@@ -59,15 +62,14 @@ $.corpsey.catacombs = (function() {
 
     function _move_titles() {
         $('.comic.single:even').each(function() {
-            var pos = $(this).offset();
-            var width = $(this).width();
-            $(this).find('h1').css({'top' : pos.top-380});
+            var $img = $(this).find('img:first');
+            var pos = $img.position();
+            $(this).find('h1').css({'top' : pos.top+20 });
         });
         $('.comic.single:odd').each(function() {
-            var pos = $(this).offset();
-            var width = $(this).width();
-            // console.log(pos.left,width);
-            $(this).find('h1').css({'top' : pos.top+240,'left' : pos.left});
+            var $img = $(this).find('img:last');
+            var pos = $img.position();
+            $(this).find('h1').css({'top' : pos.top + $img.height()-100 ,'left' : pos.left + $img.width()+20 });
         });
     }
 
