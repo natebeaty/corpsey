@@ -47,7 +47,9 @@ $.corpsey.catacombs = (function() {
         } else {
 
         }
-        _move_titles();
+        $('#catacombs').imagesLoaded(function() {
+            _move_titles();
+        });
         _show_active_comics();
     }
 
@@ -90,6 +92,12 @@ $.corpsey.catacombs = (function() {
 // fire up the mothership
 $(window).ready(function(){
     $.corpsey.catacombs.init();
+});
+
+$(window).load(function(){
+    $('#catacombs').imagesLoaded(function() {
+        _move_titles();
+    });
 });
 
 $(window).resize(function(){
