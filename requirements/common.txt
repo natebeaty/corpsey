@@ -14,6 +14,6 @@ django-taggit==0.9.3
 django-taggit-autosuggest==0.2
 django-treeadmin==0.1
 easy-thumbnails==1.1
-pycrypto==2.6
+pycrypto==2.3
 ssh==1.7.14
 wsgiref==0.1.2
