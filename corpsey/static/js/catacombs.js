@@ -39,11 +39,14 @@ $.corpsey.catacombs = (function() {
 
         // drop in comic
         $('#catacombs').append(comic);
+
         comic.find('img').each(function(i,el) {
-            $(this).hide().fadeIn(1250*(i+1), function() {
-                $('#catacombs').imagesLoaded(function() {
-                    _move_titles();
-                });
+            $(this).hide().fadeIn(1000*(i+1), function() {
+                if (i==1) {
+                    $('#catacombs').imagesLoaded(function() {
+                        _move_titles();
+                    });
+                }
             });
         });
         // $('#catacombs').isotope('insert', comic);
