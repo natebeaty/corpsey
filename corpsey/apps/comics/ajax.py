@@ -3,7 +3,7 @@ from corpsey.apps.comics.models import Comic
 from dajaxice.decorators import dajaxice_register
 from easy_thumbnails.files import get_thumbnailer
 
-@dajaxice_register
+@dajaxice_register(method='GET')
 def get_comic_panels(request, comic_id):
     comic = Comic.objects.get(pk=comic_id)
     comic_links = comic.get_comic_links()

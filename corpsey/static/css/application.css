@@ -168,7 +168,7 @@ a#clixel {
 .comic h1 {
     font: 18px/1.2em 'Arbutus Slab', helvetica, sans-serif;
     margin: .5em 0 0;
-    overflow: auto;
+    overflow: hidden;
 }
 .comic h1 a {
     float: right;

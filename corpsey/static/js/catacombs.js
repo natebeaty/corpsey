@@ -105,7 +105,7 @@ $(window).ready(function(){
 
 $(window).load(function(){
     $('#catacombs').imagesLoaded(function() {
-        _move_titles();
+       $.corpsey.catacombs.move_titles(); 
     });
 });
 
