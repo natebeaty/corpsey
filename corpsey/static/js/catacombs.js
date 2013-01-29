@@ -37,11 +37,23 @@ $.corpsey.catacombs = (function() {
         // clear out nav
         $('.next-comic-nav').remove();
 
+        // remove first comic if viewing two already
+        if ($('.comic.single').length > 1) {
+            $('.comic.single:first').fadeOut(500, function() {
+                $(this).remove();
+                _drop_in_panels(data, comic);
+            });
+        } else {
+            _drop_in_panels(data, comic);
+        }
+    }
+
+    function _drop_in_panels(data, comic) {
         // drop in comic
         $('#catacombs').append(comic);
 
         comic.find('img').each(function(i,el) {
-            $(this).hide().fadeIn(1000*(i+1), function() {
+            $(this).hide().fadeIn(500*(i+1), function() {
                 if (i==1) {
                     $('#catacombs').imagesLoaded(function() {
                         _move_titles();
