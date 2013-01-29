@@ -12,6 +12,8 @@ body {
 .clearfix:before, .clearfix:after { content: ""; display: table; }
 .clearfix:after { clear: both; }
 .clearfix { zoom: 1; }
+a { text-decoration: none; }
+a img { text-decoration: none; }
 
 /* general typography */
 
@@ -26,6 +28,21 @@ h2 {
     letter-spacing: .2em;
     text-transform: uppercase;
     margin: 1em 0;
+}
+.user-content {
+    padding: 0 5% 0 2%;
+}
+p {
+    font: 14px/1.4em 'Arbutus Slab', helvetica, sans-serif;
+    margin: .5em 0;
+}
+.user-content ul {
+    padding-left: 1.2em;
+}
+.user-content ul li {
+    list-style: disc;
+    padding: 0 0 .5em .2em;
+    line-height: 1.2em;
 }
 
 /* multiple usables */
@@ -168,6 +185,8 @@ a#clixel {
 .comic h1 {
     font: 18px/1.2em 'Arbutus Slab', helvetica, sans-serif;
     margin: .5em 0 0;
+}
+#homepage .comic h1 {
     overflow: hidden;
 }
 .comic h1 a {

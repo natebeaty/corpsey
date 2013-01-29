@@ -33,6 +33,8 @@ urlpatterns = patterns('',
     url(r'^grappelli/', include('grappelli.urls')),
 
     url(dajaxice_config.dajaxice_url, include('dajaxice.urls')),
+
+    url(r'^markitup/', include('markitup.urls')),
 )
 
 urlpatterns += patterns('',

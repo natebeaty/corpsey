@@ -2,7 +2,10 @@
 {% load thumbnail %}
 
 {% block content %}
-<h1>Upload!</h1>
+<h1>Contribute to Corpsey!</h1>
+<div class="user-content">
+    {{ page.content|safe }}
+</div>
 {{ message }}
 <form class="contribute" action="{% url contribute %}" method="post" enctype="multipart/form-data">
     {% csrf_token %}

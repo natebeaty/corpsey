@@ -45,6 +45,7 @@ from corpsey.apps.comics.forms import UploadForm
 
 def contribute(request):
     message = ''
+    page = FlatPage.objects.get(url='/contribute/')
     if request.method == 'POST':
         form = UploadForm(request.POST, request.FILES)
         if form.is_valid():
@@ -92,6 +93,7 @@ def contribute(request):
         'comics/contribute.html',
         {
             'form': form,
+            'page': page,
             'message': message
         },
         context_instance=RequestContext(request)
