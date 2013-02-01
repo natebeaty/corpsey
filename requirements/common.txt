@@ -15,7 +15,7 @@ django-grappelli==2.4.0
 django-icanhaz==0.2.1
 django-markdown==0.2.0
 django-markitup==1.0.0
-django-mptt==0.5.-dev
+django-mptt==0.5.4
 django-taggit==0.9.3
 django-taggit-autosuggest==0.2
 django-treeadmin==0.1
