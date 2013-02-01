@@ -34,7 +34,15 @@ class Comic(MPTTModel):
     def children(self):
         return self.get_children().filter(active=True)
 
-    def get_comic_links(self):
+    def get_prev_comic_links(self):
+        comic_links = []
+        if self.prev_sib():
+            comic_links.append(self.prev_sib())
+        if self.is_child_node:
+            comic_links.extend(self.get_ancestors(ascending=False).all())
+        return comic_links
+
+    def get_next_comic_links(self):
         comic_links = []
         if self.next_sib():
             comic_links.append(self.next_sib())

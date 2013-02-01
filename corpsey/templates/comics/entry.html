@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load thumbnail %}
+{% load thumbnail mptt_tags icanhaz %}
 
 {% block content %}
 <section id="catacombs">
@@ -7,46 +7,53 @@
   {% include "comics/strip.html" with comic=comic_1 extra_class="comic_1" %}
 {% endif %}
 
+{% if prev_comic_links %}
+  {% include "comics/comic_links.html" with root_comic=comic_1.parent comic_1=comic comic_links=comic_links class='prev' comic_links=prev_comic_links %}
+{% endif %}
+
 {% if comic_2 %}
   {% include "comics/strip.html" with comic=comic_2 extra_class="comic_2" %}
-  {% if comic_links %}
-    {% include "comics/next_links.html" with root_comic=comic_2 comic=comic comic_links=comic_links %}
+  {% if next_comic_links %}
+    {% include "comics/comic_links.html" with root_comic=comic_2 comic=comic comic_links=comic_links class='next' comic_links=next_comic_links %}
   {% endif %}
 
 {% else %}
-  {% if comic_links %}
-    {% include "comics/next_links.html" with root_comic=comic_1 comic=comic comic_links=comic_links %}
+  {% if next_comic_links %}
+    {% include "comics/comic_links.html" with root_comic=comic_1 comic=comic comic_links=comic_links class='next' comic_links=next_comic_links %}
   {% endif %}
 {% endif %}
 </section>
 
+{% comment %}  
 {% if not comic_links %}
   <p><a data-comic-id="{{ comic_2.id }}" href="/contribute?parent={{ comic_2.id }}" class="button">Contribute!</a></p>
 {% endif %}
+{% endcomment %}
+
+<section id="tree">
+      <ul class="tree">
+        {% if comics %}
+        {% recursetree comics %}
+            <li {% if active_comics and node in active_comics %}class="active"{% endif %} data-comic-id="{{ node.id }}">
+                <a href="{{ node.get_absolute_url }}" title="{{ node.artist.name }}">{{ node }}</a>
+                {% if not node.is_leaf_node %}
+                    <ul class="children">
+                        {{ children }}
+                    </ul>
+                {% endif %}
+            </li>
+        {% endrecursetree %}
+        {% endif %}
+    </ul>
+</section>
 
 {% endblock content %}
 
 {% block extra_javascript %}
-  <script id="comic_single" type="text/html">
-    <article class="comic single {% templatetag openvariable %} extra_class {% templatetag closevariable %}" data-comic-id="{% templatetag openvariable %} comic_id {% templatetag closevariable %}">
-      <h1>{% templatetag openvariable %} last_name {% templatetag closevariable %}</h1>
-      <ul>
-        <li><img class="panel1" src="{% templatetag openvariable %} panel1 {% templatetag closevariable %}"></li>
-        <li><img class="panel2" src="{% templatetag openvariable %} panel2 {% templatetag closevariable %}"></li>
-        <li><img class="panel3" src="{% templatetag openvariable %} panel3 {% templatetag closevariable %}"></li>
-      </ul>
-    </article>
-  </script>
+  {% icanhaz "next_comic_nav" %}
+  {% icanhaz "prev_comic_nav" %}
+  {% icanhaz "up_comic_nav" %}
+  {% icanhaz "comic_single" %}
 
-  <script id="comic_nav" type="text/html">
-    <div class="next-comic-nav">
-      <h2>Next:</h2>
-      <ul class="next-comic">
-        {% templatetag openvariable %}#comic_links{% templatetag closevariable %}
-          <li><a data-comic-id="{% templatetag openvariable %} comic_id {% templatetag closevariable %}" class="next button" href="/catacombs/{% templatetag openvariable %} comic_1_id {% templatetag closevariable %}/{% templatetag openvariable %} comic_id {% templatetag closevariable %}/">{% templatetag openvariable %} last_name {% templatetag closevariable %}</a></li>      
-        {% templatetag openvariable %}/comic_links{% templatetag closevariable %}
-      </ul>
-    </div>
-  </script>
   <script src="{{ STATIC_URL }}js/catacombs.js" type="text/javascript"></script>
 {% endblock extra_javascript %}

@@ -16,66 +16,75 @@ $.corpsey.catacombs = (function() {
         });
 
         // isotopize
-        // $('#catacombs').isotope({
-        //     itemSelector: 'li'
-        // });
+        $('#catacombs').isotope({
+            itemSelector: 'img'
+        });
 
-        $('.next-comic .button').live('click',function(e) {
+        $('.comic-nav .button').live('click',function(e) {
             e.preventDefault();
-            $('.next-comic').css('opacity',.5);
+            $('.comic-nav').css('opacity',.5);
             var comic_id = $(this).data('comic-id');
+            var direction = $(this).hasClass('next') ? 'next' : 'prev';
             History.pushState(null, null, '/catacombs/'+comic_id+'/'); // '/catacombs/'+comic_id+'/'
-            Dajaxice.corpsey.apps.comics.get_comic_panels($.corpsey.catacombs.draw_panels, { 'comic_id': comic_id });
+            Dajaxice.corpsey.apps.comics.get_comic_panels($.corpsey.catacombs.build_panels, { 'comic_id': comic_id, 'direction': direction });
             return false;
         });
     }
 
-    function _draw_panels(data){
-        // build comic icanhaz template
+    function _build_panels(data){
+        // build comic template with data
         var comic = ich.comic_single(data);
         
-        // clear out nav
-        $('.next-comic-nav').remove();
-
         // remove first comic if viewing two already
         if ($('.comic.single').length > 1) {
-            $('.comic.single:first').fadeOut(500, function() {
-                $(this).remove();
-                _drop_in_panels(data, comic);
+            var comicToRemove = data.direction=='next' ? $('.comic.single:first') : $('.comic.single:last');
+            var imgs = comicToRemove.find('img');
+            $('#catacombs').isotope('remove', imgs, function() {
+                comicToRemove.remove();
+                _show_panels(data, comic);
             });
         } else {
-            _drop_in_panels(data, comic);
+            _show_panels(data, comic);
         }
     }
 
-    function _drop_in_panels(data, comic) {
+    function _show_panels(data, comic) {
         // drop in comic
-        $('#catacombs').append(comic);
-
-        comic.find('img').each(function(i,el) {
-            $(this).hide().fadeIn(500*(i+1), function() {
-                if (i==1) {
-                    $('#catacombs').imagesLoaded(function() {
-                        _move_titles();
-                    });
-                }
-            });
-        });
-        // $('#catacombs').isotope('insert', comic);
-        
-        // any nav to add?
-        if (data.comic_links.length>0) {
-            var nav = ich.comic_nav(data);
-            $('#catacombs').append(nav);
-            $('.next-comic').animate({'opacity':1});
+        if (data.direction=='next') {
+            $('#catacombs').isotope('insert', comic);
         } else {
-
+            $('#catacombs').prepend(comic).isotope('reloadItems').isotope({ sortBy: 'original-order' });
         }
-        _show_active_comics();
+
+        _show_active_comics_in_tree();
+        _get_nav_buttons();
     }
 
+    function _get_nav_buttons() {
+        var comic_id = $('.comic.single:first').data('comic-id');
+        var comic_id_2 = $('.comic.single:last').data('comic-id');
+        Dajaxice.corpsey.apps.comics.get_nav_links($.corpsey.catacombs.show_nav_buttons, { 'comic_id': comic_id, 'comic_id_2': comic_id_2 });
+    }
 
-    function _show_active_comics() {
+    function _show_nav_buttons(data) {
+        $('.comic-nav').remove();
+
+        // any nav to add?
+        if (data.next_comic_links.length>0) {
+            var nav = ich.next_comic_nav(data);
+            $('#catacombs').append(nav);
+        } else if (data.up_comic_links) {
+            var nav = ich.up_comic_nav(data);
+            $('#catacombs').append(nav);
+        }
+
+        if (data.prev_comic_links.length>0) {
+            var nav = ich.prev_comic_nav(data);
+            $('#catacombs').append(nav);
+        }
+    }
+
+    function _show_active_comics_in_tree() {
         $('ul.tree li').removeClass('active');
         $('.comic.single').each(function() {
             var id = $(this).data('comic-id');
@@ -84,15 +93,23 @@ $.corpsey.catacombs = (function() {
     }
 
     function _move_titles() {
-        $('.comic.single:even').each(function() {
+        $('.comic.single').each(function() {
             var $img = $(this).find('img:first');
             var pos = $img.position();
-            $(this).find('h1').css({'top' : pos.top+20 });
+            $(this).find('h1').css({'top' : pos.top+20, 'right': 'auto', 'left': -73 });
         });
-        $('.comic.single:odd').each(function() {
-            var $img = $(this).find('img:last');
-            var pos = $img.position();
-            $(this).find('h1').css({'top' : pos.top + $img.height()-130 ,'left' : pos.left + $img.width()+20 });
+        // $('.comic.single:odd').each(function() {
+        //     var $img = $(this).find('img:last');
+        //     var pos = $img.position();
+        //     $(this).find('h1').css({'top' : pos.top + $img.height()-130 ,'left' : pos.left + $img.width()+20 });
+        // });
+    }
+
+    function _up_link() {
+        var imgs = $('.comic.single:last img')
+        $('#catacombs').isotope('remove', imgs, function() {
+            $('.comic.single:last').remove();
+            _get_nav_buttons();
         });
     }
 
@@ -101,11 +118,17 @@ $.corpsey.catacombs = (function() {
         init: function() {
             _init();
         },
-        draw_panels: function(data) {
-            _draw_panels(data);
+        build_panels: function(data) {
+            _build_panels(data);
         },
-        move_titles: function(data) {
-            _move_titles(data);
+        move_titles: function() {
+            _move_titles();
+        },
+        up_link: function() {
+            _up_link();
+        },
+        show_nav_buttons: function(data) {
+            _show_nav_buttons(data);
         }
     };
 })();

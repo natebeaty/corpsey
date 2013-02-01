@@ -29,6 +29,12 @@ h2 {
     text-transform: uppercase;
     margin: 1em 0;
 }
+h3 {
+    font: 14px/1.2em 'Arbutus Slab', helvetica, sans-serif;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    margin: 1em 0;
+}
 .user-content {
     padding: 0 5% 0 2%;
 }
@@ -48,14 +54,12 @@ p {
 /* multiple usables */
 
 .button, nav li a {
-    font: 12px/1.2em 'Arbutus Slab', helvetica, sans-serif;
-    letter-spacing: .2em;
+    font: 12px/1.2em 'myriad pro', helvetica, sans-serif;
+    letter-spacing: .4em;
     text-transform: uppercase;
-    background:#444; 
+    background:#ccc; 
     color: #eee;
     padding: 6px 12px;
-    -moz-border-radius: 2px;
-    -webkit-border-radius: 2px;
     white-space: nowrap;
     display:inline-block;
     margin-bottom:4px;
@@ -66,23 +70,32 @@ p {
 nav li a:hover,
 .button:hover { 
     text-decoration:none; 
-    background:#555; 
+    background:#bbb; 
 }
-nav ul {
-    text-align: center;
+nav.main ul {
+    text-align: right;
 }
 nav ul li {
     display: inline-block;
 }
+nav li a {
+    line-height: 24px;
+    padding: 2px 16px 0 16px;
+    background: none;
+}
 
-.tree { text-align: left; padding-left: 190px; }
+.tree {
+    position: absolute;
+    top: 32px;
+    left: 4px;
+}
 .tree a {
     display: inline-block;
-    width: 15px;
-    height: 15px;
+    width: 8px;
+    height: 8px;
     background: #ccc;
     text-indent: -9999em;
-    margin: 4px;
+    margin: 1px;
 }
 .tree a:hover,
 .tree li.active>a {
@@ -90,21 +103,54 @@ nav ul li {
 }
 .tree ul { 
     display: inline-block; 
+    line-height: 0;
+}
+.tree li { 
+    line-height: 0;
 }
 
 /* general layout */
 
 #wrapper { overflow: hidden; }
-#content { margin-left: 440px; }
-header.main { 
-    width: 430px;
-    float: left;
-    background: #eee;
+#static-page #content { margin-left: 440px; }
+nav.main {
+    background: #FFFB00;
+    color: #333;
+    height: 26px;
 }
-header.main .wrapper {
-    padding:20px 0;
-    text-align: center;
-    min-height: 500px;
+nav.main ul {
+    width: 460px;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+nav.main a {
+    color: #333;
+}
+nav.main a.active,
+nav.main a:hover {
+    background: #fff;
+}
+nav.main li:last-child a {
+    background: #ccc;
+    color: #fff;
+}
+nav.main li:last-child a:hover {
+    background: #bbb;
+}
+nav.main h1#textlogo {
+    margin: 0;
+    padding: 0;
+}
+nav.main h1#textlogo a {
+    display: block;
+    background: url('/static/img/mini-logo-blk.png') 4px center no-repeat;
+    letter-spacing: .2em;
+    margin: 0;
+    padding: 0 0 0 57px;
+}
+nav.main h1#textlogo a {
+    font: 15px/26px 'Arbutus Slab', helvetica, sans-serif;
 }
 #logo {
     width: 411px;
@@ -118,7 +164,6 @@ header.main .wrapper {
     width: 100%;
     height: 100%;
 }
-
 footer.main {
     position: relative;
     height: 580px;
@@ -134,13 +179,33 @@ a#clixel {
     display: block;
     background: url('/static/img/clixel.gif') no-repeat;
 }
-
+.comic-nav h2 {
+    margin: 0 0 .4em;
+}
+.comic-nav {
+    position: absolute;
+    right:0;
+    top: 340px;
+    width: 130px;
+    z-index: 10000;
+    background: #fff;
+    padding: 2px 5px;
+}
+.comic-nav.prev {
+    top: 0;
+}
+.comic-nav .button {
+    width: 106px;
+}
 
 /* homepage */
 
 #homepage #content { margin-left: 0; }
-#homepage nav li a {
-    font: 18px/1.2em 'Arbutus Slab', helvetica, sans-serif;
+#homepage header {
+    background: #eee;
+}
+#homepage header a.button {
+    font: 18px/1.2em 'myriad pro', helvetica, sans-serif;
     padding: 8px 16px;
 }
 #homepage header.main {
@@ -168,9 +233,8 @@ a#clixel {
     text-indent: -9999em;
     margin:8px auto; 
 }
-#homepage 
-.recent-contributors {
-    width: 1150px;
+#homepage .recent-contributors {
+    width: 1000px;
     margin: 10px auto;
     text-transform: uppercase;
 }
@@ -188,39 +252,40 @@ a#clixel {
 }
 #homepage .comic h1 {
     overflow: hidden;
+    position: relative;
 }
 .comic h1 a {
     float: right;
 }
 #homepage .comic {
     margin-bottom: 60px;
+    overflow: auto;
 }
 
 /* catacombs */
 
-#catacombs { position: relative; }
+#catacombs {
+    position: relative;
+    margin-top: 4px;
+    min-height: 660px;
+}
 .comic ul,
 .comic li { display: inline; }
-.comic.single { display: inline;}
+.comic img { display: block; float: left; width: 330px; height: 330px; }
+.comic.single { 
+    width: 1000px;
+    margin: 0 auto;
+    position: relative;
+}
 .comic.single h1 { position: absolute;}
-#catacombs { padding-left: 20px; margin: 30px 0 0 10px; }
 #catacombs .comic h1 { color: #999; }
-#catacombs .comic:nth-child(odd) h1 {
+#catacombs .comic h1 {
     -webkit-transform: rotate(270deg); 
     -webkit-transform-origin: right top;
     transform: rotate(270deg); 
     transform-origin: right top;
     right: 100%;
     top: 16px;
-    white-space: nowrap;
-}
-#catacombs .comic:nth-child(even) h1 {
-    -webkit-transform: rotate(90deg); 
-    -webkit-transform-origin: left top;
-    transform: rotate(90deg); 
-    transform-origin: left top;
-    left: 810px;
-    top: 1020px;
     white-space: nowrap;
 }
 

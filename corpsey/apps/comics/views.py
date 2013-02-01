@@ -18,21 +18,23 @@ def random(request):
     return redirect(comic_to)
 
 def entry(request, comic_1, comic_2=None):
-    comic_links = []
+    next_comic_links = []
     comic_1 = get_object_or_404(Comic,pk=comic_1)
     
     # build next/child comic nav if possible
     if comic_2:
         comic_2 = get_object_or_404(Comic,pk=comic_2)
-        comic_links.extend(comic_2.get_comic_links())
+        next_comic_links.extend(comic_2.get_next_comic_links())
     else:
-        comic_links.extend(comic_1.get_comic_links())
+        next_comic_links.extend(comic_1.get_next_comic_links())
+
+    prev_comic_links = comic_1.get_prev_comic_links()
 
     return render_to_response('comics/entry.html',  {
         'comic_1': comic_1,
         'comic_2': comic_2,
-        'comic_links': comic_links,
-        'prev_sib': comic_1.prev_sib,
+        'next_comic_links': next_comic_links,
+        'prev_comic_links': prev_comic_links,
         'active_comics': [comic_1, comic_2],
         'comics': Comic.objects.all().filter(active=True),
         }, RequestContext(request))
