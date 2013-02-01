@@ -1,8 +1,11 @@
 {% extends "base.html" %}
 {% load thumbnail %}
 
+{% block body_id %}contribute-page{% endblock %}
+{% block title %}Contribute to The Infinite Corpse!{% endblock %}
+
 {% block content %}
-<h1>Contribute to Corpsey!</h1>
+<h1>Contribute to The Infinite Corpse!</h1>
 <div class="user-content">
     {{ page.content|safe }}
 </div>

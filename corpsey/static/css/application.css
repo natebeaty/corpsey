@@ -112,8 +112,10 @@ nav li a {
 /* general layout */
 
 #wrapper { overflow: hidden; }
-#static-page #content { margin-left: 440px; }
-nav.main {
+#contribute-page #content,
+#static-page #content {
+    margin-left: 440px;
+}nav.main {
     background: #FFFB00;
     color: #333;
     height: 26px;
@@ -143,14 +145,15 @@ nav.main h1#textlogo {
     padding: 0;
 }
 nav.main h1#textlogo a {
-    display: block;
+    display: inline-block;
     background: url('/static/img/mini-logo-blk.png') 4px center no-repeat;
     letter-spacing: .2em;
     margin: 0;
-    padding: 0 0 0 57px;
-}
-nav.main h1#textlogo a {
+    padding: 0 16px 0 57px;
     font: 15px/26px 'Arbutus Slab', helvetica, sans-serif;
+}
+nav.main h1#textlogo a:hover {
+    background: #fff url('/static/img/mini-logo-blk.png') 4px center no-repeat;
 }
 #logo {
     width: 411px;
@@ -185,7 +188,7 @@ a#clixel {
 .comic-nav {
     position: absolute;
     right:0;
-    top: 340px;
+    top: 380px;
     width: 130px;
     z-index: 10000;
     background: #fff;
@@ -195,7 +198,7 @@ a#clixel {
     opacity: .3;
 }
 .comic-nav.prev {
-    top: 0;
+    top: 40px;
 }
 .comic-nav .button {
     width: 106px;
@@ -250,10 +253,11 @@ a#clixel {
 .recent-contributors article:nth-child(5) { opacity: .4; }
 .recent-contributors article:nth-child(6) { opacity: .2; }
 .comic h1 {
-    font: 18px/1.2em 'Arbutus Slab', helvetica, sans-serif;
+    font: 14px/1.2em 'Arbutus Slab', helvetica, sans-serif;
     margin: .5em 0 0;
 }
 #homepage .comic h1 {
+    font: 18px/1.2em 'Arbutus Slab', helvetica, sans-serif;
     overflow: hidden;
     position: relative;
 }
@@ -268,9 +272,9 @@ a#clixel {
 /* catacombs */
 
 #catacombs {
-    position: relative;
-    margin-top: 4px;
+    margin: 4px auto;
     min-height: 660px;
+    max-width: 1000px;
 }
 .comic ul,
 .comic li { display: inline; }
@@ -287,7 +291,7 @@ a#clixel {
     -webkit-transform-origin: right top;
     transform: rotate(270deg); 
     transform-origin: right top;
-    right: 100%;
+    left: -75px;
     top: 16px;
     white-space: nowrap;
 }

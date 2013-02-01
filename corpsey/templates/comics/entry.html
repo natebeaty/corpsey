@@ -7,12 +7,12 @@
   {% include "comics/strip.html" with comic=comic_1 extra_class="comic_1" %}
 {% endif %}
 
-{% if prev_comic_links %}
-  {% include "comics/comic_links.html" with root_comic=comic_1.parent comic_1=comic comic_links=comic_links class='prev' comic_links=prev_comic_links %}
-{% endif %}
-
 {% if comic_2 %}
   {% include "comics/strip.html" with comic=comic_2 extra_class="comic_2" %}
+{% endif %}
+</section>
+
+{% if comic_2 %}
   {% if next_comic_links %}
     {% include "comics/comic_links.html" with root_comic=comic_2 comic=comic comic_links=comic_links class='next' comic_links=next_comic_links %}
   {% endif %}
@@ -22,7 +22,10 @@
     {% include "comics/comic_links.html" with root_comic=comic_1 comic=comic comic_links=comic_links class='next' comic_links=next_comic_links %}
   {% endif %}
 {% endif %}
-</section>
+
+{% if prev_comic_links %}
+  {% include "comics/comic_links.html" with root_comic=comic_1.parent comic_1=comic comic_links=comic_links class='prev' comic_links=prev_comic_links %}
+{% endif %}
 
 {% comment %}  
 {% if not comic_links %}
