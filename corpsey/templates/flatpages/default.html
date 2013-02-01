@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block body_id %}static-page{% endblock %}
+{% block title %}{{ flatpage.title }}{% endblock %}
+
+{% block content %}
+	<div class="user-content">
+	    <h1>{{ flatpage.title }}</h1>
+	    {{ flatpage.content }}
+    </div>
+{% endblock content %}

@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+
+{% block body_id %}homepage{% endblock %}
+
+{% block header %}
+    <header class="main"><div class="wrap">
+        <h2 class="tc-presents">Trubble Club Presents</h2>
+        <h1 id="logo"><a href="/">Corpsey</a></h1>
+        <p class="intro">{{ page.content|safe }}</p>
+        <p class="center"><a class="button" href="/catacombs/1/">Enter the Catacombs</a></p>
+        </nav>
+    </div></header>
+{% endblock header %}
+
+{% block content %}
+  <div class="recent-contributors">
+    <h2>Most Recent Contributors</h2>
+    {% for comic in comic_set %}
+      <article class="comic">
+        <h1>{{ comic.artist }} <a class="button" href="{{ comic.get_absolute_url }}">View</a></h1>
+        <a href="{{ comic.get_absolute_url }}">{% if comic.panel1 %}<img class="panel1" src="{{ comic.panel1.midsize.url }}">{% endif %}
+        {% if comic.panel2 %}<img class="panel2" src="{{ comic.panel2.midsize.url }}">{% endif %}
+        {% if comic.panel3 %}<img class="panel3" src="{{ comic.panel3.midsize.url }}">{% endif %}</a>
+      </article>
+    {% endfor %}
+  </div>
+{% endblock content %}
+
+{% block extra_javascript %}
+  <script src="{{ STATIC_URL }}js/home.js" type="text/javascript"></script>
+{% endblock extra_javascript %}

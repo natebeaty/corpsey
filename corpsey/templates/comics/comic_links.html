@@ -1,0 +1,8 @@
+<nav class="{{ class }} comic-nav">
+  <h3>{{ class }}</h3>
+  <ul class="{{ class }}-comic">
+    {% for comic in comic_links %}
+      <li><a data-comic-id="{{ comic.id }}" class="{{ class }} button" href="/catacombs/{{ comic.id }}/">{{ comic.artist.first_name }} <br>{{ comic.artist.last_name }}</a></li>
+    {% endfor %}
+  </ul>
+</nav>

@@ -1,0 +1,62 @@
+[
+  {
+    "pk": 1, 
+    "model": "flatpages.flatpage", 
+    "fields": {
+      "registration_required": false, 
+      "title": "Home", 
+      "url": "/", 
+      "template_name": "", 
+      "sites": [
+        1
+      ], 
+      "content": "Lorem.", 
+      "enable_comments": false
+    }
+  }, 
+  {
+    "pk": 3, 
+    "model": "flatpages.flatpage", 
+    "fields": {
+      "registration_required": false, 
+      "title": "About", 
+      "url": "/about/", 
+      "template_name": "", 
+      "sites": [
+        1
+      ], 
+      "content": "Lorem.", 
+      "enable_comments": false
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "flatpages.flatpage", 
+    "fields": {
+      "registration_required": false, 
+      "title": "Catacombs", 
+      "url": "/catacombs/", 
+      "template_name": "", 
+      "sites": [
+        1
+      ], 
+      "content": "Lorem.", 
+      "enable_comments": false
+    }
+  }, 
+  {
+    "pk": 4, 
+    "model": "flatpages.flatpage", 
+    "fields": {
+      "registration_required": false, 
+      "title": "Contribute", 
+      "url": "/contribute/", 
+      "template_name": "", 
+      "sites": [
+        1
+      ], 
+      "content": "Lorem.", 
+      "enable_comments": false
+    }
+  }
+]

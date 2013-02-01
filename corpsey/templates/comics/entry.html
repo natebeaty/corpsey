@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% load thumbnail mptt_tags icanhaz %}
+
+{% block content %}
+<section id="catacombs">
+{% if comic_1 %}
+  {% include "comics/strip.html" with comic=comic_1 extra_class="comic_1" %}
+{% endif %}
+
+{% if prev_comic_links %}
+  {% include "comics/comic_links.html" with root_comic=comic_1.parent comic_1=comic comic_links=comic_links class='prev' comic_links=prev_comic_links %}
+{% endif %}
+
+{% if comic_2 %}
+  {% include "comics/strip.html" with comic=comic_2 extra_class="comic_2" %}
+  {% if next_comic_links %}
+    {% include "comics/comic_links.html" with root_comic=comic_2 comic=comic comic_links=comic_links class='next' comic_links=next_comic_links %}
+  {% endif %}
+
+{% else %}
+  {% if next_comic_links %}
+    {% include "comics/comic_links.html" with root_comic=comic_1 comic=comic comic_links=comic_links class='next' comic_links=next_comic_links %}
+  {% endif %}
+{% endif %}
+</section>
+
+{% comment %}  
+{% if not comic_links %}
+  <p><a data-comic-id="{{ comic_2.id }}" href="/contribute?parent={{ comic_2.id }}" class="button">Contribute!</a></p>
+{% endif %}
+{% endcomment %}
+
+<section id="tree">
+      <ul class="tree">
+        {% if comics %}
+        {% recursetree comics %}
+            <li {% if active_comics and node in active_comics %}class="active"{% endif %} data-comic-id="{{ node.id }}">
+                <a href="{{ node.get_absolute_url }}" title="{{ node.artist.name }}">{{ node }}</a>
+                {% if not node.is_leaf_node %}
+                    <ul class="children">
+                        {{ children }}
+                    </ul>
+                {% endif %}
+            </li>
+        {% endrecursetree %}
+        {% endif %}
+    </ul>
+</section>
+
+{% endblock content %}
+
+{% block extra_javascript %}
+  {% icanhaz "next_comic_nav" %}
+  {% icanhaz "prev_comic_nav" %}
+  {% icanhaz "up_comic_nav" %}
+  {% icanhaz "comic_single" %}
+
+  <script src="{{ STATIC_URL }}js/catacombs.js" type="text/javascript"></script>
+{% endblock extra_javascript %}
