@@ -29,6 +29,7 @@ body {
     background: #fff;
     font: 14px/1.4em 'Arbutus Slab', helvetica, sans-serif;
     color: #222;
+    position: relative;
 }
 .clearfix:before, .clearfix:after { content: ""; display: table; }
 .clearfix:after { clear: both; }
@@ -331,10 +332,22 @@ a#clixel {
         .rotation(270deg);
         -webkit-transform-origin: right top;
         transform-origin: right top;
-        left: -75px;
+        right:100%;
         top: 16px;
         white-space: nowrap;
+        opacity: 0;
     }
+}
+h1.comic_1,
+h1.comic_2 {
+    position: absolute;
+    .rotation(270deg);
+    -webkit-transform-origin: left top;
+    transform-origin: left top;
+    white-space: nowrap;
+    left: 0;
+    top: 0;
+    font: 14px/1.2em 'Arbutus Slab', helvetica, sans-serif;
 }
 
 /* contribute */

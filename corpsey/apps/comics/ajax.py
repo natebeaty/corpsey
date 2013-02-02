@@ -15,6 +15,7 @@ def get_comic_panels(request, comic_id, direction):
         'direction' : direction,
         'first_name' : comic.artist.first_name,
         'last_name' : comic.artist.last_name,
+        'name' : comic.artist.name,
     })
 
 @dajaxice_register(method='GET')
@@ -29,6 +30,7 @@ def get_nav_links(request, comic_id, comic_id_2):
                 'comic_id': link.id, 
                 'first_name': link.artist.first_name, 
                 'last_name': link.artist.last_name, 
+                'name': link.artist.name, 
             })
     else:
         if comic_2.is_child_node:
@@ -43,6 +45,7 @@ def get_nav_links(request, comic_id, comic_id_2):
                 'comic_id': link.id, 
                 'first_name': link.artist.first_name, 
                 'last_name': link.artist.last_name, 
+                'name': link.artist.name, 
             })
 
     return simplejson.dumps({ 
