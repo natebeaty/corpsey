@@ -134,11 +134,11 @@ nav.main ul li a {
   background: none;
 }
 nav.main ul li:last-child a {
-  background: #acb5b0;
+  background: #ea1f4a;
   color: #eee;
 }
 nav.main ul li:last-child a:hover {
-  background: #b9c1bd;
+  background: #ec365d;
 }
 nav.main a {
   color: #eee;
