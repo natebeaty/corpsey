@@ -52,13 +52,13 @@ $.corpsey.catacombs = (function() {
     }
 
     function _init_nav_waypoints() {
-        $('.comic-nav.next').waypoint(function() {
-            $(this).toggleClass('stuck');
+        $('.comic-nav.next').waypoint(function(d) {
+            $(this).toggleClass('stuck', d==='down');
         }, {
             offset: 200
         });
-        $('.comic-nav.prev').waypoint(function() {
-            $(this).toggleClass('stuck');
+        $('.comic-nav.prev').waypoint(function(d) {
+            $(this).toggleClass('stuck', d==='down');
         }, {
             offset: 40
         });
