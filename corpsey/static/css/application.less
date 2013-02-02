@@ -221,12 +221,25 @@ a#clixel {
     }
     &.prev {
         top: 40px;
+        &.stuck {
+            position: fixed;
+            top: 40px;
+        }
+    }
+    &.next {
+        &.stuck {
+            position: fixed;
+            top: 200px;
+        }
     }
     &.loading {
         opacity: .3;
     }
     .button {
         width: 106px;
+    }
+    &.stuck {
+        position: fixed;
     }
 }
 

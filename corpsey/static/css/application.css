@@ -205,11 +205,22 @@ a#clixel {
 .comic-nav.prev {
   top: 40px;
 }
+.comic-nav.prev.stuck {
+  position: fixed;
+  top: 40px;
+}
+.comic-nav.next.stuck {
+  position: fixed;
+  top: 200px;
+}
 .comic-nav.loading {
   opacity: .3;
 }
 .comic-nav .button {
   width: 106px;
+}
+.comic-nav.stuck {
+  position: fixed;
 }
 /* homepage */
 #homepage #content {

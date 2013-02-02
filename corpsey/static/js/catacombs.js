@@ -27,6 +27,8 @@ $.corpsey.catacombs = (function() {
             if ($('.comic-nav').hasClass('loading')) {
                 return false;
             }
+            $("html, body").animate({ scrollTop: 0 }, "fast");
+
             $('.comic-nav').addClass('loading');
             var comic_id = $(this).data('comic-id');
             var direction = $(this).hasClass('next') ? 'next' : 'prev';
@@ -44,6 +46,21 @@ $.corpsey.catacombs = (function() {
               $('.prev.button:first').trigger('click');
               e.preventDefault();
             }
+        });
+
+        _init_nav_waypoints();
+    }
+
+    function _init_nav_waypoints() {
+        $('.comic-nav.next').waypoint(function() {
+            $(this).toggleClass('stuck');
+        }, {
+            offset: 200
+        });
+        $('.comic-nav.prev').waypoint(function() {
+            $(this).toggleClass('stuck');
+        }, {
+            offset: 40
         });
     }
 
@@ -88,6 +105,7 @@ $.corpsey.catacombs = (function() {
     }
 
     function _show_nav_buttons(data) {
+        $('.comic-nav').removeClass('stuck').waypoint('destroy');
         $('.comic-nav').remove();
         var nav;
 
@@ -104,6 +122,8 @@ $.corpsey.catacombs = (function() {
             nav = ich.prev_comic_nav(data);
             $('#content').append(nav);
         }
+
+        _init_nav_waypoints();
     }
 
     function _show_active_comics_in_tree() {
@@ -120,8 +140,8 @@ $.corpsey.catacombs = (function() {
     function _move_titles() {
         $('.comic.single').each(function(i) {
             $('h1.comic_'+(i+1)).remove();
-            var c = $(i===1 && $('#catacombs').width()<980) ? '1' : '2';
-            var $img = $(this).find('img:nth-child('+c+')');
+            var c = (i===1 && $('#catacombs').width()<980) ? '1' : '0';
+            var $img = $(this).find('img:eq('+c+')');
             var pos = $img.offset();
             var $h1 = $(this).find('h1').clone().addClass('comic_'+(i+1));
             $h1.appendTo('body').css({ 'top' : pos.top+$h1.width(), 'left' : pos.left-20 });
