@@ -48,6 +48,8 @@ $.corpsey.catacombs = (function() {
     }
 
     function _build_panels(data){
+        _hide_titles();
+
         // build comic template with data
         var comic = ich.comic_single(data);
         
@@ -65,7 +67,6 @@ $.corpsey.catacombs = (function() {
     }
 
     function _show_panels(data, comic) {
-        _hide_titles();
         // drop in comic
         if (data.direction==='next') {
             $('#catacombs').isotope('insert', comic, function() {
@@ -125,7 +126,7 @@ $.corpsey.catacombs = (function() {
             var $h1 = $(this).find('h1').clone().addClass('comic_'+(i+1));
             $h1.appendTo('body').css({ 'top' : pos.top+$h1.width(), 'left' : pos.left-20 });
         });
-        $('h1.comic_1, h1.comic_2').show();
+        $('h1.comic_1, h1.comic_2').fadeIn();
     }
 
     function _up_link() {
