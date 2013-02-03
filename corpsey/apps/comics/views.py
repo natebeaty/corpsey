@@ -45,7 +45,11 @@ def tree_json(request):
     dicts = []
     for n in root_nodes:
         dicts.append(recursive_node_to_dict(n))
-    return HttpResponse(json.dumps(dicts[0]), mimetype="application/json")
+    root = {
+        'name': 'corpsey',
+        'children': dicts,
+    }
+    return HttpResponse(json.dumps(root, indent=4), mimetype="application/json")
 
 def random(request):
     comic_to = Comic.objects.order_by('?')[0]
