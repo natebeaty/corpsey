@@ -106,9 +106,17 @@ ul.tree {
     li { 
         line-height: 0;
     }
-    ul { 
+    ul.children { 
         display: inline-block; 
         line-height: 0;
+        li {
+            height: 4px;
+
+            a {
+                width: 4px;
+                height: 2px;
+            }
+        }
     }
     a {
         display: inline-block;
