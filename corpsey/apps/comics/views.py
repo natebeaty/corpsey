@@ -5,13 +5,47 @@ from django.contrib.flatpages.models import FlatPage
 from django.template import RequestContext
 from django.core.mail import mail_admins,mail_managers
 from django.core import urlresolvers
+from easy_thumbnails.files import get_thumbnailer
+from django.http import HttpResponse
 
 def home(request):
     page = get_object_or_404(FlatPage,url='/catacombs/')
     return render_to_response('comics/home.html',  {
         'page': page,
-        'comics': Comic.objects.all(),
+        'comics': Comic.objects.all().filter(active=True),
         }, RequestContext(request))
+
+
+import json
+from mptt.templatetags.mptt_tags import cache_tree_children
+
+def recursive_node_to_dict(node):
+    result = {
+        'id': node.pk,
+        'size': node.pk*100,
+        'url': node.get_absolute_url(),
+        'image': get_thumbnailer(node.panel1)['midsize'].url,
+        'name': node.artist.name,
+    }
+    children = [recursive_node_to_dict(c) for c in node.get_children()]
+    if children:
+        result['children'] = children
+    return result
+
+def tree(request):
+    page = get_object_or_404(FlatPage,url='/tree/')
+
+    return render_to_response('comics/tree.html',  {
+        'page': page,
+        'comics': Comic.objects.all().filter(active=True),
+        }, RequestContext(request))
+
+def tree_json(request):
+    root_nodes = cache_tree_children(Comic.objects.all().filter(active=True))
+    dicts = []
+    for n in root_nodes:
+        dicts.append(recursive_node_to_dict(n))
+    return HttpResponse(json.dumps(dicts[0]), mimetype="application/json")
 
 def random(request):
     comic_to = Comic.objects.order_by('?')[0]

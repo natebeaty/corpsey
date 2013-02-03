@@ -91,9 +91,16 @@ ul.tree {
 ul.tree li {
   line-height: 0;
 }
-ul.tree ul {
+ul.tree ul.children {
   display: inline-block;
   line-height: 0;
+}
+ul.tree ul.children li {
+  height: 4px;
+}
+ul.tree ul.children li a {
+  width: 4px;
+  height: 2px;
 }
 ul.tree a {
   display: inline-block;
