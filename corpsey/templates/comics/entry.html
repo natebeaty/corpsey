@@ -14,17 +14,17 @@
 
 {% if comic_2 %}
   {% if next_comic_links %}
-    {% include "comics/comic_links.html" with root_comic=comic_2 comic=comic comic_links=comic_links class='next' comic_links=next_comic_links %}
+    {% include "comics/next_comic_links.html" with root_comic=comic_2 comic_links=comic_links class='next' comic_links=next_comic_links %}
   {% endif %}
 
 {% else %}
   {% if next_comic_links %}
-    {% include "comics/comic_links.html" with root_comic=comic_1 comic=comic comic_links=comic_links class='next' comic_links=next_comic_links %}
+    {% include "comics/next_comic_links.html" with root_comic=comic_1 comic_links=comic_links class='next' comic_links=next_comic_links %}
   {% endif %}
 {% endif %}
 
 {% if prev_comic_links %}
-  {% include "comics/comic_links.html" with root_comic=comic_1.parent comic_1=comic comic_links=comic_links class='prev' comic_links=prev_comic_links %}
+  {% include "comics/prev_comic_links.html" with root_comic=comic_1 comic_links=prev_comic_links %}
 {% endif %}
 
 {% comment %}  

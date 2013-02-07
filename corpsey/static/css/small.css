@@ -15,5 +15,5 @@ h1.comic_1,h1.comic_2{display:none !important;}
 .comic-nav .button{width:106px;}
 .comic-nav.stuck{position:static;}
 nav.main{height:34px;}nav.main ul{display:none;}
+nav.main h1#textlogo{padding:4px 6px 0 57px;text-align:center;}
 ul.tree{display:none;}
-nav.main h1#textlogo{text-align:center;}
