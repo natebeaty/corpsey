@@ -15,7 +15,7 @@ $.corpsey.catacombs = (function() {
         _get_widths();
         State = History.getState();
         comics_showing = _comics_showing();
-        History.replaceState({'hash': window.location.pathname, 'direction': '', 'comic_id_arr': comics_showing}, document.title, window.location.pathname);
+        History.replaceState({'hash': window.location.pathname, 'comic_id_arr': comics_showing}, document.title, window.location.pathname);
 
         // Bind to State Change
         History.Adapter.bind(window,'statechange',function(){
@@ -23,6 +23,8 @@ $.corpsey.catacombs = (function() {
             if (!comics_data[State.data.hash]) {
                 Dajaxice.corpsey.apps.comics.get_comic_panels($.corpsey.catacombs.build_panels, { 'comic_id_arr': State.data.comic_id_arr, 'direction': State.data.direction, 'hash': State.data.hash });
             } else {
+                // update the direction
+                comics_data[State.data.hash].direction = State.data.direction;
                 _build_panels(comics_data[State.data.hash]);
             }
         });
