@@ -414,14 +414,15 @@ a#clixel {
   position: relative;
 }
 .comic.single h1 {
-  position: absolute;
+  display: none;
 }
 #catacombs {
   margin: 4px auto;
   min-height: 660px;
   max-width: 1000px;
 }
-#catacombs .comic h1 {
+#catacombs h1.comic_1,
+#catacombs h1.comic_2 {
   color: #999;
   -webkit-transform: rotate(270deg);
   -moz-transform: rotate(270deg);

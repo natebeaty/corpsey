@@ -6,7 +6,12 @@ $.corpsey.catacombs = (function() {
     var comics_showing = [];
     var comics_data = {};
 
+    var medium_width = false,
+        small_width = false,
+        delayed_resize_timer = false;
+
     function _init() {
+        _get_widths();
         State = History.getState();
         comics_showing = _comics_showing();
         History.replaceState({'hash': window.location.pathname, 'direction': '', 'comic_id': comics_showing[0]}, document.title, window.location.pathname);
@@ -24,9 +29,12 @@ $.corpsey.catacombs = (function() {
 
         // isotopize
         $('#catacombs').isotope({
-            itemSelector: 'img',
+            itemSelector: 'img,h1',
             onLayout: function() { setTimeout(function() { $.corpsey.catacombs.build_titles(); }, 600); }
         });
+        if (!small_width) {
+            $('#catacombs').isotope({ filter: '.panel' });
+        }
 
         $('.comic-nav .next, .comic-nav .prev').live('click',function(e) {
             comics_showing = _comics_showing();
@@ -166,12 +174,13 @@ $.corpsey.catacombs = (function() {
     }
 
     function _hide_titles() {
-        $('.comic.single h1, h1.comic_1, h1.comic_2').fadeOut();
+        $('h1.comic_1, h1.comic_2').fadeOut();
     }
     function _build_titles() {
         $('h1.comic_1, h1.comic_2').remove();
         $('.comic.single').each(function(i) {
-            $(this).find('h1').clone().addClass('comic_'+(i+1)).appendTo('body').css({ 'top' : -1000, 'left' : -1000 });
+            var name = $(this).find('h1').text();
+            $('<h1 />').text(name).addClass('comic_'+(i+1)).appendTo('body').css({ 'top' : -1000, 'left' : -1000 });
         });
         _move_titles();
     }
@@ -186,6 +195,23 @@ $.corpsey.catacombs = (function() {
         $('h1.comic_1, h1.comic_2').show();
     }
 
+    function _resize() {
+        _get_widths();
+        _move_titles();
+    }
+    function _delayed_resize() {
+        if (!small_width) {
+            $('#catacombs').isotope({ filter: '.panel' });
+        } else {
+            $('#catacombs').isotope({ filter: '.panel,h1' });
+        }
+    }
+    function _get_widths() {
+        var screen_width = document.documentElement.clientWidth;
+        medium_width = screen_width <= 1020;
+        small_width = screen_width <= 700;
+    }
+
     // public methods
     return {
         init: function() {
@@ -194,8 +220,11 @@ $.corpsey.catacombs = (function() {
         build_panels: function(data) {
             _build_panels(data);
         },
-        move_titles: function() {
-            _move_titles();
+        resize: function() {
+            _resize();
+        },
+        delayed_resize: function() {
+          _delayed_resize();
         },
         build_titles: function() {
             _build_titles();
@@ -218,5 +247,11 @@ $(window).load(function(){
 });
 
 $(window).resize(function(){
-    $.corpsey.catacombs.move_titles();
+    $.corpsey.catacombs.resize();
+
+  // delayed resize for more intensive tasks
+  if($.corpsey.catacombs.delayed_resize_timer !== false) {
+    clearTimeout($.corpsey.catacombs.delayed_resize_timer);
+  }
+  $.corpsey.catacombs.delayed_resize_timer = setTimeout($.corpsey.catacombs.delayed_resize, 200);
 });
