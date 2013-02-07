@@ -4,7 +4,7 @@ from dajaxice.decorators import dajaxice_register
 from easy_thumbnails.files import get_thumbnailer
 
 @dajaxice_register(method='GET')
-def get_comic_panels(request, comic_id, direction):
+def get_comic_panels(request, comic_id, direction, hash):
     comic = Comic.objects.get(pk=comic_id)
 
     return simplejson.dumps({ 
@@ -13,6 +13,7 @@ def get_comic_panels(request, comic_id, direction):
         'panel3' : get_thumbnailer(comic.panel3)['midsize'].url,
         'comic_id' : comic_id,
         'direction' : direction,
+        'hash' : hash,
         'first_name' : comic.artist.first_name,
         'last_name' : comic.artist.last_name,
         'name' : comic.artist.name,
