@@ -45,6 +45,12 @@ $.corpsey.catacombs = (function() {
             return false;
         });
 
+        $('.comic-nav .up').live('click', function(e) {
+            e.preventDefault();
+            History.back();
+            return false;
+        });
+
         // keyboard nerds
         $(document).bind('keydown',function(e) {
             if (e.keyCode === 39) {
@@ -75,6 +81,7 @@ $.corpsey.catacombs = (function() {
     function _build_panels(data){
         _hide_titles();
 
+        // check url for /3/4/
         var two_comics = History.getState().url.match(/\/\d+\/\d+\//);
 
         // build comic template with data
@@ -179,10 +186,6 @@ $.corpsey.catacombs = (function() {
         $('h1.comic_1, h1.comic_2').show();
     }
 
-    function _up_link() {
-        History.back();
-    }
-
     // public methods
     return {
         init: function() {
@@ -196,9 +199,6 @@ $.corpsey.catacombs = (function() {
         },
         build_titles: function() {
             _build_titles();
-        },
-        up_link: function() {
-            _up_link();
         },
         show_nav_buttons: function(data) {
             _show_nav_buttons(data);

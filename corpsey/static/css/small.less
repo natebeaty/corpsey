@@ -2,6 +2,84 @@
 Corpsey smaller
 */
 
+@import 'mixins.less';
+
 #catacombs {
-    max-width: 330px;
+    max-width: 300px;
+}
+
+#homepage {
+    header {
+    	a.button {
+    	    font: 16px/1.2em 'myriad pro', helvetica, sans-serif;
+    	    padding: 6px 12px 6px 20px;
+    	    .rounded-corners(20px);
+    	}
+        &.main {
+            .intro {
+                width: 300px;
+                font: 14px/1.3em 'Arbutus Slab', helvetica, sans-serif;
+            }
+        }
+    }
+    #logo { 
+        width: 300px;
+        height: 129px;
+        background-size: 300px 129px;
+    }
+    .recent-contributors {
+        width: auto;
+    }
+    .comic {
+        margin-bottom: 30px;
+        img {
+        	width: 300px;
+        	height: 300px;
+        	display: block;
+        	float: none;
+        	margin: 4px auto;
+        }
+        h1 {
+            font: 16px/1.2em 'Arbutus Slab', helvetica, sans-serif;
+            text-align: center;
+        }
+    }
+}
+.comic {
+	img {
+		width: 300px;
+		height: 300px;
+	}
+}
+.comic-nav {
+    position: static;
+    right:auto;
+    top: auto;
+    &.prev {
+        top: auto;
+        &.stuck {
+            top: auto;
+        }
+    }
+    &.next {
+        &.stuck {
+            top: auto;
+        }
+    }
+    &.loading {
+        opacity: .3;
+    }
+    .button {
+        width: 106px;
+    }
+    &.stuck {
+        position: static;
+    }
+}
+nav.main ul,
+ul.tree {
+	display: none;
+}
+nav.main h1#textlogo {
+	text-align: center;
 }

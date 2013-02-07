@@ -3,6 +3,92 @@ Corpsey
 */
 html,
 body {
+  margin: 0;
+  padding: 0;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+dd,
+dl,
+dt,
+li,
+ol,
+ul,
+fieldset,
+form,
+figure,
+label,
+legend,
+button,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 100%;
+  line-height: 1;
+  font-family: inherit;
+}
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+nav,
+section {
+  display: block;
+}
+audio[controls],
+canvas,
+video {
+  display: inline-block;
+  *display: inline;
+  *zoom: 1;
+}
+ul,
+li {
+  list-style-type: none;
+}
+html,
+body {
   height: 100%;
 }
 body {
@@ -211,13 +297,15 @@ a#clixel {
 }
 .comic-nav.prev {
   top: 40px;
+  float: left;
 }
 .comic-nav.prev.stuck {
-  position: fixed;
   top: 40px;
 }
+.comic-nav.next {
+  float: right;
+}
 .comic-nav.next.stuck {
-  position: fixed;
   top: 200px;
 }
 .comic-nav.loading {
@@ -253,14 +341,13 @@ a#clixel {
   width: auto;
 }
 #homepage header.main .wrap {
-  width: 1000px;
   margin: 0 auto 40px;
   padding: 20px;
   text-align: center;
 }
 #homepage header.main h2 {
   text-transform: uppercase;
-  margin: 0;
+  margin: 0 0 .2em 0;
 }
 #homepage header.main .intro {
   width: 550px;

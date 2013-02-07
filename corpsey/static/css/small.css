@@ -1,1 +1,15 @@
-#catacombs{max-width:330px;}
+#catacombs{max-width:300px;}
+#homepage header a.button{font:16px/1.2em 'myriad pro',helvetica,sans-serif;padding:6px 12px 6px 20px;-webkit-border-radius:20px;-moz-border-radius:20px;border-radius:20px;}
+#homepage header.main .intro{width:300px;font:14px/1.3em 'Arbutus Slab',helvetica,sans-serif;}
+#homepage #logo{width:300px;height:129px;background-size:300px 129px;}
+#homepage .recent-contributors{width:auto;}
+#homepage .comic{margin-bottom:30px;}#homepage .comic img{width:300px;height:300px;display:block;float:none;margin:4px auto;}
+#homepage .comic h1{font:16px/1.2em 'Arbutus Slab',helvetica,sans-serif;text-align:center;}
+.comic img{width:300px;height:300px;}
+.comic-nav{position:static;right:auto;top:auto;}.comic-nav.prev{top:auto;}.comic-nav.prev.stuck{top:auto;}
+.comic-nav.next.stuck{top:auto;}
+.comic-nav.loading{opacity:.3;}
+.comic-nav .button{width:106px;}
+.comic-nav.stuck{position:static;}
+nav.main ul,ul.tree{display:none;}
+nav.main h1#textlogo{text-align:center;}

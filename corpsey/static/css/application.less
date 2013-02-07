@@ -2,27 +2,14 @@
 Corpsey
 */
 
+@import 'reset.less';
+@import 'mixins.less';
+
 @olive: #76896b;
 @graygreen: #acb5b0;
 @bluegray: #989eaa;
 @red: #ea1f4a;
 @tan: #b9b19c;
-
-.rounded-corners (@radius: 4px) {
-  -webkit-border-radius: @radius;
-  -moz-border-radius: @radius;
-  border-radius: @radius;
-}
-.transform(...) {
-  -webkit-transform: @arguments;
-  -moz-transform: @arguments;
-  -o-transform: @arguments;
-  -ms-transform: @arguments;
-  transform: @arguments;
-}
-.rotation(@deg:5deg){
-  .transform(rotate(@deg));
-}
 
 html, body { height: 100%; }
 body {
@@ -229,14 +216,14 @@ a#clixel {
     }
     &.prev {
         top: 40px;
+        float: left;
         &.stuck {
-            position: fixed;
             top: 40px;
         }
     }
     &.next {
+        float: right;
         &.stuck {
-            position: fixed;
             top: 200px;
         }
     }
@@ -271,14 +258,13 @@ a#clixel {
             float: none;
             width: auto;
             .wrap {
-                width: 1000px;
                 margin:0 auto 40px;
                 padding:20px;
                 text-align: center;
             }
             h2 {
                 text-transform: uppercase;
-                margin: 0;
+                margin: 0 0 .2em 0;
             }
             .intro {
                 width: 550px;
