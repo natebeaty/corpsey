@@ -8,16 +8,17 @@ $.corpsey.catacombs = (function() {
 
     var medium_width = false,
         small_width = false,
-        delayed_resize_timer;
+        delayed_resize_timer,
+        build_titles_timer;
 
     function _init() {
         delayed_resize_timer = false;
         _get_widths();
         State = History.getState();
         comics_showing = _comics_showing();
-        History.replaceState({'hash': window.location.pathname, 'comic_id_arr': comics_showing}, document.title, window.location.pathname);
+        History.replaceState({'hash': window.location.pathname, 'direction': 'prev', 'comic_id_arr': comics_showing}, document.title, window.location.pathname);
 
-        // Bind to State Change
+        // bind to state change
         History.Adapter.bind(window,'statechange',function(){
             State = History.getState();
             if (!comics_data[State.data.hash]) {
@@ -32,7 +33,10 @@ $.corpsey.catacombs = (function() {
         // isotopize
         $('#catacombs').isotope({
             itemSelector: 'img,h1',
-            onLayout: function() { setTimeout(function() { $.corpsey.catacombs.build_titles(); }, 600); }
+            onLayout: function() {
+                if (build_titles_timer) { clearTimeout(build_titles_timer); }
+                build_titles_timer = setTimeout(function() { $.corpsey.catacombs.build_titles(); }, 650);
+            }
         });
         if (!small_width) {
             $('#catacombs').isotope({ filter: '.panel' });
@@ -93,35 +97,24 @@ $.corpsey.catacombs = (function() {
 
     function _build_panels(data){
         _hide_titles();
-        var comic_1,comic_2;
+        var comic_id_arr = History.getState().url.replace(location.host,'').match(/\d+/g);
 
-        // check url for /3/4/
-        var two_comics = History.getState().url.match(/\/\d+\/\d+\//);
-
-        // build comic template with data
-        comic_1 = ich.comic_single(data.comics[0]);
-        if (ich.comic_single(data.comics.length>1)) {
-            comic_2 = ich.comic_single(data.comics[1]);
-        }
-        
-        // remove first comic if viewing two already
-        if ($('.comic.single').length > 1) {
-            if (!two_comics) {
-                $('#catacombs').isotope('remove', $('.comic.single[data-comic-id!='+data.comic_id+']').find('img,h1'));
-                return false;
-            } else {
-                var comicToRemove = data.direction==='next' ? $('.comic.single:first') : $('.comic.single:last');
-                var comicToAdd = data.direction==='next' ? comic_2 : comic_1;
-
-                var imgs = comicToRemove.find('img,h1');
-                $('#catacombs').isotope('remove', imgs, function() {
-                    comicToRemove.remove();
-                    _show_panels(data, comicToAdd);
+        // remove strips not in new url
+        $('.comic.single').each(function() {
+            var $this = $(this);
+            if ($.inArray($this.data('comic-id').toString(), comic_id_arr)<0) {
+                $('#catacombs').isotope('remove', $this.find('img,h1'), function() {
+                    $this.remove();
                 });
             }
-        } else {
-            _show_panels(data, comic_1);
+        });
+
+        if (comic_id_arr.length>1) {
+            // build comic template with data
+            var comic = ich.comic_single(data.comics[data.direction==='next' ? 1 : 0]);
+            setTimeout(function() { _show_panels(data, comic); }, 650);
         }
+
         comics_data[data.hash] = data;
     }
 
@@ -200,7 +193,9 @@ $.corpsey.catacombs = (function() {
             var $img = $(this).find('img:eq('+c+')');
             var pos = $img.offset();
             var $h1 = $('h1.comic_'+(i+1));
-            $h1.css({ 'top' : pos.top+$h1.width(), 'left' : pos.left-20 });
+            if ($h1.length>0 && pos!==null) {
+                $h1.css({ 'top' : pos.top+$h1.width(), 'left' : pos.left-20 });
+            }
         });
         $('h1.comic_1, h1.comic_2').show();
     }
@@ -248,12 +243,6 @@ $.corpsey.catacombs = (function() {
 // fire up the mothership
 $(window).ready(function(){
     $.corpsey.catacombs.init();
-});
-
-$(window).load(function(){
-    $('#catacombs').imagesLoaded(function() {
-       $.corpsey.catacombs.build_titles();
-    });
 });
 
 $(window).resize(function(){
