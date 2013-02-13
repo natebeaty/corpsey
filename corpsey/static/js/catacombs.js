@@ -126,7 +126,7 @@ $.corpsey.catacombs = (function() {
             $('#catacombs').prepend(comic).isotope('reloadItems').isotope({ sortBy: 'original-order' });
         }
 
-        _show_active_comics_in_tree();
+        // _show_active_comics_in_tree();
         _get_nav_links();
 
         // var url = (comic_ids.length>1) ? '/catacombs/'+comic_ids[0]+'/'+comic_ids[1]+'/' : '/catacombs/'+comic_ids[0]+'/';

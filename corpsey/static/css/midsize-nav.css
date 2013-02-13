@@ -1,0 +1,26 @@
+/*
+Corpsey midsize nav adjustment
+*/
+.comic-nav {
+  position: static;
+  right: auto;
+  top: auto;
+}
+.comic-nav.prev {
+  top: auto;
+}
+.comic-nav.prev.stuck {
+  top: auto;
+}
+.comic-nav.next.stuck {
+  top: auto;
+}
+.comic-nav.loading {
+  opacity: .3;
+}
+.comic-nav .button {
+  width: 106px;
+}
+.comic-nav.stuck {
+  position: static;
+}
