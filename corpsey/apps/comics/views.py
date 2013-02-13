@@ -55,6 +55,10 @@ def random(request):
     comic_to = Comic.objects.order_by('?')[0]
     return redirect(comic_to)
 
+def random_starter(request):
+    comic_to = Comic.objects.all().filter(starter=True).order_by('?')[0]
+    return redirect(comic_to)
+
 def entry(request, comic_1, comic_2=None):
     next_comic_links = []
     comic_1 = get_object_or_404(Comic,pk=comic_1)
