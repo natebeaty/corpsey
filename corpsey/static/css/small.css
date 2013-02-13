@@ -38,12 +38,12 @@ Corpsey smaller
   margin: 4px auto;
 }
 #homepage .comic h1 {
-  font: 14px/1.2em 'Arbutus Slab', helvetica, sans-serif;
   text-align: center;
 }
 #homepage .comic h1 small {
   font: 10px/1.2em 'Arbutus Slab', helvetica, sans-serif;
   display: block;
+  margin-top: 4px;
 }
 .comic img {
   width: 300px;
