@@ -228,9 +228,9 @@ nav.main ul li #get-artist {
   color: #eee;
   background: #989eaa;
   border: 0;
-  width: 90px;
+  width: 96px;
   padding: 2px 16px;
-  height: 26px;
+  height: 24px;
 }
 nav.main ul li #get-artist::-webkit-input-placeholder {
   color: #eee;
@@ -249,7 +249,10 @@ nav.main ul li #get-artist:hover {
 }
 nav.main ul li #get-artist:focus {
   background: #fff;
-  color: #989eaa;
+  color: #222;
+  letter-spacing: .1em;
+  width: 116px;
+  padding: 2px 6px;
 }
 nav.main ul li a {
   line-height: 24px;
