@@ -3,7 +3,7 @@
 $.corpsey = (function() {
 
     function _init() {
-        $('<li><input id="get-artist" placeholder="Search Artists..."></li>').prependTo('nav.main ul');
+        $('<li><input id="get-artist" placeholder="SEARCH"></li>').prependTo('nav.main ul');
         $('#get-artist').autocomplete({
 			source: "/get_artists/",
 			minLength: 2,

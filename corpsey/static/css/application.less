@@ -14,7 +14,7 @@ Corpsey
 html, body { height: 100%; }
 body {
     background: #fff;
-    font: 14px/1.4em 'Arbutus Slab', helvetica, sans-serif;
+    font: 14px/1.4em 'Arbutus Slab', serif;
     color: #222;
     position: relative;
 }
@@ -31,19 +31,19 @@ a {
 /* general typography */
 
 h1 {
-    font: 24px/1.2em 'Arbutus Slab', helvetica, sans-serif;
+    font: 24px/1.2em 'Arbutus Slab', serif;
     letter-spacing: .2em;
     text-transform: uppercase;
     margin: 1em 0;
 }
 h2 {
-    font: 18px/1.2em 'Arbutus Slab', helvetica, sans-serif;
+    font: 18px/1.2em 'Arbutus Slab', serif;
     letter-spacing: .2em;
     text-transform: uppercase;
     margin: 1em 0;
 }
 h3 {
-    font: 14px/1.2em 'Arbutus Slab', helvetica, sans-serif;
+    font: 14px/1.2em 'Arbutus Slab', serif;
     letter-spacing: .2em;
     text-transform: uppercase;
     margin: 1em 0;
@@ -52,7 +52,7 @@ h3 {
     padding: 0 5% 0 2%;
 }
 p {
-    font: 14px/1.4em 'Arbutus Slab', helvetica, sans-serif;
+    font: 14px/1.4em 'Arbutus Slab', serif;
     margin: .5em 0;
 }
 .user-content ul {
@@ -68,7 +68,7 @@ p {
 
 .button, 
 nav li a {
-    font: 12px/1.2em 'myriad pro', helvetica, sans-serif;
+    font: 12px/1.2em 'Orienta', sans-serif;
     letter-spacing: .4em;
     text-transform: uppercase;
     background: @graygreen; 
@@ -140,9 +140,25 @@ nav.main {
         li {
             display: inline-block;
             #get-artist {
+                font: 12px/1.2em 'Orienta', sans-serif;
+                letter-spacing: .4em;
+                color: #eee;
+                background: @bluegray;
                 border: 0;
                 width: 90px;
-                padding: 2px;
+                padding: 2px 16px;
+                height: 26px;
+                &::-webkit-input-placeholder { color: #eee; }
+                &:-moz-placeholder { color: #eee; } // Firefox 18-
+                &::-moz-placeholder { color: #eee; } // Firefox 19+
+                &:-ms-input-placeholder { color: #eee; }
+                &:hover {
+                    background: lighten(@bluegray, 5%);
+                }
+                &:focus {
+                    background: #fff;
+                    color: @bluegray;
+                }
             }
             a {
                 line-height: 24px;
@@ -174,7 +190,7 @@ nav.main {
             letter-spacing: .2em;
             margin: 0;
             padding: 0 16px 0 57px;
-            font: 15px/26px 'Arbutus Slab', helvetica, sans-serif;
+            font: 15px/26px 'Arbutus Slab', serif;
             &:hover {
                 background-color: lighten(@bluegray, 5%);
             }
@@ -251,7 +267,7 @@ a#clixel {
         background: @red;
         color: #222;
         a.button {
-            font: 18px/1.2em 'myriad pro', helvetica, sans-serif;
+            font: 18px/1.2em 'Orienta', sans-serif;
             padding: 8px 16px 8px 24px;
             .rounded-corners(30px);
             background: @bluegray;
@@ -274,7 +290,7 @@ a#clixel {
             .intro {
                 width: 550px;
                 margin: 1em auto; 
-                font: 16px/1.3em 'Arbutus Slab', helvetica, sans-serif;
+                font: 16px/1.3em 'Arbutus Slab', serif;
                 strong {
                     color: #eee;
                 }
@@ -297,7 +313,7 @@ a#clixel {
         margin-bottom: 60px;
         overflow: auto;
         h1 {
-            font: 18px/1.2em 'Arbutus Slab', helvetica, sans-serif;
+            font: 18px/1.2em 'Arbutus Slab', serif;
             overflow: hidden;
             position: relative;
             a {
@@ -311,7 +327,7 @@ a#clixel {
 
 .comic {
     h1 {
-        font: 14px/1.2em 'Arbutus Slab', helvetica, sans-serif;
+        font: 14px/1.2em 'Arbutus Slab', serif;
         margin: .5em 0 0;
     }
     ul, li { display: inline; }
@@ -356,19 +372,19 @@ h1.comic_2 {
     white-space: nowrap;
     left: 0;
     top: 0;
-    font: 14px/1.2em 'Arbutus Slab', helvetica, sans-serif;
+    font: 14px/1.2em 'Arbutus Slab', serif;
 }
 
 /* contribute */
 label {
     display: block;
-    font: 14px/1.2em "myriad pro", helvetica, sans-serif;
+    font: 14px/1.2em "Orienta", sans-serif;
     text-transform: uppercase;
     margin: 1em 0 0;
 }
 .contribute {
     input[type=text] {
-        font: 16px/1.2em "myriad pro", helvetica, sans-serif;
+        font: 16px/1.2em "Orienta", sans-serif;
         color: #fff;
         width: 300px;
         background: #000;
@@ -376,7 +392,7 @@ label {
         padding: 6px; 
     }
     input[type=submit] {
-        font: 16px/1em "myriad pro", helvetica, sans-serif;
+        font: 16px/1em "Orienta", sans-serif;
         padding: 10px 60px 8px;
         background: #666;
         color: #fff;
@@ -450,7 +466,7 @@ ul.ui-autocomplete {
     z-index: 99999 !important;
     width: 100px !important;
     li {
-        font: 12px/1.2em 'myriad pro', helvetica, sans-serif;
+        font: 12px/1.2em 'Orienta', sans-serif;
         a {
             display: block;
             cursor: pointer;
