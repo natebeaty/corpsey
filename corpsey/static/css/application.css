@@ -405,14 +405,14 @@ a#clixel {
   overflow: auto;
 }
 #homepage .comic h1 {
-  font: 18px/1.2em 'Arbutus Slab', serif;
+  font: 22px/1.2em 'Arbutus Slab', serif;
   overflow: hidden;
   position: relative;
   text-align: center;
 }
 #homepage .comic h1 small {
-  font: 16px/1.2em 'Arbutus Slab', serif;
-  color: #76896b;
+  font: 12px/1.2em 'Arbutus Slab', serif;
+  color: #c5cdc0;
 }
 #homepage .comic h1 a {
   float: right;
