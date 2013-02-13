@@ -374,18 +374,6 @@ a#clixel {
   text-align: center;
   color: #ccc;
 }
-#homepage .recent-contributors article:nth-child(3) {
-  opacity: .8;
-}
-#homepage .recent-contributors article:nth-child(4) {
-  opacity: .6;
-}
-#homepage .recent-contributors article:nth-child(5) {
-  opacity: .4;
-}
-#homepage .recent-contributors article:nth-child(6) {
-  opacity: .2;
-}
 #homepage .comic {
   margin-bottom: 60px;
   overflow: auto;

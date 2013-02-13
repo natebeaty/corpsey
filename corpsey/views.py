@@ -5,7 +5,7 @@ from django.contrib.flatpages.models import FlatPage
 from django.template import RequestContext
 
 def home(request):
-    comic_set = Comic.objects.filter(active=True).order_by('-date')[:5]
+    comic_set = Comic.objects.filter(active=True).order_by('-date')[:10]
     page = FlatPage.objects.get(url='/')
     num_artists = Artist.objects.count()
     return render_to_response('home.html',  {
