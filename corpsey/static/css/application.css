@@ -228,11 +228,11 @@ nav.main ul li a {
   background: none;
 }
 nav.main ul li:last-child a {
-  background: #ea1f4a;
+  background: #ed1846;
   color: #eee;
 }
 nav.main ul li:last-child a:hover {
-  background: #ec365d;
+  background: #ef3059;
 }
 nav.main a {
   color: #eee;
@@ -259,7 +259,7 @@ nav.main h1#textlogo a:hover {
 #logo {
   width: 681px;
   height: 306px;
-  background: url('/static/img/logo.png') no-repeat;
+  background: url('/static/img/logo.gif') no-repeat;
   text-indent: -9999em;
   margin: 8px auto;
 }
@@ -322,7 +322,7 @@ a#clixel {
   margin-left: 0;
 }
 #homepage header {
-  background: #ea1f4a;
+  background: #ed1846;
   color: #222;
 }
 #homepage header a.button {
