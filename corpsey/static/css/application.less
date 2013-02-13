@@ -133,12 +133,17 @@ nav.main {
     height: 26px;
     ul {
         text-align: right;
-        width: 460px;
+        width: 470px;
         position: absolute;
         top: 0;
         right: 0;
         li {
             display: inline-block;
+            #get-artist {
+                border: 0;
+                width: 90px;
+                padding: 2px;
+            }
             a {
                 line-height: 24px;
                 padding: 2px 16px 0 16px;
@@ -440,4 +445,23 @@ label {
       -ms-transition-duration: 0s;
        -o-transition-duration: 0s;
           transition-duration: 0s;
+}
+
+/* autocomplete */
+.ui-helper-hidden-accessible { display: none; }
+ul.ui-autocomplete {
+    background: #fff;
+    z-index: 99999 !important;
+    width: 100px !important;
+    li {
+        font: 12px/1.2em 'myriad pro', helvetica, sans-serif;
+        a {
+            display: block;
+            cursor: pointer;
+            padding: 4px;
+            &:hover {
+                background: #eee;
+            }
+        }
+    }
 }

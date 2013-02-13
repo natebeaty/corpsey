@@ -24,6 +24,7 @@ urlpatterns = patterns('',
     url(r'^contribute/', 'corpsey.apps.comics.views.contribute', name='contribute'),
     
     url(r'^artist/([\d]+)/$', 'corpsey.apps.artists.views.entry', name='artist'),
+    url(r'^get_artists/', 'corpsey.apps.artists.views.get_artists', name='get_artists'),
             
     url(r'^admin/filebrowser/', include(site.urls)),
 
