@@ -401,13 +401,18 @@ a#clixel {
   color: #ccc;
 }
 #homepage .comic {
-  margin-bottom: 60px;
+  margin-bottom: 70px;
   overflow: auto;
 }
 #homepage .comic h1 {
   font: 18px/1.2em 'Arbutus Slab', serif;
   overflow: hidden;
   position: relative;
+  text-align: center;
+}
+#homepage .comic h1 small {
+  font: 16px/1.2em 'Arbutus Slab', serif;
+  color: #76896b;
 }
 #homepage .comic h1 a {
   float: right;
