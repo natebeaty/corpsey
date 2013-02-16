@@ -135,14 +135,24 @@ $.corpsey.catacombs = (function() {
     }
 
     function _filter_panels() {
+        // if you've looped through from last comic to first comic, make sure the URL matches visible order of comics
+        var visible_comics = [];
+        $('.comic.single:visible').each(function() { visible_comics.push($(this).data('comic-id')); });
+        if (visible_comics[0]!=comics_showing[0]) {
+           _find_comic(comics_showing[0]).after(_find_comic(comics_showing[1]));
+        }
+
+        // reset sort order for isotope using DOM order
         $('#catacombs').isotope('reloadItems').isotope({ sortBy: 'original-order' });
 
-        // filter strips not in new url
-        var comics_to_show = $('#catacombs .comic.single').filter(function(){
-            return ($.inArray($(this).data('comic-id'), comics_showing)<0);
+        // hide strips not in new url
+        $('#catacombs .comic.single').each(function(){
+            if ($.inArray($(this).data('comic-id'), comics_showing)<0) {
+                $(this).hide();
+            }
         });
 
-        comics_to_show.hide();
+        // set isotope to filter visible comics
         $('#catacombs').isotope({ filter: (small_width) ? '.comic:visible .panel,h1' : '.comic:visible .panel' });
 
         _get_nav_links();
