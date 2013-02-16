@@ -143,7 +143,7 @@ $.corpsey.catacombs = (function() {
         });
 
         comics_to_show.hide();
-        $('#catacombs').isotope({ filter: '.comic.single:visible .panel,.comic.single:visible .h1' });
+        $('#catacombs').isotope({ filter: '.comic:visible .panel,.comic:visible .h1' });
 
         _get_nav_links();
     }
@@ -208,9 +208,9 @@ $.corpsey.catacombs = (function() {
     }
     function _delayed_resize() {
         if (!small_width) {
-            $('#catacombs').isotope({ filter: '.panel' });
+            $('#catacombs').isotope({ filter: '.comic:visible .panel' });
         } else {
-            $('#catacombs').isotope({ filter: '.panel,h1' });
+            $('#catacombs').isotope({ filter: '.comic:visible .panel,h1' });
         }
     }
     function _get_widths() {
