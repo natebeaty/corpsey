@@ -127,7 +127,7 @@ $.corpsey.catacombs = (function() {
 
         // drop in comic
         if (data.direction==='next') {
-            $('#catacombs').find('.comic.single:visible:last').after(comic);
+            $('#catacombs').isotope('insert', comic);
         } else {
             $('#catacombs').find('.comic.single:visible:first').before(comic);
         }
