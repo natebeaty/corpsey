@@ -4,26 +4,24 @@ from dajaxice.decorators import dajaxice_register
 from easy_thumbnails.files import get_thumbnailer
 
 @dajaxice_register(method='GET')
-def get_comic_panels(request, comic_id_arr, direction, hash):
-    comics = []
-    for comic_id in comic_id_arr:
-        comic = Comic.objects.get(pk=comic_id)
-        if comic:
-            comic_obj = {
-                'panel1' : get_thumbnailer(comic.panel1)['midsize'].url, 
-                'panel2' : get_thumbnailer(comic.panel2)['midsize'].url, 
-                'panel3' : get_thumbnailer(comic.panel3)['midsize'].url,
-                'comic_id' : comic.id,
-                'first_name' : comic.artist.first_name,
-                'last_name' : comic.artist.last_name,
-                'name' : comic.artist.name
-            }
-            comics.append(comic_obj)
+def get_comic_panels(request, comic_id, direction):
+    comic = Comic.objects.get(pk=comic_id)
+    if comic:
+        comic_obj = {
+            'panel1' : get_thumbnailer(comic.panel1)['midsize'].url, 
+            'panel2' : get_thumbnailer(comic.panel2)['midsize'].url, 
+            'panel3' : get_thumbnailer(comic.panel3)['midsize'].url,
+            'comic_id' : comic.id,
+            'first_name' : comic.artist.first_name,
+            'last_name' : comic.artist.last_name,
+            'name' : comic.artist.name
+        }
+    else:
+        comic_obj = {}
 
     return simplejson.dumps({ 
         'direction' : direction,
-        'hash' : hash,
-        'comics' : comics
+        'comic' : comic_obj
     })
 
 @dajaxice_register(method='GET')

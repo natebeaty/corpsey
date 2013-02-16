@@ -140,6 +140,7 @@ nav.main {
         li {
             display: inline-block;
             #get-artist {
+                outline: none; 
                 font: 12px/1.2em 'Orienta', sans-serif;
                 letter-spacing: .4em;
                 color: #eee;
@@ -158,7 +159,7 @@ nav.main {
                 &:focus {
                     background: #fff;
                     color: #222;
-                    letter-spacing: .1em;
+                    letter-spacing: 0;
                     padding: 2px 6px;
                 }
             }
@@ -322,9 +323,12 @@ a#clixel {
             small {
                 font: 12px/1.2em 'Arbutus Slab', serif;
                 color: lighten(@olive, 30%);
-            }
-            a {
-                float: right;
+                a {
+                   color: lighten(@olive, 30%);
+                   &:hover {
+                    color: @olive;
+                    }    
+                }
             }
         }
     }
@@ -343,6 +347,7 @@ a#clixel {
         float: left;
         width: 330px;
         height: 330px;
+        background-size: 330px 330px;        
     }
     &.single { 
         width: 1000px;
@@ -469,17 +474,18 @@ label {
 /* autocomplete */
 .ui-helper-hidden-accessible { display: none; }
 ul.ui-autocomplete {
-    background: #fff;
+    background: @bluegray;
     z-index: 99999 !important;
-    width: 100px !important;
+    width: 150px !important;
     li {
         font: 12px/1.2em 'Orienta', sans-serif;
         a {
             display: block;
             cursor: pointer;
-            padding: 4px;
+            padding: 6px 8px;
+            color: #fff;
             &:hover {
-                background: #eee;
+                background: lighten(@bluegray, 5%);
             }
         }
     }
