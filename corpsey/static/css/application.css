@@ -15,14 +15,14 @@ h3{font:14px/1.2em 'Arbutus Slab',serif;letter-spacing:.2em;text-transform:upper
 .user-content{padding:0 5% 0 2%;}
 p{font:14px/1.4em 'Arbutus Slab',serif;margin:.5em 0;}
 .user-content ul{padding-left:1.2em;}.user-content ul li{list-style:disc;padding:0 0 .5em .2em;line-height:1.2em;}
-.button,nav li a{font:12px/1.2em 'Orienta',sans-serif;letter-spacing:.4em;text-transform:uppercase;background:#acb5b0;color:#eee;padding:6px 12px;white-space:nowrap;display:inline-block;margin-bottom:4px;text-decoration:none;border:0;cursor:pointer;}.button:hover,nav li a:hover{text-decoration:none;background:#b9c1bd;}
+.button,nav li a{font:12px/1.2em 'Orienta',sans-serif;letter-spacing:.2em;text-transform:uppercase;background:#acb5b0;color:#eee;padding:6px 12px;white-space:nowrap;display:inline-block;margin-bottom:4px;text-decoration:none;border:0;cursor:pointer;}.button:hover,nav li a:hover{text-decoration:none;background:#b9c1bd;}
 ul.tree{position:absolute;top:32px;left:4px;}ul.tree li{line-height:0;}
 ul.tree ul.children{display:inline-block;line-height:0;}ul.tree ul.children li{height:4px;}ul.tree ul.children li a{width:4px;height:2px;}
 ul.tree a{display:inline-block;width:8px;height:8px;background:#76896b;text-indent:-9999em;margin:1px;}
 ul.tree a:hover,ul.tree li.active>a{background:#222;}
 #wrapper{overflow:hidden;}
 #contribute-page #content,#static-page #content{margin-left:440px;}
-nav.main{background:#989eaa;height:26px;}nav.main ul{text-align:right;width:470px;position:absolute;top:0;right:0;}nav.main ul li{display:inline-block;}nav.main ul li #get-artist{outline:none;font:12px/1.2em 'Orienta',sans-serif;letter-spacing:.4em;color:#eee;background:#989eaa;border:0;width:96px;padding:2px 16px;height:24px;}nav.main ul li #get-artist::-webkit-input-placeholder{color:#eee;}
+nav.main{background:#989eaa;height:26px;}nav.main ul{text-align:right;width:470px;position:absolute;top:0;right:0;}nav.main ul li{display:inline-block;}nav.main ul li #get-artist{outline:none;font:12px/1.2em 'Orienta',sans-serif;letter-spacing:.2em;color:#eee;background:#989eaa;border:0;width:96px;padding:2px 16px;height:24px;}nav.main ul li #get-artist::-webkit-input-placeholder{color:#eee;}
 nav.main ul li #get-artist:-moz-placeholder{color:#eee;}
 nav.main ul li #get-artist::-moz-placeholder{color:#eee;}
 nav.main ul li #get-artist:-ms-input-placeholder{color:#eee;}
@@ -42,7 +42,7 @@ a#clixel{position:absolute;bottom:20px;right:10%;width:53px;height:20px;text-ind
 .comic-nav .button{width:106px;}
 .comic-nav.stuck{position:fixed;}
 #homepage #content{margin-left:0;}
-#homepage header{background:#ed1846;color:#222;}#homepage header a.button{font:18px/1.2em 'Orienta',sans-serif;padding:8px 16px 8px 24px;-webkit-border-radius:30px;-moz-border-radius:30px;border-radius:30px;background:#989eaa;}#homepage header a.button:hover{background:#a6abb6;}
+#homepage header{background:#ed1846;color:#222;}#homepage header a.button{font:18px/1.2em 'Orienta',sans-serif;letter-spacing:.2em;padding:8px 16px 8px 24px;-webkit-border-radius:30px;-moz-border-radius:30px;border-radius:30px;background:#989eaa;}#homepage header a.button:hover{background:#a6abb6;}
 #homepage header.main{float:none;width:auto;}#homepage header.main .wrap{margin:0 auto 40px;padding:20px;text-align:center;}
 #homepage header.main h2{text-transform:uppercase;margin:0 0 .2em 0;}
 #homepage header.main .intro{width:550px;margin:1em auto;font:16px/1.3em 'Arbutus Slab',serif;}#homepage header.main .intro strong{color:#eee;}
