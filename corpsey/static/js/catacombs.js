@@ -143,7 +143,7 @@ $.corpsey.catacombs = (function() {
         });
 
         comics_to_show.hide();
-        $('#catacombs').isotope({ filter: '.comic:visible .panel,.comic:visible .h1' });
+        $('#catacombs').isotope({ filter: (small_width) ? '.comic:visible .panel,h1' : '.comic:visible .panel' });
 
         _get_nav_links();
     }
