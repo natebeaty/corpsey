@@ -1,29 +1,9 @@
 {% extends "base.html" %}
 {% load thumbnail mptt_tags icanhaz %}
 
-{% block body_id %}homepage{% endblock %}
+{% block body_id %}tree{% endblock %}
 
 {% block content %}
-
-<style>
-
-.node circle {
-  fill: #fff;
-  stroke: #f00;
-  stroke-width: 1.5px;
-}
-
-.node {
-  font: 10px sans-serif;
-}
-
-.link {
-  fill: none;
-  stroke: #ccc;
-  stroke-width: 1.5px;
-}
-
-</style>
 
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <script>
