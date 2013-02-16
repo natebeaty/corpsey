@@ -111,7 +111,7 @@ $.corpsey.catacombs = (function() {
                     'direction': State.data.direction
                 });
             } else {
-                $('.comic.single[data-comic-id='+comics_showing[i]+']').show();
+                $('.comic.single[data-comic-id='+comics_showing[i]+']').addClass('active');
                 _filter_panels();
             }
         }
@@ -129,7 +129,7 @@ $.corpsey.catacombs = (function() {
         if (data.direction==='next') {
             $('#catacombs').isotope('insert', comic);
         } else {
-            $('#catacombs').find('.comic.single:visible:first').before(comic);
+            $('#catacombs').find('.comic.single.active:first').before(comic);
         }
         _filter_panels();
     }
@@ -137,7 +137,7 @@ $.corpsey.catacombs = (function() {
     function _filter_panels() {
         // if you've looped through from last comic to first comic, make sure the URL matches visible order of comics
         var visible_comics = [];
-        $('.comic.single:visible').each(function() { visible_comics.push($(this).data('comic-id')); });
+        $('.comic.single.active').each(function() { visible_comics.push($(this).data('comic-id')); });
         if (visible_comics[0]!=comics_showing[0]) {
            _find_comic(comics_showing[0]).after(_find_comic(comics_showing[1]));
         }
@@ -148,12 +148,12 @@ $.corpsey.catacombs = (function() {
         // hide strips not in new url
         $('#catacombs .comic.single').each(function(){
             if ($.inArray($(this).data('comic-id'), comics_showing)<0) {
-                $(this).hide();
+                $(this).removeClass('active');
             }
         });
 
         // set isotope to filter visible comics
-        $('#catacombs').isotope({ filter: (small_width) ? '.comic:visible .panel,h1' : '.comic:visible .panel' });
+        $('#catacombs').isotope({ filter: (small_width) ? '.comic.active .panel,h1' : '.comic.active .panel' });
 
         _get_nav_links();
     }
