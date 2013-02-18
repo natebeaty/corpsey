@@ -1,10 +1,10 @@
 {% load thumbnail %}
 
-<article class="comic single {{ extra_class }}" data-comic-id="{{ comic.id }}">
+<article class="comic single {{ extra_class }} active" data-comic-id="{{ comic.id }}">
   <h1>{{ comic.artist.name }}</h1>
   <ul>
-    <li>{% if comic.panel1 %}<img class="panel" src="{{ comic.panel1.midsize.url }}">{% endif %}</li>
-    <li>{% if comic.panel2 %}<img class="panel" src="{{ comic.panel2.midsize.url }}">{% endif %}</li>
-    <li>{% if comic.panel3 %}<img class="panel" src="{{ comic.panel3.midsize.url }}">{% endif %}</li>
+    <li>{% if comic.panel1 %}<img class="panel" src="{{ comic.panel1.midsize.url }}" width="{{ comic.panel1.midsize.width }}" height="{{ comic.panel1.midsize.height }}">{% endif %}</li>
+    <li>{% if comic.panel2 %}<img class="panel" src="{{ comic.panel2.midsize.url }}" width="{{ comic.panel1.midsize.width }}" height="{{ comic.panel1.midsize.height }}">{% endif %}</li>
+    <li>{% if comic.panel3 %}<img class="panel" src="{{ comic.panel3.midsize.url }}" width="{{ comic.panel1.midsize.width }}" height="{{ comic.panel1.midsize.height }}">{% endif %}</li>
   </ul>
 </article>

@@ -37,6 +37,9 @@ class Comic(MPTTModel):
 
     def get_prev_comic_links(self):
         comic_links = []
+        # root nodes get infinite linkage, if root and first, link to last
+        if self.is_root_node() and not self.prev_sib():
+            comic_links.append(Comic.objects.root_nodes().reverse()[0])
         if self.is_child_node():
             comic_links.extend(self.get_ancestors(ascending=True).all()[0])
         elif self.is_root_node() and self.prev_sib():
@@ -45,8 +48,12 @@ class Comic(MPTTModel):
 
     def get_next_comic_links(self):
         comic_links = []
-        if self.is_root_node() and self.next_sib():
-            comic_links.append(self.next_sib())
+        # root nodes infinite linkage, if last, link to first
+        if self.is_root_node():
+            if self.next_sib():
+                comic_links.append(self.next_sib())
+            else:
+                comic_links.append(Comic.objects.root_nodes()[0])
         if self.children:
             comic_links.extend(self.children.all())
         return comic_links

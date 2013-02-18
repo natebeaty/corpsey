@@ -69,7 +69,7 @@ p {
 .button, 
 nav li a {
     font: 12px/1.2em 'Orienta', sans-serif;
-    letter-spacing: .4em;
+    letter-spacing: .2em;
     text-transform: uppercase;
     background: @graygreen; 
     color: #eee;
@@ -124,7 +124,9 @@ ul.tree {
 #wrapper {
     overflow: hidden;
 }
-#contribute-page #content,
+#contribute-page #content {
+    margin: 0 20%;
+}
 #static-page #content {
     margin-left: 440px;
 }
@@ -140,12 +142,13 @@ nav.main {
         li {
             display: inline-block;
             #get-artist {
+                outline: none; 
                 font: 12px/1.2em 'Orienta', sans-serif;
-                letter-spacing: .4em;
+                letter-spacing: .2em;
                 color: #eee;
                 background: @bluegray;
                 border: 0;
-                width: 96px;
+                width: 86px;
                 padding: 2px 16px;
                 height: 24px;
                 &::-webkit-input-placeholder { color: #eee; }
@@ -158,7 +161,7 @@ nav.main {
                 &:focus {
                     background: #fff;
                     color: #222;
-                    letter-spacing: .1em;
+                    letter-spacing: 0;
                     padding: 2px 6px;
                 }
             }
@@ -270,6 +273,7 @@ a#clixel {
         color: #222;
         a.button {
             font: 18px/1.2em 'Orienta', sans-serif;
+            letter-spacing: .4em;
             padding: 8px 16px 8px 24px;
             .rounded-corners(30px);
             background: @bluegray;
@@ -322,9 +326,12 @@ a#clixel {
             small {
                 font: 12px/1.2em 'Arbutus Slab', serif;
                 color: lighten(@olive, 30%);
-            }
-            a {
-                float: right;
+                a {
+                   color: lighten(@olive, 30%);
+                   &:hover {
+                    color: @olive;
+                    }    
+                }
             }
         }
     }
@@ -343,6 +350,7 @@ a#clixel {
         float: left;
         width: 330px;
         height: 330px;
+        background-size: 330px 330px;        
     }
     &.single { 
         width: 1000px;
@@ -469,18 +477,37 @@ label {
 /* autocomplete */
 .ui-helper-hidden-accessible { display: none; }
 ul.ui-autocomplete {
-    background: #fff;
+    background: @bluegray;
     z-index: 99999 !important;
-    width: 100px !important;
+    width: 150px !important;
     li {
         font: 12px/1.2em 'Orienta', sans-serif;
         a {
             display: block;
             cursor: pointer;
-            padding: 4px;
+            padding: 6px 8px;
+            color: #fff;
             &:hover {
-                background: #eee;
+                background: lighten(@bluegray, 5%);
             }
         }
+    }
+}
+
+#tree {
+    .node circle {
+      fill: @olive;
+      stroke: @olive;
+      stroke-width: 1px;
+    }
+
+    .node {
+      font: 12px/1.2em 'Orienta', sans-serif;
+    }
+
+    .link {
+      fill: none;
+      stroke: lighten(@bluegray, 20%);
+      stroke-width: 1.5px;
     }
 }

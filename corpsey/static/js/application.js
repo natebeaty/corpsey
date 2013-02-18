@@ -9,7 +9,10 @@ $.corpsey = (function() {
 			minLength: 2,
 			select: function( event, ui ) {
 				location.href = ui.item.url;
+                return false;
 			}
+         }).on('blur', function() {
+            $(this).val('');
          });
     } // end _init()
 

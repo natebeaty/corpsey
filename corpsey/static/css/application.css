@@ -1,569 +1,73 @@
-/*
-Corpsey
-*/
-html,
-body {
-  margin: 0;
-  padding: 0;
-}
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-blockquote,
-pre,
-a,
-abbr,
-acronym,
-address,
-cite,
-code,
-del,
-dfn,
-em,
-img,
-q,
-s,
-samp,
-small,
-strike,
-strong,
-sub,
-sup,
-tt,
-var,
-dd,
-dl,
-dt,
-li,
-ol,
-ul,
-fieldset,
-form,
-figure,
-label,
-legend,
-button,
-table,
-caption,
-tbody,
-tfoot,
-thead,
-tr,
-th,
-td {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font-weight: normal;
-  font-style: normal;
-  font-size: 100%;
-  line-height: 1;
-  font-family: inherit;
-}
-article,
-aside,
-details,
-figcaption,
-figure,
-footer,
-header,
-hgroup,
-nav,
-section {
-  display: block;
-}
-audio[controls],
-canvas,
-video {
-  display: inline-block;
-  *display: inline;
-  *zoom: 1;
-}
-ul,
-li {
-  list-style-type: none;
-}
-html,
-body {
-  height: 100%;
-}
-body {
-  background: #fff;
-  font: 14px/1.4em 'Arbutus Slab', serif;
-  color: #222;
-  position: relative;
-}
-.clearfix:before,
-.clearfix:after {
-  content: "";
-  display: table;
-}
-.clearfix:after {
-  clear: both;
-}
-.clearfix {
-  zoom: 1;
-}
-a {
-  text-decoration: none;
-}
-a img {
-  border: 0;
-}
-/* general typography */
-h1 {
-  font: 24px/1.2em 'Arbutus Slab', serif;
-  letter-spacing: .2em;
-  text-transform: uppercase;
-  margin: 1em 0;
-}
-h2 {
-  font: 18px/1.2em 'Arbutus Slab', serif;
-  letter-spacing: .2em;
-  text-transform: uppercase;
-  margin: 1em 0;
-}
-h3 {
-  font: 14px/1.2em 'Arbutus Slab', serif;
-  letter-spacing: .2em;
-  text-transform: uppercase;
-  margin: 1em 0;
-}
-.user-content {
-  padding: 0 5% 0 2%;
-}
-p {
-  font: 14px/1.4em 'Arbutus Slab', serif;
-  margin: .5em 0;
-}
-.user-content ul {
-  padding-left: 1.2em;
-}
-.user-content ul li {
-  list-style: disc;
-  padding: 0 0 .5em .2em;
-  line-height: 1.2em;
-}
-/* multiple usables */
-.button,
-nav li a {
-  font: 12px/1.2em 'Orienta', sans-serif;
-  letter-spacing: .4em;
-  text-transform: uppercase;
-  background: #acb5b0;
-  color: #eee;
-  padding: 6px 12px;
-  white-space: nowrap;
-  display: inline-block;
-  margin-bottom: 4px;
-  text-decoration: none;
-  border: 0;
-  cursor: pointer;
-}
-.button:hover,
-nav li a:hover {
-  text-decoration: none;
-  background: #b9c1bd;
-}
-ul.tree {
-  position: absolute;
-  top: 32px;
-  left: 4px;
-}
-ul.tree li {
-  line-height: 0;
-}
-ul.tree ul.children {
-  display: inline-block;
-  line-height: 0;
-}
-ul.tree ul.children li {
-  height: 4px;
-}
-ul.tree ul.children li a {
-  width: 4px;
-  height: 2px;
-}
-ul.tree a {
-  display: inline-block;
-  width: 8px;
-  height: 8px;
-  background: #76896b;
-  text-indent: -9999em;
-  margin: 1px;
-}
-ul.tree a:hover,
-ul.tree li.active > a {
-  background: #222;
-}
-/* general layout */
-#wrapper {
-  overflow: hidden;
-}
-#contribute-page #content,
-#static-page #content {
-  margin-left: 440px;
-}
-nav.main {
-  background: #989eaa;
-  height: 26px;
-}
-nav.main ul {
-  text-align: right;
-  width: 470px;
-  position: absolute;
-  top: 0;
-  right: 0;
-}
-nav.main ul li {
-  display: inline-block;
-}
-nav.main ul li #get-artist {
-  font: 12px/1.2em 'Orienta', sans-serif;
-  letter-spacing: .4em;
-  color: #eee;
-  background: #989eaa;
-  border: 0;
-  width: 96px;
-  padding: 2px 16px;
-  height: 24px;
-}
-nav.main ul li #get-artist::-webkit-input-placeholder {
-  color: #eee;
-}
-nav.main ul li #get-artist:-moz-placeholder {
-  color: #eee;
-}
-nav.main ul li #get-artist::-moz-placeholder {
-  color: #eee;
-}
-nav.main ul li #get-artist:-ms-input-placeholder {
-  color: #eee;
-}
-nav.main ul li #get-artist:hover {
-  background: #a6abb6;
-}
-nav.main ul li #get-artist:focus {
-  background: #fff;
-  color: #222;
-  letter-spacing: .1em;
-  padding: 2px 6px;
-}
-nav.main ul li a {
-  line-height: 24px;
-  padding: 2px 16px 0 16px;
-  background: none;
-}
-nav.main ul li:last-child a {
-  background: #ed1846;
-  color: #eee;
-}
-nav.main ul li:last-child a:hover {
-  background: #ef3059;
-}
-nav.main a {
-  color: #eee;
-}
-nav.main a.active,
-nav.main a:hover {
-  background: #a6abb6;
-}
-nav.main h1#textlogo {
-  margin: 0;
-  padding: 0;
-}
-nav.main h1#textlogo a {
-  display: inline-block;
-  background: url('/static/img/mini-logo-blk.png') 4px center no-repeat;
-  letter-spacing: .2em;
-  margin: 0;
-  padding: 0 16px 0 57px;
-  font: 15px/26px 'Arbutus Slab', serif;
-}
-nav.main h1#textlogo a:hover {
-  background-color: #a6abb6;
-}
-#logo {
-  width: 681px;
-  height: 306px;
-  background: url('/static/img/logo.gif') no-repeat;
-  text-indent: -9999em;
-  margin: 8px auto;
-}
-#logo a {
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-footer.main {
-  position: relative;
-  height: 580px;
-  background: url('/static/img/footer.png') bottom center no-repeat;
-}
-a#clixel {
-  position: absolute;
-  bottom: 20px;
-  right: 10%;
-  width: 53px;
-  height: 20px;
-  text-indent: -9999em;
-  display: block;
-  background: url('/static/img/clixel.gif') no-repeat;
-}
-.comic-nav {
-  position: absolute;
-  right: 0;
-  top: 380px;
-  width: 130px;
-  z-index: 10000;
-  background: #fff;
-  padding: 2px 5px;
-}
-.comic-nav h2 {
-  margin: 0 0 .4em;
-}
-.comic-nav.prev {
-  top: 40px;
-  float: left;
-}
-.comic-nav.prev.stuck {
-  top: 40px;
-}
-.comic-nav.next {
-  float: right;
-}
-.comic-nav.next.stuck {
-  top: 200px;
-}
-.comic-nav.loading {
-  opacity: .3;
-}
-.comic-nav .button {
-  width: 106px;
-}
-.comic-nav.stuck {
-  position: fixed;
-}
-/* homepage */
-#homepage #content {
-  margin-left: 0;
-}
-#homepage header {
-  background: #ed1846;
-  color: #222;
-}
-#homepage header a.button {
-  font: 18px/1.2em 'Orienta', sans-serif;
-  padding: 8px 16px 8px 24px;
-  -webkit-border-radius: 30px;
-  -moz-border-radius: 30px;
-  border-radius: 30px;
-  background: #989eaa;
-}
-#homepage header a.button:hover {
-  background: #a6abb6;
-}
-#homepage header.main {
-  float: none;
-  width: auto;
-}
-#homepage header.main .wrap {
-  margin: 0 auto 40px;
-  padding: 20px;
-  text-align: center;
-}
-#homepage header.main h2 {
-  text-transform: uppercase;
-  margin: 0 0 .2em 0;
-}
-#homepage header.main .intro {
-  width: 550px;
-  margin: 1em auto;
-  font: 16px/1.3em 'Arbutus Slab', serif;
-}
-#homepage header.main .intro strong {
-  color: #eee;
-}
-#homepage #logo {
-  margin: 0 auto;
-}
-#homepage .recent-contributors {
-  width: 1000px;
-  margin: 10px auto;
-  text-transform: uppercase;
-}
-#homepage .recent-contributors h2 {
-  text-align: center;
-  color: #ccc;
-}
-#homepage .comic {
-  margin-bottom: 70px;
-  overflow: auto;
-}
-#homepage .comic h1 {
-  font: 22px/1.2em 'Arbutus Slab', serif;
-  overflow: hidden;
-  position: relative;
-  text-align: center;
-}
-#homepage .comic h1 small {
-  font: 12px/1.2em 'Arbutus Slab', serif;
-  color: #c5cdc0;
-}
-#homepage .comic h1 a {
-  float: right;
-}
-/* catacombs */
-.comic h1 {
-  font: 14px/1.2em 'Arbutus Slab', serif;
-  margin: .5em 0 0;
-}
-.comic ul,
-.comic li {
-  display: inline;
-}
-.comic img {
-  display: block;
-  float: left;
-  width: 330px;
-  height: 330px;
-}
-.comic.single {
-  width: 1000px;
-  margin: 0 auto;
-  position: relative;
-}
-.comic.single h1 {
-  display: none;
-}
-#catacombs {
-  margin: 4px auto;
-  min-height: 660px;
-  max-width: 1000px;
-}
-#catacombs h1.comic_1,
-#catacombs h1.comic_2 {
-  color: #999;
-  -webkit-transform: rotate(270deg);
-  -moz-transform: rotate(270deg);
-  -o-transform: rotate(270deg);
-  -ms-transform: rotate(270deg);
-  transform: rotate(270deg);
-  -webkit-transform-origin: right top;
-  transform-origin: right top;
-  right: 100%;
-  top: 16px;
-  white-space: nowrap;
-  opacity: 0;
-}
-h1.comic_1,
-h1.comic_2 {
-  position: absolute;
-  -webkit-transform: rotate(270deg);
-  -moz-transform: rotate(270deg);
-  -o-transform: rotate(270deg);
-  -ms-transform: rotate(270deg);
-  transform: rotate(270deg);
-  -webkit-transform-origin: left top;
-  transform-origin: left top;
-  white-space: nowrap;
-  left: 0;
-  top: 0;
-  font: 14px/1.2em 'Arbutus Slab', serif;
-}
-/* contribute */
-label {
-  display: block;
-  font: 14px/1.2em "Orienta", sans-serif;
-  text-transform: uppercase;
-  margin: 1em 0 0;
-}
-.contribute input[type=text] {
-  font: 16px/1.2em "Orienta", sans-serif;
-  color: #fff;
-  width: 300px;
-  background: #000;
-  border: 0;
-  padding: 6px;
-}
-.contribute input[type=submit] {
-  font: 16px/1em "Orienta", sans-serif;
-  padding: 10px 60px 8px;
-  background: #666;
-  color: #fff;
-  border: 0;
-  text-transform: uppercase;
-  margin: 1em 0;
-}
-.contribute input[type=submit]:hover {
-  background: #7a7a7a;
-}
-.errorlist li {
-  color: #777;
-  font: italic 12px/2 em Georgia, serif;
-}
-/**** Isotope Filtering ****/
-.isotope-item {
-  z-index: 2;
-}
-.isotope-hidden.isotope-item {
-  pointer-events: none;
-  z-index: 1;
-}
-/**** Isotope CSS3 transitions ****/
-.isotope,
-.isotope .isotope-item {
-  -webkit-transition-duration: 0.6s;
-  -moz-transition-duration: 0.6s;
-  -ms-transition-duration: 0.6s;
-  -o-transition-duration: 0.6s;
-  transition-duration: 0.6s;
-}
-.isotope {
-  -webkit-transition-property: height, width;
-  -moz-transition-property: height, width;
-  -ms-transition-property: height, width;
-  -o-transition-property: height, width;
-  transition-property: height, width;
-}
-.isotope .isotope-item {
-  -webkit-transition-property: -webkit-transform, opacity;
-  -moz-transition-property: -moz-transform, opacity;
-  -ms-transition-property: -ms-transform, opacity;
-  -o-transition-property: -o-transform, opacity;
-  transition-property: transform, opacity;
-}
-/**** disabling Isotope CSS3 transitions ****/
-.isotope.no-transition,
-.isotope.no-transition .isotope-item,
-.isotope .isotope-item.no-transition {
-  -webkit-transition-duration: 0s;
-  -moz-transition-duration: 0s;
-  -ms-transition-duration: 0s;
-  -o-transition-duration: 0s;
-  transition-duration: 0s;
-}
-/* autocomplete */
-.ui-helper-hidden-accessible {
-  display: none;
-}
-ul.ui-autocomplete {
-  background: #fff;
-  z-index: 99999 !important;
-  width: 100px !important;
-}
-ul.ui-autocomplete li {
-  font: 12px/1.2em 'Orienta', sans-serif;
-}
-ul.ui-autocomplete li a {
-  display: block;
-  cursor: pointer;
-  padding: 4px;
-}
-ul.ui-autocomplete li a:hover {
-  background: #eee;
-}
+html,body{margin:0;padding:0;}
+h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,cite,code,del,dfn,em,img,q,s,samp,small,strike,strong,sub,sup,tt,var,dd,dl,dt,li,ol,ul,fieldset,form,figure,label,legend,button,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;font-weight:normal;font-style:normal;font-size:100%;line-height:1;font-family:inherit;}
+article,aside,details,figcaption,figure,footer,header,hgroup,nav,section{display:block;}
+audio[controls],canvas,video{display:inline-block;*display:inline;*zoom:1;}
+ul,li{list-style-type:none;}
+html,body{height:100%;}
+body{background:#fff;font:14px/1.4em 'Arbutus Slab',serif;color:#222;position:relative;}
+.clearfix:before,.clearfix:after{content:"";display:table;}
+.clearfix:after{clear:both;}
+.clearfix{zoom:1;}
+a{text-decoration:none;}a img{border:0;}
+h1{font:24px/1.2em 'Arbutus Slab',serif;letter-spacing:.2em;text-transform:uppercase;margin:1em 0;}
+h2{font:18px/1.2em 'Arbutus Slab',serif;letter-spacing:.2em;text-transform:uppercase;margin:1em 0;}
+h3{font:14px/1.2em 'Arbutus Slab',serif;letter-spacing:.2em;text-transform:uppercase;margin:1em 0;}
+.user-content{padding:0 5% 0 2%;}
+p{font:14px/1.4em 'Arbutus Slab',serif;margin:.5em 0;}
+.user-content ul{padding-left:1.2em;}.user-content ul li{list-style:disc;padding:0 0 .5em .2em;line-height:1.2em;}
+.button,nav li a{font:12px/1.2em 'Orienta',sans-serif;letter-spacing:.2em;text-transform:uppercase;background:#acb5b0;color:#eee;padding:6px 12px;white-space:nowrap;display:inline-block;margin-bottom:4px;text-decoration:none;border:0;cursor:pointer;}.button:hover,nav li a:hover{text-decoration:none;background:#b9c1bd;}
+ul.tree{position:absolute;top:32px;left:4px;}ul.tree li{line-height:0;}
+ul.tree ul.children{display:inline-block;line-height:0;}ul.tree ul.children li{height:4px;}ul.tree ul.children li a{width:4px;height:2px;}
+ul.tree a{display:inline-block;width:8px;height:8px;background:#76896b;text-indent:-9999em;margin:1px;}
+ul.tree a:hover,ul.tree li.active>a{background:#222;}
+#wrapper{overflow:hidden;}
+#contribute-page #content{margin:0 20%;}
+#static-page #content{margin-left:440px;}
+nav.main{background:#989eaa;height:26px;}nav.main ul{text-align:right;width:470px;position:absolute;top:0;right:0;}nav.main ul li{display:inline-block;}nav.main ul li #get-artist{outline:none;font:12px/1.2em 'Orienta',sans-serif;letter-spacing:.2em;color:#eee;background:#989eaa;border:0;width:86px;padding:2px 16px;height:24px;}nav.main ul li #get-artist::-webkit-input-placeholder{color:#eee;}
+nav.main ul li #get-artist:-moz-placeholder{color:#eee;}
+nav.main ul li #get-artist::-moz-placeholder{color:#eee;}
+nav.main ul li #get-artist:-ms-input-placeholder{color:#eee;}
+nav.main ul li #get-artist:hover{background:#a6abb6;}
+nav.main ul li #get-artist:focus{background:#fff;color:#222;letter-spacing:0;padding:2px 6px;}
+nav.main ul li a{line-height:24px;padding:2px 16px 0 16px;background:none;}
+nav.main ul li:last-child a{background:#ed1846;color:#eee;}nav.main ul li:last-child a:hover{background:#ef3059;}
+nav.main a{color:#eee;}nav.main a.active,nav.main a:hover{background:#a6abb6;}
+nav.main h1#textlogo{margin:0;padding:0;}nav.main h1#textlogo a{display:inline-block;background:url('/static/img/mini-logo-blk.png') 4px center no-repeat;letter-spacing:.2em;margin:0;padding:0 16px 0 57px;font:15px/26px 'Arbutus Slab',serif;}nav.main h1#textlogo a:hover{background-color:#a6abb6;}
+#logo{width:681px;height:306px;background:url('/static/img/logo.gif') no-repeat;text-indent:-9999em;margin:8px auto;}#logo a{display:block;width:100%;height:100%;}
+footer.main{position:relative;height:580px;background:url('/static/img/footer.png') bottom center no-repeat;}
+a#clixel{position:absolute;bottom:20px;right:10%;width:53px;height:20px;text-indent:-9999em;display:block;background:url('/static/img/clixel.gif') no-repeat;}
+.comic-nav{position:absolute;right:0;top:380px;width:130px;z-index:10000;background:#fff;padding:2px 5px;}.comic-nav h2{margin:0 0 .4em;}
+.comic-nav.prev{top:40px;float:left;}.comic-nav.prev.stuck{top:40px;}
+.comic-nav.next{float:right;}.comic-nav.next.stuck{top:200px;}
+.comic-nav.loading{opacity:.3;}
+.comic-nav .button{width:106px;}
+.comic-nav.stuck{position:fixed;}
+#homepage #content{margin-left:0;}
+#homepage header{background:#ed1846;color:#222;}#homepage header a.button{font:18px/1.2em 'Orienta',sans-serif;letter-spacing:.4em;padding:8px 16px 8px 24px;-webkit-border-radius:30px;-moz-border-radius:30px;border-radius:30px;background:#989eaa;}#homepage header a.button:hover{background:#a6abb6;}
+#homepage header.main{float:none;width:auto;}#homepage header.main .wrap{margin:0 auto 40px;padding:20px;text-align:center;}
+#homepage header.main h2{text-transform:uppercase;margin:0 0 .2em 0;}
+#homepage header.main .intro{width:550px;margin:1em auto;font:16px/1.3em 'Arbutus Slab',serif;}#homepage header.main .intro strong{color:#eee;}
+#homepage #logo{margin:0 auto;}
+#homepage .recent-contributors{width:1000px;margin:10px auto;text-transform:uppercase;}#homepage .recent-contributors h2{text-align:center;color:#ccc;}
+#homepage .comic{margin-bottom:70px;overflow:auto;}#homepage .comic h1{font:22px/1.2em 'Arbutus Slab',serif;overflow:hidden;position:relative;text-align:center;}#homepage .comic h1 small{font:12px/1.2em 'Arbutus Slab',serif;color:#c5cdc0;}#homepage .comic h1 small a{color:#c5cdc0;}#homepage .comic h1 small a:hover{color:#76896b;}
+.comic h1{font:14px/1.2em 'Arbutus Slab',serif;margin:.5em 0 0;}
+.comic ul,.comic li{display:inline;}
+.comic img{display:block;float:left;width:330px;height:330px;background-size:330px 330px;}
+.comic.single{width:1000px;margin:0 auto;position:relative;}.comic.single h1{display:none;}
+#catacombs{margin:4px auto;min-height:660px;max-width:1000px;}#catacombs h1.comic_1,#catacombs h1.comic_2{color:#999;-webkit-transform:rotate(270deg);-moz-transform:rotate(270deg);-o-transform:rotate(270deg);-ms-transform:rotate(270deg);transform:rotate(270deg);-webkit-transform-origin:right top;transform-origin:right top;right:100%;top:16px;white-space:nowrap;opacity:0;}
+h1.comic_1,h1.comic_2{position:absolute;-webkit-transform:rotate(270deg);-moz-transform:rotate(270deg);-o-transform:rotate(270deg);-ms-transform:rotate(270deg);transform:rotate(270deg);-webkit-transform-origin:left top;transform-origin:left top;white-space:nowrap;left:0;top:0;font:14px/1.2em 'Arbutus Slab',serif;}
+label{display:block;font:14px/1.2em "Orienta",sans-serif;text-transform:uppercase;margin:1em 0 0;}
+.contribute input[type=text]{font:16px/1.2em "Orienta",sans-serif;color:#fff;width:300px;background:#000;border:0;padding:6px;}
+.contribute input[type=submit]{font:16px/1em "Orienta",sans-serif;padding:10px 60px 8px;background:#666;color:#fff;border:0;text-transform:uppercase;margin:1em 0;}.contribute input[type=submit]:hover{background:#7a7a7a;}
+.errorlist li{color:#777;font:italic 12px/2 em Georgia,serif;}
+.isotope-item{z-index:2;}
+.isotope-hidden.isotope-item{pointer-events:none;z-index:1;}
+.isotope,.isotope .isotope-item{-webkit-transition-duration:0.6s;-moz-transition-duration:0.6s;-ms-transition-duration:0.6s;-o-transition-duration:0.6s;transition-duration:0.6s;}
+.isotope{-webkit-transition-property:height, width;-moz-transition-property:height, width;-ms-transition-property:height, width;-o-transition-property:height, width;transition-property:height, width;}
+.isotope .isotope-item{-webkit-transition-property:-webkit-transform,opacity;-moz-transition-property:-moz-transform,opacity;-ms-transition-property:-ms-transform,opacity;-o-transition-property:-o-transform,opacity;transition-property:transform, opacity;}
+.isotope.no-transition,.isotope.no-transition .isotope-item,.isotope .isotope-item.no-transition{-webkit-transition-duration:0s;-moz-transition-duration:0s;-ms-transition-duration:0s;-o-transition-duration:0s;transition-duration:0s;}
+.ui-helper-hidden-accessible{display:none;}
+ul.ui-autocomplete{background:#989eaa;z-index:99999 !important;width:150px !important;}ul.ui-autocomplete li{font:12px/1.2em 'Orienta',sans-serif;}ul.ui-autocomplete li a{display:block;cursor:pointer;padding:6px 8px;color:#fff;}ul.ui-autocomplete li a:hover{background:#a6abb6;}
+#tree .node circle{fill:#76896b;stroke:#76896b;stroke-width:1px;}
+#tree .node{font:12px/1.2em 'Orienta',sans-serif;}
+#tree .link{fill:none;stroke:#d0d3d8;stroke-width:1.5px;}
