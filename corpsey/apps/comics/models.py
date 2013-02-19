@@ -7,6 +7,7 @@ from mptt.models import MPTTModel, TreeForeignKey
 class Comic(MPTTModel):
     parent = TreeForeignKey('self', null=True, blank=True, related_name='children')
     artist = models.ForeignKey(Artist, null=True, blank=True, related_name='artists')
+    portal_to = models.ForeignKey('self', null=True, blank=True, related_name='portal')
     notes = models.TextField(blank=True)
     date = models.DateTimeField(auto_now_add=True, blank=True)
     active = models.BooleanField(default=False)
@@ -56,4 +57,6 @@ class Comic(MPTTModel):
                 comic_links.append(Comic.objects.root_nodes()[0])
         if self.children:
             comic_links.extend(self.children.all())
+        if self.portal_to:
+            comic_links.append(self.portal_to)
         return comic_links
