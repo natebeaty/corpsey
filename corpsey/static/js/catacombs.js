@@ -220,7 +220,7 @@ $.corpsey.catacombs = (function() {
         if (!small_width) {
             $('#catacombs').isotope({ filter: '.comic.active .panel' });
         } else {
-            $('#catacombs').isotope({ filter: '.comic.active .panel,h1' });
+            $('#catacombs').isotope({ filter: '.comic.active .panel,.comic.active h1' });
         }
     }
     function _get_widths() {
