@@ -193,14 +193,14 @@ $.corpsey.catacombs = (function() {
     }
     function _build_titles() {
         $('h1.comic_1, h1.comic_2').remove();
-        $('.comic.single:visible').each(function(i) {
+        $('.comic.single.active').each(function(i) {
             var name = $(this).find('h1').text();
             $('<h1 />').text(name).addClass('comic_'+(i+1)).appendTo('body').css({ 'top' : -1000, 'left' : -1000 });
         });
         _move_titles();
     }
     function _move_titles() {
-        $('.comic.single:visible').each(function(i) {
+        $('.comic.single.active').each(function(i) {
             var c = (i===1 && $('#catacombs').width()<980) ? '1' : '0';
             var $img = $(this).find('img:eq('+c+')');
             var pos = $img.offset();
@@ -218,9 +218,9 @@ $.corpsey.catacombs = (function() {
     }
     function _delayed_resize() {
         if (!small_width) {
-            $('#catacombs').isotope({ filter: '.comic:visible .panel' });
+            $('#catacombs').isotope({ filter: '.comic.active .panel' });
         } else {
-            $('#catacombs').isotope({ filter: '.comic:visible .panel,h1' });
+            $('#catacombs').isotope({ filter: '.comic.active .panel,h1' });
         }
     }
     function _get_widths() {
