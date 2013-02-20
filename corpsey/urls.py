@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, include, url
-from filebrowser.sites import site
+# from filebrowser.sites import site
 
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.conf import settings
@@ -26,7 +26,7 @@ urlpatterns = patterns('',
     url(r'^artist/([\d]+)/$', 'corpsey.apps.artists.views.entry', name='artist'),
     url(r'^get_artists/', 'corpsey.apps.artists.views.get_artists', name='get_artists'),
             
-    url(r'^admin/filebrowser/', include(site.urls)),
+    # url(r'^admin/filebrowser/', include(site.urls)),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
