@@ -15,7 +15,6 @@ framework.
 """
 import os, sys, site
 
-site.addsitedir('/home/natebeaty/.virtualenvs/corpsey/lib/python2.7/site-packages')
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "corpsey.settings")
 
 # This application object is used by any WSGI server configured to use this
