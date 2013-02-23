@@ -4,13 +4,14 @@ from dajaxice.decorators import dajaxice_register
 from easy_thumbnails.files import get_thumbnailer
 
 @dajaxice_register(method='GET')
-def get_comic_panels(request, comic_id, direction):
+def get_comic_panels(request, comic_id, direction, hdpi_enabled):
     comic = Comic.objects.get(pk=comic_id)
+    size = 'midsize_hd' if hdpi_enabled else 'midsize'
     if comic:
         comic_obj = {
-            'panel1' : get_thumbnailer(comic.panel1)['midsize'].url, 
-            'panel2' : get_thumbnailer(comic.panel2)['midsize'].url, 
-            'panel3' : get_thumbnailer(comic.panel3)['midsize'].url,
+            'panel1' : get_thumbnailer(comic.panel1)[size].url, 
+            'panel2' : get_thumbnailer(comic.panel2)[size].url, 
+            'panel3' : get_thumbnailer(comic.panel3)[size].url,
             'comic_id' : comic.id,
             'first_name' : comic.artist.first_name,
             'last_name' : comic.artist.last_name,

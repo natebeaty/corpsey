@@ -3,6 +3,10 @@ from corpsey.apps.artists.models import Artist
 from easy_thumbnails.fields import ThumbnailerImageField
 from mptt.models import MPTTModel, TreeForeignKey
 
+from easy_thumbnails.signals import saved_file
+from easy_thumbnails.signal_handlers import generate_aliases_global
+saved_file.connect(generate_aliases_global)
+
 # Create your models here.
 class Comic(MPTTModel):
     parent = TreeForeignKey('self', null=True, blank=True, related_name='children')
