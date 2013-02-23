@@ -118,6 +118,7 @@ ul.tree {
         background: #222;
     }
 }
+.hidden { display: none; }
 
 /* general layout */
 
@@ -391,31 +392,48 @@ h1.comic_2 {
 }
 
 /* contribute */
-label {
-    display: block;
-    font: 14px/1.2em "Orienta", sans-serif;
-    text-transform: uppercase;
-    margin: 1em 0 0;
-}
-.contribute {
-    input[type=text] {
-        font: 16px/1.2em "Orienta", sans-serif;
-        color: #fff;
-        width: 300px;
-        background: #000;
-        border:0;
-        padding: 6px; 
+
+#contribute-page {
+    .comic {
+        overflow: auto;
+        margin-bottom: 30px;
+        img {
+            width: 250px;
+            height: 250px;
+        }
+        h1 {
+            font: 18px/1.2em 'Arbutus Slab', helvetica, sans-serif;
+            small {
+                font: 12px/1.2em 'Arbutus Slab', helvetica, sans-serif;
+            }
+        }
     }
-    input[type=submit] {
-        font: 16px/1em "Orienta", sans-serif;
-        padding: 10px 60px 8px;
-        background: #666;
-        color: #fff;
-        border: 0;
+    label {
+        display: block;
+        font: 14px/1.2em "Orienta", sans-serif;
         text-transform: uppercase;
-        margin: 1em 0;
-        &:hover {
-            background: #7a7a7a;
+        margin: 1em 0 0;
+    }
+    .contribute {
+        input[type=text] {
+            font: 16px/1.2em "Orienta", sans-serif;
+            color: #fff;
+            width: 300px;
+            background: #000;
+            border:0;
+            padding: 6px; 
+        }
+        input[type=submit] {
+            font: 16px/1em "Orienta", sans-serif;
+            padding: 10px 60px 8px;
+            background: #666;
+            color: #fff;
+            border: 0;
+            text-transform: uppercase;
+            margin: 1em 0;
+            &:hover {
+                background: #7a7a7a;
+            }
         }
     }
 }
@@ -493,6 +511,8 @@ ul.ui-autocomplete {
         }
     }
 }
+
+/* tree page */
 
 #tree {
     .node circle {

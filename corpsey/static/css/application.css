@@ -20,6 +20,7 @@ ul.tree{position:absolute;top:32px;left:4px;}ul.tree li{line-height:0;}
 ul.tree ul.children{display:inline-block;line-height:0;}ul.tree ul.children li{height:4px;}ul.tree ul.children li a{width:4px;height:2px;}
 ul.tree a{display:inline-block;width:8px;height:8px;background:#76896b;text-indent:-9999em;margin:1px;}
 ul.tree a:hover,ul.tree li.active>a{background:#222;}
+.hidden{display:none;}
 #wrapper{overflow:hidden;}
 #contribute-page #content{margin:0 20%;}
 #static-page #content{margin-left:440px;}
@@ -56,9 +57,11 @@ a#clixel{position:absolute;bottom:20px;right:10%;width:53px;height:20px;text-ind
 .comic.single{width:1000px;margin:0 auto;position:relative;}.comic.single h1{display:none;}
 #catacombs{margin:4px auto;min-height:660px;max-width:1000px;}#catacombs h1.comic_1,#catacombs h1.comic_2{color:#999;-webkit-transform:rotate(270deg);-moz-transform:rotate(270deg);-o-transform:rotate(270deg);-ms-transform:rotate(270deg);transform:rotate(270deg);-webkit-transform-origin:right top;transform-origin:right top;right:100%;top:16px;white-space:nowrap;opacity:0;}
 h1.comic_1,h1.comic_2{position:absolute;-webkit-transform:rotate(270deg);-moz-transform:rotate(270deg);-o-transform:rotate(270deg);-ms-transform:rotate(270deg);transform:rotate(270deg);-webkit-transform-origin:left top;transform-origin:left top;white-space:nowrap;left:0;top:0;font:14px/1.2em 'Arbutus Slab',serif;}
-label{display:block;font:14px/1.2em "Orienta",sans-serif;text-transform:uppercase;margin:1em 0 0;}
-.contribute input[type=text]{font:16px/1.2em "Orienta",sans-serif;color:#fff;width:300px;background:#000;border:0;padding:6px;}
-.contribute input[type=submit]{font:16px/1em "Orienta",sans-serif;padding:10px 60px 8px;background:#666;color:#fff;border:0;text-transform:uppercase;margin:1em 0;}.contribute input[type=submit]:hover{background:#7a7a7a;}
+#contribute-page .comic{overflow:auto;margin-bottom:30px;}#contribute-page .comic img{width:250px;height:250px;}
+#contribute-page .comic h1{font:18px/1.2em 'Arbutus Slab',helvetica,sans-serif;}#contribute-page .comic h1 small{font:12px/1.2em 'Arbutus Slab',helvetica,sans-serif;}
+#contribute-page label{display:block;font:14px/1.2em "Orienta",sans-serif;text-transform:uppercase;margin:1em 0 0;}
+#contribute-page .contribute input[type=text]{font:16px/1.2em "Orienta",sans-serif;color:#fff;width:300px;background:#000;border:0;padding:6px;}
+#contribute-page .contribute input[type=submit]{font:16px/1em "Orienta",sans-serif;padding:10px 60px 8px;background:#666;color:#fff;border:0;text-transform:uppercase;margin:1em 0;}#contribute-page .contribute input[type=submit]:hover{background:#7a7a7a;}
 .errorlist li{color:#777;font:italic 12px/2 em Georgia,serif;}
 .isotope-item{z-index:2;}
 .isotope-hidden.isotope-item{pointer-events:none;z-index:1;}

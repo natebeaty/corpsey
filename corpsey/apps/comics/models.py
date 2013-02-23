@@ -32,19 +32,27 @@ class Comic(MPTTModel):
         return u"%s - %s" % (self.artist, self.date.strftime('%b %d \'%y'))
 
     def prev_sib(self):
-        return self.get_previous_sibling(active=True)
+        # root nodes infinite linkage, if first, link to last
+        if self.is_root_node() and not self.get_previous_sibling(active=True):
+            return Comic.objects.root_nodes().reverse()[0]
+        else:
+            return self.get_previous_sibling(active=True)
 
     def next_sib(self):
-        return self.get_next_sibling(active=True)
+        # root nodes infinite linkage, if last, link to first
+        if self.is_root_node() and not self.get_next_sibling(active=True):
+            return Comic.objects.root_nodes()[0]
+        else:
+            return self.get_next_sibling(active=True)
 
     def children(self):
         return self.get_children().filter(active=True)
 
+    def get_uturn(self):
+        return self.get_ancestors().all()[0].next_sib().uturn.all()
+
     def get_prev_comic_links(self):
         comic_links = []
-        # root nodes get infinite linkage, if root and first, link to last
-        if self.is_root_node() and not self.prev_sib():
-            comic_links.append(Comic.objects.root_nodes().reverse()[0])
         if self.is_child_node():
             comic_links.extend(self.get_ancestors(ascending=True).all()[:1])
         elif self.is_root_node() and self.prev_sib():
@@ -53,14 +61,18 @@ class Comic(MPTTModel):
 
     def get_next_comic_links(self):
         comic_links = []
-        # root nodes infinite linkage, if last, link to first
         if self.is_root_node():
-            if self.next_sib():
-                comic_links.append(self.next_sib())
-            else:
-                comic_links.append(Comic.objects.root_nodes()[0])
+            comic_links.append(self.next_sib())
         if self.children:
             comic_links.extend(self.children.all())
         if self.portal_to:
             comic_links.append(self.portal_to)
+
         return comic_links
+
+class Uturn(models.Model):
+    portal_to = models.ForeignKey(Comic, related_name='uturn')
+    panel = ThumbnailerImageField(upload_to='comics', blank=True)
+
+    def __unicode__(self):
+        return u"Uturn to %s" % (self.portal_to.artist)

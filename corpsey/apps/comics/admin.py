@@ -1,7 +1,7 @@
 from django.contrib import admin
 # from treeadmin import admin as tree_admin
 from treeadmin.admin import TreeAdmin
-from corpsey.apps.comics.models import Comic
+from corpsey.apps.comics.models import Comic,Uturn
 from django import forms
 
 class ComicAdmin(TreeAdmin):
@@ -9,4 +9,14 @@ class ComicAdmin(TreeAdmin):
     # active_toggle = tree_admin.ajax_editable_boolean('active', 'is active')
     exclude = ('full_image',)
 
+class UturnForm(forms.ModelForm):
+    portal_to = forms.ModelChoiceField(queryset=Comic.objects.filter(lft=1))
+
+    class Meta:
+        model = Uturn
+
+class UturnAdmin(admin.ModelAdmin):
+	form = UturnForm
+
 admin.site.register(Comic, ComicAdmin)
+admin.site.register(Uturn, UturnAdmin)
