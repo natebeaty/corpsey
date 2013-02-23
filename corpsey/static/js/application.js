@@ -23,7 +23,6 @@ $.corpsey = (function() {
     function _retinize() {
         if (_hdpi_enabled) {
             $('img.panel').each(function() {
-                console.log($(this).attr('src'), _hdpi_enabled, $(this).attr('data-hd-src'));
                 $(this).attr('src', $(this).attr('data-hd-src'));
             });
         }
