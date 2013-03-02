@@ -11,6 +11,9 @@ Corpsey
 @red: #ed1846;
 @tan: #b9b19c;
 
+@yea: #1ccc24;
+@nay: #fc6048;
+
 html, body { height: 100%; }
 body {
     background: #fff;
@@ -26,6 +29,16 @@ a {
         border: 0;
     }
     text-decoration: none; 
+}
+.notice {
+    background: #fff189;
+    width: 500px;
+    margin: 0 auto;
+    padding: 10px;
+    overflow: hidden;
+    p {
+        font: 14px/1.2em 'Orienta', sans-serif;
+    }
 }
 
 /* general typography */
@@ -47,9 +60,6 @@ h3 {
     letter-spacing: .2em;
     text-transform: uppercase;
     margin: 1em 0;
-}
-.user-content {
-    padding: 0 5% 0 2%;
 }
 p {
     font: 14px/1.4em 'Arbutus Slab', serif;
@@ -84,6 +94,9 @@ nav li a {
         text-decoration:none; 
         background: lighten(@graygreen, 5%); 
     }
+}
+.actions {
+    margin: 10px 0;
 }
 
 ul.tree {
@@ -125,11 +138,9 @@ ul.tree {
 #wrapper {
     overflow: hidden;
 }
-#contribute-page #content {
-    margin: 0 20%;
-}
+#contribute-page #content,
 #static-page #content {
-    margin-left: 440px;
+    margin: 0 10%;
 }
 nav.main {
     background: @bluegray;
@@ -340,6 +351,7 @@ a#clixel {
 
 /* catacombs */
 
+.contribution,
 .comic {
     h1 {
         font: 14px/1.2em 'Arbutus Slab', serif;
@@ -359,6 +371,65 @@ a#clixel {
         position: relative;
         h1 {
             display: none;
+        }
+    }
+}
+#contributions {
+    #content {
+        width: 1000px;
+        margin: 10px auto;
+    }
+    ul {
+        display: block;
+        clear: left;
+        overflow: hidden;
+    }
+    .comic {
+        h1 {
+            font: 12px/1.2em 'Arbutus Slab', serif;
+        }
+        margin-bottom: 20px;
+        img {
+            width: 160px;
+            height: 160px;
+            .opacity(.5);
+        }
+    }
+    .queue {
+        .transition(all 1s);
+        margin-bottom: 60px;
+        &.voted {
+            .opacity(.2);
+            img {
+                .opacity(.5);
+            }
+            &.yea {
+                background: @yea;
+            }
+            &.nay {
+                background: @nay;
+            }
+        }
+    }
+    .actions {
+        background: #eee;
+        padding: 20px;
+        text-align: center;
+        .button {
+            font-size: 45px;
+            color: #fff;
+            &.yea {
+                background: @yea;
+                &:hover {
+                    background: lighten(@yea, 5%);
+                }
+            }
+            &.nay {
+                background: @nay;
+                &:hover {
+                    background: lighten(@nay, 5%);
+                }
+            }
         }
     }
 }
@@ -395,8 +466,11 @@ h1.comic_2 {
 
 #contribute-page {
     .comic {
+        &.single {
+            width: auto;
+            h1 { display: block; }
+        }
         overflow: auto;
-        margin-bottom: 30px;
         img {
             width: 250px;
             height: 250px;
@@ -408,32 +482,38 @@ h1.comic_2 {
             }
         }
     }
+}
+.refresh {
+    padding-left: 20px;
+    background: url('/static/img/refresh.png') no-repeat;
+    font: 12px/1.2em "Orienta", sans-serif;
+}
+
+form {
     label {
         display: block;
         font: 14px/1.2em "Orienta", sans-serif;
         text-transform: uppercase;
         margin: 1em 0 0;
     }
-    .contribute {
-        input[type=text] {
-            font: 16px/1.2em "Orienta", sans-serif;
-            color: #fff;
-            width: 300px;
-            background: #000;
-            border:0;
-            padding: 6px; 
-        }
-        input[type=submit] {
-            font: 16px/1em "Orienta", sans-serif;
-            padding: 10px 60px 8px;
-            background: #666;
-            color: #fff;
-            border: 0;
-            text-transform: uppercase;
-            margin: 1em 0;
-            &:hover {
-                background: #7a7a7a;
-            }
+    input[type=text] {
+        font: 16px/1.2em "Orienta", sans-serif;
+        color: #fff;
+        width: 300px;
+        background: #000;
+        border:0;
+        padding: 6px; 
+    }
+    input[type=submit] {
+        font: 16px/1em "Orienta", sans-serif;
+        padding: 10px 60px 8px;
+        background: #666;
+        color: #fff;
+        border: 0;
+        text-transform: uppercase;
+        margin: 1em 0;
+        &:hover {
+            background: #7a7a7a;
         }
     }
 }
@@ -505,7 +585,9 @@ ul.ui-autocomplete {
             cursor: pointer;
             padding: 6px 8px;
             color: #fff;
-            &:hover {
+            &:hover,
+            &.active,
+            &:focus {
                 background: lighten(@bluegray, 5%);
             }
         }

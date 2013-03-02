@@ -2,6 +2,7 @@ from django.db import models
 from corpsey.apps.artists.models import Artist
 from easy_thumbnails.fields import ThumbnailerImageField
 from mptt.models import MPTTModel, TreeForeignKey
+from django.contrib.auth.models import User
 
 from easy_thumbnails.signals import saved_file
 from easy_thumbnails.signal_handlers import generate_aliases_global
@@ -76,3 +77,38 @@ class Uturn(models.Model):
 
     def __unicode__(self):
         return u"Uturn to %s" % (self.portal_to.artist)
+
+class Contribution(models.Model):
+    name = models.CharField(max_length=250, blank=True)
+    email = models.CharField(max_length=250, blank=True)
+    website = models.CharField(max_length=250, blank=True)
+    code = models.CharField(max_length=250, blank=True)
+    date = models.DateTimeField(auto_now_add=True, blank=True)
+    comic = models.ForeignKey(Comic, related_name='contributions')
+    panel1 = ThumbnailerImageField(upload_to='contributions', blank=True)
+    panel2 = ThumbnailerImageField(upload_to='contributions', blank=True)
+    panel3 = ThumbnailerImageField(upload_to='contributions', blank=True)
+    pending = models.BooleanField(default=True)
+    accepted = models.BooleanField(default=False)
+    notes = models.TextField(blank=True)
+
+    def days_left(self):
+        return self.date
+
+    def __unicode__(self):
+        return u"Contribution from %s -- following %s" % (self.name, self.comic.artist)
+
+class Rule(models.Model):
+    text = models.CharField(max_length=250, blank=True)
+    def __unicode__(self):
+        return u(self.text)
+
+class Vote(models.Model):
+    date = models.DateTimeField(auto_now_add=True, blank=True)
+    contribution = models.ForeignKey(Contribution, related_name='votes')
+    user = models.ForeignKey(User, related_name='votes')
+    approve = models.BooleanField(default=False)
+    rule_broke = models.ForeignKey(Rule, null=True, blank=True, related_name='rules_broke')
+
+    def __unicode__(self):
+        return u"Vote for %s " % (self.contribution.name)

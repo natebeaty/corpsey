@@ -1,0 +1,40 @@
+Hello,
+
+Thanks for wanting to contribute to The Infinite Corpse!
+
+You have 4 days to draw your panels and upload them for review. You can view the panels you're following here:
+
+http://corpsey.trubbleclub.com{{ parent_comic_url }}
+
+Here is a link to the original character design (just so we all see where he started): 
+
+http://corpsey.trubbleclub.com/pdf/corpsey-character-design.pdf
+
+Once you have your panels ready for upload, go to this link:
+
+http://corpsey.trubbleclub.com/contribute/upload/{{ code }}
+
+We're excited to see what you come up with!
+
+- Trubble Club
+
+
+--INFINITE-CORPSE-RULES---------------------------------
+
+The Infinite Corpse is going to be an online collaborative comic that will have an open call for submissions. Everyone in the world can participate as long as it lives online. We’re particularly looking for outstanding efforts in humor, creativity and/or draftsmanship. We want this to be open to the world, but in order to keep it going it has to be outstanding, and all contributions will need to pass a degree of quality control. So in addition to outstanding effort, we also need these seven rules followed.
+
+THE SEVEN RULES:
+
+- The actions within the panels must be clear and easy to read.
+
+- Three perfectly square panels which directly follow the previous artist's panels, in your own style, in your own palette. Paint/sculpt/photograph/sew/draw Corpsey how YOU would represent him, not necessarily how the artist before you did. (He's a skeleton with ripped pants! That's it!) Black and white or color are both encouraged. We'd love it to be a wonderful patchwork of all sorts of things, but no halftones please. (Example of halftone: http://bit.ly/x7fwbv)
+
+- The main character Corpsey must always be somewhere in the comic. He is already dead, so you cannot kill him. Your panels cannot be the end of the story.
+
+- Keep it PG-13. (We'd like this to be a place where anybody can come and draw and contribute. What PG-13 means http://bit.ly/d1XveM )
+
+- Panels must be RGB, square, and at least 1200px by 1200px. Save files as JPG.
+
+- Please DO NOT include characters from your own comics, or others already created. We want this to be 100% original.
+
+- Do not post your panels online until they have been up on The Infinite Corpse

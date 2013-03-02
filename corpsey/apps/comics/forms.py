@@ -26,3 +26,8 @@ class UploadForm(forms.Form):
         label='Your website',
         required=False
     )
+
+class ContributeForm(forms.Form):
+    email = forms.EmailField()
+    name = forms.CharField()
+    comic_id = forms.CharField()

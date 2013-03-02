@@ -1,0 +1,28 @@
+{% load thumbnail %}
+
+{% if contribution.panel1 %}
+<div class="queue" data-contribution-id="{{ contribution.id }}">
+	<article class="comic" data-comic-id="{{ comic.id }}">
+	  <h1>Following {{ comic.artist.name }}</h1>
+	  <ul>
+	    <li>{% if comic.panel1 %}<img class="panel" src="{{ comic.panel1.midsize.url }}">{% endif %}</li>
+	    <li>{% if comic.panel2 %}<img class="panel" src="{{ comic.panel2.midsize.url }}">{% endif %}</li>
+	    <li>{% if comic.panel3 %}<img class="panel" src="{{ comic.panel3.midsize.url }}">{% endif %}</li>
+	  </ul>
+	</article>
+
+	<article class="contribution" data-contribution-id="{{ contribution.id }}">
+	  <h1>Contribution from: <a href="{{ contribution.admin_url }}">{{ contribution.name }} &lt;{{ contribution.email }}&gt;</a></h1>
+	  <ul>
+	    <li>{% if contribution.panel1 %}<img class="panel" src="{{ contribution.panel1.midsize.url }}" width="{{ contribution.panel1.midsize.width }}" height="{{ contribution.panel1.midsize.height }}">{% else %}No image for panel 1{% endif %}</li>
+	    <li>{% if contribution.panel2 %}<img class="panel" src="{{ contribution.panel2.midsize.url }}" width="{{ contribution.panel1.midsize.width }}" height="{{ contribution.panel1.midsize.height }}">{% else %}No image for panel 2{% endif %}</li>
+	    <li>{% if contribution.panel3 %}<img class="panel" src="{{ contribution.panel3.midsize.url }}" width="{{ contribution.panel1.midsize.width }}" height="{{ contribution.panel1.midsize.height }}">{% else %}No image for panel 3{% endif %}</li>
+	  </ul>
+	</article>
+
+	<div class="actions">
+		<a class="button yea" href="/contributions/vote/{{ contribution.id }}/1/">Yea</a>
+		<a class="button nay" href="/contributions/vote/{{ contribution.id }}/0/">Nay</a>
+	</div>
+</div>
+{% endif %}

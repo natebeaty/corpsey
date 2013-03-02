@@ -1,7 +1,7 @@
 from django.contrib import admin
 # from treeadmin import admin as tree_admin
 from treeadmin.admin import TreeAdmin
-from corpsey.apps.comics.models import Comic,Uturn
+from corpsey.apps.comics.models import Comic,Uturn,Contribution
 from django import forms
 
 class ComicAdmin(TreeAdmin):
@@ -12,11 +12,12 @@ class ComicAdmin(TreeAdmin):
 class UturnForm(forms.ModelForm):
     portal_to = forms.ModelChoiceField(queryset=Comic.objects.filter(lft=1))
 
-    class Meta:
-        model = Uturn
+class ContributionAdmin(admin.ModelAdmin):
+    list_display = ('__unicode__', 'pending', 'accepted', 'days_left', 'notes')
 
 class UturnAdmin(admin.ModelAdmin):
 	form = UturnForm
 
 admin.site.register(Comic, ComicAdmin)
 admin.site.register(Uturn, UturnAdmin)
+admin.site.register(Contribution, ContributionAdmin)

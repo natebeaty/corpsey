@@ -30,6 +30,7 @@ def recursive_node_to_dict(node):
     children = [recursive_node_to_dict(c) for c in node.get_children()]
     if children:
         result['children'] = children
+        # todo: add uturn to end of children
     return result
 
 def tree(request):
@@ -81,65 +82,160 @@ def entry(request, comic_1, comic_2=None):
         'comics': Comic.objects.all().filter(active=True),
         }, RequestContext(request))
 
+def contributions(request):
+    contributions = Contribution.objects.filter(pending=True)
+
+    return render_to_response('comics/contributions.html',  {
+        'contribution_set': contributions
+        }, RequestContext(request))
+
 
     
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
-from corpsey.apps.comics.forms import UploadForm
+from corpsey.apps.comics.forms import UploadForm, ContributeForm
 
 def contribute(request):
+    from django.db.models import F
+    parent_comic = Comic.objects.filter(lft=F('rght')-1).order_by('?')[0]
+    step = 1
     message = ''
-    page = FlatPage.objects.get(url='/contribute/')
+    # form sent!
     if request.method == 'POST':
-        form = UploadForm(request.POST, request.FILES)
+        form = ContributeForm(request.POST)
         if form.is_valid():
-            # parent sent?
-            # if form.parent_id:
-            #     parent = Comic(pk=form.cleaned_data.parent_id)
-            # else:
-            #     parent = null
+            from django.core.mail import EmailMultiAlternatives
+            from django.template.loader import get_template
+            from django.template import Context
+            import base64, md5, hashlib, time
 
-            # look for artist or add new
+            comic_id = form.cleaned_data['comic_id']
+            email = form.cleaned_data['email']
+            name = form.cleaned_data['name']
+            parent_comic = Comic.objects.get(pk=comic_id)
+            code = base64.urlsafe_b64encode(hashlib.md5(str(time.time())).digest())[:15]
+
+            # check if email has pending contributions
             try:
-                artist = Artist.objects.get(name=form.cleaned_data['name'])
+                existing_contribution = Contribution.objects.get(email=email,pending=True)
+                message = 'The email %s already has a pending contribution. Please check your email for instructions on uploading your panels.' % email
             except:
-                artist = Artist(name=form.cleaned_data['name'])
-            artist.email=form.cleaned_data['email']
-            if form.cleaned_data['website']:
-                artist.website=form.cleaned_data['website']
-            artist.save()
+                # store contribution in db
+                contribution = Contribution(
+                    code = code,
+                    email = email,
+                    name = name,
+                    comic = parent_comic,
+                )
+                contribution.save()
 
-            comic = Comic(
-                artist = artist,
-                panel1 = request.FILES['panel1'],
-                # panel2 = request.FILES['panel2'],
-                # panel3 = request.FILES['panel3']
-            )
-            comic.save()
-            message = "Comic saved ok! %s" % comic.get_absolute_url()
+                plaintext = get_template('emails/contribute_invite_email.txt')
+                htmly     = get_template('emails/contribute_invite_email.html')
 
-            # Email managers
-            admin_link = urlresolvers.reverse('admin:comics_comic_change', args=(comic.id,))
-            mail_subject = 'New Corpsey Submission!'
-            mail_body = 'Title: %s\n\nEdit: http://%s%s\n' % (comic, request.META['HTTP_HOST'], admin_link)
-            mail_admins(mail_subject, mail_body, fail_silently=False)
+                d = Context({ 
+                    'parent_comic_url': parent_comic.get_absolute_url(),
+                    'code': code,
+                    })
 
-            # return HttpResponseRedirect(reverse('myapp.views.contribute'))
+                subject, from_email, to = 'infinite corpse confirmation', 'corpsey@trubbleclub.com', email
+                text_content = plaintext.render(d)
+                html_content = htmly.render(d)
+                try:
+                    msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+                    msg.attach_alternative(html_content, "text/html")
+                    # msg.attach_file("static/img/corpsey-character-design.jpg")
+                    msg.send()
 
+                    message = 'Email sent ok!'
+                except:
+                    message = 'There was an error sending your confirmation email. Please write nate@trubbleclub.com for help.'
+                step = 2
         else:
             message = "oh no!"
     else:
-        form = UploadForm()
+        form = ContributeForm({ 'comic_id': parent_comic.id })
 
+    page = FlatPage.objects.get(url='/contribute/')
+    page2 = FlatPage.objects.get(url='/contribute/ok/')
 
-    # Render list page with the documents and the form
     return render_to_response(
         'comics/contribute.html',
         {
+            'message': message,
+            'step': step,
+            'page': page,
+            'page2': page2,
+            'parent_comic': parent_comic,
+            'contribute_form': form
+        },
+        context_instance=RequestContext(request))
+
+
+def contribute_upload(request, upload_code):
+    from django.db.models import F
+    message = ''
+    step = 1
+    page = FlatPage.objects.get(url='/contribute/upload/')
+    page2 = FlatPage.objects.get(url='/contribute/upload/ok/')
+    try:
+        contribution = Contribution.objects.get(code=upload_code)
+        parent_comic = Contribution.comic
+        form = UploadForm({'name': contribution.name, 'email': contribution.email})
+
+        if request.method == 'POST':
+            form = UploadForm(request.POST, request.FILES)
+            if form.is_valid():
+                contribution.panel1 = request.FILES['panel1']
+                contribution.panel2 = request.FILES['panel2']
+                contribution.panel3 = request.FILES['panel3']
+                contribution.save()
+
+                message = "Contribution uploaded ok!"
+                step = 2
+
+                # Email managers
+                admin_link = urlresolvers.reverse('admin:comics_contribution_change', args=(contribution.id,))
+                mail_subject = 'New Corpsey Submission!'
+                mail_body = 'Title: %s\n\nEdit: http://%s%s\n' % (contribution, request.META['HTTP_HOST'], admin_link)
+                mail_admins(mail_subject, mail_body, fail_silently=False)
+
+                # return HttpResponseRedirect(reverse('myapp.views.contribute'))
+
+            else:
+                message = "oh no!"
+    except Contribution.DoesNotExist:
+        message = 'code %s not found!' % upload_code
+
+    return render_to_response(
+        'comics/contribute_upload.html',
+        {
+            'upload_code': upload_code,
+            'step': step,
             'form': form,
             'page': page,
+            'page2': page2,
+            'parent_comic': parent_comic,
             'message': message
         },
         context_instance=RequestContext(request)
     )
 
+
+
+                # look for artist or add new
+                # try:
+                #     artist = Artist.objects.get(name=form.cleaned_data['name'])
+                # except:
+                #     artist = Artist(name=form.cleaned_data['name'])
+                # artist.email=form.cleaned_data['email']
+                # if form.cleaned_data['website']:
+                #     artist.website=form.cleaned_data['website']
+                # artist.save()
+
+                # comic = Comic(
+                #     artist = artist,
+                #     panel1 = request.FILES['panel1'],
+                #     panel2 = request.FILES['panel2'],
+                #     panel3 = request.FILES['panel3']
+                # )
+                # comic.save()

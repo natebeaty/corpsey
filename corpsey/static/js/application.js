@@ -4,6 +4,7 @@ $.corpsey = (function() {
     var _hdpi_enabled;
 
     function _init() {
+        // are we on a retina display?
         _hdpi_enabled = (window.devicePixelRatio >= 2);
 
         // search-o-rama
@@ -11,6 +12,11 @@ $.corpsey = (function() {
         $('#get-artist').autocomplete({
 			source: "/get_artists/",
 			minLength: 2,
+            focus: function( event, ui ) {
+                $('.ui-autocomplete a').removeClass('active');
+                $('.ui-autocomplete a:contains('+ui.item.value+')').addClass('active');
+                return false;
+            },
 			select: function( event, ui ) {
 				location.href = ui.item.url;
                 return false;
@@ -21,6 +27,7 @@ $.corpsey = (function() {
     }
 
     function _retinize() {
+        // reload @2x images 
         if (_hdpi_enabled) {
             $('img.panel').each(function() {
                 $(this).attr('src', $(this).attr('data-hd-src'));

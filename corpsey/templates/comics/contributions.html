@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+
+{% block body_id %}contributions{% endblock %}
+
+{% block content %}
+  <h2>Pending Contributions</h2>
+  {% for contribution in contribution_set %}
+    {% include "comics/contribution.html" with contribution=contribution comic=contribution.comic %}
+  {% endfor %}
+{% endblock content %}
+
+{% block extra_javascript %}
+  <script src="{{ STATIC_URL }}js/contributions.js" type="text/javascript"></script>
+{% endblock extra_javascript %}
