@@ -64,8 +64,8 @@ a#clixel{position:absolute;bottom:20px;right:10%;width:53px;height:20px;text-ind
 #contributions .queue.voted.nay{background:#fc6048;}
 #contributions .actions{background:#eee;padding:20px;text-align:center;}#contributions .actions .button{font-size:45px;color:#fff;}#contributions .actions .button.yea{background:#1ccc24;}#contributions .actions .button.yea:hover{background:#21e12a;}
 #contributions .actions .button.nay{background:#fc6048;}#contributions .actions .button.nay:hover{background:#fc7661;}
-#catacombs{margin:4px auto;min-height:660px;max-width:1000px;}#catacombs h1.comic_1,#catacombs h1.comic_2{color:#999;-webkit-transform:rotate(270deg);-moz-transform:rotate(270deg);-o-transform:rotate(270deg);-ms-transform:rotate(270deg);transform:rotate(270deg);-webkit-transform-origin:right top;transform-origin:right top;right:100%;top:16px;white-space:nowrap;opacity:0;}
-h1.comic_1,h1.comic_2{position:absolute;-webkit-transform:rotate(270deg);-moz-transform:rotate(270deg);-o-transform:rotate(270deg);-ms-transform:rotate(270deg);transform:rotate(270deg);-webkit-transform-origin:left top;transform-origin:left top;white-space:nowrap;left:0;top:0;font:14px/1.2em 'Arbutus Slab',serif;}
+#catacombs{margin:4px auto;min-height:660px;max-width:1000px;}
+h1.comic_1,h1.comic_2{position:absolute;-webkit-transform:rotate(270deg);-moz-transform:rotate(270deg);-o-transform:rotate(270deg);-ms-transform:rotate(270deg);transform:rotate(270deg);-webkit-transform-origin:left top;transform-origin:left top;white-space:nowrap;left:0;top:0;font:14px/1.2em 'Arbutus Slab',serif;}h1.comic_1 a,h1.comic_2 a{color:#222;}
 #contribute-page .comic{overflow:auto;}#contribute-page .comic.single{width:auto;}#contribute-page .comic.single h1{display:block;}
 #contribute-page .comic img{width:250px;height:250px;}
 #contribute-page .comic h1{font:18px/1.2em 'Arbutus Slab',helvetica,sans-serif;}#contribute-page .comic h1 small{font:12px/1.2em 'Arbutus Slab',helvetica,sans-serif;}

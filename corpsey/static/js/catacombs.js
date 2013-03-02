@@ -195,8 +195,8 @@ $.corpsey.catacombs = (function() {
     function _build_titles() {
         $('h1.comic_1, h1.comic_2').remove();
         $('.comic.single.active').each(function(i) {
-            var name = $(this).find('h1').text();
-            $('<h1 />').text(name).addClass('comic_'+(i+1)).appendTo('body').css({ 'top' : -1000 });
+            var name = $(this).find('h1').html();
+            $('<h1 />').html(name).addClass('comic_'+(i+1)).appendTo('body').css({ 'top' : -1000 });
         });
         _move_titles();
     }

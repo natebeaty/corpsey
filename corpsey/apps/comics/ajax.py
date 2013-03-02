@@ -15,7 +15,8 @@ def get_comic_panels(request, comic_id, direction, hdpi_enabled):
             'comic_id' : comic.id,
             'first_name' : comic.artist.first_name,
             'last_name' : comic.artist.last_name,
-            'name' : comic.artist.name
+            'name' : comic.artist.name,
+            'url' : comic.artist.url,
         }
     else:
         comic_obj = {}
@@ -59,7 +60,8 @@ def get_new_leaf(request, comic_id, hdpi_enabled):
         'comic_id' : comic.id,
         'first_name' : comic.artist.first_name,
         'last_name' : comic.artist.last_name,
-        'name' : comic.artist.name
+        'name' : comic.artist.name,
+        'url' : comic.artist.url,
     }
     return simplejson.dumps({ 
         'comic' : comic_obj
