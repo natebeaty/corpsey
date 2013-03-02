@@ -195,10 +195,10 @@ def contribute_upload(request, upload_code):
                 step = 2
 
                 # Email managers
-                admin_link = urlresolvers.reverse('admin:comics_contribution_change', args=(contribution.id,))
-                mail_subject = 'New Corpsey Submission!'
-                mail_body = 'Title: %s\n\nEdit: http://%s%s\n' % (contribution, request.META['HTTP_HOST'], admin_link)
-                mail_admins(mail_subject, mail_body, fail_silently=False)
+                # admin_link = urlresolvers.reverse('admin:comics_contribution_change', args=(contribution.id,))
+                # mail_subject = 'New Corpsey Submission!'
+                # mail_body = 'Title: %s\n\nEdit: http://%s%s\n' % (contribution, request.META['HTTP_HOST'], admin_link)
+                # mail_admins(mail_subject, mail_body, fail_silently=False)
 
                 # return HttpResponseRedirect(reverse('myapp.views.contribute'))
 
