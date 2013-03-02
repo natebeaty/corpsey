@@ -18,9 +18,9 @@
 
 				<h3>{{ comic.artist.name }}</h3>
 				<p>
-					{% if comic.panel1 %}<img class="panel" src="{{ comic.panel1.midsize.url }}" width="{{ comic.panel1.midsize.width }}" height="{{ comic.panel1.midsize.height }}">{% endif %}
-				    {% if comic.panel2 %}<img class="panel" src="{{ comic.panel2.midsize.url }}" width="{{ comic.panel1.midsize.width }}" height="{{ comic.panel1.midsize.height }}">{% endif %}
-				    {% if comic.panel3 %}<img class="panel" src="{{ comic.panel3.midsize.url }}" width="{{ comic.panel1.midsize.width }}" height="{{ comic.panel1.midsize.height }}">{% endif %}
+					{% if comic.panel1 %}<img class="panel" src="http://corpsey.trubbleclub.com/{{ comic.panel1.midsize.url }}" width="{{ comic.panel1.midsize.width }}" height="{{ comic.panel1.midsize.height }}">{% endif %}
+				    {% if comic.panel2 %}<img class="panel" src="http://corpsey.trubbleclub.com/{{ comic.panel2.midsize.url }}" width="{{ comic.panel1.midsize.width }}" height="{{ comic.panel1.midsize.height }}">{% endif %}
+				    {% if comic.panel3 %}<img class="panel" src="http://corpsey.trubbleclub.com/{{ comic.panel3.midsize.url }}" width="{{ comic.panel1.midsize.width }}" height="{{ comic.panel1.midsize.height }}">{% endif %}
 				</p>
 
 				<h2>The Seven Rules:</h2>

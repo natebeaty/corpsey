@@ -181,7 +181,7 @@ def contribute_upload(request, upload_code):
     page2 = FlatPage.objects.get(url='/contribute/upload/ok/')
     try:
         contribution = Contribution.objects.get(code=upload_code)
-        parent_comic = Contribution.comic
+        parent_comic = contribution.comic
         form = UploadForm({'name': contribution.name, 'email': contribution.email})
 
         if request.method == 'POST':
@@ -206,7 +206,12 @@ def contribute_upload(request, upload_code):
             else:
                 message = "oh no!"
     except Contribution.DoesNotExist:
-        message = 'code %s not found!' % upload_code
+        message = 'Contribution code <i>%s</i> was not found!' % upload_code
+        return render_to_response(
+            'comics/contribute_upload.html', 
+            { 'message': message },
+            context_instance=RequestContext(request)
+        )
 
     return render_to_response(
         'comics/contribute_upload.html',

@@ -7,12 +7,11 @@
 {% block content %}
 
 {% if message %}
-<div class="notice"><p>{{ message }}</p></div>
+<div class="notice"><p>{{ message|safe }}</p></div>
 {% endif %}
 
 {% if step == 1 %}
 <section id="step1" class="step">
-
 
     {% if form %}
         <div class="user-content">
@@ -31,27 +30,21 @@
 
                 <label for="id_panel1" class="required">{{ form.panel1.label_tag }}</label> 
                 {{ form.panel1 }}
-                {{ form.panel1.errors }}
 
                 <label for="id_panel2" class="required">{{ form.panel2.label_tag }}</label> 
                 {{ form.panel2 }}
-                {{ form.panel2.errors }}
 
                 <label for="id_panel3" class="required">{{ form.panel3.label_tag }}</label> 
                 {{ form.panel3 }}
-                {{ form.panel3.errors }}
 
                 <label for="id_name" class="required">{{ form.name.label_tag }}</label> 
                 {{ form.name }}
-                {{ form.name.errors }}
 
                 <label for="id_email" class="required">{{ form.email.label_tag }}</label> 
                 {{ form.email }}
-                {{ form.email.errors }}
 
                 <label for="id_website">{{ form.website.label_tag }}</label> 
                 {{ form.website }}
-                {{ form.website.errors }}
 
                 {{ form.parent_id.as_hidden }}
 
