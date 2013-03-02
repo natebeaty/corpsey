@@ -107,7 +107,8 @@ def contribute(request):
             from django.core.mail import EmailMultiAlternatives
             from django.template.loader import get_template
             from django.template import Context
-            import base64, md5, hashlib, time
+            from django.conf import settings
+            import base64, md5, hashlib, time, os
 
             comic_id = form.cleaned_data['comic_id']
             email = form.cleaned_data['email']
@@ -144,7 +145,7 @@ def contribute(request):
                 try:
                     msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
                     msg.attach_alternative(html_content, "text/html")
-                    msg.attach_file("/static/img/corpsey-character-design.jpg")
+                    msg.attach_file(os.path.join(settings.STATIC_ROOT, "img/corpsey-character-design.jpg"))
                     msg.send()
 
                     message = 'Email sent ok!'
