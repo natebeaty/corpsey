@@ -133,6 +133,7 @@ def contribute(request):
                 htmly     = get_template('emails/contribute_invite_email.html')
 
                 d = Context({ 
+                    'comic': parent_comic,
                     'parent_comic_url': parent_comic.get_absolute_url(),
                     'code': code,
                     })
@@ -143,7 +144,7 @@ def contribute(request):
                 try:
                     msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
                     msg.attach_alternative(html_content, "text/html")
-                    # msg.attach_file("static/img/corpsey-character-design.jpg")
+                    msg.attach_file("/static/img/corpsey-character-design.jpg")
                     msg.send()
 
                     message = 'Email sent ok!'
