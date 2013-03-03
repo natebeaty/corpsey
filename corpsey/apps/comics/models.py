@@ -4,6 +4,7 @@ from easy_thumbnails.fields import ThumbnailerImageField
 from mptt.models import MPTTModel, TreeForeignKey
 from django.contrib.auth.models import User
 from django.core import urlresolvers
+from datetime import datetime, timedelta
 
 from easy_thumbnails.signals import saved_file
 from easy_thumbnails.signal_handlers import generate_aliases_global
@@ -85,6 +86,7 @@ class Contribution(models.Model):
     website = models.CharField(max_length=250, blank=True)
     code = models.CharField(max_length=250, blank=True)
     date = models.DateTimeField(auto_now_add=True, blank=True)
+    deadline = models.DateTimeField(default=datetime.now()+timedelta(days=4), blank=True)
     comic = models.ForeignKey(Comic, related_name='contributions')
     panel1 = ThumbnailerImageField(upload_to='contributions', blank=True)
     panel2 = ThumbnailerImageField(upload_to='contributions', blank=True)
@@ -93,9 +95,6 @@ class Contribution(models.Model):
     accepted = models.BooleanField(default=False)
     notes = models.TextField(blank=True)
 
-    def days_left(self):
-        return self.date
-    
     def admin_url(self):
         return urlresolvers.reverse('admin:comics_contribution_change', args=(self.id,))
 
@@ -112,7 +111,7 @@ class Vote(models.Model):
     contribution = models.ForeignKey(Contribution, related_name='votes')
     user = models.ForeignKey(User, related_name='votes')
     approve = models.BooleanField(default=False)
-    rule_broke = models.ForeignKey(Rule, null=True, blank=True, related_name='rules_broke')
+    rule_broke = models.ForeignKey(Rule, null=True, blank=True, related_name='rules_broke', default=None)
 
     def __unicode__(self):
         return u"Vote for %s " % (self.contribution.name)
