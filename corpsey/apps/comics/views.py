@@ -141,7 +141,6 @@ def contribute(request):
                 try:
                     msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
                     msg.attach_alternative(html_content, "text/html")
-                    msg.attach_file(os.path.join(settings.STATIC_ROOT, "img/corpsey-character-design.jpg"))
                     msg.send()
 
                     message = 'Email sent ok!'
