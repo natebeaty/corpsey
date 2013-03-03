@@ -3,52 +3,51 @@
 	<td bgcolor="#acb5b0">
 
 	<table cellspacing="0" cellpadding="0" border="0" width="500" align="center">
-		<tr><td>
-		<img src="http://corpsey.trubbleclub.com/static/img/logo.png" width="500px">
+		<tr>
+			<td><img src="http://corpsey.trubbleclub.com/static/img/logo.png" width="500px"></td>
+			<td>
+				<table cellspacing="0" cellpadding="40" border="0" width="500" align="center">
+					<tr>
+						<td bgcolor="#ffffff">
+							<h2>Hello!</h2>
 
-		<table cellspacing="0" cellpadding="40" border="0" width="500" align="center">
-			<tr>
-				<td bgcolor="#ffffff">
-					<h2>Hello!</h2>
+							<p>Thanks for wanting to contribute to The Infinite Corpse!</p>
+							<p>You have 4 days to draw your panels and upload them for review. Attached to this email you'll find the panels you're following, the original character design (just so we all see where he started), and the rules. </p>
+							<p>Once you have your panels ready for upload, go to this link:</p>
+							<p><a href="http://corpsey.trubbleclub.com/contribute/upload/{{ code }}">http://corpsey.trubbleclub.com/contribute/upload/{{ code }}</a></p>
+							<p>We're excited to see what you come up with!</p>
 
-					<p>Thanks for wanting to contribute to The Infinite Corpse!</p>
-					<p>You have 4 days to draw your panels and upload them for review. Attached to this email you'll find the panels you're following, the original character design (just so we all see where he started), and the rules. </p>
-					<p>Once you have your panels ready for upload, go to this link:</p>
-					<p><a href="http://corpsey.trubbleclub.com/contribute/upload/{{ code }}">http://corpsey.trubbleclub.com/contribute/upload/{{ code }}</a></p>
-					<p>We're excited to see what you come up with!</p>
+							<h2>Your parent strip:</h2>
 
-					<h2>Your parent strip:</h2>
+							<h3>{{ comic.artist.name }}</h3>
+							<p>
+								{% if comic.panel1 %}<img class="panel" src="http://corpsey.trubbleclub.com{{ comic.panel1.midsize.url }}" width="{{ comic.panel1.midsize.width }}" height="{{ comic.panel1.midsize.height }}">{% endif %}
+							    {% if comic.panel2 %}<img class="panel" src="http://corpsey.trubbleclub.com{{ comic.panel2.midsize.url }}" width="{{ comic.panel1.midsize.width }}" height="{{ comic.panel1.midsize.height }}">{% endif %}
+							    {% if comic.panel3 %}<img class="panel" src="http://corpsey.trubbleclub.com{{ comic.panel3.midsize.url }}" width="{{ comic.panel1.midsize.width }}" height="{{ comic.panel1.midsize.height }}">{% endif %}
+							</p>
 
-					<h3>{{ comic.artist.name }}</h3>
-					<p>
-						{% if comic.panel1 %}<img class="panel" src="http://corpsey.trubbleclub.com{{ comic.panel1.midsize.url }}" width="{{ comic.panel1.midsize.width }}" height="{{ comic.panel1.midsize.height }}">{% endif %}
-					    {% if comic.panel2 %}<img class="panel" src="http://corpsey.trubbleclub.com{{ comic.panel2.midsize.url }}" width="{{ comic.panel1.midsize.width }}" height="{{ comic.panel1.midsize.height }}">{% endif %}
-					    {% if comic.panel3 %}<img class="panel" src="http://corpsey.trubbleclub.com{{ comic.panel3.midsize.url }}" width="{{ comic.panel1.midsize.width }}" height="{{ comic.panel1.midsize.height }}">{% endif %}
-					</p>
+							<h2>The Seven Rules:</h2>
 
-					<h2>The Seven Rules:</h2>
+							<p>The Infinite Corpse is going to be an online collaborative comic that will have an open call for submissions. Everyone in the world can participate as long as it lives online. We’re particularly looking for outstanding efforts in humor, creativity and/or draftsmanship. We want this to be open to the world, but in order to keep it going it has to be outstanding, and all contributions will need to pass a degree of quality control. So in addition to outstanding effort, we also need these seven rules followed.</p>
 
-					<p>The Infinite Corpse is going to be an online collaborative comic that will have an open call for submissions. Everyone in the world can participate as long as it lives online. We’re particularly looking for outstanding efforts in humor, creativity and/or draftsmanship. We want this to be open to the world, but in order to keep it going it has to be outstanding, and all contributions will need to pass a degree of quality control. So in addition to outstanding effort, we also need these seven rules followed.</p>
+							<ul>
+								<li style="margin: 5px 0;">The actions within the panels must be clear and easy to read.</li>
+								<li style="margin: 5px 0;">Three perfectly square panels which directly follow the previous artist's panels, in your own style, in your own palette. Paint/sculpt/photograph/sew/draw Corpsey how YOU would represent him, not necessarily how the artist before you did. (He's a skeleton with ripped pants! That's it!) Black and white or color are both encouraged. We'd love it to be a wonderful patchwork of all sorts of things, but no halftones please. (Example of halftone: http://bit.ly/x7fwbv)</li>
+								<li style="margin: 5px 0;">The main character Corpsey must always be somewhere in the comic. He is already dead, so you cannot kill him. Your panels cannot be the end of the story.</li>
+								<li style="margin: 5px 0;">Keep it PG-13. (We'd like this to be a place where anybody can come and draw and contribute. What PG-13 means http://bit.ly/d1XveM)</li>
+								<li style="margin: 5px 0;">Panels must be RGB, square, and at least 1200px by 1200px. Save files as JPG.</li>
+								<li style="margin: 5px 0;">Please DO NOT include characters from your own comics, or others already created. We want this to be 100% original.</li>
+								<li style="margin: 5px 0;">Do not post your panels online until they have been up on The Infinite Corpse</li>
+							</ul>
 
-					<ul>
-						<li style="margin: 5px 0;">The actions within the panels must be clear and easy to read.</li>
-						<li style="margin: 5px 0;">Three perfectly square panels which directly follow the previous artist's panels, in your own style, in your own palette. Paint/sculpt/photograph/sew/draw Corpsey how YOU would represent him, not necessarily how the artist before you did. (He's a skeleton with ripped pants! That's it!) Black and white or color are both encouraged. We'd love it to be a wonderful patchwork of all sorts of things, but no halftones please. (Example of halftone: http://bit.ly/x7fwbv)</li>
-						<li style="margin: 5px 0;">The main character Corpsey must always be somewhere in the comic. He is already dead, so you cannot kill him. Your panels cannot be the end of the story.</li>
-						<li style="margin: 5px 0;">Keep it PG-13. (We'd like this to be a place where anybody can come and draw and contribute. What PG-13 means http://bit.ly/d1XveM)</li>
-						<li style="margin: 5px 0;">Panels must be RGB, square, and at least 1200px by 1200px. Save files as JPG.</li>
-						<li style="margin: 5px 0;">Please DO NOT include characters from your own comics, or others already created. We want this to be 100% original.</li>
-						<li style="margin: 5px 0;">Do not post your panels online until they have been up on The Infinite Corpse</li>
-					</ul>
+							<p><em>- Trubble Club</em></p>
 
-					<p><em>- Trubble Club</em></p>
-
-				</td>
-			</tr>
-		</table>
-
-		<br><br>
-
-		</td></tr>
+						</td>
+					</tr>
+				</table>
+				<br><br>
+			</td>
+		</tr>
 	</table>
 
 	</td>
