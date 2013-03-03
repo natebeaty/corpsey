@@ -3,6 +3,7 @@ from corpsey.apps.artists.models import Artist
 from easy_thumbnails.fields import ThumbnailerImageField
 from mptt.models import MPTTModel, TreeForeignKey
 from django.contrib.auth.models import User
+from django.core import urlresolvers
 
 from easy_thumbnails.signals import saved_file
 from easy_thumbnails.signal_handlers import generate_aliases_global
@@ -94,6 +95,9 @@ class Contribution(models.Model):
 
     def days_left(self):
         return self.date
+    
+    def admin_url(self):
+        return urlresolvers.reverse('admin:comics_contribution_change', args=(self.id,))
 
     def __unicode__(self):
         return u"Contribution from %s -- following %s" % (self.name, self.comic.artist)

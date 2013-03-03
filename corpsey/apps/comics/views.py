@@ -16,9 +16,6 @@ def home(request):
         }, RequestContext(request))
 
 
-import json
-from mptt.templatetags.mptt_tags import cache_tree_children
-
 def recursive_node_to_dict(node):
     result = {
         'id': node.pk,
@@ -42,6 +39,9 @@ def tree(request):
         }, RequestContext(request))
 
 def tree_json(request):
+    import json
+    from mptt.templatetags.mptt_tags import cache_tree_children
+
     root_nodes = cache_tree_children(Comic.objects.all().filter(active=True))
     dicts = []
     for n in root_nodes:
@@ -89,14 +89,10 @@ def contributions(request):
         'contribution_set': contributions
         }, RequestContext(request))
 
-
-    
-from django.http import HttpResponseRedirect
-from django.core.urlresolvers import reverse
-from corpsey.apps.comics.forms import UploadForm, ContributeForm
-
 def contribute(request):
     from django.db.models import F
+    from corpsey.apps.comics.forms import ContributeForm
+
     parent_comic = Comic.objects.filter(lft=F('rght')-1).order_by('?')[0]
     step = 1
     message = ''
@@ -174,6 +170,10 @@ def contribute(request):
 
 
 def contribute_upload(request, upload_code):
+    from django.http import HttpResponseRedirect
+    from django.core.urlresolvers import reverse
+    from corpsey.apps.comics.forms import UploadForm
+
     from django.db.models import F
     message = ''
     step = 1

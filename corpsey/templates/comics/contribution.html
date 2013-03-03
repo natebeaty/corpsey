@@ -12,7 +12,7 @@
 	</article>
 
 	<article class="contribution" data-contribution-id="{{ contribution.id }}">
-	  <h1>Contribution from: <a href="{{ contribution.admin_url }}">{{ contribution.name }} &lt;{{ contribution.email }}&gt;</a></h1>
+	  <h1>Contribution from: {{ contribution.name }} &lt;{{ contribution.email }}&gt;</h1>
 	  <ul>
 	    <li>{% if contribution.panel1 %}<img class="panel" src="{{ contribution.panel1.midsize.url }}" width="{{ contribution.panel1.midsize.width }}" height="{{ contribution.panel1.midsize.height }}">{% else %}No image for panel 1{% endif %}</li>
 	    <li>{% if contribution.panel2 %}<img class="panel" src="{{ contribution.panel2.midsize.url }}" width="{{ contribution.panel1.midsize.width }}" height="{{ contribution.panel1.midsize.height }}">{% else %}No image for panel 2{% endif %}</li>

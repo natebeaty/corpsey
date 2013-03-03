@@ -4,10 +4,14 @@
 {% block body_id %}contributions{% endblock %}
 
 {% block content %}
+{% if user.is_authenticated %}
   <h2>Pending Contributions</h2>
   {% for contribution in contribution_set %}
     {% include "comics/contribution.html" with contribution=contribution comic=contribution.comic %}
   {% endfor %}
+{% else %}
+	<p>This page is only for moderators.</p>
+{% endif %}
 {% endblock content %}
 
 {% block extra_javascript %}

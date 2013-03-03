@@ -1,8 +1,7 @@
 from django.conf.urls import patterns, include, url
-# from filebrowser.sites import site
-
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.conf import settings
+from django.shortcuts import redirect
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
@@ -10,6 +9,7 @@ admin.autodiscover()
 
 from dajaxice.core import dajaxice_autodiscover, dajaxice_config
 dajaxice_autodiscover()
+
 
 urlpatterns = patterns('',
     # Examples:
@@ -22,6 +22,7 @@ urlpatterns = patterns('',
     url(r'^tree/$', 'corpsey.apps.comics.views.tree', name='tree'),
     url(r'^tree_json/$', 'corpsey.apps.comics.views.tree_json', name='tree_json'),
     url(r'^contribute/upload/(?P<upload_code>[\w\-=_]+)/$', 'corpsey.apps.comics.views.contribute_upload', name='contribute_upload'),
+    url(r'^contribute/upload/$', lambda x: redirect('/')),
     url(r'^contribute/$', 'corpsey.apps.comics.views.contribute', name='contribute'),
     url(r'^contributions/$', 'corpsey.apps.comics.views.contributions', name='contributions'),
     # url(r'^contributions/vote/(?P<contribution_id>[\d]+)/(?P<vote>[\d]+)/$', 'corpsey.apps.comics.views.contribution_vote', name='contribution_vote'),

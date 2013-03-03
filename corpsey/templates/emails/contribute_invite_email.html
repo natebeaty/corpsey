@@ -2,9 +2,10 @@
 <tr>
 	<td bgcolor="#acb5b0">
 
-	<table cellspacing="0" cellpadding="40" border="0" width="500" align="center">
+	<table cellspacing="0" cellpadding="40" border="0" width="580" align="center">
 		<tr>
 			<td bgcolor="#ffffff">
+				<img src="http://corpsey.trubbleclub.com/static/img/logo.png" width="500px">
 
 				<h2>Hello!</h2>
 
@@ -18,9 +19,9 @@
 
 				<h3>{{ comic.artist.name }}</h3>
 				<p>
-					{% if comic.panel1 %}<img class="panel" src="http://corpsey.trubbleclub.com/{{ comic.panel1.midsize.url }}" width="{{ comic.panel1.midsize.width }}" height="{{ comic.panel1.midsize.height }}">{% endif %}
-				    {% if comic.panel2 %}<img class="panel" src="http://corpsey.trubbleclub.com/{{ comic.panel2.midsize.url }}" width="{{ comic.panel1.midsize.width }}" height="{{ comic.panel1.midsize.height }}">{% endif %}
-				    {% if comic.panel3 %}<img class="panel" src="http://corpsey.trubbleclub.com/{{ comic.panel3.midsize.url }}" width="{{ comic.panel1.midsize.width }}" height="{{ comic.panel1.midsize.height }}">{% endif %}
+					{% if comic.panel1 %}<img class="panel" src="http://corpsey.trubbleclub.com{{ comic.panel1.midsize.url }}" width="{{ comic.panel1.midsize.width }}" height="{{ comic.panel1.midsize.height }}">{% endif %}
+				    {% if comic.panel2 %}<img class="panel" src="http://corpsey.trubbleclub.com{{ comic.panel2.midsize.url }}" width="{{ comic.panel1.midsize.width }}" height="{{ comic.panel1.midsize.height }}">{% endif %}
+				    {% if comic.panel3 %}<img class="panel" src="http://corpsey.trubbleclub.com{{ comic.panel3.midsize.url }}" width="{{ comic.panel1.midsize.width }}" height="{{ comic.panel1.midsize.height }}">{% endif %}
 				</p>
 
 				<h2>The Seven Rules:</h2>
