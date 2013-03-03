@@ -22,14 +22,14 @@
 							<h2>Your parent strip:</h2>
 
 							<h3>{{ comic.artist.name }}</h3>
-							<p>
+							<p><a href="http://corpsey.trubbleclub.com/catacombs/{{ comic.parent.id }}/{{ comic.id }}/">
 								{% if comic.panel1 %}<img class="panel" src="http://corpsey.trubbleclub.com{{ comic.panel1.midsize.url }}" width="{{ comic.panel1.midsize.width }}" height="{{ comic.panel1.midsize.height }}">{% endif %}
 							    {% if comic.panel2 %}<img class="panel" src="http://corpsey.trubbleclub.com{{ comic.panel2.midsize.url }}" width="{{ comic.panel1.midsize.width }}" height="{{ comic.panel1.midsize.height }}">{% endif %}
 							    {% if comic.panel3 %}<img class="panel" src="http://corpsey.trubbleclub.com{{ comic.panel3.midsize.url }}" width="{{ comic.panel1.midsize.width }}" height="{{ comic.panel1.midsize.height }}">{% endif %}
-							</p>
+							</a></p>
 
 							<h2>Corpsey character design</h2>
-							<p><img src="http://corpsey.trubbleclub.com/static/img/corpsey-character-design.jpg"></p>
+							<p><a href="http://corpsey.trubbleclub.com/static/img/corpsey-character-design.jpg"><img src="http://corpsey.trubbleclub.com/static/img/corpsey-character-design.jpg" style="width: 500px;"></a></p>
 
 							<h2>The Seven Rules:</h2>
 							<p>The Infinite Corpse is an online collaborative comic that has an open call for submissions. Everyone in the world can participate. We're particularly looking for outstanding efforts in humor, creativity and/or draftsmanship. We want this to be open to everyone, but in order to keep it going it has to be outstanding, and all contributions will need to pass a degree of quality control.</p>
