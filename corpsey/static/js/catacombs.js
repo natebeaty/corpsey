@@ -219,7 +219,7 @@ $.corpsey.catacombs = (function() {
         if (data.next_comic_links.length>0) {
             nav = ich.next_comic_nav(data);
             $('#content').append(nav);
-        } else if (data.uturn_links) {
+        } else if (data.uturn_links.length>0) {
             nav = ich.uturn_nav(data.uturn_links[0]);
             $('#content').append(nav);
         }
