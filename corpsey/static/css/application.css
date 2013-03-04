@@ -51,7 +51,7 @@ a#clixel{position:absolute;bottom:20px;right:10%;width:53px;height:20px;text-ind
 #homepage #logo{margin:0 auto;}
 #homepage .recent-contributors{width:1000px;margin:10px auto;text-transform:uppercase;}#homepage .recent-contributors h2{text-align:center;color:#ccc;}
 #homepage .comic{margin-bottom:70px;overflow:auto;}#homepage .comic h1{font:22px/1.2em 'Arbutus Slab',serif;overflow:hidden;position:relative;text-align:center;}#homepage .comic h1 small{font:12px/1.2em 'Arbutus Slab',serif;color:#c5cdc0;}#homepage .comic h1 small a{color:#c5cdc0;}#homepage .comic h1 small a:hover{color:#76896b;}
-.contribution h1,.comic h1{font:14px/1.2em 'Arbutus Slab',serif;margin:.5em 0 0;}
+.contribution h1,.comic h1{font:14px/1.2em 'Arbutus Slab',serif;margin:.5em 0 0;}.contribution h1 a,.comic h1 a{color:#222;}
 .contribution ul,.comic ul,.contribution li,.comic li{display:inline;}
 .contribution img,.comic img{display:block;float:left;width:330px;height:330px;background-size:330px 330px;}
 .contribution.single,.comic.single{width:1000px;margin:0 auto;position:relative;}.contribution.single h1,.comic.single h1{display:none;}
