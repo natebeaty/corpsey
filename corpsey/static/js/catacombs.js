@@ -87,6 +87,7 @@ $.corpsey.catacombs = (function() {
             }
         });
 
+        _delayed_resize();
         _init_nav_waypoints();
     }
 
@@ -245,7 +246,10 @@ $.corpsey.catacombs = (function() {
     }
     function _move_titles() {
         $('.comic.single.active').each(function(i) {
+            // figure out which comic panel to position next to
             var c = (i===1 && $('#catacombs').width()<980) ? '1' : '0';
+            // todo: put this damn title to the right of the strip, ugh
+            if (is_uturn && $(this).hasClass('uturn') && $('#catacombs').width()<980) c = '1';
             var $img = $(this).find('img:eq('+c+')');
             var pos = $img.offset();
             var $h1 = $('h1.comic_'+(i+1));
