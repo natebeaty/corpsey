@@ -4,6 +4,24 @@ from dajaxice.decorators import dajaxice_register
 from easy_thumbnails.files import get_thumbnailer
 
 @dajaxice_register(method='GET')
+def get_uturn_panel(request, uturn_id, direction, hdpi_enabled):
+    uturn = Uturn.objects.get(pk=uturn_id)
+    size = 'midsize_hd' if hdpi_enabled else 'midsize'
+    if uturn:
+        uturn_obj = {
+            'panel' : get_thumbnailer(uturn.panel)[size].url, 
+            'uturn_id' : uturn.id,
+            'portal_to_id' : uturn.portal_to.id,
+        }
+    else:
+        uturn_obj = {}
+
+    return simplejson.dumps({ 
+        'direction' : direction,
+        'uturn' : uturn_obj
+    })
+
+@dajaxice_register(method='GET')
 def get_comic_panels(request, comic_id, direction, hdpi_enabled):
     comic = Comic.objects.get(pk=comic_id)
     size = 'midsize_hd' if hdpi_enabled else 'midsize'
@@ -68,50 +86,72 @@ def get_new_leaf(request, comic_id, hdpi_enabled):
     })
 
 @dajaxice_register(method='GET')
-def get_nav_links(request, comic_id_arr):
-    up_comic_links = {};
-
-    comic = Comic.objects.get(pk=comic_id_arr[0])
-    prev_comic_links = comic.get_prev_comic_links()
-    prev_comic_links_arr = []
-    if prev_comic_links:
-        for link in prev_comic_links:
-            prev_comic_links_arr.append({ 
-                'comic_id': link.id, 
-                'comic_id_2': comic.id,
-                'first_name': link.artist.first_name, 
-                'last_name': link.artist.last_name, 
-                'name': link.artist.name, 
-            })
-
-    if len(comic_id_arr) == 1:
-        comic = Comic.objects.get(pk=comic_id_arr[0])
-    else:
-        comic = Comic.objects.get(pk=comic_id_arr[1])
-
-    next_comic_links = comic.get_next_comic_links()
+def get_nav_links(request, comic_id_arr, is_uturn):
     next_comic_links_arr = []
-    if next_comic_links:
-        for link in next_comic_links:
-            next_comic_links_arr.append({ 
-                'comic_id': link.id, 
-                'comic_id_2': comic.id,
-                'first_name': link.artist.first_name, 
-                'last_name': link.artist.last_name, 
-                'name': link.artist.name, 
-            })
+    prev_comic_links_arr = []
+    uturn_links = []
+
+    if is_uturn:
+        uturn = Uturn.objects.get(pk=comic_id_arr[0])
+        if comic_id_arr[1] == uturn.portal_to.id:
+            next_comic_links = uturn.portal_to.get_next_comic_links()
+            if next_comic_links:
+                for link in next_comic_links:
+                    next_comic_links_arr.append({ 
+                        'comic_id': link.id, 
+                        'comic_id_2': uturn.portal_to.id,
+                        'first_name': link.artist.first_name, 
+                        'last_name': link.artist.last_name, 
+                        'name': link.artist.name, 
+                    })
+        else:
+            uturn_links = [{
+                'uturn_id': uturn.id,
+                'comic_id': '',
+                'first_name': uturn.portal_to.artist.first_name,
+                'last_name': uturn.portal_to.artist.last_name,
+                }]
+
     else:
-        if comic.is_child_node:
-            if (comic.get_uturn()):
-                up_comic_links = {
-                    'comic_id': comic.id,
-                    'id': comic.get_uturn()[0].id,
-                    'uturn_comic_id': comic.get_uturn()[0].portal_to.id,
-                    'uturn_name': 'Trubble Club'
-                };
+        comic = Comic.objects.get(pk=comic_id_arr[0])
+        prev_comic_links = comic.get_prev_comic_links()
+        if prev_comic_links:
+            for link in prev_comic_links:
+                prev_comic_links_arr.append({ 
+                    'comic_id': link.id, 
+                    'comic_id_2': comic.id,
+                    'first_name': link.artist.first_name, 
+                    'last_name': link.artist.last_name, 
+                    'name': link.artist.name, 
+                })
+
+        if len(comic_id_arr) == 1:
+            comic = Comic.objects.get(pk=comic_id_arr[0])
+        else:
+            comic = Comic.objects.get(pk=comic_id_arr[1])
+
+        next_comic_links = comic.get_next_comic_links()
+        if next_comic_links:
+            for link in next_comic_links:
+                next_comic_links_arr.append({ 
+                    'comic_id': link.id, 
+                    'comic_id_2': comic.id,
+                    'first_name': link.artist.first_name, 
+                    'last_name': link.artist.last_name, 
+                    'name': link.artist.name, 
+                })
+        else:
+            if comic.is_child_node:
+                if (comic.get_uturn()):
+                    uturn_links = [{
+                        'uturn_id': comic.get_uturn()[0].id,
+                        'comic_id': comic.id,
+                        'first_name': 'Trubble',
+                        'last_name': 'Club',
+                    }]
 
     return simplejson.dumps({ 
         'prev_comic_links' : prev_comic_links_arr,
         'next_comic_links' : next_comic_links_arr,
-        'up_comic_links' : up_comic_links,
+        'uturn_links' : uturn_links,
     })

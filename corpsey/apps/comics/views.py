@@ -62,6 +62,7 @@ def random_starter(request):
 
 def entry(request, comic_1, comic_2=None):
     next_comic_links = []
+    uturn = []
     comic_1 = get_object_or_404(Comic,pk=comic_1)
     
     # build next/child comic nav if possible
@@ -73,13 +74,35 @@ def entry(request, comic_1, comic_2=None):
 
     prev_comic_links = comic_1.get_prev_comic_links()
 
+    if not next_comic_links and comic_2:
+        uturn = comic_2.get_uturn()
+
     return render_to_response('comics/entry.html',  {
         'comic_1': comic_1,
         'comic_2': comic_2,
+        'uturn': uturn,
         'next_comic_links': next_comic_links,
         'prev_comic_links': prev_comic_links,
-        'active_comics': [comic_1, comic_2],
-        'comics': Comic.objects.all().filter(active=True),
+        }, RequestContext(request))
+
+def uturn(request, uturn, comic=None):
+    uturn = get_object_or_404(Uturn,pk=uturn)
+    prev_comic_links = []
+    next_comic_links = []
+    
+    if comic:
+        comic = get_object_or_404(Comic,pk=comic)
+        prev_comic_links.extend(comic.get_prev_comic_links())
+        next_comic_links = [uturn.portal_to]
+    else:
+        next_comic_links.extend(uturn.portal_to.get_next_comic_links())
+
+
+    return render_to_response('comics/uturn_entry.html',  {
+        'uturn': uturn,
+        'comic': comic,
+        'next_comic_links': next_comic_links,
+        'prev_comic_links': prev_comic_links,
         }, RequestContext(request))
 
 def contributions(request):
@@ -135,7 +158,7 @@ def contribute(request):
                     'code': code,
                     })
 
-                subject, from_email, to = 'infinite corpse confirmation', 'corpsey@trubbleclub.com', email
+                subject, from_email, to = 'Infinite Corpsey Confirmation', 'corpsey@trubbleclub.com', email
                 text_content = plaintext.render(d)
                 html_content = htmly.render(d)
                 try:

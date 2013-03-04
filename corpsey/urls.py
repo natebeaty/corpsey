@@ -14,6 +14,8 @@ dajaxice_autodiscover()
 urlpatterns = patterns('',
     # Examples:
     url(r'^$', 'corpsey.views.home', name='home'),
+    url(r'^catacombs/uturn/(?P<uturn>[\d]+)/(?P<comic>\d+)/$', 'corpsey.apps.comics.views.uturn', name='uturn'),
+    url(r'^catacombs/uturn/(?P<uturn>[\d]+)/$', 'corpsey.apps.comics.views.uturn', name='uturn'),
     url(r'^catacombs/(?P<comic_1>[\d]+)/(?P<comic_2>\d+)/$', 'corpsey.apps.comics.views.entry', name='comic'),
     url(r'^catacombs/(?P<comic_1>[\d]+)/$', 'corpsey.apps.comics.views.entry', name='comic'),
     url(r'^catacombs/$', 'corpsey.apps.comics.views.home', name='catacombs'),

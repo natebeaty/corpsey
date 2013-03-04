@@ -4,5 +4,8 @@
     {{#next_comic_links}}
       <li><a data-comic-id="{{ comic_id }}" class="next button" href="/catacombs/{{ comic_id_2 }}/{{ comic_id }}/">{{ first_name }} <br>{{ last_name }} </a></li>      
     {{/next_comic_links}}
-  </ul>
+    {{#uturn_links}}
+      <li><a data-uturn-id="{{ uturn_id }}" class="next button" href="/catacombs/uturn/{{ uturn_id }}/">Trubble <br>Club</a></li>
+    {{/uturn_links}}  
+    </ul>
 </nav>

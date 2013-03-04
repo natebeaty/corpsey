@@ -1,5 +1,5 @@
 <nav class="prev comic-nav">
-  <h3>prev</h3>
+  <h3>Prev</h3>
   <ul class="prev-comic">
     {% for comic in comic_links %}
       <li><a data-comic-id="{{ comic.id }}" class="prev button" href="/catacombs/{{ comic.id }}/{{ root_comic.id }}/">{{ comic.artist.first_name }} <br>{{ comic.artist.last_name }}</a></li>

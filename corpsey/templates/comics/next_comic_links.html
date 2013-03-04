@@ -1,8 +1,11 @@
 <nav class="next comic-nav">
-  <h3>next</h3>
+  <h3>Next</h3>
   <ul class="next-comic">
     {% for comic in comic_links %}
       <li><a data-comic-id="{{ comic.id }}" class="next button" href="/catacombs/{{ root_comic.id }}/{{ comic.id }}/">{{ comic.artist.first_name }} <br>{{ comic.artist.last_name }}</a></li>
+    {% endfor %}
+    {% for uturn in uturn %}
+      <li><a data-uturn-id="{{ uturn.id }}" class="next button" href="/catacombs/uturn/{{ uturn.id }}/{{ root_comic.id }}/">Trubble <br>Club</a></li>
     {% endfor %}
   </ul>
 </nav>
