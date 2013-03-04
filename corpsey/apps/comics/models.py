@@ -37,14 +37,14 @@ class Comic(MPTTModel):
     def prev_sib(self):
         # root nodes infinite linkage, if first, link to last
         if self.is_root_node() and not self.get_previous_sibling(active=True):
-            return Comic.objects.root_nodes().reverse()[0]
+            return Comic.objects.root_nodes(active=True).reverse()[0]
         else:
             return self.get_previous_sibling(active=True)
 
     def next_sib(self):
         # root nodes infinite linkage, if last, link to first
         if self.is_root_node() and not self.get_next_sibling(active=True):
-            return Comic.objects.root_nodes()[0]
+            return Comic.objects.root_nodes(active=True)[0]
         else:
             return self.get_next_sibling(active=True)
 
