@@ -93,6 +93,7 @@ def get_nav_links(request, comic_id_arr, is_uturn):
 
     if is_uturn:
         uturn = Uturn.objects.get(pk=comic_id_arr[0])
+        # /catacombs/uturn/uturn_id/ (comic_id_arr[1] is sent along by js magic, taken from uturn's data-portal-id)
         if comic_id_arr[1] == uturn.portal_to.id:
             next_comic_links = uturn.portal_to.get_next_comic_links()
             if next_comic_links:
@@ -105,6 +106,18 @@ def get_nav_links(request, comic_id_arr, is_uturn):
                         'name': link.artist.name, 
                     })
         else:
+            # /catacombs/uturn/uturn_id/comic that's not the portal!
+            comic = Comic.objects.get(pk=comic_id_arr[1])
+            prev_comic_links = comic.get_prev_comic_links()
+            if prev_comic_links:
+                for link in prev_comic_links:
+                    prev_comic_links_arr.append({ 
+                        'comic_id': link.id, 
+                        'comic_id_2': comic.id,
+                        'first_name': link.artist.first_name, 
+                        'last_name': link.artist.last_name, 
+                        'name': link.artist.name, 
+                    })
             uturn_links = [{
                 'uturn_id': uturn.id,
                 'comic_id': '',
