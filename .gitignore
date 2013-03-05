@@ -7,3 +7,5 @@ virtualenv.py
 src/
 .DS_Store
 codekit-config.json
+build/*
+
