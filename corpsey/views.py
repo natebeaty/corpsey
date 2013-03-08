@@ -18,3 +18,13 @@ def home(request):
         'num_artists': num_artists,
         'comic_set': comic_set,
         }, RequestContext(request))
+
+def artists(request):
+    artist_set = Artist.objects.all().order_by('last_name')
+    page = FlatPage.objects.get(url='/artists/')
+    return render_to_response('artists.html',  {
+        'title': page.title,
+        'page': page,
+        'artist_set': artist_set,
+        }, RequestContext(request))
+

@@ -12,7 +12,7 @@ def home(request):
     page = get_object_or_404(FlatPage,url='/catacombs/')
     return render_to_response('comics/home.html',  {
         'page': page,
-        'comics': Comic.objects.all().filter(active=True),
+        'comics': Comic.objects.filter(active=True),
         }, RequestContext(request))
 
 
@@ -35,14 +35,14 @@ def tree(request):
 
     return render_to_response('comics/tree.html',  {
         'page': page,
-        'comics': Comic.objects.all().filter(active=True),
+        'comics': Comic.objects.filter(active=True),
         }, RequestContext(request))
 
 def tree_json(request):
     import json
     from mptt.templatetags.mptt_tags import cache_tree_children
 
-    root_nodes = cache_tree_children(Comic.objects.all().filter(active=True))
+    root_nodes = cache_tree_children(Comic.objects.filter(active=True))
     dicts = []
     for n in root_nodes:
         dicts.append(recursive_node_to_dict(n))
@@ -58,8 +58,17 @@ def random(request):
     return redirect('/catacombs/%d/%d/' % (comic_leaf.parent.id, comic_leaf.id,))
 
 def random_starter(request):
-    comic_to = Comic.objects.all().filter(starter=True).order_by('?')[0]
+    comic_to = Comic.objects.filter(starter=True).order_by('?')[0]
     return redirect(comic_to)
+
+def artist_in_catacombs(request, artist):
+    artist = get_object_or_404(Artist,pk=artist)
+    comic_to = Comic.objects.filter(artist_id=artist.id).order_by('?')[0]
+    if not comic_to.is_root_node():
+        url = '/catacombs/%d/%d/' % (comic_to.parent.id, comic_to.id)
+    else:
+        url = comic_to.get_absolute_url()
+    return redirect(url)
 
 def entry(request, comic_1, comic_2=None):
     next_comic_links = []

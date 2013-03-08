@@ -147,7 +147,7 @@ nav.main {
     height: 26px;
     ul {
         text-align: right;
-        width: 470px;
+        width: 550px;
         position: absolute;
         top: 0;
         right: 0;
@@ -615,5 +615,26 @@ ul.ui-autocomplete {
       fill: none;
       stroke: lighten(@bluegray, 20%);
       stroke-width: 1.5px;
+    }
+}
+
+/* artists */
+#artists {
+    #content {
+        width: 650px;
+        margin: 20px auto;
+        h3.name {
+            margin: 0;
+            line-height: 24px;
+            display: block;
+            float: left;
+            width: 300px;
+        }
+        li {
+            overflow: hidden;
+            &:hover .name {
+                background: #eee;
+            }
+        }
     }
 }
