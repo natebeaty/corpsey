@@ -219,8 +219,10 @@ nav.main {
     height: 295px;
     background: url('/static/img/logo.gif') no-repeat;
     background-size: 682px 295px;
-    @media screen and (min-device-pixel-ratio: 2) {
+    @media only screen and (-webkit-min-device-pixel-ratio: 2),
+    only screen and (min-device-pixel-ratio: 2) {
         background: url('/static/img/logo@2x.gif') no-repeat;
+        background-size: 682px 295px;
     }
     text-indent: -9999em;
     margin:8px auto; 
