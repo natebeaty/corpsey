@@ -88,7 +88,6 @@ $.corpsey.catacombs = (function() {
         });
 
         _delayed_resize();
-        _init_nav_waypoints();
     }
 
     // build id arr and convert to int
@@ -104,19 +103,6 @@ $.corpsey.catacombs = (function() {
 
         // add .is-uturn class for small.less to shorten min-height
         $('#catacombs').toggleClass('is-uturn', (is_uturn!==null));
-    }
-
-    function _init_nav_waypoints() {
-        $('.comic-nav.next').waypoint(function(d) {
-            $(this).toggleClass('stuck', d==='down');
-        }, {
-            offset: 200
-        });
-        $('.comic-nav.prev').waypoint(function(d) {
-            $(this).toggleClass('stuck', d==='down');
-        }, {
-            offset: 40
-        });
     }
 
     function _build_panels(){
@@ -234,7 +220,6 @@ $.corpsey.catacombs = (function() {
     }
 
     function _show_nav_links(data) {
-        $('.comic-nav').removeClass('stuck').waypoint('destroy');
         $('.comic-nav').remove();
         var nav;
         // any nav to add?
@@ -250,8 +235,6 @@ $.corpsey.catacombs = (function() {
             nav = ich.prev_comic_nav(data);
             $('#content').append(nav);
         }
-
-        _init_nav_waypoints();
     }
 
     function _hide_titles() {
