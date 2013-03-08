@@ -101,8 +101,9 @@ $.corpsey.catacombs = (function() {
         }
         // add class .one-comic-showing to adjust min-height
         $('#catacombs').toggleClass('one-comic-showing', (comics_showing.length===1));
+
         // add .is-uturn class for small.less to shorten min-height
-        $('#catacombs').toggleClass('is-uturn', is_uturn);
+        $('#catacombs').toggleClass('is-uturn', (is_uturn!==null));
     }
 
     function _init_nav_waypoints() {
