@@ -1,4 +1,4 @@
-#catacombs{max-width:300px;}
+#catacombs{min-height:990px;max-width:300px;}
 .button{letter-spacing:.3em;}
 #homepage header a.button{font:14px/1.2em 'myriad pro',helvetica,sans-serif;letter-spacing:.2em;padding:6px 10px 6px 16px;-webkit-border-radius:20px;-moz-border-radius:20px;border-radius:20px;}
 #homepage header.main .intro{width:300px;font:14px/1.3em 'Arbutus Slab',helvetica,sans-serif;}
