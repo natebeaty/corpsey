@@ -53,8 +53,9 @@ def tree_json(request):
     return HttpResponse(json.dumps(root, indent=4), mimetype="application/json")
 
 def random(request):
-    comic_to = Comic.objects.order_by('?')[0]
-    return redirect(comic_to)
+    from django.db.models import F
+    comic_leaf = Comic.objects.filter(level__gt=0).order_by('?')[0]
+    return redirect('/catacombs/%d/%d/' % (comic_leaf.parent.id, comic_leaf.id,))
 
 def random_starter(request):
     comic_to = Comic.objects.all().filter(starter=True).order_by('?')[0]

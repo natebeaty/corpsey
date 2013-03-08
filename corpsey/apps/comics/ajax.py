@@ -70,7 +70,7 @@ def contribution_vote(request, contribution_id, yea, rule_broke):
 def get_new_leaf(request, comic_id, hdpi_enabled):
     from django.db.models import F
     size = 'midsize_hd' if hdpi_enabled else 'midsize'
-    comic = Comic.objects.filter(lft = F('rght')-1).exclude(id = comic_id).order_by('?')[0]
+    comic = Comic.objects.filter(level__gt=0).exclude(id = comic_id).order_by('?')[0]
     comic_obj = {
         'panel1' : get_thumbnailer(comic.panel1)[size].url, 
         'panel2' : get_thumbnailer(comic.panel2)[size].url, 
