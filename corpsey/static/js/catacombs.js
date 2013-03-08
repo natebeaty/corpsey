@@ -159,6 +159,11 @@ $.corpsey.catacombs = (function() {
         // build from icanhaz template
         var comic = ich.comic_single(data.comic);
 
+        // show loading status
+        comic.find('img').addClass('loading').imagesLoaded(function($imgs) {
+            $imgs.removeClass('loading');
+        });
+
         // drop in comic
         if (data.direction==='next') {
             $('#catacombs').isotope('insert', comic);

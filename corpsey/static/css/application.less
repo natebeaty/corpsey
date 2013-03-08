@@ -366,7 +366,11 @@ a#clixel {
         float: left;
         width: 330px;
         height: 330px;
-        background-size: 330px 330px;        
+        background-size: 330px 330px;
+        .transition(background-color .5s);
+        &.loading {
+            background: #ccc url('/static/img/loading.gif') no-repeat;
+        }
     }
     &.single { 
         width: 1000px;
