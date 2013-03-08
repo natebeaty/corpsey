@@ -212,14 +212,16 @@ $.corpsey.catacombs = (function() {
 
         _get_comics_showing();
         _get_nav_links();
-        if (State.data.direction=='next') {
-            setTimeout(function() {
-                $('html,body').animate({scrollTop:small_width ? 960 : 320 });
-            }, 250);
-        } else {
-            setTimeout(function() {
-                $('html,body').animate({scrollTop:small_width ? 40 : 30});
-            }, 250);
+        if (medium_width || small_width) {
+            if (State.data.direction=='next') {
+                setTimeout(function() {
+                    $('html,body').animate({scrollTop:small_width ? 960 : 320 });
+                }, 250);
+            } else {
+                setTimeout(function() {
+                    $('html,body').animate({scrollTop:small_width ? 40 : 30});
+                }, 250);
+            }
         }
     }
 
