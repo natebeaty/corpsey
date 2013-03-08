@@ -202,6 +202,17 @@ $.corpsey.catacombs = (function() {
 
         _get_comics_showing();
         _get_nav_links();
+        if (small_width || medium_width) {
+            if (State.data.direction=='next') {
+                setTimeout(function() {
+                    $('html,body').animate({scrollTop:$('.comic.single.active:last img:first').offset().top-40});
+                }, 600);
+            } else {
+                setTimeout(function() {
+                    $('html,body').animate({scrollTop:$('.comic.single.active:first img:first').offset().top-40});
+                }, 600);
+            }
+        }
     }
 
     function _find_comic(id) {
