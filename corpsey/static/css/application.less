@@ -215,9 +215,13 @@ nav.main {
     }
 }
 #logo {
-    width: 681px;
-    height: 306px;
+    width: 682px;
+    height: 295px;
     background: url('/static/img/logo.gif') no-repeat;
+    background-size: 682px 295px;
+    @media screen and (min-device-pixel-ratio: 2) {
+        background: url('/static/img/logo@2x.gif') no-repeat;
+    }
     text-indent: -9999em;
     margin:8px auto; 
     a {
@@ -226,6 +230,7 @@ nav.main {
         height: 100%;
     }
 }
+
 footer.main {
     position: relative;
     height: 580px;

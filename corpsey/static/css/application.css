@@ -34,7 +34,7 @@ nav.main ul li a{line-height:24px;padding:2px 16px 0 16px;background:none;}
 nav.main ul li:last-child a{background:#ed1846;color:#eee;}nav.main ul li:last-child a:hover{background:#ef3059;}
 nav.main a{color:#eee;}nav.main a.active,nav.main a:hover{background:#a6abb6;}
 nav.main h1#textlogo{margin:0;padding:0;}nav.main h1#textlogo a{display:inline-block;background:url('/static/img/mini-logo-blk.png') 4px center no-repeat;letter-spacing:.2em;margin:0;padding:0 16px 0 57px;font:15px/26px 'Arbutus Slab',serif;}nav.main h1#textlogo a:hover{background-color:#a6abb6;}
-#logo{width:681px;height:306px;background:url('/static/img/logo.gif') no-repeat;text-indent:-9999em;margin:8px auto;}#logo a{display:block;width:100%;height:100%;}
+#logo{width:682px;height:295px;background:url('/static/img/logo.gif') no-repeat;background-size:682px 295px;text-indent:-9999em;margin:8px auto;}@media screen and (min-device-pixel-ratio:2){#logo{background:url('/static/img/logo@2x.gif') no-repeat;}}#logo a{display:block;width:100%;height:100%;}
 footer.main{position:relative;height:580px;background:url('/static/img/footer.png') bottom center no-repeat;}
 a#clixel{position:absolute;bottom:20px;right:10%;width:53px;height:20px;text-indent:-9999em;display:block;background:url('/static/img/clixel.gif') no-repeat;}
 .comic-nav{position:absolute;right:0;top:380px;width:130px;z-index:10000;background:#fff;padding:2px 5px;}.comic-nav h2{margin:0 0 .4em;}

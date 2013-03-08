@@ -31,8 +31,11 @@ Corpsey smaller
     }
     #logo { 
         width: 300px;
-        height: 129px;
-        background-size: 300px 129px;
+        height: 130px;
+        background-size: 300px 130px;
+        @media screen and (min-device-pixel-ratio: 2) {
+            background: url('/static/img/logo.gif') no-repeat;
+        }
     }
     .recent-contributors {
         width: auto;
