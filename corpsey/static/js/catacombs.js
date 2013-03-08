@@ -49,9 +49,9 @@ $.corpsey.catacombs = (function() {
                 build_titles_timer = setTimeout(function() { $.corpsey.catacombs.build_titles(); }, 450);
             }
         });
-        if (!small_width) {
-            $('#catacombs').isotope({ filter: '.panel' });
-        }
+        setTimeout(function() {
+            $('#catacombs').isotope({ filter: (small_width) ? '.comic.active .panel:not(.uturn-pad),.comic.active h1' : (medium_width) ? '.comic.active .panel:not(.uturn-pad)' : '.comic.active .panel' });
+        }, 250);
 
         $('.comic-nav .next, .comic-nav .prev').live('click',function(e) {
             e.preventDefault();
