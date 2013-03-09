@@ -184,7 +184,7 @@ $.corpsey.catacombs = (function() {
             var id = $(this).data('comic-id');
             // somehow comics are duplicating sometimes?
             if ($.inArray(id,visible_comics)>-1 && !$(this).hasClass('uturn')) {
-                $(this).destroy();
+                $(this).remove();
             } else {
                 visible_comics.push(id); 
             }
