@@ -7,14 +7,7 @@ from django.core.mail import mail_admins,mail_managers
 from django.core import urlresolvers
 from easy_thumbnails.files import get_thumbnailer
 from django.http import HttpResponse
-
-def home(request):
-    page = get_object_or_404(FlatPage,url='/catacombs/')
-    return render_to_response('comics/home.html',  {
-        'page': page,
-        'comics': Comic.objects.filter(active=True),
-        }, RequestContext(request))
-
+from django.views.decorators.cache import cache_page
 
 def recursive_node_to_dict(node):
     result = {
@@ -38,6 +31,7 @@ def tree(request):
         'comics': Comic.objects.filter(active=True),
         }, RequestContext(request))
 
+@cache_page(60 * 15)
 def tree_json(request):
     import json
     from mptt.templatetags.mptt_tags import cache_tree_children
@@ -70,6 +64,7 @@ def artist_in_catacombs(request, artist):
         url = comic_to.get_absolute_url()
     return redirect(url)
 
+@cache_page(60 * 15)
 def entry(request, comic_1, comic_2=None):
     next_comic_links = []
     uturn = []
@@ -95,6 +90,7 @@ def entry(request, comic_1, comic_2=None):
         'prev_comic_links': prev_comic_links,
         }, RequestContext(request))
 
+@cache_page(60 * 15)
 def uturn(request, uturn, comic=None):
     uturn = get_object_or_404(Uturn,pk=uturn)
     prev_comic_links = []
