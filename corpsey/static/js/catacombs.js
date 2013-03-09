@@ -178,20 +178,20 @@ $.corpsey.catacombs = (function() {
 
     function _filter_panels() {
         _get_comics_showing();
-        // if you've looped through from last comic to first comic, make sure the URL matches visible order of comics
-        // or if uturn and we're out of sync, swap em around!
 
         var visible_comics = [];
         $('.comic.single.active').each(function() { 
             var id = $(this).data('comic-id');
             // somehow comics are duplicating sometimes?
-            // console.log($.inArray(id,visible_comics), $(this).hasClass('uturn'), this, visible_comics);
             if ($.inArray(id,visible_comics)>-1 && !$(this).hasClass('uturn')) {
                 $(this).destroy();
             } else {
-                visible_comics.push(); 
+                visible_comics.push(id); 
             }
         });
+
+        // if you've looped through from last comic to first comic, make sure the URL matches visible order of comics
+        // or if uturn and we're out of sync, swap em around!
         // console.log(visible_comics, is_uturn, comics_showing, uturn_single);
         if ((!is_uturn && visible_comics[0]!=comics_showing[0]) ||
             (is_uturn && uturn_single && visible_comics[0]!=comics_showing[0])
