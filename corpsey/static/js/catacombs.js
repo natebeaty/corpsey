@@ -181,12 +181,11 @@ $.corpsey.catacombs = (function() {
         // if you've looped through from last comic to first comic, make sure the URL matches visible order of comics
         // or if uturn and we're out of sync, swap em around!
 
-        $('#catacombs').isotope('reloadItems').isotope({ sortBy: 'original-order' });
-
         var visible_comics = [];
         $('.comic.single.active').each(function() { 
             var id = $(this).data('comic-id');
             // somehow comics are duplicating sometimes?
+            // console.log($.inArray(id,visible_comics), $(this).hasClass('uturn'), this, visible_comics);
             if ($.inArray(id,visible_comics)>-1 && !$(this).hasClass('uturn')) {
                 $(this).destroy();
             } else {
