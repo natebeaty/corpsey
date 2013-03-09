@@ -184,7 +184,15 @@ $.corpsey.catacombs = (function() {
         $('#catacombs').isotope('reloadItems').isotope({ sortBy: 'original-order' });
 
         var visible_comics = [];
-        $('.comic.single.active').each(function() { visible_comics.push($(this).data('comic-id')); });
+        $('.comic.single.active').each(function() { 
+            var id = $(this).data('comic-id');
+            // somehow comics are duplicating sometimes?
+            if ($.inArray(id,visible_comics)>-1 && !$(this).hasClass('uturn')) {
+                $(this).destroy();
+            } else {
+                visible_comics.push(); 
+            }
+        });
         // console.log(visible_comics, is_uturn, comics_showing, uturn_single);
         if ((!is_uturn && visible_comics[0]!=comics_showing[0]) ||
             (is_uturn && uturn_single && visible_comics[0]!=comics_showing[0])
