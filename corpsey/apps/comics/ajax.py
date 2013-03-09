@@ -101,6 +101,8 @@ def get_nav_links(request, comic_id_arr, is_uturn):
                     next_comic_links_arr.append({ 
                         'comic_id': link.id, 
                         'comic_id_2': uturn.portal_to.id,
+                        'artist_name': link.artist.name, 
+                        'artist_name_2': uturn.portal_to.artist.name, 
                         'first_name': link.artist.first_name, 
                         'last_name': link.artist.last_name, 
                         'name': link.artist.name, 
@@ -114,6 +116,8 @@ def get_nav_links(request, comic_id_arr, is_uturn):
                     prev_comic_links_arr.append({ 
                         'comic_id': link.id, 
                         'comic_id_2': comic.id,
+                        'artist_name': link.artist.name, 
+                        'artist_name_2': comic.artist.name, 
                         'first_name': link.artist.first_name, 
                         'last_name': link.artist.last_name, 
                         'name': link.artist.name, 
@@ -121,6 +125,8 @@ def get_nav_links(request, comic_id_arr, is_uturn):
             uturn_links = [{
                 'uturn_id': uturn.id,
                 'comic_id': '',
+                'artist_name': 'Trubble Club', 
+                'artist_name_2': uturn.portal_to.artist.name, 
                 'first_name': uturn.portal_to.artist.first_name,
                 'last_name': uturn.portal_to.artist.last_name,
                 }]
@@ -133,6 +139,8 @@ def get_nav_links(request, comic_id_arr, is_uturn):
                 prev_comic_links_arr.append({ 
                     'comic_id': link.id, 
                     'comic_id_2': comic.id,
+                    'artist_name': link.artist.name, 
+                    'artist_name_2': comic.artist.name, 
                     'first_name': link.artist.first_name, 
                     'last_name': link.artist.last_name, 
                     'name': link.artist.name, 
@@ -149,16 +157,21 @@ def get_nav_links(request, comic_id_arr, is_uturn):
                 next_comic_links_arr.append({ 
                     'comic_id': link.id, 
                     'comic_id_2': comic.id,
+                    'artist_name': link.artist.name, 
+                    'artist_name_2': comic.artist.name, 
                     'first_name': link.artist.first_name, 
                     'last_name': link.artist.last_name, 
                     'name': link.artist.name, 
                 })
         else:
             if comic.is_child_node:
-                if (comic.get_uturn()):
+                uturn = comic.get_uturn()
+                if (uturn):
                     uturn_links = [{
-                        'uturn_id': comic.get_uturn()[0].id,
+                        'uturn_id': uturn[0].id,
                         'comic_id': comic.id,
+                        'artist_name': 'Trubble Club', 
+                        'artist_name_2': uturn[0].portal_to.artist.name, 
                         'first_name': 'Trubble',
                         'last_name': 'Club',
                     }]

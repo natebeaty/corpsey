@@ -62,7 +62,8 @@ $.corpsey.catacombs = (function() {
 
             var direction = $(this).hasClass('next') ? 'next' : 'prev';
             var url = $(this).attr('href');
-            History.pushState({'direction': direction}, document.title, url);
+            var title = $(this).attr('title')+' : The Infinite Corpse';
+            History.pushState({'direction': direction}, title, url);
 
             return false;
         });
