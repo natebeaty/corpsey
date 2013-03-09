@@ -23,7 +23,7 @@ ul.tree a{display:inline-block;width:8px;height:8px;background:#76896b;text-inde
 ul.tree a:hover,ul.tree li.active>a{background:#222;}
 .hidden{display:none;}
 #wrapper{overflow:hidden;min-height:660px;}
-#contribute-page #content,#static-page #content{margin:0 10%;}
+#contribute-page #content,#about #content,#static-page #content{margin:0 10%;}
 nav.main{background:#989eaa;height:26px;}nav.main ul{text-align:right;width:550px;position:absolute;top:0;right:0;}nav.main ul li{display:inline-block;}nav.main ul li #get-artist{outline:none;font:12px/1.2em 'Orienta',sans-serif;letter-spacing:.2em;color:#eee;background:#989eaa;border:0;width:86px;padding:2px 16px;height:24px;}nav.main ul li #get-artist::-webkit-input-placeholder{color:#eee;}
 nav.main ul li #get-artist:-moz-placeholder{color:#eee;}
 nav.main ul li #get-artist::-moz-placeholder{color:#eee;}
