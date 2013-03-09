@@ -7,6 +7,7 @@ def deploy():
     with cd('/home/natebeaty/webapps/django145/corpsey/'):
         run('git pull origin master')
         run('/usr/local/bin/python2.7 manage.py collectstatic --noinput')
+        run('/usr/local/bin/python2.7 manage.py clear_cache')
         restart()
 
 def syncdb():
