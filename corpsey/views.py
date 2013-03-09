@@ -20,7 +20,7 @@ def home(request):
         }, RequestContext(request))
 
 def artists(request):
-    artist_set = Artist.objects.all().order_by('last_name')
+    artist_set = Artist.objects.all().order_by('name')
     page = FlatPage.objects.get(url='/artists/')
     return render_to_response('artists.html',  {
         'title': page.title,
