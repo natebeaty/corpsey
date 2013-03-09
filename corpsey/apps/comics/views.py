@@ -23,6 +23,7 @@ def recursive_node_to_dict(node):
         # todo: add uturn to end of children
     return result
 
+@cache_page(60 * 15)
 def tree(request):
     page = get_object_or_404(FlatPage,url='/tree/')
 
