@@ -636,24 +636,25 @@ ul.ui-autocomplete {
         margin: 20px auto;
         h3.name {
             margin: 0;
-            line-height: 24px;
             display: block;
             float: left;
             width: 300px;
             a { 
                 color: #222; 
                 display: block;
-                line-height: 24px;
+                line-height: 18px;
                 &:hover {
                     color: @bluegray;
                 }
             }
         }
         li {
+            overflow: hidden;
             min-height: 24px;
             margin-bottom: 4px;
             &.letter {
                 height: 30px;
+                overflow: visible;
                 h2 {
                     clear: left;
                     margin: 20px 0 0;

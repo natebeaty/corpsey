@@ -85,5 +85,5 @@ ul.ui-autocomplete{background:#989eaa;z-index:99999 !important;width:150px !impo
 #tree .node circle{fill:#76896b;stroke:#76896b;stroke-width:1px;}
 #tree .node{font:12px/1.2em 'Orienta',sans-serif;}
 #tree .link{fill:none;stroke:#d0d3d8;stroke-width:1.5px;}
-#artists #content{width:400px;margin:20px auto;}#artists #content h3.name{margin:0;line-height:24px;display:block;float:left;width:300px;}#artists #content h3.name a{color:#222;display:block;line-height:24px;}#artists #content h3.name a:hover{color:#989eaa;}
-#artists #content li{min-height:24px;margin-bottom:4px;}#artists #content li.letter{height:30px;}#artists #content li.letter h2{clear:left;margin:20px 0 0;font:22px/1.2em 'Arbutus Slab',serif;}
+#artists #content{width:400px;margin:20px auto;}#artists #content h3.name{margin:0;display:block;float:left;width:300px;}#artists #content h3.name a{color:#222;display:block;line-height:18px;}#artists #content h3.name a:hover{color:#989eaa;}
+#artists #content li{overflow:hidden;min-height:24px;margin-bottom:4px;}#artists #content li.letter{height:30px;overflow:visible;}#artists #content li.letter h2{clear:left;margin:20px 0 0;font:22px/1.2em 'Arbutus Slab',serif;}
