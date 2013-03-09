@@ -20,5 +20,6 @@ paramiko==1.9.0
 psycopg2==2.4.6
 pycrypto==2.6
 pydkim==0.3
+python-memcached==1.48
 ssh==1.8.0
 wsgiref==0.1.2
