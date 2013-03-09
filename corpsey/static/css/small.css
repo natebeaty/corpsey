@@ -19,3 +19,4 @@ h1.comic_1,h1.comic_2{display:none !important;}
 nav.main{height:34px;}nav.main ul{display:none;}
 nav.main h1#textlogo{padding:4px 6px 0 20px;text-align:center;}nav.main h1#textlogo a{padding:0 0 0 57px;margin-left:-20px;}
 ul.tree{display:none;}
+#artists #content{width:300px;}#artists #content h3.name{width:200px;}
