@@ -22,7 +22,7 @@ ul.tree ul.children{display:inline-block;line-height:0;}ul.tree ul.children li{h
 ul.tree a{display:inline-block;width:8px;height:8px;background:#76896b;text-indent:-9999em;margin:1px;}
 ul.tree a:hover,ul.tree li.active>a{background:#222;}
 .hidden{display:none;}
-#wrapper{overflow:hidden;}
+#wrapper{overflow:hidden;min-height:660px;}
 #contribute-page #content,#static-page #content{margin:0 10%;}
 nav.main{background:#989eaa;height:26px;}nav.main ul{text-align:right;width:550px;position:absolute;top:0;right:0;}nav.main ul li{display:inline-block;}nav.main ul li #get-artist{outline:none;font:12px/1.2em 'Orienta',sans-serif;letter-spacing:.2em;color:#eee;background:#989eaa;border:0;width:86px;padding:2px 16px;height:24px;}nav.main ul li #get-artist::-webkit-input-placeholder{color:#eee;}
 nav.main ul li #get-artist:-moz-placeholder{color:#eee;}
@@ -85,5 +85,5 @@ ul.ui-autocomplete{background:#989eaa;z-index:99999 !important;width:150px !impo
 #tree .node circle{fill:#76896b;stroke:#76896b;stroke-width:1px;}
 #tree .node{font:12px/1.2em 'Orienta',sans-serif;}
 #tree .link{fill:none;stroke:#d0d3d8;stroke-width:1.5px;}
-#artists #content{width:650px;margin:20px auto;}#artists #content h3.name{margin:0;line-height:24px;display:block;float:left;width:300px;}
-#artists #content li{overflow:hidden;}#artists #content li:hover .name{background:#eee;}
+#artists #content{width:400px;margin:20px auto;}#artists #content h3.name{margin:0;line-height:24px;display:block;float:left;width:300px;}#artists #content h3.name a{color:#222;display:block;line-height:24px;}#artists #content h3.name a:hover{color:#989eaa;}
+#artists #content li{height:24px;overflow:hidden;margin-bottom:4px;}

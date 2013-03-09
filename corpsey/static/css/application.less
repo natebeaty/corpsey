@@ -137,6 +137,7 @@ ul.tree {
 
 #wrapper {
     overflow: hidden;
+    min-height: 660px;
 }
 #contribute-page #content,
 #static-page #content {
@@ -631,7 +632,7 @@ ul.ui-autocomplete {
 /* artists */
 #artists {
     #content {
-        width: 650px;
+        width: 400px;
         margin: 20px auto;
         h3.name {
             margin: 0;
@@ -639,12 +640,19 @@ ul.ui-autocomplete {
             display: block;
             float: left;
             width: 300px;
+            a { 
+                color: #222; 
+                display: block;
+                line-height: 24px;
+                &:hover {
+                    color: @bluegray;
+                }
+            }
         }
         li {
+            height: 24px;
             overflow: hidden;
-            &:hover .name {
-                background: #eee;
-            }
+            margin-bottom: 4px;
         }
     }
 }

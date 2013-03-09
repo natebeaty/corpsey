@@ -11,10 +11,9 @@
   <div class="artists-list">
     <ul>
     {% for artist in artist_set %}
-      <li><h3 class="name">{{ artist.name }}</h3>
-        <a class="button artist-catacombs" href="/artist_in_catacombs/{{ artist.id }}/">view in catacombs</a>
+      <li><h3 class="name"><a title="View in Catacombs" href="/artist_in_catacombs/{{ artist.id }}/">{{ artist.name }}</a></h3>
         {% if artist.url %}
-          <a class="button artist-url" target="_blank" href="{{ artist.url }}">view website</a>
+          <a class="button artist-url" target="_blank" href="{{ artist.url }}">Website</a>
         {% endif %}
       </li>
     {% endfor %}
