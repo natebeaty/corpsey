@@ -4,16 +4,12 @@
 {% block body_id %}contributions{% endblock %}
 
 {% block content %}
-{% if user.is_authenticated %}
   <h2>Pending Contributions</h2>
   {% for contribution in contributions %}
     {% include "comics/contribution.html" with contribution=contribution comic=contribution.comic %}
   {% empty %}
   	<p>No contributions found that you ({{ user.username }}) haven't voted on.</p>
   {% endfor %}
-{% else %}
-	<p>This page is only for moderators.</p>
-{% endif %}
 {% endblock content %}
 
 {% block extra_javascript %}
