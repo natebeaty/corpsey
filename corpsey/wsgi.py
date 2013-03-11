@@ -15,7 +15,22 @@ framework.
 """
 import os, sys, site
 
+# Tell wsgi to add the Python site-packages to its path. 
+site.addsitedir('/home/natebeaty/.virtualenvs/corpsey_15/lib/python2.7/site-packages')
+
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "corpsey.settings")
+# os.environ['DJANGO_SETTINGS_MODULE'] = 'corpsey.settings'
+
+activate_this = os.path.expanduser("~/.virtualenvs/corpsey_15/bin/activate_this.py")
+execfile(activate_this, dict(__file__=activate_this))
+
+# Calculate the path based on the location of the WSGI script
+project = '/home/natebeaty/webapps/django15/corpsey/'
+workspace = os.path.dirname(project)
+sys.path.append(workspace)
+
+# sys.path.insert(0, '/home/natebeaty/webapps/django15/corpsey')
+# sys.path.insert(0, '/home/natebeaty/.virtualenvs/corpsey')
 
 # This application object is used by any WSGI server configured to use this
 # file. This includes Django's development server, if the WSGI_APPLICATION
