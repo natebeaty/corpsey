@@ -512,7 +512,8 @@ form {
         text-transform: uppercase;
         margin: 1em 0 0;
     }
-    input[type=text] {
+    input[type=text],
+    input[type=password], {
         font: 16px/1.2em "Orienta", sans-serif;
         color: #fff;
         width: 300px;
@@ -665,5 +666,14 @@ ul.ui-autocomplete {
                 }
         }
         }
+    }
+}
+#login {
+    form {
+        width: 400px;
+        margin: 40px auto;
+    }
+    input[type=submit] {
+        margin:20px auto;
     }
 }

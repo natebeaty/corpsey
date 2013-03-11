@@ -8,6 +8,7 @@ from django.core import urlresolvers
 from easy_thumbnails.files import get_thumbnailer
 from django.http import HttpResponse
 from django.views.decorators.cache import cache_page
+from django.contrib.auth.decorators import login_required
 
 def recursive_node_to_dict(node):
     result = {
@@ -112,11 +113,15 @@ def uturn(request, uturn, comic=None):
         'prev_comic_links': prev_comic_links,
         }, RequestContext(request))
 
+@login_required()
 def contributions(request):
-    contributions = Contribution.objects.filter(pending=True)
+    user_votes = Vote.objects.filter(user_id=request.user.id)
+    # omit contributions user has already voted on & contributions that have no panel 1 (todo: better to have Uploaded boolean field?)
+    contributions = Contribution.objects.filter(pending=True).exclude(id__in=user_votes.values_list('contribution_id', flat=True)).exclude(panel1__exact='', panel2__exact='', panel3__exact='')
 
     return render_to_response('comics/contributions.html',  {
-        'contribution_set': contributions
+        'user_votes': user_votes,
+        'contributions': contributions,
         }, RequestContext(request))
 
 def contribute(request):

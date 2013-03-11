@@ -71,7 +71,7 @@ h1.comic_1,h1.comic_2{position:absolute;-webkit-transform:rotate(270deg);-moz-tr
 #contribute-page .comic h1{font:18px/1.2em 'Arbutus Slab',helvetica,sans-serif;}#contribute-page .comic h1 small{font:12px/1.2em 'Arbutus Slab',helvetica,sans-serif;}
 .refresh{padding-left:20px;background:url('/static/img/refresh.png') no-repeat;font:12px/1.2em "Orienta",sans-serif;}
 form label{display:block;font:14px/1.2em "Orienta",sans-serif;text-transform:uppercase;margin:1em 0 0;}
-form input[type=text]{font:16px/1.2em "Orienta",sans-serif;color:#fff;width:300px;background:#000;border:0;padding:6px;}
+form input[type=text],form input[type=password]{font:16px/1.2em "Orienta",sans-serif;color:#fff;width:300px;background:#000;border:0;padding:6px;}
 form input[type=submit]{font:16px/1em "Orienta",sans-serif;padding:10px 60px 8px;background:#666;color:#fff;border:0;text-transform:uppercase;margin:1em 0;}form input[type=submit]:hover{background:#7a7a7a;}
 .errorlist li{color:#777;font:italic 12px/2 em Georgia,serif;}
 .isotope-item{z-index:2;}
@@ -87,3 +87,5 @@ ul.ui-autocomplete{background:#989eaa;z-index:99999 !important;width:150px !impo
 #tree .link{fill:none;stroke:#d0d3d8;stroke-width:1.5px;}
 #artists #content{width:400px;margin:20px auto;}#artists #content h3.name{margin:0;display:block;float:left;width:300px;line-height:16px;}#artists #content h3.name a{color:#222;display:block;line-height:16px;padding:5px 0;}#artists #content h3.name a:hover{color:#989eaa;}
 #artists #content li{overflow:hidden;min-height:24px;margin-bottom:4px;}#artists #content li.letter{height:30px;overflow:visible;}#artists #content li.letter h2{clear:left;margin:20px 0 0;font:22px/1.2em 'Arbutus Slab',serif;}
+#login form{width:400px;margin:40px auto;}
+#login input[type=submit]{margin:20px auto;}
