@@ -17,7 +17,7 @@
       {{ page.content|safe }}
   </div>
 
-  <form class="contribute" action="{% url contribute %}" method="post" enctype="multipart/form-data">
+  <form class="contribute" action="{% url contribute %}" method="post">
     <h2>Your parent strip:</h2>
     <div id="parent_comic">
         {% include "comics/strip.html" with comic=parent_comic %}

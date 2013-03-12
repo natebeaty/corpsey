@@ -41,7 +41,6 @@ $.corpsey.contribute = (function() {
         var comic = ich.comic_single(data.comic);
         $('#parent_comic').empty().append(comic);
         $('#id_comic_id').val(data.comic.comic_id);
-        console.log(data.comic.comic_id, $('#id_comic_id').val());
         comic_id = data.comic.comic_id;
     }
 
