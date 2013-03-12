@@ -7,35 +7,39 @@
 {% block content %}
 
 {% if message %}
-<div class="notice"><p>{{ message }}</p></div>
+  <div class="notice"><p>{{ message }}</p></div>
 {% endif %}
 
 {% if step == 1 %}
 <section id="step1" class="step">
+  <div class="user-content">
+      <h1>{{ page.title|safe }}</h1>
+      {{ page.content|safe }}
+  </div>
+
   <form class="contribute" action="{% url contribute %}" method="post" enctype="multipart/form-data">
-      <div class="user-content">
-          <h1>{{ page.title|safe }}</h1>
-          {{ page.content|safe }}
-      </div>
+    <h2>Your parent strip:</h2>
+    <div id="parent_comic">
+        {% include "comics/strip.html" with comic=parent_comic %}
+    </div>
+    <p><a class="new-leaf refresh" href="#">Give me another random strip to follow</a></p>
 
-      <h2>Your parent strip:</h2>
-      <div id="parent_comic">
-          {% include "comics/strip.html" with comic=parent_comic %}
-      </div>
-      <p><a class="new-leaf refresh" href="#">Give me another random strip to follow</a></p>
+      {{ contribute_form.email }}
+      {% if contribute_form.email.errors %}
+         <div class="field-error">{{ contribute_form.email.errors }}</div>
+      {% endif %}
+      {{ contribute_form.name }}
+      {% if contribute_form.name.errors %}
+         <div class="field-error">{{ contribute_form.name.errors }}</div>
+      {% endif %}
 
-        <label>Your Name:</label>
-        {{ contribute_form.name }}
-        
-        <label>Your Email:</label>
-        {{ contribute_form.email }}
+      <div class="hidden">{{ contribute_form.comic_id }}</div>
+      {% csrf_token %}
 
-        <div class="hidden">{{ contribute_form.comic_id }}</div>
-        {% csrf_token %}
-
-      <div class="actions">
-        <button class="button" type="submit">Yes! I'd like to reserve my spot after this panel!</button>
-      </div>
+    <div class="actions">
+      <button class="button" type="submit">Yes! I'd like to reserve my spot after this panel!</button>
+      <p class="note">Remember! You have 4 days to submit your follow up panels. You can only reserve one spot at a time.</p>
+    </div>
   </form>
 </section>
 {% else %}

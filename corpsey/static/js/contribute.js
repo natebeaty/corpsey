@@ -34,7 +34,7 @@ $.corpsey.contribute = (function() {
             });
         });
 
-        // _show_step();
+        $('form.contribute').validate();
     }
 
     function _show_new_leaf(data) {
@@ -44,26 +44,6 @@ $.corpsey.contribute = (function() {
         console.log(data.comic.comic_id, $('#id_comic_id').val());
         comic_id = data.comic.comic_id;
     }
-
-    // function _get_step() {
-    //     step_at = State.url.replace(location.host,'').match(/\d/g);
-    //     if (step_at === null) step_at = 1;
-    // }
-
-    // function _show_step() {
-    //     _get_step();
-    //     var comic_id = 
-    //     $('.step').hide();
-    //     if (step_at==2) {
-    //         $('#step'+step_at).fadeIn();
-    //         $.cookie('corpsey_contribute', comic_id, { expires: 4 });
-    //     } else if ($.cookie('corpsey_contribute') != '') {
-    //         alert('foo');
-    //         $('#step'+step_at).fadeIn();
-    //     } else {
-    //         $('#step'+step_at).fadeIn();
-    //     }
-    // }
 
     // public methods
     return {

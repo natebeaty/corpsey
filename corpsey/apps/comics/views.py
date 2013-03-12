@@ -183,9 +183,9 @@ def contribute(request):
                     message = 'There was an error sending your confirmation email. Please write nate@trubbleclub.com for help.'
                 step = 2
         else:
-            message = "oh no!"
+            message = "Oh no! Corpsey robot brain broke with your data."
     else:
-        form = ContributeForm({ 'comic_id': parent_comic.id })
+        form = ContributeForm(initial={ 'comic_id': parent_comic.id })
 
     page = FlatPage.objects.get(url='/contribute/')
     page2 = FlatPage.objects.get(url='/contribute/ok/')
