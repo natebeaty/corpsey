@@ -1,0 +1,51 @@
+[
+  {
+    "pk": 2, 
+    "model": "comics.rule", 
+    "fields": {
+      "text": "The actions within the panels must be clear, and easy to read."
+    }
+  }, 
+  {
+    "pk": 3, 
+    "model": "comics.rule", 
+    "fields": {
+      "text": "Three perfectly square panels which directly follow the previous artist's panels, in your own style, in your own palette. Draw Corpsey how you would draw him, not necessarily how the artist before you did. Black and white or color are both encouraged. We'd love it to be a wonderful patchwork of all sorts of things, but no <a href=\"http://bit.ly/x7fwbv\">halftones</a> please."
+    }
+  }, 
+  {
+    "pk": 4, 
+    "model": "comics.rule", 
+    "fields": {
+      "text": "The main character Corpsey must always be in the comic. He is already dead, so you cannot kill him. Your panels cannot be the end of the comic."
+    }
+  }, 
+  {
+    "pk": 5, 
+    "model": "comics.rule", 
+    "fields": {
+      "text": "Keep it <a href=\"http://bit.ly/d1XveM\">PG-13</a>. (We'd like this to be a place where anybody can come and draw and contribute.)"
+    }
+  }, 
+  {
+    "pk": 6, 
+    "model": "comics.rule", 
+    "fields": {
+      "text": "Panels must be RGB, at least 1200x1200 pixels, and saved as JPGs."
+    }
+  }, 
+  {
+    "pk": 7, 
+    "model": "comics.rule", 
+    "fields": {
+      "text": "Please DO NOT include characters from your own comics, or others already created. We want this to be 100% original."
+    }
+  }, 
+  {
+    "pk": 8, 
+    "model": "comics.rule", 
+    "fields": {
+      "text": "Do not post your panels online until they have been up on the Infinite Corpse."
+    }
+  }
+]

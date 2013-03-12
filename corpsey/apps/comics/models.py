@@ -102,9 +102,9 @@ class Contribution(models.Model):
         return u"Contribution from %s -- following %s" % (self.name, self.comic.artist)
 
 class Rule(models.Model):
-    text = models.CharField(max_length=250, blank=True)
+    text = models.TextField()
     def __unicode__(self):
-        return u(self.text)
+        return u"%s" % self.text
 
 class Vote(models.Model):
     date = models.DateTimeField(auto_now_add=True, blank=True)
