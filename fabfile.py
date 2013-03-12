@@ -14,11 +14,12 @@ def deploy():
 def syncdb():
     with cd('/home/natebeaty/webapps/django15/corpsey/'):
         run('/home/natebeaty/.virtualenvs/corpsey_15/bin/python2.7 manage.py syncdb')
-        # run('../apache2/bin/restart')
+        restart()
 
 def migrate():
     with cd('/home/natebeaty/webapps/django15/corpsey/'):
-        run('/home/natebeaty/.virtualenvs/corpsey_15/python2.7 manage.py migrate')
+        run('/home/natebeaty/.virtualenvs/corpsey_15/bin/python2.7 manage.py migrate')
+        restart()
 
 def restart():
     run('/home/natebeaty/webapps/django15/apache2/bin/restart')

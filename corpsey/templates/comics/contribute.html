@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load thumbnail icanhaz %}
+{% load thumbnail icanhaz humanize %}
 
 {% block body_id %}contribute-page{% endblock %}
 {% block title %}Contribute to The Infinite Corpse!{% endblock %}
@@ -15,6 +15,12 @@
   <div class="user-content">
       <h1>{{ page.title|safe }}</h1>
       {{ page.content|safe }}
+      <h2>The {{ rules|length|apnumber }} Rules</h2>
+      <ul class="rules">
+        {% for rule in rules %}
+          <li>{{ rule|safe }}</li>
+        {% endfor %}
+      </ul>
   </div>
 
   <form class="contribute" action="{% url contribute %}" method="post">
