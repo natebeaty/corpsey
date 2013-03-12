@@ -3,8 +3,9 @@ from corpsey.apps.comics.models import *
 from dajaxice.decorators import dajaxice_register
 from easy_thumbnails.files import get_thumbnailer
 
-@dajaxice_register(method='GET')
+@dajaxice_register(method='POST')
 def get_uturn_panel(request, uturn_id, direction, hdpi_enabled):
+    """The wacky uturn anomaly that turned Nate super bald."""
     uturn = Uturn.objects.get(pk=uturn_id)
     size = 'midsize_hd' if hdpi_enabled else 'midsize'
     if uturn:
@@ -21,8 +22,9 @@ def get_uturn_panel(request, uturn_id, direction, hdpi_enabled):
         'uturn' : uturn_obj
     })
 
-@dajaxice_register(method='GET')
+@dajaxice_register(method='POST')
 def get_comic_panels(request, comic_id, direction, hdpi_enabled):
+    """Ajaxtastic catacombs browsing magic."""
     comic = Comic.objects.get(pk=comic_id)
     size = 'midsize_hd' if hdpi_enabled else 'midsize'
     if comic:
@@ -44,8 +46,9 @@ def get_comic_panels(request, comic_id, direction, hdpi_enabled):
         'comic' : comic_obj
     })
 
-@dajaxice_register(method='GET')
+@dajaxice_register(method='POST')
 def contribution_vote(request, contribution_id, yea, rule_broke):
+    """The elders voting YAY OR NAY on freshly contributed strips."""
     contribution = Contribution.objects.get(pk=contribution_id)
     approve = True if yea == 1 else False
 
@@ -66,11 +69,12 @@ def contribution_vote(request, contribution_id, yea, rule_broke):
         'yea' : yea
     })
 
-@dajaxice_register(method='GET')
+@dajaxice_register(method='POST')
 def get_new_leaf(request, comic_id, hdpi_enabled):
-    from django.db.models import F
+    """Pull another random strip to follow for /contribute/ page."""
+    from corpsey.apps.comics.views import find_comic_to_follow
+    comic = find_comic_to_follow(comic_id)
     size = 'midsize_hd' if hdpi_enabled else 'midsize'
-    comic = Comic.objects.filter(level__gt=0).exclude(id = comic_id).order_by('?')[0]
     comic_obj = {
         'panel1' : get_thumbnailer(comic.panel1)[size].url, 
         'panel2' : get_thumbnailer(comic.panel2)[size].url, 
@@ -85,8 +89,9 @@ def get_new_leaf(request, comic_id, hdpi_enabled):
         'comic' : comic_obj
     })
 
-@dajaxice_register(method='GET')
+@dajaxice_register(method='POST')
 def get_nav_links(request, comic_id_arr, is_uturn):
+    """Ajaxtastic next/prev links, overly verbose at the moment just so they work."""
     next_comic_links_arr = []
     prev_comic_links_arr = []
     uturn_links = []
