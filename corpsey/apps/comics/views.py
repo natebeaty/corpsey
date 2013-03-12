@@ -9,6 +9,7 @@ from easy_thumbnails.files import get_thumbnailer
 from django.http import HttpResponse
 from django.views.decorators.cache import cache_page
 from django.contrib.auth.decorators import login_required
+from django.conf import settings
 
 def recursive_node_to_dict(node):
     result = {
@@ -26,6 +27,7 @@ def recursive_node_to_dict(node):
 
 @cache_page(60 * 15)
 def tree(request):
+    """Fancy tree browsing."""
     page = get_object_or_404(FlatPage,url='/tree/')
 
     return render_to_response('comics/tree.html',  {
@@ -35,6 +37,7 @@ def tree(request):
 
 @cache_page(60 * 15)
 def tree_json(request):
+    """Json view for the tree page."""
     import json
     from mptt.templatetags.mptt_tags import cache_tree_children
 
@@ -49,15 +52,17 @@ def tree_json(request):
     return HttpResponse(json.dumps(root, indent=4), mimetype="application/json")
 
 def random(request):
-    from django.db.models import F
+    """Return a random comic that's not a root."""
     comic_leaf = Comic.objects.filter(level__gt=0).order_by('?')[0]
     return redirect('/catacombs/%d/%d/' % (comic_leaf.parent.id, comic_leaf.id,))
 
 def random_starter(request):
+    """Return a random comic marked as a starter for Enter the Catacombs button on homepage."""
     comic_to = Comic.objects.filter(starter=True).order_by('?')[0]
     return redirect(comic_to)
 
 def artist_in_catacombs(request, artist):
+    """Return a random contribution for an artist."""
     artist = get_object_or_404(Artist,pk=artist)
     comic_to = Comic.objects.filter(artist_id=artist.id).order_by('?')[0]
     if not comic_to.is_root_node():
@@ -68,6 +73,7 @@ def artist_in_catacombs(request, artist):
 
 @cache_page(60 * 15)
 def entry(request, comic_1, comic_2=None):
+    """Page in the catacombs, one or two comics."""
     next_comic_links = []
     uturn = []
     comic_1 = get_object_or_404(Comic,pk=comic_1)
@@ -94,6 +100,7 @@ def entry(request, comic_1, comic_2=None):
 
 @cache_page(60 * 15)
 def uturn(request, uturn, comic=None):
+    """Motherfucking uturns."""
     uturn = get_object_or_404(Uturn,pk=uturn)
     prev_comic_links = []
     next_comic_links = []
@@ -115,8 +122,9 @@ def uturn(request, uturn, comic=None):
 
 @login_required()
 def contributions(request):
+    """Page for the elders to vote YAY or NAY on contributions."""
     user_votes = Vote.objects.filter(user_id=request.user.id)
-    # omit contributions user has already voted on & contributions that have no panel 1 (todo: better to have Uploaded boolean field?)
+    # omit contributions user has already voted on AND contributions that have no panels yet (todo: has_uploaded boolean field?)
     contributions = Contribution.objects.filter(pending=True).exclude(id__in=user_votes.values_list('contribution_id', flat=True)).exclude(panel1__exact='', panel2__exact='', panel3__exact='')
 
     return render_to_response('comics/contributions.html',  {
@@ -125,10 +133,10 @@ def contributions(request):
         }, RequestContext(request))
 
 def contribute(request):
-    from django.db.models import F
+    """Reserve a spot to contribute after a comic."""
     from corpsey.apps.comics.forms import ContributeForm
 
-    parent_comic = Comic.objects.filter(lft=F('rght')-1).order_by('?')[0]
+    parent_comic = find_comic_to_follow()
     step = 1
     message = ''
     # form sent!
@@ -138,7 +146,6 @@ def contribute(request):
             from django.core.mail import EmailMultiAlternatives
             from django.template.loader import get_template
             from django.template import Context
-            from django.conf import settings
             import base64, md5, hashlib, time, os
 
             comic_id = form.cleaned_data['comic_id']
@@ -202,13 +209,22 @@ def contribute(request):
         },
         context_instance=RequestContext(request))
 
+def find_comic_to_follow(exclude=0):
+    """Loop through comic leafs to find one with less than MAX_COMIC_CHILDREN children + pending contributions."""
+    comic_leafs = Comic.objects.filter(level__gt=0).exclude(id = exclude).order_by('?')
+    for comic in comic_leafs:
+        pending_contributions = len(Contribution.objects.filter(comic_id=comic.id, pending=True))
+        comic_children = len(comic.get_children())
+        if pending_contributions + comic_children < settings.MAX_COMIC_CHILDREN:
+            return comic
+    return None
 
 def contribute_upload(request, upload_code):
+    """Upload panels for a reserved contribution."""
     from django.http import HttpResponseRedirect
     from django.core.urlresolvers import reverse
     from corpsey.apps.comics.forms import UploadForm
 
-    from django.db.models import F
     message = ''
     step = 1
     page = FlatPage.objects.get(url='/contribute/upload/')
