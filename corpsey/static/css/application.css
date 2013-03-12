@@ -74,10 +74,10 @@ h1.comic_1,h1.comic_2{position:absolute;-webkit-transform:rotate(270deg);-moz-tr
 #contribute-page .comic{overflow:auto;}#contribute-page .comic.single{width:750px;margin:10px auto;}#contribute-page .comic.single h1{display:none;}#contribute-page .comic.single h1 a{color:#222;}
 #contribute-page .comic img{width:250px;height:250px;}
 #contribute-page .comic h1{font:18px/1.2em 'Arbutus Slab',helvetica,sans-serif;}#contribute-page .comic h1 small{font:12px/1.2em 'Arbutus Slab',helvetica,sans-serif;}
-label.error,.errorlist li{margin-top:4px;font:italic 12px/1.4em 'Georgia',serif;color:#888;text-transform:none;}
+label.error,.errorlist li{margin-top:6px;font:italic 12px/1.4em 'Georgia',serif;color:#888;text-transform:none;}
 .refresh{padding-left:20px;background:url('/static/img/refresh.png') no-repeat;font:12px/1.2em "Orienta",sans-serif;}
 form label{display:block;font:14px/1.2em "Orienta",sans-serif;text-transform:uppercase;margin:1em 0 0;}
-form input[type=text],form input[type=password]{font:18px/1.2em 'Arbutus Slab',serif;color:#222;width:300px;background:none;border:0;padding:10px 6px 4px 6px;border-bottom:1px dashed #ccc;text-align:center;outline:none;}
+form input[type=text],form input[type=password]{font:18px/1.2em 'Arbutus Slab',serif;color:#222;width:300px;background:none;border:0;padding:10px 6px 4px 6px;border-bottom:1px dashed #ccc;text-align:center;outline:none;}form input[type=text]:focus,form input[type=password]:focus{border-bottom:1px dashed #666;}
 form input[type=submit]{font:16px/1em "Orienta",sans-serif;padding:10px 60px 8px;background:#666;color:#fff;border:0;text-transform:uppercase;margin:1em 0;}form input[type=submit]:hover{background:#7a7a7a;}
 .isotope-item{z-index:2;}
 .isotope-hidden.isotope-item{pointer-events:none;z-index:1;}

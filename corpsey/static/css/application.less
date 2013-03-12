@@ -538,7 +538,7 @@ h1.comic_2 {
 
 label.error,
 .errorlist li {
-    margin-top: 4px;
+    margin-top: 6px;
     .cursive-gray;
     text-transform: none;
 }
@@ -567,6 +567,9 @@ form {
         border-bottom: 1px dashed #ccc;
         text-align: center;
         outline: none;
+        &:focus {
+            border-bottom: 1px dashed #666;
+        }
     }
     input[type=submit] {
         font: 16px/1em "Orienta", sans-serif;

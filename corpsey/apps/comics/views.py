@@ -135,6 +135,7 @@ def contributions(request):
 def contribute(request):
     """Reserve a spot to contribute after a comic."""
     from corpsey.apps.comics.forms import ContributeForm
+    from datetime import datetime, timedelta
 
     parent_comic = find_comic_to_follow()
     step = 1
@@ -196,11 +197,13 @@ def contribute(request):
 
     page = FlatPage.objects.get(url='/contribute/')
     page2 = FlatPage.objects.get(url='/contribute/ok/')
+    deadline = datetime.now()+timedelta(days=4)
 
     return render_to_response(
         'comics/contribute.html',
         {
             'message': message,
+            'deadline': deadline,
             'step': step,
             'page': page,
             'page2': page2,
