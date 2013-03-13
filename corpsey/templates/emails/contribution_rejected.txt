@@ -1,0 +1,15 @@
+Hello {{ name }}!
+
+Thanks for your submission to The Infinite Corpse. Unfortunately we were unable to approve your panels.
+
+The following rules were marked as having issues:
+
+{% for vote in votes %}
+	{% if vote.rule_broke %}
+		- {{ vote.rule_broke }}
+	{% elif vote.notes %}
+		- {{ vote.notes }}
+	{% endif %}
+{% endfor %}
+
+- Trubble Club
