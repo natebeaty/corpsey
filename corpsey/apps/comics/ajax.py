@@ -69,11 +69,41 @@ def contribution_vote(request, contribution_id, yea, rule_broke=0, notes=''):
         notes = notes,
         )
     vote.save()
+
     num_yea_votes = len(contribution.votes.filter(approve=True))
     num_nay_votes = len(contribution.votes.filter(approve=False))
-    if num_yea_votes > 1:
-        # approve contribution
+
+    # reject contribution
+    if num_nay_votes > 1:
         contribution.pending = False
+        contribution.save()
+        # email user that their comic was rejected
+        from django.core.mail import EmailMultiAlternatives
+        from django.template.loader import get_template
+        from django.template import Context
+
+        plaintext = get_template('emails/contribution_rejected.txt')
+        htmly     = get_template('emails/contribution_rejected.html')
+
+        d = Context({ 
+            'votes': contribution.votes.filter(approve=False),
+            'name': contribution.name,
+            })
+
+        subject, from_email, to = 'Your Infinite Corpse contribution', 'corpsey@trubbleclub.com', contribution.email
+        text_content = plaintext.render(d)
+        html_content = htmly.render(d)
+        try:
+            msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+            msg.attach_alternative(html_content, "text/html")
+            msg.send()
+        except:
+            message = 'There was an error sending the rejection email to %s. Please write Nate and mock him.' % contribution.email
+
+    # approve contribution
+    if num_yea_votes > 1:
+        contribution.pending = False
+        contribution.approved = True
         contribution.save()
         # look for artist or add new
         try:
@@ -114,7 +144,7 @@ def contribution_vote(request, contribution_id, yea, rule_broke=0, notes=''):
             msg.attach_alternative(html_content, "text/html")
             msg.send()
         except:
-            message = 'There was an error sending the approval email to %s. Please write nate and mock him.' % contribution.email
+            message = 'There was an error sending the approval email to %s. Please write Nate and mock him.' % contribution.email
 
 
     # elif num_nay_votes > 1:

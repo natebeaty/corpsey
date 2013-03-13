@@ -1,0 +1,23 @@
+{% extends "base_email.html" %}
+
+{% block title %}Your Infinite Corpse strip is approved!{% endblock title %}
+
+{% block body %}
+	<h2>Hello {{ name }}!</h2>
+
+	<p>Thanks for your submission to The Infinite Corpse. Unfortunately we were unable to approve your panels.</p>
+
+	<p>The following rules were marked as having issues:</p>
+
+	<ul>
+	{% for vote in votes %}
+		{% if vote.rule_broke %}
+			<li>{{ vote.rule_broke }}</li>
+		{% elif vote.notes %}
+			<li>{{ vote.notes }}</li>
+		{% endif %}
+	{% endfor %}
+	</ul>
+
+    <p><b><i>- Trubble Club</i></b></p>	
+{% endblock body %}
