@@ -77,7 +77,7 @@ h1.comic_1,h1.comic_2{position:absolute;-webkit-transform:rotate(270deg);-moz-tr
 #contribute-page form.contribute button{width:300px;white-space:normal;background:#ed1846;margin:20px auto;}#contribute-page form.contribute button:hover{background:#ef3059;}
 #contribute-page form.contribute p.note{font:italic 12px/1.4em 'Georgia',serif;color:#888;width:300px;margin:0 auto;}
 #contribute-page form.contribute fieldset{border:none;padding:0;margin:0;}#contribute-page form.contribute fieldset.images{width:250px;margin:0 auto;}
-#contribute-page form.contribute fieldset.info{margin-top:40px;}
+#contribute-page form.contribute fieldset.info{margin-top:40px;}#contribute-page form.contribute fieldset.info label{display:none;}
 #contribute-page .comic{overflow:auto;}#contribute-page .comic.single{width:750px;margin:10px auto;}#contribute-page .comic.single h1{display:none;}#contribute-page .comic.single h1 a{color:#222;}
 #contribute-page .comic img{width:250px;height:250px;}
 #contribute-page .comic h1{font:18px/1.2em 'Arbutus Slab',helvetica,sans-serif;}#contribute-page .comic h1 small{font:12px/1.2em 'Arbutus Slab',helvetica,sans-serif;}
