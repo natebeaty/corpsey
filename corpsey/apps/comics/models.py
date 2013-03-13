@@ -112,6 +112,7 @@ class Vote(models.Model):
     user = models.ForeignKey(User, related_name='votes')
     approve = models.BooleanField(default=False)
     rule_broke = models.ForeignKey(Rule, null=True, blank=True, related_name='rules_broke', default=None)
+    notes = models.TextField(blank=True)
 
     def __unicode__(self):
         return u"Vote for %s " % (self.contribution.name)
