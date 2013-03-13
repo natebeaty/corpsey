@@ -50,7 +50,11 @@ def get_comic_panels(request, comic_id, direction, hdpi_enabled):
 def contribution_vote(request, contribution_id, yea, rule_broke=0, notes=''):
     """The elders voting YAY OR NAY on freshly contributed strips."""
     contribution = Contribution.objects.get(pk=contribution_id)
+    # has this already been approved?
+    if contribution.pending == False:
+        return
     approve = True if yea == 1 else False
+    message = ''
 
     if rule_broke == 0:
         rule_broke = None
@@ -65,9 +69,61 @@ def contribution_vote(request, contribution_id, yea, rule_broke=0, notes=''):
         notes = notes,
         )
     vote.save()
+    num_yea_votes = len(contribution.votes.filter(approve=True))
+    num_nay_votes = len(contribution.votes.filter(approve=False))
+    if num_yea_votes > 1:
+        # approve contribution
+        contribution.pending = False
+        contribution.save()
+        # look for artist or add new
+        try:
+            artist = Artist.objects.get(name=contribution.name)
+        except:
+            artist = Artist(name=contribution.name)
+        artist.email = contribution.email
+        artist.url = contribution.website
+        artist.save()
+
+        comic = Comic(
+            artist = artist,
+            active = True,
+            parent = contribution.comic,
+            panel1 = contribution.panel1,
+            panel2 = contribution.panel2,
+            panel3 = contribution.panel3,
+        )
+        comic.save()
+        # email user that their comic was approved
+        from django.core.mail import EmailMultiAlternatives
+        from django.template.loader import get_template
+        from django.template import Context
+
+        plaintext = get_template('emails/contribution_approved.txt')
+        htmly     = get_template('emails/contribution_approved.html')
+
+        d = Context({ 
+            'comic_url': "/catacombs/%s/%s/" % (contribution.comic.id, comic.id),
+            'name': contribution.name,
+            })
+
+        subject, from_email, to = 'Your Infinite Corpse contribution is live!', 'corpsey@trubbleclub.com', contribution.email
+        text_content = plaintext.render(d)
+        html_content = htmly.render(d)
+        try:
+            msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+            msg.attach_alternative(html_content, "text/html")
+            msg.send()
+        except:
+            message = 'There was an error sending the approval email to %s. Please write nate and mock him.' % contribution.email
+
+
+    # elif num_nay_votes > 1:
+        # reject contribution
+
     return simplejson.dumps({ 
         'contribution_id' : contribution_id,
-        'yea' : yea
+        'yea' : yea,
+        'message' : message
     })
 
 @dajaxice_register(method='POST')

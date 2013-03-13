@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        
+        <title>{% block title %}{% endblock title %}</title>
+ 
+        <style type="text/css">
+            body {
+                width:100% !important; 
+                -webkit-text-size-adjust:none;
+                margin: 0;
+                padding: 0;
+                font-size: 13px;
+                line-height: 19px;
+                font-family: georgia, serif;
+            }
+            img {
+                border:0;
+                height:auto;
+                line-height:100%;
+                outline:none;
+                text-decoration:none;
+            }
+            table td {
+                border-collapse:collapse;
+            }
+            p, 
+            li {
+                font-size: 13px;
+                line-height: 19px;
+                font-family: georgia, serif;
+            }
+            h2 {
+                font-weight: bold;
+                font-size: 24px;
+                line-height: 31px;
+                font-family: helvetica, sans-serif; 
+            }
+            h3 {
+                font-weight: bold;
+                font-size: 18px;
+                line-height: 23px;
+                font-family: helvetica, sans-serif; 
+                margin-bottom: 0;
+            }
+            a {
+                color: #989eaa;
+            }
+        </style>
+    </head>
+    <body leftmargin="0" marginwidth="0" topmargin="0" marginheight="0" offset="0">
+    <center>
+        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+        <tr>
+            <td bgcolor="#acb5b0">
+
+            <table cellspacing="0" cellpadding="0" border="0" width="500" align="center">
+                <tr>
+                    <td height="216"><img src="http://corpsey.trubbleclub.com/static/img/logo.png" width="500" height="216"></td>
+                </tr>
+                <tr>
+                    <td>
+                        <table cellspacing="0" cellpadding="40" border="0" width="500" align="center">
+                            <tr>
+                                <td bgcolor="#ffffff">
+                                    {% block body %}{% endblock body %}
+                                </td>
+                            </tr>
+                        </table>
+                        <br><br>
+                    </td>
+                </tr>
+            </table>
+
+            </td>
+        </tr>
+        </table>
+    </center>
+    </body>
+</html>
