@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 {% load thumbnail mptt_tags icanhaz %}
 
+{% block title %}{{ comic_1.artist.name }}{% if comic_2 %} / {{ comic_2.artist.name }}{% endif %}{% endblock %}
+
 {% block content %}
 <section id="catacombs">
 {% if comic_1 %}
@@ -13,7 +15,7 @@
 </section>
 
 {% if comic_2 %}
-  {% if next_comic_links %}
+  {% if next_comic_links or uturn %}
     {% include "comics/next_comic_links.html" with root_comic=comic_2 comic_links=comic_links class='next' comic_links=next_comic_links %}
   {% endif %}
 
@@ -27,31 +29,6 @@
   {% include "comics/prev_comic_links.html" with root_comic=comic_1 comic_links=prev_comic_links %}
 {% endif %}
 
-{% comment %}  
-{% if not comic_links %}
-  <p><a data-comic-id="{{ comic_2.id }}" href="/contribute?parent={{ comic_2.id }}" class="button">Contribute!</a></p>
-{% endif %}
-{% endcomment %}
-
-{% comment %}
-<section id="tree">
-      <ul class="tree">
-        {% if comics %}
-        {% recursetree comics %}
-            <li {% if active_comics and node in active_comics %}class="active"{% endif %} data-comic-id="{{ node.id }}">
-                <a href="{{ node.get_absolute_url }}" title="{{ node.artist.name }}">{{ node }}</a>
-                {% if not node.is_leaf_node %}
-                    <ul class="children">
-                        {{ children }}
-                    </ul>
-                {% endif %}
-            </li>
-        {% endrecursetree %}
-        {% endif %}
-    </ul>
-</section>
-{% endcomment %}
-
 {% endblock content %}
 
 {% block extra_javascript %}
@@ -59,13 +36,12 @@
   <script src="{{ STATIC_URL }}js/icanhaz.min.js" type="text/javascript"></script>
   <script src="{{ STATIC_URL }}js/jquery.isotope.min.js" type="text/javascript"></script>
   <script src="{{ STATIC_URL }}js/jquery.history.js" type="text/javascript"></script>
-  <script src="{{ STATIC_URL }}js/waypoints.min.js" type="text/javascript"></script>
-  <script src="{{ STATIC_URL }}js/waypoints-sticky.min.js" type="text/javascript"></script>
 
   {% icanhaz "next_comic_nav" %}
   {% icanhaz "prev_comic_nav" %}
-  {% icanhaz "up_comic_nav" %}
   {% icanhaz "comic_single" %}
+  {% icanhaz "uturn_nav" %}
+  {% icanhaz "uturn_single" %}
 
   <script src="{{ STATIC_URL }}js/catacombs.js" type="text/javascript"></script>
 {% endblock extra_javascript %}

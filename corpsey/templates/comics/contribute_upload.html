@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% load thumbnail icanhaz %}
+
+{% block body_id %}contribute-page{% endblock %}
+{% block title %}Contribute to The Infinite Corpse!{% endblock %}
+
+{% block content %}
+
+{% if message %}
+<div class="notice"><p>{{ message|safe }}</p></div>
+{% endif %}
+
+{% if step == 1 %}
+<section id="step1" class="step">
+
+    {% if form %}
+        <div class="user-content">
+            <h1>{{ page.title|safe }}</h1>
+            {{ page.content|safe }}
+        </div>
+
+        <h2>Your parent strip:</h2>
+        <div id="parent_comic">
+            {% include "comics/strip.html" with comic=parent_comic %}
+        </div>
+
+        <form class="contribute" action="{% url contribute_upload upload_code %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+                {{ form.non_field_errors }}
+
+                <label for="id_panel1" class="required">{{ form.panel1.label_tag }}</label> 
+                {{ form.panel1 }}
+
+                <label for="id_panel2" class="required">{{ form.panel2.label_tag }}</label> 
+                {{ form.panel2 }}
+
+                <label for="id_panel3" class="required">{{ form.panel3.label_tag }}</label> 
+                {{ form.panel3 }}
+
+                <label for="id_name" class="required">{{ form.name.label_tag }}</label> 
+                {{ form.name }}
+
+                <label for="id_email" class="required">{{ form.email.label_tag }}</label> 
+                {{ form.email }}
+
+                <label for="id_website">{{ form.website.label_tag }}</label> 
+                {{ form.website }}
+
+                {{ form.parent_id.as_hidden }}
+
+            <div class="actions"><input type="submit" value="Upload" /></div>
+        </form>
+    </section>
+    {% endif %}
+{% endif %}
+{% if step == 2 %}
+<section id="step1" class="step">
+
+    <div class="user-content">
+        <h1>{{ page2.title|safe }}</h1>
+        {{ page2.content|safe }}
+    </div>
+
+</section>    
+{% endif %}
+{% endblock content %}
+
+{% block extra_javascript %}
+  <script src="{{ STATIC_URL }}js/icanhaz.min.js" type="text/javascript"></script>
+  <script src="{{ STATIC_URL }}js/jquery.history.js" type="text/javascript"></script>
+  <script src="{{ STATIC_URL }}js/jquery.cookie.js" type="text/javascript"></script>
+  <script src="{{ STATIC_URL }}js/contribute.js" type="text/javascript"></script>
+
+  {% icanhaz "comic_single" %}
+{% endblock extra_javascript %}

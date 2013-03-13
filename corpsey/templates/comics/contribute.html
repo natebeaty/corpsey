@@ -1,49 +1,70 @@
 {% extends "base.html" %}
-{% load thumbnail %}
+{% load thumbnail icanhaz humanize %}
 
 {% block body_id %}contribute-page{% endblock %}
 {% block title %}Contribute to The Infinite Corpse!{% endblock %}
 
 {% block content %}
-<h1>Contribute to The Infinite Corpse!</h1>
-<div class="user-content">
-    {{ page.content|safe }}
-</div>
-{{ message }}
-<form class="contribute" action="{% url contribute %}" method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-        {{ form.non_field_errors }}
 
-        <label for="id_panel1" class="required">{{ form.panel1.label_tag }}</label> 
-        {{ form.panel1 }}
-        {{ form.panel1.errors }}
+{% if message %}
+  <div class="notice"><p>{{ message }}</p></div>
+{% endif %}
 
-        <label for="id_panel2" class="required">{{ form.panel2.label_tag }}</label> 
-        {{ form.panel2 }}
-        {{ form.panel2.errors }}
+{% if step == 1 %}
+<section id="step1" class="step">
+  <div class="user-content">
+      <h1>{{ page.title|safe }}</h1>
+      {{ page.content|safe }}
+      <h2>The {{ rules|length|apnumber }} Rules</h2>
+      <ul class="rules">
+        {% for rule in rules %}
+          <li>{{ rule|safe }}</li>
+        {% endfor %}
+      </ul>
+  </div>
 
-        <label for="id_panel3" class="required">{{ form.panel3.label_tag }}</label> 
-        {{ form.panel3 }}
-        {{ form.panel3.errors }}
+  <form class="contribute" action="{% url contribute %}" method="post">
+    <h2>Your parent strip:</h2>
+    <div id="parent_comic">
+        {% include "comics/strip.html" with comic=parent_comic %}
+    </div>
+    <p><a class="new-leaf refresh" href="#">Give me another random strip to follow</a></p>
 
-        <label for="id_name" class="required">{{ form.name.label_tag }}</label> 
-        {{ form.name }}
-        {{ form.name.errors }}
+      {{ contribute_form.name }}
+      {% if contribute_form.name.errors %}
+         <div class="field-error">{{ contribute_form.name.errors }}</div>
+      {% endif %}
 
-        <label for="id_email" class="required">{{ form.email.label_tag }}</label> 
-        {{ form.email }}
-        {{ form.email.errors }}
+      {{ contribute_form.email }}
+      {% if contribute_form.email.errors %}
+         <div class="field-error">{{ contribute_form.email.errors }}</div>
+      {% endif %}
 
-        <label for="id_website">{{ form.website.label_tag }}</label> 
-        {{ form.website }}
-        {{ form.website.errors }}
+      <div class="hidden">{{ contribute_form.comic_id }}</div>
+      {% csrf_token %}
 
-        {{ form.parent_id.as_hidden }}
-
-    <div class="actions"><input type="submit" value="Upload" /></div>
-</form>
+    <div class="actions">
+      <button class="button" type="submit">Yes! I'd like to reserve my spot after this panel!</button>
+      <p class="note">Remember! You have 4 days to submit your follow up panels ({{ deadline|date:'l, M j' }}). You can only reserve one spot at a time.</p>
+    </div>
+  </form>
+</section>
+{% else %}
+<section id="step2" class="step {% if step == 1 %}hidden{% endif %}">
+    <div class="user-content">
+        <h1>{{ page2.title|safe }}</h1>
+        {{ page2.content|safe }}
+    </div>
+</section>
+{% endif %}
 {% endblock content %}
 
 {% block extra_javascript %}
+  <script src="{{ STATIC_URL }}js/icanhaz.min.js" type="text/javascript"></script>
+  <script src="{{ STATIC_URL }}js/jquery.history.js" type="text/javascript"></script>
+  <script src="{{ STATIC_URL }}js/jquery.cookie.js" type="text/javascript"></script>
+  <script src="{{ STATIC_URL }}js/jquery.validate.min.js" type="text/javascript"></script>
   <script src="{{ STATIC_URL }}js/contribute.js" type="text/javascript"></script>
+
+  {% icanhaz "comic_single" %}
 {% endblock extra_javascript %}

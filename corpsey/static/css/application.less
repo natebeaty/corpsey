@@ -11,6 +11,9 @@ Corpsey
 @red: #ed1846;
 @tan: #b9b19c;
 
+@yea: #1ccc24;
+@nay: #fc6048;
+
 html, body { height: 100%; }
 body {
     background: #fff;
@@ -26,6 +29,20 @@ a {
         border: 0;
     }
     text-decoration: none; 
+}
+.notice {
+    background: #fff189;
+    width: 500px;
+    margin: 0 auto;
+    padding: 10px;
+    overflow: hidden;
+    p {
+        font: 14px/1.2em 'Orienta', sans-serif;
+    }
+}
+.cursive-gray {
+    font: italic 12px/1.4em 'Georgia', serif;
+    color: #888;
 }
 
 /* general typography */
@@ -47,9 +64,6 @@ h3 {
     letter-spacing: .2em;
     text-transform: uppercase;
     margin: 1em 0;
-}
-.user-content {
-    padding: 0 5% 0 2%;
 }
 p {
     font: 14px/1.4em 'Arbutus Slab', serif;
@@ -85,6 +99,9 @@ nav li a {
         background: lighten(@graygreen, 5%); 
     }
 }
+.actions {
+    margin: 10px 0;
+}
 
 ul.tree {
     position: absolute;
@@ -118,24 +135,25 @@ ul.tree {
         background: #222;
     }
 }
+.hidden { display: none; }
 
 /* general layout */
 
 #wrapper {
     overflow: hidden;
+    min-height: 660px;
 }
-#contribute-page #content {
-    margin: 0 20%;
-}
+#contribute-page #content,
+#about #content,
 #static-page #content {
-    margin-left: 440px;
+    margin: 0 10%;
 }
 nav.main {
     background: @bluegray;
     height: 26px;
     ul {
         text-align: right;
-        width: 470px;
+        width: 550px;
         position: absolute;
         top: 0;
         right: 0;
@@ -203,9 +221,15 @@ nav.main {
     }
 }
 #logo {
-    width: 681px;
-    height: 306px;
+    width: 682px;
+    height: 295px;
     background: url('/static/img/logo.gif') no-repeat;
+    background-size: 682px 295px;
+    @media  only screen and (-webkit-min-device-pixel-ratio: 1.3),
+        only screen and (-o-min-device-pixel-ratio: 13/10),
+        only screen and (min-resolution: 120dpi) {
+            background-image: url('/static/img/logo@2x.gif');
+    }
     text-indent: -9999em;
     margin:8px auto; 
     a {
@@ -214,6 +238,7 @@ nav.main {
         height: 100%;
     }
 }
+
 footer.main {
     position: relative;
     height: 580px;
@@ -339,10 +364,14 @@ a#clixel {
 
 /* catacombs */
 
+.contribution,
 .comic {
     h1 {
         font: 14px/1.2em 'Arbutus Slab', serif;
         margin: .5em 0 0;
+        a {
+            color: #222;
+        }
     }
     ul, li { display: inline; }
     img {
@@ -350,7 +379,11 @@ a#clixel {
         float: left;
         width: 330px;
         height: 330px;
-        background-size: 330px 330px;        
+        background-size: 330px 330px;
+        .transition(background-color .5s);
+        &.loading {
+            background: #ccc url('/static/img/loading.gif') center no-repeat;
+        }
     }
     &.single { 
         width: 1000px;
@@ -361,22 +394,104 @@ a#clixel {
         }
     }
 }
+#contributions {
+    #content {
+        max-width: 1000px;
+        margin: 10px auto;
+    }
+    ul {
+        display: block;
+        clear: left;
+        overflow: hidden;
+    }
+    .comic {
+        h1 {
+            font: 12px/1.2em 'Arbutus Slab', serif;
+        }
+        margin-bottom: 20px;
+        img {
+            width: 160px;
+            height: 160px;
+            .opacity(.5);
+        }
+    }
+    .queue {
+        .transition(all 1s);
+        margin-bottom: 60px;
+        &.voted {
+            .opacity(.2);
+            img {
+                .opacity(.5);
+            }
+            &.yea {
+                background: @yea;
+            }
+            &.nay {
+                background: @nay;
+            }
+        }
+    }
+    .actions {
+        background: #eee;
+        padding: 20px;
+        text-align: center;
+        .button {
+            font-size: 35px;
+            color: #fff;
+            &.yea {
+                background: @yea;
+                &:hover {
+                    background: lighten(@yea, 5%);
+                }
+            }
+            &.nay {
+                background: @nay;
+                &:hover {
+                    background: lighten(@nay, 5%);
+                }
+            }
+        }
+    }
+    #rules {
+        display: none;
+        background: @red;
+        color: #fff;
+        padding: 10px 20px;
+        text-align: left;
+        a.button {
+           color: #eee;
+           font-size: 14px;
+           float: left;
+        }
+        li {
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+        input,
+        span {
+            display: block;
+            margin-left: 100px;
+        }
+        input {
+            width: 60%;
+            font-size: 14px;
+            padding: 4px;
+            border: none;
+        }
+        &.active {
+            display: block;
+            height: auto;
+        }
+    }
+}
 
 #catacombs {
     margin: 4px auto;
     min-height: 660px;
-    max-width: 1000px;
-    h1.comic_1, 
-    h1.comic_2, { 
-        color: #999; 
-        .rotation(270deg);
-        -webkit-transform-origin: right top;
-        transform-origin: right top;
-        right:100%;
-        top: 16px;
-        white-space: nowrap;
-        opacity: 0;
+    &.one-comic-showing {
+        min-height: 350px;
     }
+    max-width: 1000px;
 }
 h1.comic_1,
 h1.comic_2 {
@@ -388,23 +503,104 @@ h1.comic_2 {
     left: 0;
     top: 0;
     font: 14px/1.2em 'Arbutus Slab', serif;
+    a {
+        color: #222;
+    }
 }
 
 /* contribute */
-label {
-    display: block;
-    font: 14px/1.2em "Orienta", sans-serif;
-    text-transform: uppercase;
-    margin: 1em 0 0;
+
+#contribute-page {
+    #content {
+        width: 800px;
+        margin: 0 auto;
+    }
+    form.contribute {
+        background: #eee;
+        .rounded-corners(4px);
+        text-align: center;
+        width: 800px;
+        margin: 40px auto;
+        padding: 2px 10px 6px;
+        button,
+        input[type=text] {
+            display: block;
+            margin: 4px auto;
+        }
+        button {
+            width: 300px;
+            white-space: normal;
+            background: @red;
+            margin: 20px auto;
+            &:hover {
+                background: lighten(@red, 5%);
+            }
+        }
+        p.note {
+            .cursive-gray;
+            width: 300px;
+            margin: 0 auto;
+        }
+    }
+    .comic {
+        &.single {
+            width: 750px;
+            margin: 10px auto;
+            h1 { 
+                display: none; 
+                a {
+                    color: #222;
+                }
+            }
+        }
+        overflow: auto;
+        img {
+            width: 250px;
+            height: 250px;
+        }
+        h1 {
+            font: 18px/1.2em 'Arbutus Slab', helvetica, sans-serif;
+            small {
+                font: 12px/1.2em 'Arbutus Slab', helvetica, sans-serif;
+            }
+        }
+    }
 }
-.contribute {
-    input[type=text] {
-        font: 16px/1.2em "Orienta", sans-serif;
-        color: #fff;
+
+label.error,
+.errorlist li {
+    margin-top: 6px;
+    .cursive-gray;
+    text-transform: none;
+}
+
+.refresh {
+    padding-left: 20px;
+    background: url('/static/img/refresh.png') no-repeat;
+    font: 12px/1.2em "Orienta", sans-serif;
+}
+
+form {
+    label {
+        display: block;
+        font: 14px/1.2em "Orienta", sans-serif;
+        text-transform: uppercase;
+        margin: 1em 0 0;
+    }
+    input[type=text],
+    input[type=password], {
+        font: 18px/1.2em 'Arbutus Slab', serif;
+        color: #222;
         width: 300px;
-        background: #000;
+        background: none;
         border:0;
-        padding: 6px; 
+        padding: 10px 6px 4px 6px; 
+        border-bottom: 1px dashed #ccc;
+        text-align: center;
+        outline: none;
+        &:focus {
+            border-bottom: 1px dashed #666;
+        }
     }
     input[type=submit] {
         font: 16px/1em "Orienta", sans-serif;
@@ -418,11 +614,6 @@ label {
             background: #7a7a7a;
         }
     }
-}
-
-.errorlist li {
-    color: #777;
-    font: italic 12px/2 em Georgia, serif;
 }
 
 /**** Isotope Filtering ****/
@@ -487,12 +678,16 @@ ul.ui-autocomplete {
             cursor: pointer;
             padding: 6px 8px;
             color: #fff;
-            &:hover {
+            &:hover,
+            &.active,
+            &:focus {
                 background: lighten(@bluegray, 5%);
             }
         }
     }
 }
+
+/* tree page */
 
 #tree {
     .node circle {
@@ -509,5 +704,52 @@ ul.ui-autocomplete {
       fill: none;
       stroke: lighten(@bluegray, 20%);
       stroke-width: 1.5px;
+    }
+}
+
+/* artists */
+#artists {
+    #content {
+        width: 400px;
+        margin: 20px auto;
+        h3.name {
+            margin: 0;
+            display: block;
+            float: left;
+            width: 300px;
+            line-height: 16px;
+            a { 
+                color: #222; 
+                display: block;
+                line-height: 16px;
+                &:hover {
+                    color: @bluegray;
+                }
+                padding: 5px 0;
+            }
+        }
+        li {
+            overflow: hidden;
+            min-height: 24px;
+            margin-bottom: 4px;
+            &.letter {
+                height: 30px;
+                overflow: visible;
+                h2 {
+                    clear: left;
+                    margin: 20px 0 0;
+                    font: 22px/1.2em 'Arbutus Slab', serif;
+                }
+        }
+        }
+    }
+}
+#login {
+    form {
+        width: 400px;
+        margin: 40px auto;
+    }
+    input[type=submit] {
+        margin:20px auto;
     }
 }

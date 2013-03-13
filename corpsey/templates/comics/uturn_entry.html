@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load thumbnail mptt_tags icanhaz %}
+
+{% block title %}Trubble Club{% if comic %} / {{ comic.artist.name }}{% else %} / {{ uturn.portal_to.artist.name }}{% endif %}{% endblock %}
+
+{% block content %}
+<section id="catacombs">
+{% if comic %}
+  {% include "comics/strip.html" with comic=comic extra_class="comic_1" %}
+{% endif %}
+
+<article class="comic single uturn active" data-comic-id="{{ uturn.id }}" data-portal-to-id="{{ uturn.portal_to.id }}">
+  <h1>Trubble Club</h1>
+  <ul>
+    <li><img class="panel uturn-pad" src="/static/img/uturn-pad-1.jpg" width="{{ uturn.panel.midsize.width }}" height="{{ uturn.panel.midsize.height }}" data-hd-src="/static/img/uturn-pad-1.jpg"></li>
+    <li><img class="panel" src="{{ uturn.panel.midsize.url }}" width="{{ uturn.panel.midsize.width }}" height="{{ uturn.panel.midsize.height }}" data-hd-src="{{ uturn.panel2.midsize_hd.url }}"></li>
+    <li><img class="panel uturn-pad" src="/static/img/uturn-pad-2.jpg" width="{{ uturn.panel.midsize.width }}" height="{{ uturn.panel.midsize.height }}" data-hd-src="/static/img/uturn-pad-2.jpg"></li>
+  </ul>
+</article>
+
+{% if not comic %}
+  {% include "comics/strip.html" with comic=uturn.portal_to extra_class="comic_2" %}
+{% endif %}
+</section>
+
+<nav class="next comic-nav">
+  <h3>Next</h3>
+  <ul class="next-comic">
+    {% if comic %}
+      <li><a title="Trubble Club / {{ uturn.portal_to.artist.name }}" data-comic-id="{{ uturn.id }}" class="next button" href="/catacombs/uturn/{{ uturn.id }}/">{{ uturn.portal_to.artist.first_name }} <br>{{ uturn.portal_to.artist.last_name }}</a></li>
+    {% else %}
+      {% for comic in next_comic_links %}
+        <li><a title="{{ uturn.portal_to.artist.name }} / {{ comic.artist.name }}" data-comic-id="{{ comic.id }}" class="next button" href="/catacombs/{{ uturn.portal_to.id }}/{{ comic.id }}/">{{ comic.artist.first_name }} <br>{{ comic.artist.last_name }}</a></li>
+      {% endfor %}
+    {% endif %}
+  </ul>
+</nav>
+
+{% if prev_comic_links %}
+  {% include "comics/prev_comic_links.html" with root_comic=comic comic_links=prev_comic_links %}
+{% endif %}
+
+{% endblock content %}
+
+{% block extra_javascript %}
+  <script src="{{ STATIC_URL }}js/jquery.imagesloaded.min.js" type="text/javascript"></script>
+  <script src="{{ STATIC_URL }}js/icanhaz.min.js" type="text/javascript"></script>
+  <script src="{{ STATIC_URL }}js/jquery.isotope.min.js" type="text/javascript"></script>
+  <script src="{{ STATIC_URL }}js/jquery.history.js" type="text/javascript"></script>
+
+  {% icanhaz "next_comic_nav" %}
+  {% icanhaz "prev_comic_nav" %}
+  {% icanhaz "comic_single" %}
+  {% icanhaz "uturn_nav" %}
+  {% icanhaz "uturn_single" %}
+
+  <script src="{{ STATIC_URL }}js/catacombs.js" type="text/javascript"></script>
+{% endblock extra_javascript %}

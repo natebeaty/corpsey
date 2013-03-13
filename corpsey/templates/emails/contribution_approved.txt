@@ -1,0 +1,9 @@
+Hello {{ name }}!
+
+Thanks for contributing to The Infinite Corpse!
+
+Your strip has been approved and can be found here:
+
+http://corpsey.trubbleclub.com{{ comic_url }}
+
+- Trubble Club

@@ -5,6 +5,13 @@ Corpsey smaller
 @import 'mixins.less';
 
 #catacombs {
+    min-height: 1868px;
+    &.one-comic-showing {
+        min-height: 928px;
+    }
+    &.is-uturn {
+        min-height: 1278px;
+    }
     max-width: 300px;
 }
 .button {
@@ -19,6 +26,9 @@ Corpsey smaller
     	    .rounded-corners(20px);
     	}
         &.main {
+            .wrap {
+                padding: 20px 10px 10px;
+            }
             .intro {
                 width: 300px;
                 font: 14px/1.3em 'Arbutus Slab', helvetica, sans-serif;
@@ -27,8 +37,8 @@ Corpsey smaller
     }
     #logo { 
         width: 300px;
-        height: 129px;
-        background-size: 300px 129px;
+        height: 130px;
+        background-size: 300px 130px;
     }
     .recent-contributors {
         width: auto;
@@ -60,6 +70,10 @@ Corpsey smaller
 	&.single {
 		h1 {
 			display: block;
+            text-align: center;
+            font: 18px/1.2em 'Arbutus Slab', helvetica, sans-serif;
+            width: 300px;
+            margin: 12px 0 4px;
 		}
 	}
 }
@@ -110,4 +124,12 @@ nav.main {
 }
 ul.tree {
 	display: none;
+}
+#artists {
+    #content {
+        width: 300px;
+        h3.name {
+            width: 200px;
+        }
+    }
 }

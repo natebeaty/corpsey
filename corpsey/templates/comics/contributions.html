@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+
+{% block body_id %}contributions{% endblock %}
+
+{% block content %}
+  <h2>Pending Contributions</h2>
+  {% for contribution in contributions %}
+    {% include "comics/contribution.html" with contribution=contribution comic=contribution.comic %}
+  {% empty %}
+  	<p>No contributions found that you ({{ user.username }}) haven't voted on.</p>
+  {% endfor %}
+  <div id="rules">
+  <h2>Select one rule for your NAY:</h2>
+  	<ul class="rules">
+  	  {% for rule in rules %}
+	  	  <li><a data-rule-id="{{ rule.id }}" href="#" class="button rule">BROKE</a> <span>{{ rule|safe }}</span></li>
+  	  {% endfor %}
+  	  <li><a class="button rule other" href="#">Other:</a> <input type="text" id="notes" size="80"/></li>
+  	</ul>
+  </div>
+{% endblock content %}
+
+{% block extra_javascript %}
+  <script src="{{ STATIC_URL }}js/contributions.js" type="text/javascript"></script>
+{% endblock extra_javascript %}

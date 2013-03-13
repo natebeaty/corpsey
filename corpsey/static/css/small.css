@@ -1,13 +1,15 @@
-#catacombs{max-width:300px;}
+#catacombs{min-height:1868px;max-width:300px;}#catacombs.one-comic-showing{min-height:928px;}
+#catacombs.is-uturn{min-height:1278px;}
 .button{letter-spacing:.3em;}
 #homepage header a.button{font:14px/1.2em 'myriad pro',helvetica,sans-serif;letter-spacing:.2em;padding:6px 10px 6px 16px;-webkit-border-radius:20px;-moz-border-radius:20px;border-radius:20px;}
+#homepage header.main .wrap{padding:20px 10px 10px;}
 #homepage header.main .intro{width:300px;font:14px/1.3em 'Arbutus Slab',helvetica,sans-serif;}
-#homepage #logo{width:300px;height:129px;background-size:300px 129px;}
+#homepage #logo{width:300px;height:130px;background-size:300px 130px;}
 #homepage .recent-contributors{width:auto;}
 #homepage .comic{margin-bottom:30px;}#homepage .comic img{width:300px;height:300px;display:block;float:none;margin:4px auto;}
 #homepage .comic h1{text-align:center;}#homepage .comic h1 small{font:10px/1.2em 'Arbutus Slab',helvetica,sans-serif;display:block;margin-top:4px;}
 .comic img{width:300px;height:300px;}
-.comic.single h1{display:block;}
+.comic.single h1{display:block;text-align:center;font:18px/1.2em 'Arbutus Slab',helvetica,sans-serif;width:300px;margin:12px 0 4px;}
 h1.comic_1,h1.comic_2{display:none !important;}
 .comic-nav{position:static;right:auto;top:auto;}.comic-nav.prev{top:auto;}.comic-nav.prev.stuck{top:auto;}
 .comic-nav.next.stuck{top:auto;}
@@ -17,3 +19,4 @@ h1.comic_1,h1.comic_2{display:none !important;}
 nav.main{height:34px;}nav.main ul{display:none;}
 nav.main h1#textlogo{padding:4px 6px 0 20px;text-align:center;}nav.main h1#textlogo a{padding:0 0 0 57px;margin-left:-20px;}
 ul.tree{display:none;}
+#artists #content{width:300px;}#artists #content h3.name{width:200px;}

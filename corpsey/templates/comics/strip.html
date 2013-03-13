@@ -1,10 +1,10 @@
 {% load thumbnail %}
 
 <article class="comic single {{ extra_class }} active" data-comic-id="{{ comic.id }}">
-  <h1>{{ comic.artist.name }}</h1>
+  <h1>{% if comic.artist.url %}<a href="{{ comic.artist.url}}" target="_blank">{{ comic.artist.name }}</a>{% else %}{{ comic.artist.name }}{% endif %}</h1>
   <ul>
-    <li>{% if comic.panel1 %}<img class="panel" src="{{ comic.panel1.midsize.url }}" width="{{ comic.panel1.midsize.width }}" height="{{ comic.panel1.midsize.height }}">{% endif %}</li>
-    <li>{% if comic.panel2 %}<img class="panel" src="{{ comic.panel2.midsize.url }}" width="{{ comic.panel1.midsize.width }}" height="{{ comic.panel1.midsize.height }}">{% endif %}</li>
-    <li>{% if comic.panel3 %}<img class="panel" src="{{ comic.panel3.midsize.url }}" width="{{ comic.panel1.midsize.width }}" height="{{ comic.panel1.midsize.height }}">{% endif %}</li>
+    <li>{% if comic.panel1 %}<img class="panel" src="{{ comic.panel1.midsize.url }}" width="{{ comic.panel1.midsize.width }}" height="{{ comic.panel1.midsize.height }}" data-hd-src="{{ comic.panel1.midsize_hd.url }}">{% endif %}</li>
+    <li>{% if comic.panel2 %}<img class="panel" src="{{ comic.panel2.midsize.url }}" width="{{ comic.panel1.midsize.width }}" height="{{ comic.panel1.midsize.height }}" data-hd-src="{{ comic.panel2.midsize_hd.url }}">{% endif %}</li>
+    <li>{% if comic.panel3 %}<img class="panel" src="{{ comic.panel3.midsize.url }}" width="{{ comic.panel1.midsize.width }}" height="{{ comic.panel1.midsize.height }}" data-hd-src="{{ comic.panel3.midsize_hd.url }}">{% endif %}</li>
   </ul>
 </article>
