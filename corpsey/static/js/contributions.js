@@ -1,26 +1,50 @@
 $.corpsey = $.corpsey || {};
 
 $.corpsey.contributions = (function() {
-
     function _init() {
-        var rule_broke = 0;
-        $('.button').click(function(e) {
-            e.preventDefault();
+        $('.button.yea').click(function() {
             var $queue = $(this).parents('.queue:first');
-            if (!$queue.hasClass('voted')){
-                var yea = $(this).text()=='Yea' ? 1 : 0;
-                var contribution_id = $queue.attr('data-contribution-id');
-                Dajaxice.corpsey.apps.comics.contribution_vote($.corpsey.contributions.after_vote, {
-                    'contribution_id': contribution_id,
-                    'yea': yea,
-                    'rule_broke': rule_broke
-                });
+            var contribution_id = $queue.attr('data-contribution-id');
+            Dajaxice.corpsey.apps.comics.contribution_vote($.corpsey.contributions.after_vote, {
+                'contribution_id': contribution_id, 
+                'yea': 1
+            });
+            return false;
+        });
+        $('.button.nay').click(function() {
+            $('#rules').hide().appendTo($(this).parents('.actions:first')).slideDown();
+            return false;
+        });
+        $('.button.rule').click(function() {
+            console.log('foo');
+            var rule_broke = 0;
+            var notes = '';
+
+            var $queue = $(this).parents('.queue:first');
+            var contribution_id = $queue.attr('data-contribution-id');
+
+            if ($(this).hasClass('other')) {
+                notes = $('#notes').val();
+                if (notes=='') {
+                    alert('Please enter a reason for Other!');
+                    return false;
+                }
+            } else {
+                rule_broke = $(this).attr('data-rule-id');
             }
+            Dajaxice.corpsey.apps.comics.contribution_vote($.corpsey.contributions.after_vote, {
+                'contribution_id': contribution_id, 
+                'yea': 0,
+                'rule_broke': rule_broke,
+                'notes': notes
+            });
+            return false;
         });
     } // end _init()
 
     function _after_vote(data) {
         console.log(data);
+        $('#rules').slideUp();
         $('.queue[data-contribution-id='+data.contribution_id+']').addClass('voted').toggleClass('yea',data.yea==1).toggleClass('nay',data.yea==0).find('.actions').slideUp();
     }
 

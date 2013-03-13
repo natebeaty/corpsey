@@ -47,7 +47,7 @@ def get_comic_panels(request, comic_id, direction, hdpi_enabled):
     })
 
 @dajaxice_register(method='POST')
-def contribution_vote(request, contribution_id, yea, rule_broke):
+def contribution_vote(request, contribution_id, yea, rule_broke=0, notes=''):
     """The elders voting YAY OR NAY on freshly contributed strips."""
     contribution = Contribution.objects.get(pk=contribution_id)
     approve = True if yea == 1 else False
@@ -62,6 +62,7 @@ def contribution_vote(request, contribution_id, yea, rule_broke):
         user = request.user,
         approve = approve,
         rule_broke = rule_broke,
+        notes = notes,
         )
     vote.save()
     return simplejson.dumps({ 
