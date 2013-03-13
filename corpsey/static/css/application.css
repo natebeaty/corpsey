@@ -76,7 +76,7 @@ h1.comic_1,h1.comic_2{position:absolute;-webkit-transform:rotate(270deg);-moz-tr
 #contribute-page form.contribute{background:#eee;-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px;text-align:center;width:800px;margin:40px auto;padding:2px 10px 6px;}#contribute-page form.contribute button,#contribute-page form.contribute input[type=text]{display:block;margin:4px auto;}
 #contribute-page form.contribute button{width:300px;white-space:normal;background:#ed1846;margin:20px auto;}#contribute-page form.contribute button:hover{background:#ef3059;}
 #contribute-page form.contribute p.note{font:italic 12px/1.4em 'Georgia',serif;color:#888;width:300px;margin:0 auto;}
-#contribute-page form.contribute fieldset{border:none;padding:0;margin:0;}#contribute-page form.contribute fieldset.images{width:250px;margin:0 auto;text-align:left;}
+#contribute-page form.contribute fieldset{border:none;padding:0;margin:0;}#contribute-page form.contribute fieldset.images{width:200px;margin:0 auto;text-align:left;}
 #contribute-page form.contribute fieldset.info{margin-top:40px;}
 #contribute-page .comic{overflow:auto;}#contribute-page .comic.single{width:750px;margin:10px auto;}#contribute-page .comic.single h1{display:none;}#contribute-page .comic.single h1 a{color:#222;}
 #contribute-page .comic img{width:250px;height:250px;}
