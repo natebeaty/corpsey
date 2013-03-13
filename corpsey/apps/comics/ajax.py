@@ -2,6 +2,9 @@ from django.utils import simplejson
 from corpsey.apps.comics.models import *
 from dajaxice.decorators import dajaxice_register
 from easy_thumbnails.files import get_thumbnailer
+from django.core.mail import EmailMultiAlternatives
+from django.template.loader import get_template
+from django.template import Context
 
 @dajaxice_register(method='POST')
 def get_uturn_panel(request, uturn_id, direction, hdpi_enabled):
@@ -70,6 +73,8 @@ def contribution_vote(request, contribution_id, yea, rule_broke=0, notes=''):
         )
     vote.save()
 
+    """Count votes and if 2 Nay or 2 Yea have been reached, take action."""
+
     num_yea_votes = len(contribution.votes.filter(approve=True))
     num_nay_votes = len(contribution.votes.filter(approve=False))
 
@@ -78,10 +83,6 @@ def contribution_vote(request, contribution_id, yea, rule_broke=0, notes=''):
         contribution.pending = False
         contribution.save()
         # email user that their comic was rejected
-        from django.core.mail import EmailMultiAlternatives
-        from django.template.loader import get_template
-        from django.template import Context
-
         plaintext = get_template('emails/contribution_rejected.txt')
         htmly     = get_template('emails/contribution_rejected.html')
 
@@ -124,10 +125,6 @@ def contribution_vote(request, contribution_id, yea, rule_broke=0, notes=''):
         )
         comic.save()
         # email user that their comic was approved
-        from django.core.mail import EmailMultiAlternatives
-        from django.template.loader import get_template
-        from django.template import Context
-
         plaintext = get_template('emails/contribution_approved.txt')
         htmly     = get_template('emails/contribution_approved.html')
 
@@ -145,10 +142,6 @@ def contribution_vote(request, contribution_id, yea, rule_broke=0, notes=''):
             msg.send()
         except:
             message = 'There was an error sending the approval email to %s. Please write Nate and mock him.' % contribution.email
-
-
-    # elif num_nay_votes > 1:
-        # reject contribution
 
     return simplejson.dumps({ 
         'contribution_id' : contribution_id,
