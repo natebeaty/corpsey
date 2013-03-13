@@ -8,6 +8,7 @@ class ComicAdmin(TreeAdmin):
     list_display = ('__unicode__', 'active', 'starter', 'notes')
     # active_toggle = tree_admin.ajax_editable_boolean('active', 'is active')
     exclude = ('full_image',)
+    jquery_no_conflict = False
 
 class UturnForm(forms.ModelForm):
     portal_to = forms.ModelChoiceField(queryset=Comic.objects.filter(lft=1))
