@@ -262,15 +262,11 @@ def contribute_upload(request, upload_code):
                 step = 2
 
                 # Email managers
-                # admin_link = urlresolvers.reverse('admin:comics_contribution_change', args=(contribution.id,))
-                # mail_subject = 'New Corpsey Submission!'
-                # mail_body = 'Title: %s\n\nEdit: http://%s%s\n' % (contribution, request.META['HTTP_HOST'], admin_link)
-                # mail_admins(mail_subject, mail_body, fail_silently=False)
-
-                # return HttpResponseRedirect(reverse('myapp.views.contribute'))
-
+                mail_subject = 'A new Infinite Corpse submission has been uploaded!'
+                mail_body = 'OMG LOOK:\n\n%s\n\nLet the elders Yea or Nay: http://%s/contributions/\n' % (contribution, request.META['HTTP_HOST'])
+                mail_managers(mail_subject, mail_body, fail_silently=False)
             else:
-                message = "oh no!"
+                message = "Oh no! Something went wrong and broke Corpsey's robot brain."
     except Contribution.DoesNotExist:
         message = 'Contribution code <i>%s</i> was not found!' % upload_code
         return render_to_response(
