@@ -6,6 +6,9 @@ from django.contrib.auth.models import User
 from django.core import urlresolvers
 from datetime import datetime, timedelta
 
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+
 from easy_thumbnails.signals import saved_file
 from easy_thumbnails.signal_handlers import generate_aliases_global
 saved_file.connect(generate_aliases_global)
@@ -72,6 +75,11 @@ class Comic(MPTTModel):
             comic_links.append(self.portal_to)
 
         return comic_links
+
+@receiver(post_save, sender=Comic)
+def clear_cache(sender, instance, created, **kwargs):
+    """Clear homepage cache on comic save."""
+    cache.delete('/')
 
 class Uturn(models.Model):
     portal_to = models.ForeignKey(Comic, related_name='uturn')
