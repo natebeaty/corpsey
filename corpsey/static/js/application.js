@@ -17,6 +17,9 @@ $.corpsey = (function() {
                 $('.ui-autocomplete a:contains('+ui.item.value+')').addClass('active');
                 return false;
             },
+            search: function( event, ui ) {
+                if (typeof _gaq != 'undefined') _gaq.push(['_trackEvent', 'Search', $('#get-artist').val() ]);
+            },
 			select: function( event, ui ) {
 				location.href = ui.item.url;
                 return false;
