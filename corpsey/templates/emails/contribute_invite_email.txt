@@ -16,6 +16,8 @@ http://corpsey.trubbleclub.com/contribute/upload/{{ code }}
 
 We're excited to see what you come up with!
 
+If our panel of judges have any problems with your submission, your comic will not be posted, and you will get a message briefly explaining why. Good luck!
+
 - Trubble Club
 
 
