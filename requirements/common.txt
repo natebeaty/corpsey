@@ -6,6 +6,7 @@ Pillow==1.7.8
 South==0.7.6
 django-cleanup==0.1.6
 django-clear-cache==0.3
+django-cronjobs==0.2.3
 django-dajax==0.9.2
 django-dajaxice==0.5.5
 django-flatpages-x==0.1.2
