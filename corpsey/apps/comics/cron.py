@@ -1,0 +1,56 @@
+from corpsey.apps.comics.models import *
+from django.template import RequestContext
+from django.core.mail import mail_admins,mail_managers
+from datetime import datetime, timedelta
+import cronjobs
+
+@cronjobs.register
+def test_cron():
+    contributions = Contribution.objects.all()
+    message = ''
+    for c in contributions:
+        message = message + "%s" % c
+    print message
+
+
+@cronjobs.register
+def check_contributions():
+    contributions_expiring_tomorrow = Contribution.objects.filter(pending=True, deadline__lte=datetime.now()-timedelta(days=1))
+    contributions_expired = Contribution.objects.filter(pending=True, deadline__lte=datetime.now())
+    for contribution in contributions_expiring_tomorrow:
+        message = send_html_email({
+            'template' : 'contribute_expiring_tomorrow',
+            'email_to' : contribution.email,
+            'subject'  : 'Your Infinite Corpse reservation expires tomorrow',
+            'context'  : { 'contribution': contribution },
+            })
+        self.stdout.write(message)
+
+    for contribution in contributions_expired:
+        message = send_html_email({
+            'template' : 'contribute_expired',
+            'email_to' : contribution.email,
+            'subject'  : 'Your Infinite Corpse reservation has expired',
+            'context'  : { 'contribution': contribution },
+            })
+        self.stdout.write(message)
+
+
+def send_html_email(email_data):
+    plaintext = get_template('emails/%s.txt') % email_data.template
+    htmly     = get_template('emails/%s.html') % email_data.template
+
+    d = Context(email_data.context)
+
+    subject = email_data.subject
+    from_email = 'corpsey@trubbleclub.com'
+    text_content = plaintext.render(d)
+    html_content = htmly.render(d)
+    try:
+        msg = EmailMultiAlternatives(subject, text_content, from_email, [email_data.email_to])
+        msg.attach_alternative(html_content, "text/html")
+        msg.send()
+
+        message = 'Email sent to %s ok!' % email_data.email_to
+    except:
+        message = 'There was an error sending a "%s" email to %s.' % (email_data.template, email_data.email_to)
