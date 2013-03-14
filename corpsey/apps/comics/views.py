@@ -290,23 +290,3 @@ def contribute_upload(request, upload_code):
         },
         context_instance=RequestContext(request)
     )
-
-
-
-                # look for artist or add new
-                # try:
-                #     artist = Artist.objects.get(name=form.cleaned_data['name'])
-                # except:
-                #     artist = Artist(name=form.cleaned_data['name'])
-                # artist.email=form.cleaned_data['email']
-                # if form.cleaned_data['website']:
-                #     artist.website=form.cleaned_data['website']
-                # artist.save()
-
-                # comic = Comic(
-                #     artist = artist,
-                #     panel1 = request.FILES['panel1'],
-                #     panel2 = request.FILES['panel2'],
-                #     panel3 = request.FILES['panel3']
-                # )
-                # comic.save()
