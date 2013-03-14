@@ -36,12 +36,12 @@
   <script src="{{ STATIC_URL }}js/icanhaz.min.js" type="text/javascript"></script>
   <script src="{{ STATIC_URL }}js/jquery.isotope.min.js" type="text/javascript"></script>
   <script src="{{ STATIC_URL }}js/jquery.history.js" type="text/javascript"></script>
-
+  <script src="{{ STATIC_URL }}js/catacombs.js?v2" type="text/javascript"></script>
+{% endblock extra_javascript %}
+{% block icanhaz_templates %}
   {% icanhaz "next_comic_nav" %}
   {% icanhaz "prev_comic_nav" %}
   {% icanhaz "comic_single" %}
   {% icanhaz "uturn_nav" %}
   {% icanhaz "uturn_single" %}
-
-  <script src="{{ STATIC_URL }}js/catacombs.js?v2" type="text/javascript"></script>
-{% endblock extra_javascript %}
+{% endblock icanhaz_templates %}
