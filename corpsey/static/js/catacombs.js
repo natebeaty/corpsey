@@ -40,7 +40,7 @@ $.corpsey.catacombs = (function() {
             State = History.getState();
             _get_comics_showing();
             _build_panels();
-            if (typeof _gaq != 'undefined') _gaq.push(['_trackEvent', 'Catacombs', 'View', State.url]);
+            if (typeof _gaq != 'undefined') _gaq.push(['_trackPageview', State.url]);
         });
 
         // isotopize
