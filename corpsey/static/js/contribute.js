@@ -7,6 +7,11 @@ $.corpsey.contribute = (function() {
     var comic_id;
 
     function _init() {
+        // add .required to inputs
+        $('label.required').each(function() {
+            $('input#'+$(this).attr('for')).addClass('required');
+        });
+
         History = window.History;
         State = History.getState();
         comic_id = $('.comic.single').attr('data-comic-id');

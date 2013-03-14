@@ -6,7 +6,7 @@ class UploadForm(forms.Form):
     panel3 = forms.FileField(label='Select jpg for panel 3')
     name = forms.CharField(label='Your name', widget=forms.TextInput(attrs={'placeholder': 'Your name'}))
     email = forms.CharField(label='Your email', widget=forms.TextInput(attrs={'placeholder': 'Your email'}))
-    website = forms.CharField(label='Your website', widget=forms.TextInput(attrs={'placeholder': 'Your website'}))
+    website = forms.CharField(label='Your website', required=False, widget=forms.TextInput(attrs={'placeholder': 'Your website'}))
 
 class ContributeForm(forms.Form):
     email = forms.EmailField(label='Your name', widget=forms.TextInput(attrs={'placeholder': 'Your email', 'class': 'email required'}))

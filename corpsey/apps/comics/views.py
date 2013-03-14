@@ -250,7 +250,7 @@ def contribute_upload(request, upload_code):
     try:
         contribution = Contribution.objects.get(code=upload_code)
         parent_comic = contribution.comic
-        form = UploadForm({'name': contribution.name, 'email': contribution.email})
+        form = UploadForm(initial = {'name': contribution.name, 'email': contribution.email})
 
         if request.method == 'POST':
             form = UploadForm(request.POST, request.FILES)
