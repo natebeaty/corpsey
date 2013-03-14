@@ -44,6 +44,9 @@ def get_comic_panels(request, comic_id, direction, hdpi_enabled):
     else:
         comic_obj = {}
 
+    # store comic_id for /contribute/
+    request.session['last_comic_id'] = comic_id
+
     return simplejson.dumps({ 
         'direction' : direction,
         'comic' : comic_obj

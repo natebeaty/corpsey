@@ -140,7 +140,14 @@ def contribute(request):
     from corpsey.apps.comics.forms import ContributeForm
     from datetime import datetime, timedelta
 
-    parent_comic = find_comic_to_follow()
+    # ?parent=x
+    if request.GET.get('parent', False):
+        parent_comic = Comic.objects.get(pk=request.GET['parent'])
+    elif request.session.get('last_comic_id', False):
+        parent_comic = Comic.objects.get(pk=request.session['last_comic_id'])
+    else:
+        parent_comic = find_comic_to_follow()
+    
     step = 1
     message = ''
     # form sent!
@@ -181,15 +188,16 @@ def contribute(request):
                     'code': code,
                     })
 
-                subject, from_email, to = 'Infinite Corpse Confirmation', 'corpsey@trubbleclub.com', email
+                subject = 'Infinite Corpse Confirmation'
+                from_email = 'corpsey@trubbleclub.com'
                 text_content = plaintext.render(d)
                 html_content = htmly.render(d)
                 try:
-                    msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+                    msg = EmailMultiAlternatives(subject, text_content, from_email, [email])
                     msg.attach_alternative(html_content, "text/html")
                     msg.send()
 
-                    message = 'Email sent ok!'
+                    message = 'Email sent to %s ok!' % email
                 except:
                     message = 'There was an error sending your confirmation email. Please write nate@trubbleclub.com for help.'
                 step = 2
