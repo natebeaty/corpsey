@@ -9,6 +9,7 @@ from django.conf import settings
 
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.core.cache import cache
 
 from easy_thumbnails.signals import saved_file
 from easy_thumbnails.signal_handlers import generate_aliases_global
