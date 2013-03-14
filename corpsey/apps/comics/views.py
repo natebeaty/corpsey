@@ -143,8 +143,12 @@ def contribute(request):
     # ?parent=x
     if request.GET.get('parent', False):
         parent_comic = Comic.objects.get(pk=request.GET['parent'])
+        if not parent_comic.valid_to_follow():
+            parent_comic = find_comic_to_follow()
     elif request.session.get('last_comic_id', False):
         parent_comic = Comic.objects.get(pk=request.session['last_comic_id'])
+        if not parent_comic.valid_to_follow():
+            parent_comic = find_comic_to_follow()
     else:
         parent_comic = find_comic_to_follow()
     
@@ -229,9 +233,7 @@ def find_comic_to_follow(exclude=0):
     """Loop through comic leafs to find one with less than MAX_COMIC_CHILDREN children + pending contributions."""
     comic_leafs = Comic.objects.filter(level__gt=0).exclude(id = exclude).order_by('?')
     for comic in comic_leafs:
-        pending_contributions = len(Contribution.objects.filter(comic_id=comic.id, pending=True))
-        comic_children = len(comic.get_children())
-        if pending_contributions + comic_children < settings.MAX_COMIC_CHILDREN:
+        if comic.valid_to_follow():
             return comic
     return None
 

@@ -5,6 +5,7 @@ from mptt.models import MPTTModel, TreeForeignKey
 from django.contrib.auth.models import User
 from django.core import urlresolvers
 from datetime import datetime, timedelta
+from django.conf import settings
 
 from django.db.models.signals import post_save
 from django.dispatch import receiver
@@ -36,6 +37,11 @@ class Comic(MPTTModel):
 
     def __unicode__(self):
         return u"%s - %s" % (self.artist, self.date.strftime('%b %d \'%y'))
+    def valid_to_follow(self):
+        pending_contributions = len(Contribution.objects.filter(comic_id=self.id, pending=True))
+        comic_children = len(self.get_children())
+        return pending_contributions + comic_children < settings.MAX_COMIC_CHILDREN
+            
 
     def prev_sib(self):
         # root nodes infinite linkage, if first, link to last
