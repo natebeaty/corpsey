@@ -127,7 +127,7 @@ def contributions(request):
     # omit contributions user has already voted on AND contributions that have no panels yet (todo: has_uploaded boolean field?)
     contributions = Contribution.objects.filter(pending=True).exclude(id__in=user_votes.values_list('contribution_id', flat=True)).exclude(panel1__exact='', panel2__exact='', panel3__exact='')
     # contributions = Contribution.objects.filter(pending=True).exclude(panel1__exact='', panel2__exact='', panel3__exact='')
-    rules = Rule.objects.all()
+    rules = Rule.objects.all().order_by('-id')
 
     return render_to_response('comics/contributions.html',  {
         'user_votes': user_votes,
