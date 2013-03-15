@@ -15,12 +15,6 @@
   <div class="user-content">
       <h1>{{ page.title|safe }}</h1>
       {{ page.content|safe }}
-      <h2>The {{ rules|length|apnumber }} Rules</h2>
-      <ul class="rules">
-        {% for rule in rules %}
-          <li>{{ rule|safe }}</li>
-        {% endfor %}
-      </ul>
   </div>
 
   <form class="contribute" action="{% url contribute %}" method="post">
