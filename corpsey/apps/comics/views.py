@@ -147,6 +147,8 @@ def contribute(request):
             parent_comic = find_comic_to_follow()
     elif request.session.get('last_comic_id', False):
         parent_comic = Comic.objects.get(pk=request.session['last_comic_id'])
+        # only use last_comic_id once
+        request.session['last_comic_id'] = None
         if not parent_comic.valid_to_follow():
             parent_comic = find_comic_to_follow()
     else:
