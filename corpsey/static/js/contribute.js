@@ -12,6 +12,9 @@ $.corpsey.contribute = (function() {
             $('input#'+$(this).attr('for')).addClass('required');
         });
 
+        // open links in new window (halftones, pg-13)
+        $('.user-content a').attr('target','_blank');
+
         History = window.History;
         State = History.getState();
         comic_id = $('.comic.single').attr('data-comic-id');
