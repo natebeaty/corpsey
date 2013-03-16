@@ -14,7 +14,7 @@ class UturnForm(forms.ModelForm):
     portal_to = forms.ModelChoiceField(queryset=Comic.objects.filter(lft=1))
 
 class ContributionAdmin(admin.ModelAdmin):
-    list_display = ('__unicode__', 'pending', 'accepted', 'deadline', 'notes')
+    list_display = ('__unicode__', 'pending', 'accepted', 'date', 'deadline', 'notes')
 
 class UturnAdmin(admin.ModelAdmin):
 	form = UturnForm

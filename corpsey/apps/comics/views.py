@@ -10,6 +10,7 @@ from django.http import HttpResponse
 from django.views.decorators.cache import cache_page
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
+from datetime import datetime, timedelta
 
 def recursive_node_to_dict(node):
     result = {
@@ -138,7 +139,6 @@ def contributions(request):
 def contribute(request):
     """Reserve a spot to contribute after a comic."""
     from corpsey.apps.comics.forms import ContributeForm
-    from datetime import datetime, timedelta
 
     # ?parent=x
     if request.GET.get('parent', False):
@@ -181,6 +181,7 @@ def contribute(request):
                     code = code,
                     email = email,
                     name = name,
+                    deadline = datetime.now()+timedelta(days=4),
                     comic = parent_comic,
                 )
                 contribution.save()
