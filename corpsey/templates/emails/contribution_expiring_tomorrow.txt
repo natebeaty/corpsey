@@ -1,8 +1,8 @@
 Hello!
 
-The deadline to upload your panels for review is tomorrow at midnight!
+The deadline to submit your panels will expire tomorrow at midnight!
 
-When you have your panels ready for upload, go to this link:
+To upload your panels for review, go to this link:
 
 http://corpsey.trubbleclub.com/contribute/upload/{{ contribution.code }}
 
