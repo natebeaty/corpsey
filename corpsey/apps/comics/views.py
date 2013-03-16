@@ -186,8 +186,8 @@ def contribute(request):
                 )
                 contribution.save()
 
-                plaintext = get_template('emails/contribute_invite_email.txt')
-                htmly     = get_template('emails/contribute_invite_email.html')
+                plaintext = get_template('emails/contribution_invite.txt')
+                htmly     = get_template('emails/contribution_invite.html')
 
                 d = Context({ 
                     'comic': parent_comic,
