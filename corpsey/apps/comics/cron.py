@@ -60,3 +60,4 @@ def send_html_email(email_data):
         message = 'Email sent to %s ok!' % email_data['email_to']
     except:
         message = 'There was an error sending a "%s" email to %s.' % (email_data['template'], email_data['email_to'])
+    return message
