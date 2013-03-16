@@ -6,12 +6,15 @@ import cronjobs
 
 @cronjobs.register
 def test_cron():
-    contributions = Contribution.objects.all()
-    message = ''
-    for c in contributions:
-        message = message + "%s" % c
+    contributions_expiring_tomorrow = Contribution.objects.filter(pending=True, deadline__lte=datetime.now()-timedelta(days=1))
+    contributions_expired = Contribution.objects.filter(pending=True, deadline__lte=datetime.now())
+    message = 'Contributions expiring tomorrow: '
+    for c in contributions_expiring_tomorrow:
+        message = message + " %s " % c
+    message = message + ' ... Contributions expired: '
+    for c in contributions_expired:
+        message = message + " %s " % c
     print message
-
 
 @cronjobs.register
 def check_contributions():
@@ -34,7 +37,6 @@ def check_contributions():
             'context'  : { 'contribution': contribution },
             })
         self.stdout.write(message)
-
 
 def send_html_email(email_data):
     plaintext = get_template('emails/%s.txt') % email_data.template
