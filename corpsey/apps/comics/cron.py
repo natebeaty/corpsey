@@ -6,7 +6,7 @@ import cronjobs
 
 @cronjobs.register
 def test_cron():
-    contributions_expiring_tomorrow = Contribution.objects.filter(pending=True, deadline__lte=datetime.now()-timedelta(days=1))
+    contributions_expiring_tomorrow = Contribution.objects.filter(pending=True, deadline__lte=datetime.now()+timedelta(days=1))
     contributions_expired = Contribution.objects.filter(pending=True, deadline__lte=datetime.now())
     message = 'Contributions expiring tomorrow: '
     for c in contributions_expiring_tomorrow:
