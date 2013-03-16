@@ -22,8 +22,15 @@ def test_cron():
 
 @cronjobs.register
 def check_contributions():
+    print 'Running contribution cron... '
     contributions_expiring_tomorrow = Contribution.objects.filter(pending=True, deadline__lte=timezone.now()-timedelta(days=1))
+    print 'Expiring tomorrow: '
+    for c in contributions_expiring_tomorrow:
+        print c
     contributions_expired = Contribution.objects.filter(pending=True, deadline__lte=timezone.now())
+    print 'Expired: '
+    for c in contributions_expired:
+        print c
     for contribution in contributions_expiring_tomorrow:
         message = send_html_email({
             'template' : 'contribution_expiring_tomorrow',
