@@ -2,12 +2,13 @@ from corpsey.apps.comics.models import *
 from django.template import RequestContext
 from django.core.mail import mail_admins,mail_managers
 from datetime import datetime, timedelta
+from django.utils import timezone
 import cronjobs
 
 @cronjobs.register
 def test_cron():
-    contributions_expiring_tomorrow = Contribution.objects.filter(pending=True, deadline__lte=datetime.now()+timedelta(days=1))
-    contributions_expired = Contribution.objects.filter(pending=True, deadline__lte=datetime.now())
+    contributions_expiring_tomorrow = Contribution.objects.filter(pending=True, deadline__lte=timezone.now()+timedelta(days=1))
+    contributions_expired = Contribution.objects.filter(pending=True, deadline__lte=timezone.now())
     message = 'Contributions expiring tomorrow: '
     for c in contributions_expiring_tomorrow:
         message = message + " %s " % c
@@ -18,8 +19,8 @@ def test_cron():
 
 @cronjobs.register
 def check_contributions():
-    contributions_expiring_tomorrow = Contribution.objects.filter(pending=True, deadline__lte=datetime.now()-timedelta(days=1))
-    contributions_expired = Contribution.objects.filter(pending=True, deadline__lte=datetime.now())
+    contributions_expiring_tomorrow = Contribution.objects.filter(pending=True, deadline__lte=timezone.now()-timedelta(days=1))
+    contributions_expired = Contribution.objects.filter(pending=True, deadline__lte=timezone.now())
     for contribution in contributions_expiring_tomorrow:
         message = send_html_email({
             'template' : 'contribute_expiring_tomorrow',

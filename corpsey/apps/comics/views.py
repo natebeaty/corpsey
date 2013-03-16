@@ -11,6 +11,7 @@ from django.views.decorators.cache import cache_page
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from datetime import datetime, timedelta
+from django.utils import timezone
 
 def recursive_node_to_dict(node):
     result = {
@@ -181,7 +182,7 @@ def contribute(request):
                     code = code,
                     email = email,
                     name = name,
-                    deadline = datetime.now()+timedelta(days=4),
+                    deadline = timezone.now()+timedelta(days=4),
                     comic = parent_comic,
                 )
                 contribution.save()
@@ -215,7 +216,7 @@ def contribute(request):
 
     page = FlatPage.objects.get(url='/contribute/')
     page2 = FlatPage.objects.get(url='/contribute/ok/')
-    deadline = datetime.now()+timedelta(days=4)
+    deadline = timezone.now()+timedelta(days=4)
 
     return render_to_response(
         'comics/contribute.html',
