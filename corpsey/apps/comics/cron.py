@@ -3,6 +3,9 @@ from django.template import RequestContext
 from django.core.mail import mail_admins,mail_managers
 from datetime import datetime, timedelta
 from django.utils import timezone
+from django.core.mail import EmailMultiAlternatives
+from django.template.loader import get_template
+from django.template import Context
 import cronjobs
 
 @cronjobs.register
@@ -23,16 +26,16 @@ def check_contributions():
     contributions_expired = Contribution.objects.filter(pending=True, deadline__lte=timezone.now())
     for contribution in contributions_expiring_tomorrow:
         message = send_html_email({
-            'template' : 'contribute_expiring_tomorrow',
+            'template' : 'contribution_expiring_tomorrow',
             'email_to' : contribution.email,
             'subject'  : 'Your Infinite Corpse reservation expires tomorrow',
             'context'  : { 'contribution': contribution, 'title': 'Your Infinite Corpse reservation expires tomorrow' },
             })
-        self.stdout.write(message)
+        print message
 
     for contribution in contributions_expired:
         message = send_html_email({
-            'template' : 'contribute_expired',
+            'template' : 'contribution_expired',
             'email_to' : contribution.email,
             'subject'  : 'Your Infinite Corpse reservation has expired',
             'context'  : { 'contribution': contribution, 'title': 'Your Infinite Corpse reservation has expired' },
@@ -40,20 +43,20 @@ def check_contributions():
         print message
 
 def send_html_email(email_data):
-    plaintext = get_template('emails/%s.txt') % email_data.template
-    htmly     = get_template('emails/%s.html') % email_data.template
+    plaintext = get_template('emails/%s.txt' % email_data['template'])
+    htmly     = get_template('emails/%s.html' % email_data['template'])
 
-    d = Context(email_data.context)
+    d = Context(email_data['context'])
 
-    subject = email_data.subject
+    subject = email_data['subject']
     from_email = 'corpsey@trubbleclub.com'
     text_content = plaintext.render(d)
     html_content = htmly.render(d)
     try:
-        msg = EmailMultiAlternatives(subject, text_content, from_email, [email_data.email_to])
+        msg = EmailMultiAlternatives(subject, text_content, from_email, [email_data['email_to']])
         msg.attach_alternative(html_content, "text/html")
         msg.send()
 
-        message = 'Email sent to %s ok!' % email_data.email_to
+        message = 'Email sent to %s ok!' % email_data['email_to']
     except:
-        message = 'There was an error sending a "%s" email to %s.' % (email_data.template, email_data.email_to)
+        message = 'There was an error sending a "%s" email to %s.' % (email_data['template'], email_data['email_to'])
