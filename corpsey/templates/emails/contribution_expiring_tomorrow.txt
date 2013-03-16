@@ -1,0 +1,9 @@
+Hello!
+
+The deadline to upload your panels for review is tomorrow at midnight!
+
+When you have your panels ready for upload, go to this link:
+
+http://corpsey.trubbleclub.com/contribute/upload/{{ contribution.code }}
+
+- Trubble Club	

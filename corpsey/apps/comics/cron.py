@@ -25,7 +25,7 @@ def check_contributions():
             'template' : 'contribute_expiring_tomorrow',
             'email_to' : contribution.email,
             'subject'  : 'Your Infinite Corpse reservation expires tomorrow',
-            'context'  : { 'contribution': contribution },
+            'context'  : { 'contribution': contribution, 'title': 'Your Infinite Corpse reservation expires tomorrow' },
             })
         self.stdout.write(message)
 
@@ -34,9 +34,9 @@ def check_contributions():
             'template' : 'contribute_expired',
             'email_to' : contribution.email,
             'subject'  : 'Your Infinite Corpse reservation has expired',
-            'context'  : { 'contribution': contribution },
+            'context'  : { 'contribution': contribution, 'title': 'Your Infinite Corpse reservation has expired' },
             })
-        self.stdout.write(message)
+        print message
 
 def send_html_email(email_data):
     plaintext = get_template('emails/%s.txt') % email_data.template
