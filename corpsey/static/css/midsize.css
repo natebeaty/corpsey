@@ -6,3 +6,6 @@
 #homepage .recent-contributors{width:760px;}
 #homepage .comic{margin-bottom:30px;}#homepage .comic img{width:250px;height:250px;}
 #homepage .comic h1{font:18px/1.2em 'Arbutus Slab',helvetica,sans-serif;}#homepage .comic h1 small{font:12px/1.2em 'Arbutus Slab',helvetica,sans-serif;}
+#artists #content{width:400px;}#artists #content .artists-list{-webkit-columns:1;margin:20px auto;}
+body.static #content,#contribute-page #content{width:65%;}
+#about #content{width:65%;}

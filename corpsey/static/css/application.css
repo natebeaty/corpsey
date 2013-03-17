@@ -24,7 +24,7 @@ ul.tree a{display:inline-block;width:8px;height:8px;background:#76896b;text-inde
 ul.tree a:hover,ul.tree li.active>a{background:#222;}
 .hidden{display:none;}
 #wrapper{overflow:hidden;min-height:660px;}
-body.static #content,#contribute-page #content,#about #content,#static-page #content{margin:0 10%;}
+body.static #content,#contribute-page #content{width:800px;}
 nav.main{background:#989eaa;height:26px;}nav.main ul{text-align:right;width:550px;position:absolute;top:0;right:0;}nav.main ul li{display:inline-block;}nav.main ul li #get-artist{outline:none;font:12px/1.2em 'Orienta',sans-serif;letter-spacing:.2em;color:#eee;background:#989eaa;border:0;width:86px;padding:2px 16px;height:24px;}nav.main ul li #get-artist::-webkit-input-placeholder{color:#eee;}
 nav.main ul li #get-artist:-moz-placeholder{color:#eee;}
 nav.main ul li #get-artist::-moz-placeholder{color:#eee;}
@@ -73,7 +73,7 @@ a#clixel{position:absolute;bottom:20px;right:10%;width:53px;height:20px;text-ind
 #catacombs{margin:4px auto;min-height:660px;max-width:1000px;}#catacombs.one-comic-showing{min-height:350px;}
 h1.comic_1,h1.comic_2{position:absolute;-webkit-transform:rotate(270deg);-moz-transform:rotate(270deg);-o-transform:rotate(270deg);-ms-transform:rotate(270deg);transform:rotate(270deg);-webkit-transform-origin:left top;transform-origin:left top;white-space:nowrap;left:0;top:0;font:14px/1.2em 'Arbutus Slab',serif;}h1.comic_1 a,h1.comic_2 a{color:#222;}
 #contribute-page #content{width:800px;margin:0 auto;}
-#contribute-page form.contribute{background:#eee;-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px;text-align:center;width:800px;margin:40px auto;padding:2px 10px 6px;}#contribute-page form.contribute button,#contribute-page form.contribute input[type=text]{display:block;margin:4px auto;}
+#contribute-page form.contribute{background:#eee;-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px;text-align:center;margin:40px auto;padding:2px 10px 6px;}#contribute-page form.contribute button,#contribute-page form.contribute input[type=text]{display:block;margin:4px auto;}
 #contribute-page form.contribute button{width:300px;white-space:normal;background:#ed1846;margin:20px auto;}#contribute-page form.contribute button:hover{background:#ef3059;}
 #contribute-page form.contribute p.note{font:italic 12px/1.4em 'Georgia',serif;color:#888;width:300px;margin:0 auto;}
 #contribute-page form.contribute fieldset{border:none;padding:0;margin:0;}#contribute-page form.contribute fieldset.images{width:250px;margin:0 auto;}
@@ -97,7 +97,9 @@ ul.ui-autocomplete{background:#989eaa;z-index:99999 !important;width:150px !impo
 #tree .node circle{fill:#76896b;stroke:#76896b;stroke-width:1px;}
 #tree .node{font:12px/1.2em 'Orienta',sans-serif;}
 #tree .link{fill:none;stroke:#d0d3d8;stroke-width:1.5px;}
-#artists #content{width:400px;margin:20px auto;}#artists #content h3.name{margin:0;display:block;float:left;width:300px;line-height:16px;}#artists #content h3.name a{color:#222;display:block;line-height:16px;padding:5px 0;}#artists #content h3.name a:hover{color:#989eaa;}
+#artists #content{width:850px;margin:0 auto;}#artists #content .artists-list{-webkit-columns:2;margin:20px auto;}
+#artists #content h3.name{margin:0;display:block;float:left;width:300px;line-height:16px;}#artists #content h3.name a{color:#222;display:block;line-height:16px;padding:5px 0;}#artists #content h3.name a:hover{color:#989eaa;}
 #artists #content li{overflow:hidden;min-height:24px;margin-bottom:4px;}#artists #content li.letter{height:30px;overflow:visible;}#artists #content li.letter h2{clear:left;margin:20px 0 0;font:22px/1.2em 'Arbutus Slab',serif;}
 #login form{width:400px;margin:40px auto;}
 #login input[type=submit]{margin:20px auto;}
+#about #content{width:600px;margin:0 auto;}
