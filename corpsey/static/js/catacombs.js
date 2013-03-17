@@ -11,14 +11,13 @@ $.corpsey.catacombs = (function() {
 
     var medium_width = false,
         small_width = false,
-        delayed_resize_timer,
+        delayed_resize_timer = false,
         build_titles_timer;
 
     function _init() {
-        delayed_resize_timer = false;
+        // get initial screen width
         _get_widths();
         State = History.getState();
-
         _get_comics_showing();
 
         // init first strips as shown
@@ -90,13 +89,18 @@ $.corpsey.catacombs = (function() {
             }
         });
 
+        // init isotope filter based on window size
         _delayed_resize();
     }
 
-    // build id arr and convert to int
     function _get_comics_showing() {
+        // get comic_id array from URL
         comics_showing = State.url.replace(location.host,'').match(/\d+/g);
+        
+        // build id arr and convert to int
         for(var i=0; i<comics_showing.length; i++) comics_showing[i] = +comics_showing[i];
+
+        // is this a uturn page?
         is_uturn = State.url.match(/uturn/);
 
         // for /catacombs/uturn/5/ URLs
@@ -106,7 +110,6 @@ $.corpsey.catacombs = (function() {
         } else {
             uturn_single = false;
         }
-        // console.log('gcs', comics_showing, 'comics_shown:', comics_shown);
 
         // add class .one-comic-showing to adjust min-height
         $('#catacombs').toggleClass('one-comic-showing', (comics_showing.length===1));
@@ -127,6 +130,7 @@ $.corpsey.catacombs = (function() {
                     'hdpi_enabled': $.corpsey.hdpi_enabled()
                 });
             } else if (
+                // motherfucking uturns breaking my brain
                 (is_uturn && i===1 && !comics_shown[comics_showing[i]]) || 
                 (!is_uturn && !comics_shown[comics_showing[i]])
             ){
@@ -157,7 +161,6 @@ $.corpsey.catacombs = (function() {
     }
 
     function _show_panels(data) {
-
         // cache comic data
         comics_shown[data.comic.comic_id] = 1;
 
@@ -179,6 +182,7 @@ $.corpsey.catacombs = (function() {
     }
 
     function _filter_panels() {
+        // i do this a lot. todo: clean this up
         _get_comics_showing();
 
         var visible_comics = [];
@@ -208,6 +212,7 @@ $.corpsey.catacombs = (function() {
 
         // hide strips not in new url
         $('#catacombs .comic.single').each(function(){
+            // uturn pages have different 
             if (is_uturn) {
                 if (
                     ($(this).hasClass('uturn') && $(this).data('comic-id')!=comics_showing[0]) || 
@@ -240,11 +245,6 @@ $.corpsey.catacombs = (function() {
 
         _get_comics_showing();
         _get_nav_links();
-
-    }
-
-    function _find_comic(id) {
-        return $('#catacombs').find('.comic.single[data-comic-id='+id+']');
     }
 
     function _get_nav_links() {
@@ -272,6 +272,7 @@ $.corpsey.catacombs = (function() {
     function _hide_titles() {
         $('h1.comic_1, h1.comic_2').fadeOut();
     }
+
     function _build_titles() {
         $('h1.comic_1, h1.comic_2').remove();
         $('.comic.single.active').each(function(i) {
@@ -280,6 +281,7 @@ $.corpsey.catacombs = (function() {
         });
         _move_titles();
     }
+
     function _move_titles() {
         $('.comic.single.active').each(function(i) {
             // figure out which comic panel to position next to
@@ -300,9 +302,11 @@ $.corpsey.catacombs = (function() {
         _get_widths();
         _move_titles();
     }
+
     function _delayed_resize() {
         $('#catacombs').isotope({ filter: (small_width) ? '.comic.active .panel:not(.uturn-pad),.comic.active h1' : (medium_width) ? '.comic.active .panel:not(.uturn-pad)' : '.comic.active .panel' });
     }
+
     function _get_widths() {
         var screen_width = document.documentElement.clientWidth;
         medium_width = screen_width <= 1020;
@@ -313,9 +317,6 @@ $.corpsey.catacombs = (function() {
     return {
         init: function() {
             _init();
-        },
-        build_panels: function(data) {
-            _build_panels(data);
         },
         show_panels: function(data) {
             _show_panels(data);
@@ -343,6 +344,7 @@ $(window).ready(function(){
     $.corpsey.catacombs.init();
 });
 
+// adjust to mothership size variations
 $(window).resize(function(){
     $.corpsey.catacombs.resize();
 
