@@ -66,11 +66,14 @@ def random_starter(request):
 def artist_in_catacombs(request, artist):
     """Return a random contribution for an artist."""
     artist = get_object_or_404(Artist,pk=artist)
-    comic_to = Comic.objects.filter(artist_id=artist.id).order_by('?')[0]
-    if not comic_to.is_root_node():
-        url = '/catacombs/%d/%d/' % (comic_to.parent.id, comic_to.id)
-    else:
-        url = comic_to.get_absolute_url()
+    try:
+        comic_to = Comic.objects.filter(artist_id=artist.id).order_by('?')[0]
+        if not comic_to.is_root_node():
+            url = '/catacombs/%d/%d/' % (comic_to.parent.id, comic_to.id)
+        else:
+            url = comic_to.get_absolute_url()
+    except:
+        url = '/artists/'
     return redirect(url)
 
 @cache_page(60 * 15)
@@ -127,8 +130,8 @@ def contributions(request):
     """Page for the elders to vote YAY or NAY on contributions."""
     user_votes = Vote.objects.filter(user_id=request.user.id)
     # omit contributions user has already voted on AND contributions that have no panels yet (todo: has_uploaded boolean field?)
-    contributions = Contribution.objects.filter(pending=True).exclude(id__in=user_votes.values_list('contribution_id', flat=True)).exclude(panel1__exact='', panel2__exact='', panel3__exact='')
-    # contributions = Contribution.objects.filter(pending=True).exclude(panel1__exact='', panel2__exact='', panel3__exact='')
+    # contributions = Contribution.objects.filter(pending=True).exclude(id__in=user_votes.values_list('contribution_id', flat=True)).exclude(panel1__exact='', panel2__exact='', panel3__exact='')
+    contributions = Contribution.objects.filter(pending=True).exclude(panel1__exact='', panel2__exact='', panel3__exact='')
     rules = Rule.objects.all().order_by('-id')
 
     return render_to_response('comics/contributions.html',  {
