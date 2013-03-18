@@ -9,7 +9,7 @@ def entry(request, artist_id):
 def get_artists(request):
     if request.is_ajax():
         q = request.GET.get('term', '')
-        artists = Artist.objects.filter(name__icontains = q )[:20]
+        artists = Artist.objects.exclude(comics=None).filter(name__icontains = q )[:20]
         results = []
         for artist in artists:
             url = ''
