@@ -18,7 +18,7 @@ saved_file.connect(generate_aliases_global)
 # Create your models here.
 class Comic(MPTTModel):
     parent = TreeForeignKey('self', null=True, blank=True, related_name='children')
-    artist = models.ForeignKey(Artist, null=True, blank=True, related_name='artists')
+    artist = models.ForeignKey(Artist, null=True, blank=True, related_name='comics')
     portal_to = models.ForeignKey('self', null=True, blank=True, related_name='portal')
     notes = models.TextField(blank=True)
     date = models.DateTimeField(auto_now_add=True, blank=True)
