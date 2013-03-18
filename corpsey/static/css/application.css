@@ -59,7 +59,7 @@ a#clixel{position:absolute;bottom:20px;right:10%;width:53px;height:20px;text-ind
 #contributions #content{max-width:1000px;margin:10px auto;}
 #contributions ul{display:block;clear:left;overflow:hidden;}
 #contributions .comic{margin-bottom:20px;}#contributions .comic h1{font:12px/1.2em 'Arbutus Slab',serif;}
-#contributions .comic img{width:160px;height:160px;-moz-opacity:0.5;-khtml-opacity:0.5;-webkit-opacity:0.5;opacity:0.5;-ms-filter:progid:DXImageTransform.Microsoft.Alpha(opacity=50);filter:alpha(opacity=50);}
+#contributions .comic img{width:250px;height:250px;-moz-opacity:0.5;-khtml-opacity:0.5;-webkit-opacity:0.5;opacity:0.5;-ms-filter:progid:DXImageTransform.Microsoft.Alpha(opacity=50);filter:alpha(opacity=50);}
 #contributions .queue{-webkit-transition:all 1s;-moz-transition:all 1s;-o-transition:all 1s;transition:all 1s;margin-bottom:60px;}#contributions .queue.voted{-moz-opacity:0.2;-khtml-opacity:0.2;-webkit-opacity:0.2;opacity:0.2;-ms-filter:progid:DXImageTransform.Microsoft.Alpha(opacity=20);filter:alpha(opacity=20);}#contributions .queue.voted img{-moz-opacity:0.5;-khtml-opacity:0.5;-webkit-opacity:0.5;opacity:0.5;-ms-filter:progid:DXImageTransform.Microsoft.Alpha(opacity=50);filter:alpha(opacity=50);}
 #contributions .queue.voted.yea{background:#1ccc24;}
 #contributions .queue.voted.nay{background:#fc6048;}
