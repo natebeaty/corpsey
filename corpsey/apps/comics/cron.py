@@ -41,6 +41,8 @@ def check_contributions():
         print message
 
     for contribution in contributions_expired:
+        contribution.pending = False
+        contribution.save()
         message = send_html_email({
             'template' : 'contribution_expired',
             'email_to' : contribution.email,
