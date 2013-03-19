@@ -107,7 +107,7 @@ def contribution_vote(request, contribution_id, yea, rule_broke=0, notes=''):
     # approve contribution
     if num_yea_votes > 1:
         contribution.pending = False
-        contribution.approved = True
+        contribution.accepted = True
         contribution.save()
         # look for artist or add new
         try:
