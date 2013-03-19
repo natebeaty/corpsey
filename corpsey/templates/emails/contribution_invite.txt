@@ -2,7 +2,7 @@ Hello,
 
 Thanks for wanting to contribute to The Infinite Corpse!
 
-You have 4 days to draw your panels and upload them for review. You can view the panels you're following here:
+You have 7 days to draw your panels and upload them for review. You can view the panels you're following here:
 
 http://corpsey.trubbleclub.com{{ parent_comic_url }}
 

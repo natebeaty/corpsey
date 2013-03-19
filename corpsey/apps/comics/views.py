@@ -218,7 +218,7 @@ def contribute(request):
 
     page = FlatPage.objects.get(url='/contribute/')
     page2 = FlatPage.objects.get(url='/contribute/ok/')
-    deadline = timezone.now()+timedelta(days=4)
+    deadline = timezone.now()+timedelta(days=7)
 
     return render_to_response(
         'comics/contribute.html',
