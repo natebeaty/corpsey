@@ -270,10 +270,16 @@ def contribute_upload(request, upload_code):
                 message = "Contribution uploaded ok!"
                 step = 2
 
-                # Email managers
+                # Email voters about new submission
+                from django.contrib.auth.models import User, Group
                 mail_subject = 'A new Infinite Corpse submission has been uploaded!'
-                mail_body = 'OMG LOOK:\n\n%s\n\nLet the elders Yea or Nay: http://%s/contributions/\n' % (contribution, request.META['HTTP_HOST'])
-                mail_managers(mail_subject, mail_body, fail_silently=False)
+                mail_body = 'OMG LOOK:\n\n%s\n\nGo forth Trubblers and cast your Yea or Nay: http://%s/contributions/\n' % (contribution, request.META['HTTP_HOST'])
+                voters = User.objects.all() # .filter(groups__name='voters')
+                emails = ()
+                # build tuple of emails to send
+                for voter in voters:
+                    emails = emails + ((mail_subject, mail_body, 'hal@trubbleclub.com', voter.email),)
+                send_mass_email(emails)
             else:
                 message = "Oh no! Something went wrong and broke Corpsey's robot brain."
     except Contribution.DoesNotExist:
