@@ -101,7 +101,7 @@ class Contribution(models.Model):
     website = models.CharField(max_length=250, blank=True)
     code = models.CharField(max_length=250, blank=True)
     date = models.DateTimeField(auto_now_add=True, blank=True)
-    deadline = models.DateTimeField(default=datetime.now()+timedelta(days=4), blank=True)
+    deadline = models.DateTimeField(blank=True)
     comic = models.ForeignKey(Comic, related_name='contributions')
     panel1 = ThumbnailerImageField(upload_to='contributions', blank=True)
     panel2 = ThumbnailerImageField(upload_to='contributions', blank=True)

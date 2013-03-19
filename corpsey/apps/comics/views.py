@@ -184,7 +184,7 @@ def contribute(request):
                     code = code,
                     email = email,
                     name = name,
-                    deadline = timezone.now()+timedelta(days=4),
+                    deadline = timezone.now()+timedelta(days=7),
                     comic = parent_comic,
                 )
                 contribution.save()
