@@ -262,6 +262,9 @@ def contribute_upload(request, upload_code):
                 contribution.panel1 = request.FILES['panel1']
                 contribution.panel2 = request.FILES['panel2']
                 contribution.panel3 = request.FILES['panel3']
+                contribution.name = form.cleaned_data['name']
+                contribution.email = form.cleaned_data['email']
+                contribution.website = form.cleaned_data['website']
                 contribution.save()
 
                 message = "Contribution uploaded ok!"
