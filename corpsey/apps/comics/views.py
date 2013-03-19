@@ -277,7 +277,15 @@ def contribute_upload(request, upload_code):
             else:
                 message = "Oh no! Something went wrong and broke Corpsey's robot brain."
     except Contribution.DoesNotExist:
-        message = 'Contribution code <i>%s</i> was not found!' % upload_code
+        message = 'Contribution code <strong>%s</strong> was not found!' % upload_code
+        return render_to_response(
+            'comics/contribute_upload.html', 
+            { 'message': message },
+            context_instance=RequestContext(request)
+        )
+
+    if not contribution.pending:
+        message = 'Contribution code <strong>%s</strong> has expired.' % upload_code
         return render_to_response(
             'comics/contribute_upload.html', 
             { 'message': message },
@@ -289,6 +297,7 @@ def contribute_upload(request, upload_code):
         {
             'upload_code': upload_code,
             'step': step,
+            'contribution': contribution,
             'form': form,
             'page': page,
             'page2': page2,

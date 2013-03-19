@@ -10,6 +10,7 @@ body{background:#fff;font:14px/1.4em 'Arbutus Slab',serif;color:#222;position:re
 .clearfix{zoom:1;}
 a{text-decoration:none;}a img{border:0;}
 .notice{background:#fff189;width:500px;margin:0 auto;padding:10px;overflow:hidden;}.notice p{font:14px/1.2em 'Orienta',sans-serif;}
+.notice strong{border-bottom:1px dashed #666;font-weight:normal;}
 .cursive-gray{font:italic 12px/1.4em 'Georgia',serif;color:#888;}
 h1{font:24px/1.2em 'Arbutus Slab',serif;letter-spacing:.2em;text-transform:uppercase;margin:1em 0;}
 h2{font:18px/1.2em 'Arbutus Slab',serif;letter-spacing:.2em;text-transform:uppercase;margin:1em 0;}
