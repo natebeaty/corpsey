@@ -2,6 +2,10 @@ from django.db import models
 from easy_thumbnails.fields import ThumbnailerImageField
 import re 
 
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from django.core.cache import cache
+
 # Create your models here.
 class Artist(models.Model):
     name = models.CharField(max_length=250, blank=True)
@@ -28,3 +32,9 @@ class Artist(models.Model):
 			self.last_name = foo[-1]
 			self.first_name = re.sub(foo[-1], "",self.name).strip()
         super(Artist, self).save(*args, **kwargs)
+
+@receiver(post_save, sender=Artist)
+def clear_cache(sender, instance, created, **kwargs):
+    """Clear artists page cache on artist save."""
+    cache.delete('/artists/')
+
