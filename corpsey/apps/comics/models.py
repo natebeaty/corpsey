@@ -107,18 +107,22 @@ class Contribution(models.Model):
     panel2 = ThumbnailerImageField(upload_to='contributions', blank=True)
     panel3 = ThumbnailerImageField(upload_to='contributions', blank=True)
     pending = models.BooleanField(default=True)
+    has_panels = models.BooleanField(default=False)
     accepted = models.BooleanField(default=False)
     notes = models.TextField(blank=True)
 
     def admin_url(self):
         return urlresolvers.reverse('admin:comics_contribution_change', args=(self.id,))
 
+    # list of votes for admin view
     def votes_list(self):
-        str = u""
+        votes_list = ''
         if self.votes:
+            values = []
             for vote in self.votes.all():
-                str += "%s, " % vote
-        return str
+                values.append(str(vote))
+            votes_list = ', '.join(values)
+        return votes_list
 
     def __unicode__(self):
         return u"Contribution from %s -- following %s" % (self.name, self.comic.artist)
