@@ -116,7 +116,7 @@ class Contribution(models.Model):
     def votes_list(self):
         str = u""
         if self.votes:
-            for vote in self.votes:
+            for vote in self.votes.all():
                 str += "%s, " % vote
         return str
 
