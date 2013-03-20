@@ -10,8 +10,8 @@ $.corpsey = (function() {
         // search-o-rama
         $('<li><input id="get-artist" placeholder="SEARCH"></li>').prependTo('nav.main ul');
         $('#get-artist').autocomplete({
-			source: "/get_artists/",
-			minLength: 2,
+            source: "/get_artists/",
+            minLength: 2,
             focus: function( event, ui ) {
                 $('.ui-autocomplete a').removeClass('active');
                 $('.ui-autocomplete a:contains('+ui.item.value+')').addClass('active');
@@ -20,13 +20,16 @@ $.corpsey = (function() {
             search: function( event, ui ) {
                 if (typeof _gaq != 'undefined') _gaq.push(['_trackEvent', 'Search', $('#get-artist').val() ]);
             },
-			select: function( event, ui ) {
-				location.href = ui.item.url;
+            select: function( event, ui ) {
+                location.href = ui.item.url;
                 return false;
-			}
+            }
          }).on('blur', function() {
             $(this).val('');
          });
+
+        // focus on login form 
+        $('#id_username').focus();
     }
 
     function _retinize() {
