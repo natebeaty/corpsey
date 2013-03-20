@@ -15,7 +15,7 @@ a{text-decoration:none;}a img{border:0;}
 h1{font:24px/1.2em 'Arbutus Slab',serif;letter-spacing:.2em;text-transform:uppercase;margin:1em 0;}
 h2{font:18px/1.2em 'Arbutus Slab',serif;letter-spacing:.2em;text-transform:uppercase;margin:1em 0;}
 h3{font:14px/1.2em 'Arbutus Slab',serif;letter-spacing:.2em;text-transform:uppercase;margin:1em 0;}
-p{font:14px/1.4em 'Arbutus Slab',serif;margin:.5em 0;}
+p{font:14px/1.4em 'Arbutus Slab',serif;margin:.5em 0 1em;}
 .user-content ul{padding-left:1.2em;}.user-content ul li{list-style:disc;padding:0 0 .5em .2em;line-height:1.2em;}
 .button,nav li a{font:12px/1.2em 'Orienta',sans-serif;letter-spacing:.2em;text-transform:uppercase;background:#acb5b0;color:#eee;padding:6px 12px;white-space:nowrap;display:inline-block;margin-bottom:4px;text-decoration:none;border:0;cursor:pointer;}.button:hover,nav li a:hover{text-decoration:none;background:#b9c1bd;}
 .actions{margin:10px 0;}
