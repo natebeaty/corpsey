@@ -113,6 +113,13 @@ class Contribution(models.Model):
     def admin_url(self):
         return urlresolvers.reverse('admin:comics_contribution_change', args=(self.id,))
 
+    def vote_list(self):
+        str = u""
+        if self.votes:
+            for vote in votes:
+                str += "%s, " % vote
+        return str
+
     def __unicode__(self):
         return u"Contribution from %s -- following %s" % (self.name, self.comic.artist)
 
@@ -130,4 +137,7 @@ class Vote(models.Model):
     notes = models.TextField(blank=True)
 
     def __unicode__(self):
-        return u"Vote for %s " % (self.contribution.name)
+        if self.approve:
+            return u"Yea Vote for %s" % (self.contribution.name)
+        else:
+            return u"Nay Vote for %s : %s" % (self.contribution.name, self.rule_broke)
