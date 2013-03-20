@@ -113,7 +113,7 @@ class Contribution(models.Model):
     def admin_url(self):
         return urlresolvers.reverse('admin:comics_contribution_change', args=(self.id,))
 
-    def vote_list(self):
+    def votes_list(self):
         str = u""
         if self.votes:
             for vote in votes:
