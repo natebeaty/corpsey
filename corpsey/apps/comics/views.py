@@ -3,7 +3,7 @@ from corpsey.apps.artists.models import *
 from django.shortcuts import get_object_or_404, render_to_response, redirect
 from django.contrib.flatpages.models import FlatPage
 from django.template import RequestContext
-from django.core.mail import send_mass_email
+from django.core.mail import send_mass_mail
 from django.core import urlresolvers
 from easy_thumbnails.files import get_thumbnailer
 from django.http import HttpResponse
@@ -280,7 +280,7 @@ def contribute_upload(request, upload_code):
                 # build tuple of emails to send
                 for voter in voters:
                     emails = emails + ((mail_subject, mail_body, 'hal@trubbleclub.com', voter.email),)
-                send_mass_email(emails)
+                send_mass_mail(emails)
             else:
                 message = "Oh no! Something went wrong and broke Corpsey's robot brain."
     except Contribution.DoesNotExist:
