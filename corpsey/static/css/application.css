@@ -46,6 +46,7 @@ a#clixel{position:absolute;bottom:20px;right:10%;width:53px;height:20px;text-ind
 .comic-nav .button{width:106px;}
 .comic-nav.stuck{position:fixed;}
 #homepage #content{margin-left:0;}
+#homepage .bone-divider{width:350px;height:100px;margin:30px auto;background:url('/static/img/bone-divider-1.jpg') no-repeat center;}#homepage .bone-divider.odd{background:url('/static/img/bone-divider-2.jpg') no-repeat center;}
 #homepage header{background:#ed1846;color:#222;}#homepage header a.button{font:18px/1.2em 'Orienta',sans-serif;letter-spacing:.4em;padding:8px 16px 8px 24px;-webkit-border-radius:30px;-moz-border-radius:30px;border-radius:30px;background:#989eaa;}#homepage header a.button:hover{background:#a6abb6;}
 #homepage header.main{float:none;width:auto;}#homepage header.main .wrap{margin:0 auto 40px;padding:20px;text-align:center;}
 #homepage header.main h2{text-transform:uppercase;margin:0 0 .2em 0;}
