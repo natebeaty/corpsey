@@ -3,7 +3,7 @@ from corpsey.apps.artists.models import *
 from django.shortcuts import get_object_or_404, render_to_response, redirect
 from django.contrib.flatpages.models import FlatPage
 from django.template import RequestContext
-from django.core.mail import mail_admins,mail_managers
+from django.core.mail import send_mass_email
 from django.core import urlresolvers
 from easy_thumbnails.files import get_thumbnailer
 from django.http import HttpResponse
