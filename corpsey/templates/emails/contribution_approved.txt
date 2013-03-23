@@ -6,4 +6,5 @@ Your strip has been approved and can be found here:
 
 http://corpsey.trubbleclub.com{{ comic_url }}
 
-- Trubble Club
+High five to you,
+Trubble Club
