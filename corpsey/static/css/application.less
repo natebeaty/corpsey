@@ -711,20 +711,25 @@ ul.ui-autocomplete {
 /* tree page */
 
 #tree {
-    .node circle {
-      fill: @olive;
-      stroke: @olive;
-      stroke-width: 1px;
-    }
+    #content {
+        margin: 20px;
+        overflow: hidden;
+        svg { margin-left: -47px; }
+        .node circle {
+          fill: @olive;
+          stroke: @olive;
+          stroke-width: 1px;
+        }
 
-    .node {
-      font: 12px/1.2em 'Orienta', sans-serif;
-    }
+        .node {
+          font: 12px/1.2em 'Orienta', sans-serif;
+        }
 
-    .link {
-      fill: none;
-      stroke: lighten(@bluegray, 20%);
-      stroke-width: 1.5px;
+        .link {
+          fill: none;
+          stroke: lighten(@bluegray, 20%);
+          stroke-width: 1.5px;
+        }
     }
 }
 

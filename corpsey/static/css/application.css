@@ -96,9 +96,10 @@ form input[type=submit]{font:16px/1em "Orienta",sans-serif;padding:10px 60px 8px
 .isotope.no-transition,.isotope.no-transition .isotope-item,.isotope .isotope-item.no-transition{-webkit-transition-duration:0s;-moz-transition-duration:0s;-ms-transition-duration:0s;-o-transition-duration:0s;transition-duration:0s;}
 .ui-helper-hidden-accessible{display:none;}
 ul.ui-autocomplete{background:#989eaa;z-index:99999 !important;width:150px !important;}ul.ui-autocomplete li{font:12px/1.2em 'Orienta',sans-serif;}ul.ui-autocomplete li a{display:block;cursor:pointer;padding:6px 8px;color:#fff;}ul.ui-autocomplete li a:hover,ul.ui-autocomplete li a.active,ul.ui-autocomplete li a:focus{background:#a6abb6;}
-#tree .node circle{fill:#76896b;stroke:#76896b;stroke-width:1px;}
-#tree .node{font:12px/1.2em 'Orienta',sans-serif;}
-#tree .link{fill:none;stroke:#d0d3d8;stroke-width:1.5px;}
+#tree #content{margin:20px;overflow:hidden;}#tree #content svg{margin-left:-47px;}
+#tree #content .node circle{fill:#76896b;stroke:#76896b;stroke-width:1px;}
+#tree #content .node{font:12px/1.2em 'Orienta',sans-serif;}
+#tree #content .link{fill:none;stroke:#d0d3d8;stroke-width:1.5px;}
 #artists #content{width:850px;margin:0 auto;}#artists #content .artists-list{-webkit-columns:2;margin:20px auto;}
 #artists #content h3.name{margin:0;display:block;float:left;width:300px;line-height:16px;}#artists #content h3.name a{color:#222;display:block;line-height:16px;padding:5px 0;}#artists #content h3.name a:hover{color:#989eaa;}
 #artists #content li{overflow:hidden;min-height:24px;margin-bottom:4px;}#artists #content li.letter{height:30px;overflow:visible;}#artists #content li.letter h2{clear:left;margin:20px 0 0;font:22px/1.2em 'Arbutus Slab',serif;}
