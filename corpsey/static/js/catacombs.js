@@ -8,6 +8,7 @@ $.corpsey.catacombs = (function() {
     var State = History.getState();
     var comics_showing = [];
     var comics_shown = [];
+    var max_comics_loaded = 15;
     var uturns_shown = [];
     var is_uturn = false; // true when on a uturn page
     var uturn_single = false; // true when /uturn/x/
@@ -25,12 +26,14 @@ $.corpsey.catacombs = (function() {
 
         // init first strips as shown
         if (is_uturn) {
-            uturns_shown[comics_showing[0]] = 1;
+            uturns_shown.push(comics_showing[0]);
             $('.comic.single:not(.uturn)').each(function() {
-                comics_shown[$(this).attr('data-comic-id')] = 1;
+                comics_shown.push($(this).attr('data-comic-id'));
             });
         } else {
-            for(var i=0; i<comics_showing.length; i++) comics_shown[comics_showing[i]] = 1;
+            for(var i=0; i<comics_showing.length; i++) {
+                comics_shown.push(comics_showing[i]);
+            }
         }
 
         History.replaceState({
@@ -41,6 +44,7 @@ $.corpsey.catacombs = (function() {
         History.Adapter.bind(window,'statechange',function(){
             State = History.getState();
             _get_comics_showing();
+            _garbage_collection();
             _build_panels();
             if (typeof _gaq != 'undefined') _gaq.push(['_trackPageview', window.location.pathname]);
         });
@@ -121,6 +125,15 @@ $.corpsey.catacombs = (function() {
         $('#catacombs').toggleClass('is-uturn', (is_uturn!==null));
     }
 
+    // try to keep memory use not insane (was getting up to 900mb for one tab)
+    function _garbage_collection() {
+        // remove first comic if we've shown more than max_comics_loaded
+        if (comics_shown.length>max_comics_loaded) {
+            $('.comic.single:not(.uturn)[data-comic-id='+comics_showing[0]+']');
+            comics_shown.shift();
+        }
+    }
+
     function _build_panels(){
         _hide_titles();
         
@@ -134,8 +147,8 @@ $.corpsey.catacombs = (function() {
                 });
             } else if (
                 // motherfucking uturns breaking my brain
-                (is_uturn && i===1 && !comics_shown[comics_showing[i]]) || 
-                (!is_uturn && !comics_shown[comics_showing[i]])
+                (is_uturn && i===1 && comics_shown.indexOf(comics_showing[i]) < 0) || 
+                (!is_uturn && comics_shown.indexOf(comics_showing[i]) < 0)
             ){
                 // console.log('bp', i, 'csi', comics_showing[i], 'comics_shown:', comics_shown);
                 Dajaxice.corpsey.apps.comics.get_comic_panels($.corpsey.catacombs.show_panels, {
@@ -165,7 +178,9 @@ $.corpsey.catacombs = (function() {
 
     function _show_panels(data) {
         // cache comic data
-        comics_shown[data.comic.comic_id] = 1;
+        if(comics_shown.indexOf(data.comic.comic_id) < 0) {
+            comics_shown.push(data.comic.comic_id);
+        }
 
         // build from icanhaz template
         var comic = ich.comic_single(data.comic);
