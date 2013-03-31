@@ -1,9 +1,9 @@
+// Infinite Corpse js brains for reserving a spot to contribute
+// nate beaty @ clixel 2013
+
 $.corpsey = $.corpsey || {};
 
 $.corpsey.contribute = (function() {
-    var History;
-    var State;
-    var step_at;
     var comic_id;
 
     function _init() {
@@ -15,23 +15,7 @@ $.corpsey.contribute = (function() {
         // open links in new window (halftones, pg-13)
         $('.user-content a').attr('target','_blank');
 
-        History = window.History;
-        State = History.getState();
         comic_id = $('.comic.single').attr('data-comic-id');
-
-        History.replaceState({}, document.title, window.location.pathname );
-
-        // bind to state change
-        History.Adapter.bind(window,'statechange',function(){
-            State = History.getState();
-            _show_step();
-        });
-
-        $('.continue').click(function(e) {
-            e.preventDefault();
-            var url = $(this).attr('href');
-            History.pushState({}, document.title, url);
-        });
 
         $('.new-leaf').click(function(e) {
             e.preventDefault();

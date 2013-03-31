@@ -1,3 +1,6 @@
+// Infinite Corpse js brains for voting on contributions
+// nate beaty @ clixel 2013
+
 $.corpsey = $.corpsey || {};
 
 $.corpsey.contributions = (function() {

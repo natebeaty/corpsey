@@ -1,22 +1,17 @@
+// Infinite Corpse js brains for homepage
+// nate beaty @ clixel 2013
+
 $.corpsey = $.corpsey || {};
 
 $.corpsey.home = (function() {
 
     function _init() {
+        // scroll down to recent contributors from homepage button
         $('li.recent a').click(function() {
             $('html,body').animate({scrollTop:$('#recent-contributors').offset().top }, 'fast');
             return false;
         });
-        // $('.comic').each(function(i) {
-        //     var dim = '.'+(100-((i+1)*4));
-        //     $(this).data('dim', dim).find('img').css('opacity', dim);
-        //     $(this).on('mouseover', function() {
-        //         $(this).find('img').stop().animate({'opacity': 1});
-        //     }).on('mouseout', function() {
-        //         $(this).find('img').stop().animate({'opacity': $(this).data('dim')});
-        //     });
-        // });
-    } // end _init()
+    }
 
     // public methods
     return {
