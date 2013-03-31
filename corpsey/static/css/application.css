@@ -47,12 +47,14 @@ a#clixel{position:absolute;bottom:20px;right:10%;width:53px;height:20px;text-ind
 .comic-nav.stuck{position:fixed;}
 #homepage #content{margin-left:0;}
 #homepage .bone-divider{width:350px;height:100px;margin:30px auto;background:url('/static/img/bone-divider-1.png') no-repeat center;background-size:350px 100px;}#homepage .bone-divider.odd{background-image:url('/static/img/bone-divider-2.png');}
-#homepage header{background:#ed1846;color:#222;}#homepage header a.button{font:18px/1.2em 'Orienta',sans-serif;letter-spacing:.4em;padding:8px 16px 8px 24px;-webkit-border-radius:30px;-moz-border-radius:30px;border-radius:30px;background:#989eaa;}#homepage header a.button:hover{background:#a6abb6;}
+#homepage header{background:#ed1846;color:#222;padding:40px 0 10px;}#homepage header .buttons{overflow:hidden;padding:20px 0 0;}#homepage header .buttons li{width:33%;display:block;float:left;}#homepage header .buttons li a{display:block;width:230px;height:30px;background:url('/static/img/homepage-buttons.gif') no-repeat;background-size:690px 170px;overflow:hidden;margin:0 auto;padding-top:180px;color:#fff;font:18px/1.2em 'Orienta',sans-serif;text-transform:uppercase;letter-spacing:.1em;}@media only screen and (-webkit-min-device-pixel-ratio:1.3),only screen and (-o-min-device-pixel-ratio:13/10),only screen and (min-resolution:120dpi){#homepage header .buttons li a{background-image:url('/static/img/homepage-buttons@2x.gif');}}
+#homepage header .buttons li.recent a{background-position:-230px 0;}
+#homepage header .buttons li.about a{background-position:-460px 0;}
 #homepage header.main{float:none;width:auto;}#homepage header.main .wrap{margin:0 auto 40px;padding:20px;text-align:center;}
 #homepage header.main h2{text-transform:uppercase;margin:0 0 .2em 0;}
 #homepage header.main .intro{width:550px;margin:1em auto;font:16px/1.3em 'Arbutus Slab',serif;}#homepage header.main .intro strong{color:#eee;}
 #homepage #logo{margin:0 auto;}
-#homepage .recent-contributors{width:1000px;margin:10px auto;text-transform:uppercase;}#homepage .recent-contributors h2{text-align:center;color:#ccc;}
+#homepage .recent-contributors{padding-top:20px;width:1000px;margin:10px auto;text-transform:uppercase;}#homepage .recent-contributors h2{text-align:center;color:#ccc;}
 #homepage .comic{margin-bottom:70px;overflow:auto;}#homepage .comic h1{font:22px/1.2em 'Arbutus Slab',serif;overflow:hidden;position:relative;text-align:center;}#homepage .comic h1 small{font:12px/1.2em 'Arbutus Slab',serif;color:#c5cdc0;}
 .contribution h1,.comic h1{font:14px/1.2em 'Arbutus Slab',serif;margin:.5em 0 0;}.contribution h1 a,.comic h1 a{color:#222;}
 .contribution ul,.comic ul,.contribution li,.comic li{display:inline;}

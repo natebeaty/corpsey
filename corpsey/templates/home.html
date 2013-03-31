@@ -8,13 +8,17 @@
         <h2 class="tc-presents">Trubble Club Presents</h2>
         <h1 id="logo"><a href="/">Corpsey</a></h1>
         <h2 class="intro">A CHAIN COMIC BY <strong>{{ num_artists }}</strong> ARTISTS</h2>
-        <p class="center"><a class="button" href="/random_starter/">Enter the Catacombs</a></p>
+        <ul class="buttons">
+          <li class="enter"><a href="/enter_the_catacombs/">Enter the Catacombs</a></li>
+          <li class="recent"><a href="/#recent-contributors">Recent Contributors</a></li>
+          <li class="about"><a href="/about/">About Infinite Corpse</a></li>
+        </ul>
         </nav>
     </div></header>
 {% endblock header %}
 
 {% block content %}
-  <div class="recent-contributors">
+  <div class="recent-contributors" id="recent-contributors">
     <h2>Most Recent Contributors</h2>
     {% for comic in comic_set %}
       <article class="comic">

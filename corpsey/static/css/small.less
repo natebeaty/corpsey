@@ -27,15 +27,22 @@ Corpsey smaller
         }
     }
     header {
-    	a.button {
-    	    font: 14px/1.2em 'myriad pro', helvetica, sans-serif;
-    	    letter-spacing: .2em;
-    	    padding: 6px 10px 6px 16px;
-    	    .rounded-corners(20px);
-    	}
+        .buttons {
+            overflow: hidden;
+            padding: 0;
+            li {
+                width: auto;
+                display: block;
+                float: none;
+                margin: 10px auto;
+            }
+
+        }
         &.main {
+            padding-top: 0;
             .wrap {
                 padding: 20px 10px 10px;
+                margin-bottom: 0;
             }
             .intro {
                 width: 300px;
