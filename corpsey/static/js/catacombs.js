@@ -1,3 +1,6 @@
+// Infinite Corpse js brains for catacombs
+// nate beaty @ clixel 2013
+
 $.corpsey = $.corpsey || {};
 
 $.corpsey.catacombs = (function() {
@@ -6,8 +9,8 @@ $.corpsey.catacombs = (function() {
     var comics_showing = [];
     var comics_shown = [];
     var uturns_shown = [];
-    var is_uturn = false;
-    var uturn_single = false;
+    var is_uturn = false; // true when on a uturn page
+    var uturn_single = false; // true when /uturn/x/
 
     var medium_width = false,
         small_width = false,
@@ -233,12 +236,17 @@ $.corpsey.catacombs = (function() {
         // if med/small screen, scroll up to comic we just loaded
         if (medium_width || small_width) {
             if (State.data.direction=='next') {
+                var scrollTo = small_width ? 960 : 320;
+                // for small_width single uturns (only has single first TC panel, scroll to panel 2 on page)
+                if (small_width && is_uturn && uturn_single) {
+                    scrollTo = 340;
+                }
                 setTimeout(function() {
-                    $('html,body').animate({scrollTop:small_width ? 960 : 320 });
+                    $('html,body').animate({ scrollTop: scrollTo });
                 }, 250);
             } else {
                 setTimeout(function() {
-                    $('html,body').animate({scrollTop:small_width ? 40 : 30});
+                    $('html,body').animate({ scrollTop: small_width ? 40 : 30 });
                 }, 250);
             }
         }
