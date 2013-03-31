@@ -128,8 +128,8 @@ $.corpsey.catacombs = (function() {
     // try to keep memory use not insane (was getting up to 900mb for one tab)
     function _garbage_collection() {
         // remove first comic if we've shown more than max_comics_loaded
-        if (comics_shown.length>max_comics_loaded) {
-            $('.comic.single:not(.uturn)[data-comic-id='+comics_showing[0]+']');
+        if (comics_shown.length > max_comics_loaded) {
+            $('.comic.single:not(.uturn)[data-comic-id='+comics_shown[0]+']').remove();
             comics_shown.shift();
         }
     }
@@ -150,7 +150,6 @@ $.corpsey.catacombs = (function() {
                 (is_uturn && i===1 && comics_shown.indexOf(comics_showing[i]) < 0) || 
                 (!is_uturn && comics_shown.indexOf(comics_showing[i]) < 0)
             ){
-                // console.log('bp', i, 'csi', comics_showing[i], 'comics_shown:', comics_shown);
                 Dajaxice.corpsey.apps.comics.get_comic_panels($.corpsey.catacombs.show_panels, {
                     'comic_id': comics_showing[i],
                     'direction': State.data.direction,
@@ -216,7 +215,6 @@ $.corpsey.catacombs = (function() {
 
         // if you've looped through from last comic to first comic, make sure the URL matches visible order of comics
         // or if uturn and we're out of sync, swap em around!
-        // console.log(visible_comics, is_uturn, comics_showing, uturn_single);
         if ((!is_uturn && visible_comics[0]!=comics_showing[0]) ||
             (is_uturn && uturn_single && visible_comics[0]!=comics_showing[0])
             ) {
