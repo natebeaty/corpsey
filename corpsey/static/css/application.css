@@ -26,16 +26,16 @@ ul.tree a:hover,ul.tree li.active>a{background:#222;}
 .hidden{display:none;}
 #wrapper{overflow:hidden;min-height:660px;}
 body.static #content,#contribute-page #content{width:800px;}
-nav.main{background:#989eaa;height:26px;}nav.main ul{text-align:right;width:550px;position:absolute;top:0;right:0;}nav.main ul li{display:inline-block;}nav.main ul li #get-artist{outline:none;font:12px/1.2em 'Orienta',sans-serif;letter-spacing:.2em;color:#eee;background:#989eaa;border:0;width:86px;padding:2px 16px;height:24px;}nav.main ul li #get-artist::-webkit-input-placeholder{color:#eee;}
+nav.main{background:#989eaa;height:28px;}nav.main ul{text-align:right;width:550px;position:absolute;top:0;right:0;}nav.main ul li{display:inline-block;}nav.main ul li #get-artist{outline:none;font:12px/1.2em 'Orienta',sans-serif;letter-spacing:.2em;color:#eee;background:#989eaa;border:0;width:86px;padding:2px 16px;height:26px;}nav.main ul li #get-artist::-webkit-input-placeholder{color:#eee;}
 nav.main ul li #get-artist:-moz-placeholder{color:#eee;}
 nav.main ul li #get-artist::-moz-placeholder{color:#eee;}
 nav.main ul li #get-artist:-ms-input-placeholder{color:#eee;}
 nav.main ul li #get-artist:hover{background:#a6abb6;}
 nav.main ul li #get-artist:focus{background:#fff;color:#222;letter-spacing:0;padding:2px 6px;}
-nav.main ul li a{line-height:24px;padding:2px 16px 0 16px;background:none;}
+nav.main ul li a{line-height:26px;padding:2px 16px 0 16px;background:none;}
 nav.main ul li:last-child a{background:#ed1846;color:#eee;}nav.main ul li:last-child a:hover{background:#ef3059;}
 nav.main a{color:#eee;}nav.main a.active,nav.main a:hover{background:#a6abb6;}
-nav.main h1#textlogo{margin:0;padding:0;}nav.main h1#textlogo a{display:inline-block;background:url('/static/img/mini-logo-blk.png') 4px center no-repeat;letter-spacing:.2em;margin:0;padding:0 16px 0 57px;font:15px/26px 'Arbutus Slab',serif;}nav.main h1#textlogo a:hover{background-color:#a6abb6;}
+nav.main h1#textlogo{margin:0;padding:0;}nav.main h1#textlogo a{text-indent:-9999em;display:block;float:left;width:188px;background:url('/static/img/logo-solo.png') no-repeat;background-size:188px 25px;margin:1px 0 0 8px;}@media only screen and (-webkit-min-device-pixel-ratio:1.3),only screen and (-o-min-device-pixel-ratio:13/10),only screen and (min-resolution:120dpi){nav.main h1#textlogo a{background-image:url('/static/img/logo-solo@2x.png');}}
 #logo{width:682px;height:295px;background:url('/static/img/logo.gif') no-repeat;background-size:682px 295px;text-indent:-9999em;margin:8px auto;}@media only screen and (-webkit-min-device-pixel-ratio:1.3),only screen and (-o-min-device-pixel-ratio:13/10),only screen and (min-resolution:120dpi){#logo{background-image:url('/static/img/logo@2x.gif');}}#logo a{display:block;width:100%;height:100%;}
 footer.main{position:relative;height:580px;background:url('/static/img/footer.png') bottom center no-repeat;}
 a#clixel{position:absolute;bottom:20px;right:10%;width:53px;height:20px;text-indent:-9999em;display:block;background:url('/static/img/clixel.gif') no-repeat;}
