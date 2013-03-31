@@ -6,11 +6,11 @@
 {% block content %}
 <section id="catacombs">
 {% if comic_1 %}
-  {% include "comics/strip.html" with comic=comic_1 extra_class="comic_1" %}
+  {% include "comics/strip.html" with comic=comic_1 %}
 {% endif %}
 
 {% if comic_2 %}
-  {% include "comics/strip.html" with comic=comic_2 extra_class="comic_2" %}
+  {% include "comics/strip.html" with comic=comic_2 %}
 {% endif %}
 </section>
 

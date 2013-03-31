@@ -6,7 +6,7 @@
 {% block content %}
 <section id="catacombs">
 {% if comic %}
-  {% include "comics/strip.html" with comic=comic extra_class="comic_1" %}
+  {% include "comics/strip.html" with comic=comic %}
 {% endif %}
 
 <article class="comic single uturn active" data-comic-id="{{ uturn.id }}" data-portal-to-id="{{ uturn.portal_to.id }}">
