@@ -58,7 +58,7 @@ def random(request):
     comic_leaf = Comic.objects.filter(level__gt=0).order_by('?')[0]
     return redirect('/catacombs/%d/%d/' % (comic_leaf.parent.id, comic_leaf.id,))
 
-def random_starter(request):
+def enter_the_catacombs(request):
     """Return a random comic marked as a starter for Enter the Catacombs button on homepage."""
     comic_to = Comic.objects.filter(starter=True).order_by('?')[0]
     return redirect(comic_to)
