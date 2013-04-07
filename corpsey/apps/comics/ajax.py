@@ -82,7 +82,7 @@ def contribution_vote(request, contribution_id, yea, rule_broke=0, notes=''):
     num_nay_votes = len(contribution.votes.filter(approve=False))
 
     # reject contribution
-    if num_nay_votes > 1:
+    if num_nay_votes > 2:
         contribution.pending = False
         contribution.save()
         # email user that their comic was rejected
@@ -105,7 +105,7 @@ def contribution_vote(request, contribution_id, yea, rule_broke=0, notes=''):
             message = 'There was an error sending the rejection email to %s. Please write Nate and mock him.' % contribution.email
 
     # approve contribution
-    if num_yea_votes > 1:
+    if num_yea_votes > 2:
         contribution.pending = False
         contribution.accepted = True
         contribution.save()
