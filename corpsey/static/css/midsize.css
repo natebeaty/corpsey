@@ -2,6 +2,7 @@
 #catacombs{min-height:990px;max-width:660px;}#catacombs.one-comic-showing{min-height:690px;}
 #homepage h2{font:16px/1.2em 'Arbutus Slab',helvetica,sans-serif;}
 #homepage header.main .intro{width:300px;font:14px/1.3em 'Arbutus Slab',helvetica,sans-serif;}
+#homepage header .buttons{width:auto;}
 #homepage #logo{width:550px;height:238px;background-size:550px 238px;}
 #homepage .recent-contributors{width:760px;}
 #homepage .comic{margin-bottom:30px;}#homepage .comic img{width:250px;height:250px;}
