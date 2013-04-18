@@ -95,31 +95,31 @@ $.corpsey.catacombs = (function() {
                 $('.prev.button:first').trigger('click');
                 e.preventDefault();
             } else if (e.keyCode === 27) {
-                _hideFlonav();            
+                _hide_flonav();            
             }
         });
 
        // mobile nerds
-        $('#catacombs').bind('swipeleft',function(e) {
+        $(document).bind('swipeleft',function(e) {
             $('.prev.button:first').trigger('click');
         });
-        $('#catacombs').bind('swiperight',function(e) {
+        $(document).bind('swiperight',function(e) {
             $('.next.button:first').trigger('click');
         });
-        $('#catacombs').bind('taptwo click',function(e) {
-            _showFlonav(e);
+        $(document).bind('taptwo',function(e) {
+            _show_flonav(e);
         });
 
         // init isotope filter based on window size
         _delayed_resize();
     }
 
-    function _showFlonav(e) {
+    function _show_flonav(e) {
         var nav = $('.next.comic-nav').html();
         $('#flonav').show().css({left: e.pageX, top: e.pageY}).html(nav);
     }
 
-    function _hideFlonav() {
+    function _hide_flonav() {
         $('#flonav').hide();
     }
 
@@ -200,6 +200,8 @@ $.corpsey.catacombs = (function() {
     }
 
     function _show_panels(data) {
+        _hide_flonav();
+
         // cache comic data
         comics_shown.push(data.comic.comic_id);
 
