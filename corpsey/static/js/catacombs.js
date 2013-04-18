@@ -102,8 +102,7 @@ $.corpsey.catacombs = (function() {
        // mobile nerds
         $('#catacombs').bind('swipeone', function (e, obj) {
             var direction = obj.description.split(":")[2]
-            console.log(e,obj, obj.delta, obj.delta.moved);
-            if (obj.delta.moved > 200) {
+            if (obj.delta[0].moved > 200) {
                 if (direction === "left") {
                     $('.prev.button:first').trigger('click');
                 } else if (direction === "right") {
