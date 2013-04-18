@@ -95,18 +95,22 @@ $.corpsey.catacombs = (function() {
                 $('.prev.button:first').trigger('click');
                 e.preventDefault();
             } else if (e.keyCode === 27) {
-                _hide_flonav();            
+                _hide_flonav();
             }
         });
 
        // mobile nerds
-        $(document).bind('swipeleft',function(e) {
-            $('.prev.button:first').trigger('click');
+        $('#catacombs').bind('swipeone', function (e, obj) {
+            var direction = obj.description.split(":")[2]
+            if (direction === "left") {
+                $('.prev.button:first').trigger('click');
+            } else if (direction === "left") {
+                $('.next.button:first').trigger('click');
+            }
         });
-        $(document).bind('swiperight',function(e) {
-            $('.next.button:first').trigger('click');
-        });
-        $(document).bind('taptwo',function(e) {
+        $('#catacombs').bind('swipetwo', function (e, obj) {
+            var direction = obj.description.split(":")[2]
+            // todo, send along next or prev dir to show appropriate nav
             _show_flonav(e);
         });
 
