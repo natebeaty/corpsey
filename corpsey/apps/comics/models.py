@@ -92,6 +92,10 @@ class Uturn(models.Model):
     portal_to = models.ForeignKey(Comic, related_name='uturn')
     panel = ThumbnailerImageField(upload_to='comics', blank=True)
 
+    @models.permalink
+    def get_absolute_url(self):
+        return ('corpsey.apps.comics.views.uturn', [str(self.id)])
+
     def __unicode__(self):
         return u"Uturn to %s" % (self.portal_to.artist)
 
