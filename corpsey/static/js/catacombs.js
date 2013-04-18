@@ -312,7 +312,7 @@ $.corpsey.catacombs = (function() {
             var pos = $img.offset();
             var $h1 = $('h1.comic_'+(i+1));
             if ($h1.length>0 && pos!==null) {
-                $h1.css({ 'top' : pos.top+$h1.width(), 'left' : pos.left-20 });
+                $h1.css({ 'top' : pos.top+$h1.width(), 'left' : pos.left-16 });
             }
         });
         $('h1.comic_1, h1.comic_2').show();
