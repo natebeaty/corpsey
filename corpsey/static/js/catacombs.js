@@ -102,10 +102,14 @@ $.corpsey.catacombs = (function() {
        // mobile nerds
         $('#catacombs').bind('swipeone', function (e, obj) {
             var direction = obj.description.split(":")[2]
-            if (direction === "left") {
-                $('.prev.button:first').trigger('click');
-            } else if (direction === "right") {
-                $('.next.button:first').trigger('click');
+            alert(obj.deltaX);
+            alert(obj.deltaY);
+            if (obj.deltaX > 100 && obj.deltaY < 50) {
+                if (direction === "left") {
+                    $('.prev.button:first').trigger('click');
+                } else if (direction === "right") {
+                    $('.next.button:first').trigger('click');
+                }
             }
         });
         $('#catacombs').bind('swipetwo', function (e, obj) {
