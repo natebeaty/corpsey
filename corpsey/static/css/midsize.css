@@ -1,5 +1,5 @@
 #wrapper{min-height:1210px;}
-#catacombs{min-height:990px;max-width:660px;}#catacombs.one-comic-showing{min-height:690px;}
+#catacombs{min-height:990px;max-width:660px;padding-left:0;}#catacombs.one-comic-showing{min-height:690px;}
 #homepage h2{font:16px/1.2em 'Arbutus Slab',helvetica,sans-serif;}
 #homepage header.main .intro{width:300px;font:14px/1.3em 'Arbutus Slab',helvetica,sans-serif;}
 #homepage header .buttons{width:auto;}
