@@ -139,7 +139,7 @@ $.corpsey.catacombs = (function() {
         
         // check for comic panels to load
         for(var i=0; i<comics_showing.length; i++) {
-            if (is_uturn && (i===0 && !uturns_shown.indexOf(comics_showing[i])<0)) {
+            if (is_uturn && (i===0 && uturns_shown.indexOf(comics_showing[i]) < 0)) {
                 Dajaxice.corpsey.apps.comics.get_uturn_panel($.corpsey.catacombs.show_uturn, {
                     'uturn_id': comics_showing[i],
                     'direction': State.data.direction,
