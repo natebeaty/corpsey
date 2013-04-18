@@ -104,7 +104,7 @@ $.corpsey.catacombs = (function() {
             var direction = obj.description.split(":")[2]
             if (direction === "left") {
                 $('.prev.button:first').trigger('click');
-            } else if (direction === "left") {
+            } else if (direction === "right") {
                 $('.next.button:first').trigger('click');
             }
         });
