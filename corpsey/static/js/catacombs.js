@@ -130,7 +130,8 @@ $.corpsey.catacombs = (function() {
         // remove first comic if we've shown more than max_comics_loaded
         if (comics_shown.length > max_comics_loaded) {
             $('.comic.single:not(.uturn)[data-comic-id='+comics_shown[0]+']').remove();
-            comics_shown.shift();
+            var index = $.inArray(comics_shown[0], comics_shown);
+            comics_shown.splice(index, 1);
         }
     }
 
