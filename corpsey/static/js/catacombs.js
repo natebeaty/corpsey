@@ -164,7 +164,7 @@ $.corpsey.catacombs = (function() {
 
     function _show_uturn(data) {
         // cache uturn data
-        uturns_shown[data.uturn.uturn_id] = 1;
+        uturns_shown.push(data.uturn.uturn_id);
         
         // build from icanhaz template
         var uturn = ich.uturn_single(data.uturn);
@@ -177,9 +177,7 @@ $.corpsey.catacombs = (function() {
 
     function _show_panels(data) {
         // cache comic data
-        if(comics_shown.indexOf(data.comic.comic_id) < 0) {
-            comics_shown.push(data.comic.comic_id);
-        }
+        comics_shown.push(data.comic.comic_id);
 
         // build from icanhaz template
         var comic = ich.comic_single(data.comic);
