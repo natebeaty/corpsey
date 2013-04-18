@@ -60,6 +60,7 @@ a#clixel{position:absolute;bottom:20px;right:10%;width:53px;height:20px;text-ind
 .contribution ul,.comic ul,.contribution li,.comic li{display:inline;}
 .contribution img,.comic img{display:block;float:left;width:330px;height:330px;background-size:330px 330px;-webkit-transition:background-color 0.5s;-moz-transition:background-color 0.5s;-o-transition:background-color 0.5s;transition:background-color 0.5s;}.contribution img.loading,.comic img.loading{background:#ccc;}
 .contribution.single,.comic.single{width:1000px;margin:0 auto;position:relative;}.contribution.single h1,.comic.single h1{display:none;}
+#flonav{position:absolute;width:200px;height:200px;background:#666;-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px;padding:20px;text-align:center;z-index:10001;}
 #contributions #content{max-width:1000px;margin:10px auto;}
 #contributions ul{display:block;clear:left;overflow:hidden;}
 #contributions .comic{margin-bottom:20px;}#contributions .comic h1{font:12px/1.2em 'Arbutus Slab',serif;}

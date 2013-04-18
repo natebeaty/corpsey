@@ -35,6 +35,7 @@ $.corpsey.catacombs = (function() {
                 comics_shown.push(comics_showing[i]);
             }
         }
+        $('<div id="flonav" />').appendTo('body');
 
         History.replaceState({
             'direction': ''
@@ -88,16 +89,38 @@ $.corpsey.catacombs = (function() {
         // keyboard nerds
         $(document).bind('keydown',function(e) {
             if (e.keyCode === 39) {
-              $('.next.button:first').trigger('click');
-              e.preventDefault();
+                $('.next.button:first').trigger('click');
+                e.preventDefault();
             } else if (e.keyCode === 37) {
-              $('.prev.button:first').trigger('click');
-              e.preventDefault();
+                $('.prev.button:first').trigger('click');
+                e.preventDefault();
+            } else if (e.keyCode === 27) {
+                _hideFlonav();            
             }
+        });
+
+       // mobile nerds
+        $('#catacombs').bind('swipeleft',function(e) {
+            $('.prev.button:first').trigger('click');
+        });
+        $('#catacombs').bind('swiperight',function(e) {
+            $('.next.button:first').trigger('click');
+        });
+        $('#catacombs').bind('taptwo click',function(e) {
+            _showFlonav(e);
         });
 
         // init isotope filter based on window size
         _delayed_resize();
+    }
+
+    function _showFlonav(e) {
+        var nav = $('.next.comic-nav').html();
+        $('#flonav').show().css({left: e.pageX, top: e.pageY}).html(nav);
+    }
+
+    function _hideFlonav() {
+        $('#flonav').hide();
     }
 
     function _get_comics_showing() {
