@@ -35,7 +35,7 @@ $.corpsey.catacombs = (function() {
                 comics_shown.push(comics_showing[i]);
             }
         }
-        $('<div id="flonav" />').appendTo('body');
+        $('<div id="flonav" />').appendTo('body').hide();
 
         History.replaceState({
             'direction': ''
