@@ -37,7 +37,9 @@ nav.main ul li:last-child a{background:#ed1846;color:#eee;}nav.main ul li:last-c
 nav.main a{color:#eee;}nav.main a.active,nav.main a:hover{background:#a6abb6;}
 nav.main h1#textlogo{margin:0;padding:0;}nav.main h1#textlogo a{text-indent:-9999em;display:block;float:left;width:198px;height:28px;background:url('/static/img/logo-solo.png') center center no-repeat;background-size:188px 25px;}@media only screen and (-webkit-min-device-pixel-ratio:1.3),only screen and (-o-min-device-pixel-ratio:13/10),only screen and (min-resolution:120dpi){nav.main h1#textlogo a{background-image:url('/static/img/logo-solo@2x.png');}}nav.main h1#textlogo a:hover{background-color:#a6abb6;}
 #logo{width:682px;height:295px;background:url('/static/img/logo.gif') no-repeat;background-size:682px 295px;text-indent:-9999em;margin:8px auto;}@media only screen and (-webkit-min-device-pixel-ratio:1.3),only screen and (-o-min-device-pixel-ratio:13/10),only screen and (min-resolution:120dpi){#logo{background-image:url('/static/img/logo@2x.gif');}}#logo a{display:block;width:100%;height:100%;}
-footer.main{position:relative;height:600px;background:url('/static/img/bones.gif') repeat-x bottom center;}
+footer.main{position:relative;height:540px;background:url('/static/img/footer-1.gif') repeat-x bottom center;}
+#homepage footer.main{background:url('/static/img/footer-2.gif') repeat-x bottom center;height:600px;}
+#about footer.main{background:url('/static/img/footer-3.gif') repeat-x bottom center;}
 a#clixel{position:absolute;bottom:20px;right:10%;width:53px;height:20px;text-indent:-9999em;display:block;background:url('/static/img/clixel.gif') no-repeat;}
 .comic-nav{position:absolute;right:0;top:380px;width:130px;z-index:10000;background:#fff;padding:2px 5px;}.comic-nav h2{margin:0 0 .4em;}
 .comic-nav.prev{top:40px;float:left;}.comic-nav.prev.stuck{top:40px;}
@@ -109,4 +111,5 @@ ul.ui-autocomplete{background:#76896b;z-index:99999 !important;width:250px !impo
 #login form{width:400px;margin:40px auto;}
 #login input[type=submit]{margin:20px auto;}
 #about #content{width:600px;margin:0 auto;}
+#about #wrapper,#artists #wrapper{min-height:0;}
 #mobile-nav{display:none;position:absolute;top:6px;right:6px;width:22px;height:22px;background:url('/static/img/mobile-nav.png') no-repeat;background-size:22px 22px;}@media only screen and (-webkit-min-device-pixel-ratio:1.3),only screen and (-o-min-device-pixel-ratio:13/10),only screen and (min-resolution:120dpi){#mobile-nav{background-image:url('/static/img/mobile-nav@2x.png');}}

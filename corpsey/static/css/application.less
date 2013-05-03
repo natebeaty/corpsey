@@ -243,9 +243,17 @@ nav.main {
 
 footer.main {
     position: relative;
-    height: 600px;
-    background: url('/static/img/bones.gif') repeat-x bottom center;
+    height: 540px;
+    background: url('/static/img/footer-1.gif') repeat-x bottom center;
 }
+#homepage footer.main {
+    background: url('/static/img/footer-2.gif') repeat-x bottom center;
+    height: 600px;
+}
+#about footer.main {
+    background: url('/static/img/footer-3.gif') repeat-x bottom center;
+}
+
 a#clixel {
     position: absolute;
     bottom: 20px;
@@ -829,6 +837,12 @@ ul.ui-autocomplete {
     #content {
         width: 600px;
         margin: 0 auto;
+    }
+}
+#about,
+#artists {
+    #wrapper {
+        min-height: 0
     }
 }
 #mobile-nav {

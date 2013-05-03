@@ -27,7 +27,9 @@
         {% if comic.panel2 %}<img class="panel" src="{{ comic.panel2.midsize.url }}" width="{{ comic.panel1.midsize.width }}" height="{{ comic.panel1.midsize.height }}" data-hd-src="{{ comic.panel2.midsize_hd.url }}">{% endif %}
         {% if comic.panel3 %}<img class="panel" src="{{ comic.panel3.midsize.url }}" width="{{ comic.panel1.midsize.width }}" height="{{ comic.panel1.midsize.height }}" data-hd-src="{{ comic.panel3.midsize_hd.url }}">{% endif %}</a>
       </article>
-      <div class="bone-divider {% cycle 'odd' 'even' %}"></div>
+      {% if not forloop.last %}
+        <div class="bone-divider {% cycle 'odd' 'even' %}"></div>
+      {% endif %}
     {% endfor %}
   </div>
 {% endblock content %}
