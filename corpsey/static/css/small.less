@@ -134,11 +134,20 @@ nav.main {
         width: 100%;
         z-index: 10000;
         background: @bluegray;
+        padding: 15px 0;
         li {
             display: block;
             width: 100%;
             text-align: center;
-            height: 32px;
+            height: 40px;
+            a {
+                font: 16px/26px 'Orienta', sans-serif;
+            }
+            #get-artist {
+                font: 16px/26px 'Orienta', sans-serif;
+                width: 130px;
+                text-align: center;
+            }
         }
 	}
 	h1#textlogo {
@@ -148,10 +157,13 @@ nav.main {
             height: 34px;
         }
 	}
-
 }
-ul.tree {
-	display: none;
+ul.ui-autocomplete {
+    width: 100% !important;
+    left: 0 !important;
+    li {
+        font: 16px/1.2em 'Orienta', sans-serif;
+    }
 }
 #artists {
     #content {
