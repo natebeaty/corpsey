@@ -101,6 +101,7 @@ $.corpsey.catacombs = (function() {
 
        // mobile nerds
         $('#catacombs').bind('swipeone', function (e, obj) {
+            return; // disabling for now
             var direction = obj.description.split(":")[2]
             if (obj.delta[0].moved > 200) {
                 if (direction === "left") {
@@ -111,6 +112,7 @@ $.corpsey.catacombs = (function() {
             }
         });
         $('#catacombs').bind('swipetwo', function (e, obj) {
+            return; // disabling for now
             var direction = obj.description.split(":")[2]
             // todo, send along next or prev dir to show appropriate nav
             _show_flonav(e);
