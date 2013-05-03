@@ -54,7 +54,7 @@ $.corpsey = (function() {
         medium_width = screen_width <= 1020;
         small_width = screen_width <= 700;
         if (small_width) {
-            $('nav.main ul').slideUp('fast');
+            $('nav.main ul').hide();
             $('#mobile-nav').show();
         } else {
             $('nav.main ul').show();
@@ -82,10 +82,10 @@ $.corpsey = (function() {
 // fire up the mothership
 $(window).ready(function(){
     $.corpsey.init();
+    $.corpsey.resize();
 });
 $(window).load(function(){
     $.corpsey.retinize();
-    $.corpsey.resize();
 });
 $(window).resize(function(){
     $.corpsey.resize();
