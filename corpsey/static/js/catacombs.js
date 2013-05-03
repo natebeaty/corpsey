@@ -394,6 +394,9 @@ $.corpsey.catacombs = (function() {
 $(window).ready(function(){
     $.corpsey.catacombs.init();
 });
+$(window).load(function(){
+    $.corpsey.catacombs.build_titles();
+});
 
 // adjust to mothership size variations
 $(window).resize(function(){
