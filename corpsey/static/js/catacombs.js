@@ -409,9 +409,9 @@ $(window).ready(function(){
     $.corpsey.catacombs.init();
 });
 $(window).load(function(){
-    // attempt to fix title cutting off glitch
-    setTimeout(function() { $.corpsey.catacombs.move_titles(); }, 250);
-    $.corpsey.retinize();
+    // attempt to fix title cutoff glitch 
+    setTimeout(function() { $.corpsey.catacombs.build_titles(); }, 250);
+    $.corpsey.catacombs.retinize();
 });
 
 // adjust to mothership size variations
