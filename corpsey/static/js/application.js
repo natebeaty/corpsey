@@ -48,7 +48,8 @@ $.corpsey = (function() {
         var screen_width = document.documentElement.clientWidth;
         medium_width = screen_width <= 1020;
         small_width = screen_width <= 700;
-        if (small_width) {
+        // show mobile "=" nav toggler if not on homepage
+        if (small_width && $('#homepage').length==0) {
             $('#mobile-nav').show();
         } else {
             $('nav.main ul').show();
