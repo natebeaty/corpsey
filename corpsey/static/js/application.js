@@ -44,15 +44,6 @@ $.corpsey = (function() {
         $('#id_username').focus();
     }
 
-    function _retinize() {
-        // reload @2x images 
-        if (_hdpi_enabled) {
-            $('img.panel').each(function() {
-                $(this).attr('src', $(this).attr('data-hd-src'));
-            });
-        }
-    }
-
     function _resize() {
         var screen_width = document.documentElement.clientWidth;
         medium_width = screen_width <= 1020;
@@ -70,9 +61,6 @@ $.corpsey = (function() {
         init: function() {
             _init();
         },
-        retinize: function() {
-            _retinize();
-        },
         resize: function() {
             _resize();
         },
@@ -85,9 +73,6 @@ $.corpsey = (function() {
 // fire up the mothership
 $(window).ready(function(){
     $.corpsey.init();
-});
-$(window).load(function(){
-    $.corpsey.retinize();
 });
 $(window).resize(function(){
     $.corpsey.resize();

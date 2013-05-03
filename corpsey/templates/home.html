@@ -23,9 +23,9 @@
     {% for comic in comic_set %}
       <article class="comic">
         <h1>{{ comic.artist }} {% if comic.parent %}<small>following {{ comic.parent.artist }}</small>{% endif %}</h1>
-        <a href="{% if comic.parent %}/catacombs/{{ comic.parent.id }}/{{ comic.id }}/{% else %}{{ comic.get_absolute_url }}{% endif %}">{% if comic.panel1 %}<img class="panel" src="{{ comic.panel1.midsize.url }}" width="{{ comic.panel1.midsize.width }}" height="{{ comic.panel1.midsize.height }}" data-hd-src="{{ comic.panel1.midsize_hd.url }}">{% endif %}
-        {% if comic.panel2 %}<img class="panel" src="{{ comic.panel2.midsize.url }}" width="{{ comic.panel1.midsize.width }}" height="{{ comic.panel1.midsize.height }}" data-hd-src="{{ comic.panel2.midsize_hd.url }}">{% endif %}
-        {% if comic.panel3 %}<img class="panel" src="{{ comic.panel3.midsize.url }}" width="{{ comic.panel1.midsize.width }}" height="{{ comic.panel1.midsize.height }}" data-hd-src="{{ comic.panel3.midsize_hd.url }}">{% endif %}</a>
+        <a href="{% if comic.parent %}/catacombs/{{ comic.parent.id }}/{{ comic.id }}/{% else %}{{ comic.get_absolute_url }}{% endif %}">{% if comic.panel1 %}<img class="panel" src="/static/img/panel-placeholder.png" data-original="{{ comic.panel1.midsize.url }}" width="{{ comic.panel1.midsize.width }}" height="{{ comic.panel1.midsize.height }}" data-original-hd="{{ comic.panel1.midsize_hd.url }}">{% endif %}
+        {% if comic.panel2 %}<img class="panel" src="/static/img/panel-placeholder.png" data-original="{{ comic.panel2.midsize.url }}" width="{{ comic.panel1.midsize.width }}" height="{{ comic.panel1.midsize.height }}" data-original-hd="{{ comic.panel2.midsize_hd.url }}">{% endif %}
+        {% if comic.panel3 %}<img class="panel" src="/static/img/panel-placeholder.png" data-original="{{ comic.panel3.midsize.url }}" width="{{ comic.panel1.midsize.width }}" height="{{ comic.panel1.midsize.height }}" data-original-hd="{{ comic.panel3.midsize_hd.url }}">{% endif %}</a>
       </article>
       {% if not forloop.last %}
         <div class="bone-divider {% cycle 'odd' 'even' %}"></div>
@@ -35,5 +35,6 @@
 {% endblock content %}
 
 {% block extra_javascript %}
+  <script src="{{ STATIC_URL }}js/jquery.lazyload.min.js" type="text/javascript"></script>
   <script src="{{ STATIC_URL }}js/home.js" type="text/javascript"></script>
 {% endblock extra_javascript %}

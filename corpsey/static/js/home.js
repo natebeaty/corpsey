@@ -11,6 +11,12 @@ $.corpsey.home = (function() {
             $('html,body').animate({scrollTop:$('#recent-contributors').offset().top }, 'fast');
             return false;
         });
+
+        // lazy load
+        $("img.panel").lazyload({
+            threshold: 200,
+            hidpi_support: true
+        });
     }
 
     // public methods

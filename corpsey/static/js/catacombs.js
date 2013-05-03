@@ -366,6 +366,15 @@ $.corpsey.catacombs = (function() {
         small_width = screen_width <= 700;
     }
 
+    function _retinize() {
+        // reload @2x images 
+        if (_hdpi_enabled) {
+            $('img.panel').each(function() {
+                $(this).attr('src', $(this).attr('data-hd-src'));
+            });
+        }
+    }
+
     // public methods
     return {
         init: function() {
@@ -379,6 +388,9 @@ $.corpsey.catacombs = (function() {
         },
         resize: function() {
             _resize();
+        },
+        retinize: function() {
+            _retinize();
         },
         delayed_resize: function() {
           _delayed_resize();
@@ -398,6 +410,7 @@ $(window).ready(function(){
 });
 $(window).load(function(){
     $.corpsey.catacombs.build_titles();
+    $.corpsey.retinize();
 });
 
 // adjust to mothership size variations
