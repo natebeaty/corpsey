@@ -11,12 +11,16 @@ $.corpsey = (function() {
         // are we on a retina display?
         _hdpi_enabled = (window.devicePixelRatio >= 2);
 
+        // get screen width and roll up nav if mobile
+        _resize();
+        if (small_width) $('nav.main ul').hide();
+
         $('<a id="mobile-nav" />').appendTo('body').click(function() {
             $('nav.main ul').slideToggle('fast');    
         });
 
         // search-o-rama
-        $('<li><input id="get-artist" placeholder="SEARCH"></li>').prependTo('nav.main ul');
+        $('<li><input id="get-artist" placeholder="SEARCH" autocomplete="off"></li>').prependTo('nav.main ul');
         $('#get-artist').autocomplete({
             source: "/get_artists/",
             minLength: 2,
@@ -54,7 +58,6 @@ $.corpsey = (function() {
         medium_width = screen_width <= 1020;
         small_width = screen_width <= 700;
         if (small_width) {
-            $('nav.main ul').hide();
             $('#mobile-nav').show();
         } else {
             $('nav.main ul').show();
@@ -82,7 +85,6 @@ $.corpsey = (function() {
 // fire up the mothership
 $(window).ready(function(){
     $.corpsey.init();
-    $.corpsey.resize();
 });
 $(window).load(function(){
     $.corpsey.retinize();
