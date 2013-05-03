@@ -17,7 +17,7 @@ h1.comic_1,h1.comic_2{display:none !important;}
 .comic-nav.loading{opacity:.3;}
 .comic-nav .button{width:106px;}
 .comic-nav.stuck{position:static;}
-nav.main{height:34px;}nav.main ul{top:34px;left:0;width:100%;z-index:10000;background:#989eaa;}nav.main ul li{display:block;width:100%;text-align:center;}
+nav.main{height:34px;}nav.main ul{top:34px;left:0;width:100%;z-index:10000;background:#989eaa;}nav.main ul li{display:block;width:100%;text-align:center;height:32px;}
 nav.main h1#textlogo a{float:none;margin:0 auto;height:34px;}
 ul.tree{display:none;}
 #artists #content{width:300px;}#artists #content h3.name{width:200px;}
