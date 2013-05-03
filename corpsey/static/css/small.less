@@ -129,7 +129,16 @@ h1.comic_2 {
 nav.main {
 	height: 34px;
 	ul {
-		display: none;
+        top: 34px;
+        left: 0;
+        width: 100%;
+        z-index: 10000;
+        background: @bluegray;
+        li {
+            display: block;
+            width: 100%;
+            text-align: center;
+        }
 	}
 	h1#textlogo {
         a {

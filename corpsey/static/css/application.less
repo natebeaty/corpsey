@@ -5,15 +5,6 @@ Corpsey
 @import 'reset.less';
 @import 'mixins.less';
 
-@olive: #76896b;
-@graygreen: #acb5b0;
-@bluegray: #989eaa;
-@red: #ed1846;
-@tan: #b9b19c;
-
-@yea: #1ccc24;
-@nay: #fc6048;
-
 html, body { height: 100%; }
 body {
     background: #fff;
@@ -734,7 +725,7 @@ form {
 /* autocomplete */
 .ui-helper-hidden-accessible { display: none; }
 ul.ui-autocomplete {
-    background: @bluegray;
+    background: @olive;
     z-index: 99999 !important;
     width: 150px !important;
     li {
@@ -747,7 +738,7 @@ ul.ui-autocomplete {
             &:hover,
             &.active,
             &:focus {
-                background: lighten(@bluegray, 5%);
+                background: lighten(@olive, 5%);
             }
         }
     }
@@ -837,4 +828,12 @@ ul.ui-autocomplete {
         width: 600px;
         margin: 0 auto;
     }
+}
+#mobile-nav {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    width: 24px;
+    height: 24px;
+    background: url('/static/img/mobile-nav.png') no-repeat;
 }
