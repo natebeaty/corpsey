@@ -26,13 +26,13 @@ ul.tree a:hover,ul.tree li.active>a{background:#222;}
 .hidden{display:none;}
 #wrapper{overflow:hidden;min-height:660px;}
 body.static #content,#contribute-page #content{width:800px;}
-nav.main{background:#989eaa;height:28px;}nav.main ul{text-align:right;width:550px;position:absolute;top:0;right:0;}nav.main ul li{display:inline-block;}nav.main ul li #get-artist{outline:none;font:12px/26px 'Orienta',sans-serif;display:inline-block;letter-spacing:.2em;color:#eee;background:#989eaa;border:0;width:89px;padding:2px 16px;height:26px;}nav.main ul li #get-artist::-webkit-input-placeholder{color:#eee;}
+nav.main{background:#989eaa;height:28px;}nav.main ul{text-align:right;width:550px;position:absolute;top:0;right:0;}nav.main ul li{display:inline-block;}nav.main ul li #get-artist{outline:none;font:12px/24px 'Orienta',sans-serif;display:inline-block;letter-spacing:.2em;color:#eee;background:#989eaa;border:0;width:89px;padding:2px 16px 0 16px;}nav.main ul li #get-artist::-webkit-input-placeholder{color:#eee;}
 nav.main ul li #get-artist:-moz-placeholder{color:#eee;}
 nav.main ul li #get-artist::-moz-placeholder{color:#eee;}
 nav.main ul li #get-artist:-ms-input-placeholder{color:#eee;}
 nav.main ul li #get-artist:hover{background:#a6abb6;}
-nav.main ul li #get-artist:focus{background:#fff;color:#222;letter-spacing:0;padding:2px 6px;}
-nav.main ul li a{line-height:26px;display:inline-block;padding:2px 16px 0 16px;background:none;margin:0;}
+nav.main ul li #get-artist:focus{background:#fff;color:#222;letter-spacing:.08em;padding:2px 6px;}
+nav.main ul li a{font:12px/24px 'Orienta',sans-serif;display:inline-block;padding:2px 16px 0 16px;background:none;margin:0;}
 nav.main ul li:last-child a{background:#ed1846;color:#eee;}nav.main ul li:last-child a:hover{background:#ef3059;}
 nav.main a{color:#eee;}nav.main a.active,nav.main a:hover{background:#a6abb6;}
 nav.main h1#textlogo{margin:0;padding:0;}nav.main h1#textlogo a{text-indent:-9999em;display:block;float:left;width:198px;height:28px;background:url('/static/img/logo-solo.png') center center no-repeat;background-size:188px 25px;}@media only screen and (-webkit-min-device-pixel-ratio:1.3),only screen and (-o-min-device-pixel-ratio:13/10),only screen and (min-resolution:120dpi){nav.main h1#textlogo a{background-image:url('/static/img/logo-solo@2x.png');}}nav.main h1#textlogo a:hover{background-color:#a6abb6;}
@@ -98,7 +98,7 @@ form input[type=submit]{font:16px/1em "Orienta",sans-serif;padding:10px 60px 8px
 .isotope .isotope-item{-webkit-transition-property:-webkit-transform,opacity;-moz-transition-property:-moz-transform,opacity;-ms-transition-property:-ms-transform,opacity;-o-transition-property:-o-transform,opacity;transition-property:transform, opacity;}
 .isotope.no-transition,.isotope.no-transition .isotope-item,.isotope .isotope-item.no-transition{-webkit-transition-duration:0s;-moz-transition-duration:0s;-ms-transition-duration:0s;-o-transition-duration:0s;transition-duration:0s;}
 .ui-helper-hidden-accessible{display:none;}
-ul.ui-autocomplete{background:#76896b;z-index:99999 !important;width:150px !important;}ul.ui-autocomplete li{font:12px/1.2em 'Orienta',sans-serif;}ul.ui-autocomplete li a{display:block;cursor:pointer;padding:6px 8px;color:#fff;}ul.ui-autocomplete li a:hover,ul.ui-autocomplete li a.active,ul.ui-autocomplete li a:focus{background:#839678;}
+ul.ui-autocomplete{background:#76896b;z-index:99999 !important;width:250px !important;}ul.ui-autocomplete li a{font:12px/1.3em 'Orienta',sans-serif;display:block;cursor:pointer;padding:6px 8px;color:#fff;}ul.ui-autocomplete li a:hover,ul.ui-autocomplete li a.active,ul.ui-autocomplete li a:focus{background:#839678;}
 #tree #content{margin:20px;overflow:hidden;}#tree #content svg{margin-left:-47px;}
 #tree #content .node circle{fill:#76896b;stroke:#76896b;stroke-width:1px;}
 #tree #content .node{font:12px/1.2em 'Orienta',sans-serif;}
