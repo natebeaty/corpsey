@@ -409,7 +409,8 @@ $(window).ready(function(){
     $.corpsey.catacombs.init();
 });
 $(window).load(function(){
-    $.corpsey.catacombs.build_titles();
+    // attempt to fix title cutting off glitch
+    setTimeout(function() { $.corpsey.catacombs.move_titles(); }, 250);
     $.corpsey.retinize();
 });
 
