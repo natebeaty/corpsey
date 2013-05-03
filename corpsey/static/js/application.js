@@ -20,7 +20,7 @@ $.corpsey = (function() {
         });
 
         // search-o-rama
-        $('<li><input id="get-artist" placeholder="SEARCH" autocomplete="off"></li>').prependTo('nav.main ul');
+        $('<li><input id="get-artist" placeholder="SEARCH" autocomplete="off" autocorrect="off" autocapitalize="off"></li>').prependTo('nav.main ul');
         $('#get-artist').autocomplete({
             source: "/get_artists/",
             minLength: 2,
