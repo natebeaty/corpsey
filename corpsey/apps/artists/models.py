@@ -18,6 +18,12 @@ class Artist(models.Model):
     def __unicode__(self):
         return self.name
 
+    def name_reversed(self):
+        if self.last_name and self.first_name:
+            return "%s, %s" % (self.last_name, self.first_name)
+        else:
+            return self.name
+
     class Meta:
         ordering = ['last_name', 'first_name']
 

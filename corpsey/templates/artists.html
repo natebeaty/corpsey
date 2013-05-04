@@ -13,7 +13,7 @@
     <ul>
     {% for artist in artist_set %}
       {% ifchanged %}<li class="letter"><h2>{{ artist.last_name|slice:"1"|upper }}</h2></li>{% endifchanged %}
-      <li><h3 class="name"><a title="View in Catacombs" href="/artist_in_catacombs/{{ artist.id }}/">{{ artist.name }}</a></h3>
+      <li><h3 class="name"><a title="View in Catacombs" href="/artist_in_catacombs/{{ artist.id }}/">{{ artist.name_reversed }}</a></h3>
         {% if artist.url %}
           <a class="button artist-url" target="_blank" href="{{ artist.url }}">Website</a>
         {% endif %}
