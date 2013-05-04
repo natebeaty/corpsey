@@ -15,12 +15,10 @@ $.corpsey.home = (function() {
         });
 
         // lazy load for everything but ipad
-        if (!isIpad) {
-            $("img.panel").lazyload({
-                threshold: 200,
-                hidpi_support: true
-            });
-        }
+        $("img.panel").lazyload({
+            threshold: (isiPad) ? 99999 : 200,
+            hidpi_support: true
+        });
     }
 
     // public methods
