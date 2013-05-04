@@ -245,25 +245,47 @@ footer.main {
     position: relative;
     height: 540px;
     background: url('/static/img/footer-1.gif') repeat-x bottom center;
+    ul {
+        text-align: center;
+        padding-top: 370px;
+        li { 
+            display: inline; 
+        }
+        a {
+            display: inline-block;
+            width: 46px;
+            height: 110px;
+            background: url('/static/img/facebook.png') no-repeat 0 62px;
+            text-indent: -9999em;
+            .transition(all .3s);
+            &:hover {
+                .rotation(6deg);
+            }
+            &#clixel {
+                width: 82px;
+                background: url('/static/img/clixel.png') no-repeat 0 64px;
+                &:hover {
+                    .rotation(-6deg);
+                }
+            }
+            &#twitter {
+                width: 80px;
+                background: url('/static/img/twitter.png') no-repeat 0 20px;
+            }
+        }
+    }
 }
 #homepage footer.main {
     background: url('/static/img/footer-2.gif') repeat-x bottom center;
     height: 600px;
+    ul {
+        padding-top: 440px;
+    }
 }
 #about footer.main {
     background: url('/static/img/footer-3.gif') repeat-x bottom center;
 }
 
-a#clixel {
-    position: absolute;
-    bottom: 20px;
-    right:10%;
-    width: 53px;
-    height: 20px;
-    text-indent: -9999em;
-    display: block;
-    background: url('/static/img/clixel.gif') no-repeat;
-}
 .comic-nav {
     position: absolute;
     right:0;
@@ -289,7 +311,7 @@ a#clixel {
         }
     }
     &.loading {
-        opacity: .3;
+        .opacity(.3);
     }
     .button {
         width: 106px;
