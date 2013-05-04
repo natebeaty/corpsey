@@ -6,17 +6,21 @@ $.corpsey = $.corpsey || {};
 $.corpsey.home = (function() {
 
     function _init() {
+        var isiPad = navigator.userAgent.match(/iPad/i) != null;
+
         // scroll down to recent contributors from homepage button
         $('li.recent a').click(function() {
             $('html,body').animate({scrollTop:$('#recent-contributors').offset().top }, 'fast');
             return false;
         });
 
-        // lazy load
-        $("img.panel").lazyload({
-            threshold: 200,
-            hidpi_support: true
-        });
+        // lazy load for everything but ipad
+        if (!isIpad) {
+            $("img.panel").lazyload({
+                threshold: 200,
+                hidpi_support: true
+            });
+        }
     }
 
     // public methods
