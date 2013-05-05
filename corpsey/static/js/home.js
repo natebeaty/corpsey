@@ -6,7 +6,7 @@ $.corpsey = $.corpsey || {};
 $.corpsey.home = (function() {
 
     function _init() {
-        var isiPad = navigator.userAgent.match(/iPad/i) != null;
+        var ios_device = navigator.userAgent.match(/(iPod|iPhone|iPad)/) && navigator.userAgent.match(/AppleWebKit/)
 
         // scroll down to recent contributors from homepage button
         $('li.recent a').click(function() {
@@ -14,9 +14,9 @@ $.corpsey.home = (function() {
             return false;
         });
 
-        // lazy load for everything but ipad
+        // lazy load for everything but iOS (waits until end of scroll to load images)
         $("img.panel").lazyload({
-            threshold: (isiPad) ? 99999 : 200,
+            threshold: (ios_device) ? 99999 : 200,
             hidpi_support: true
         });
     }
