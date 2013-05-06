@@ -1,0 +1,8 @@
+/* TEAM */
+Aaron Renier, organizer: aaronrenier.com, @acornreindeer
+Nate Beaty, coder: natebeaty.com, @natebeaty
+
+/* SITE */
+Standards: HTML5, CSS3
+Components: jQuery, Isotope, Icanhaz, History.js
+Software: Django, Sublime Text, CodeKit, Git
