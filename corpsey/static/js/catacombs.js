@@ -368,7 +368,7 @@ $.corpsey.catacombs = (function() {
 
     function _retinize() {
         // reload @2x images 
-        if (_hdpi_enabled) {
+        if ($.corpsey.hdpi_enabled()) {
             $('img.panel').each(function() {
                 $(this).attr('src', $(this).attr('data-hd-src'));
             });
