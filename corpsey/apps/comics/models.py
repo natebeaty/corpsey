@@ -103,7 +103,7 @@ class Contribution(models.Model):
     name = models.CharField(max_length=250, blank=True)
     email = models.CharField(max_length=250, blank=True)
     website = models.CharField(max_length=250, blank=True)
-    code = models.CharField(max_length=250, blank=True)
+    code = models.CharField(max_length=250, blank=True, help_text="Upload link is http://corpsey.trubbleclub.com/contribute/upload/CODE_HERE/")
     date = models.DateTimeField(auto_now_add=True, blank=True)
     deadline = models.DateTimeField(blank=True)
     comic = models.ForeignKey(Comic, related_name='contributions')
