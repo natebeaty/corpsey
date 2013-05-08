@@ -1,7 +1,7 @@
 {% load thumbnail %}
 
 {% if contribution.panel1 %}
-<div class="queue" data-contribution-id="{{ contribution.id }}">
+<div class="queue" data-contribution-id="{{ contribution.id }}" id="contribution-{{ contribution.id }}">
 	<article class="comic" data-comic-id="{{ comic.id }}">
 	  <h1>Following {{ comic.artist.name }}</h1>
 	  <ul>
