@@ -12,7 +12,7 @@ class Artist(models.Model):
     first_name = models.CharField(max_length=250, blank=True)
     last_name = models.CharField(max_length=250, blank=True)
     email = models.CharField(max_length=250, blank=True)
-    url = models.CharField(max_length=250, blank=True, help_text="Don't forget the HTTP://! (e.g. http://foo.com/)")
+    url = models.URLField(max_length=250, blank=True)
     image = ThumbnailerImageField(upload_to='artists', blank=True)
     
     def __unicode__(self):
