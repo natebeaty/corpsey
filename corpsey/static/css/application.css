@@ -9,6 +9,7 @@ body{background:#fff;font:14px/1.4em 'Arbutus Slab',serif;color:#222;position:re
 .clearfix:after{clear:both;}
 .clearfix{zoom:1;}
 a{text-decoration:none;}a img{border:0;}
+ul.bullets{padding-left:1.2em;}ul.bullets li{list-style:disc;}
 .notice{background:#fff189;width:500px;margin:0 auto;padding:10px;overflow:hidden;}.notice p{font:14px/1.2em 'Orienta',sans-serif;}
 .notice strong{border-bottom:1px dashed #666;font-weight:normal;}
 .cursive-gray{font:italic 12px/1.4em 'Georgia',serif;color:#888;}
@@ -65,20 +66,22 @@ footer.main ul a#twitter{width:70px;height:93px;padding-top:50px;background:url(
 .contribution img,.comic img{display:block;float:left;width:330px;height:330px;background-size:330px 330px;-webkit-transition:background-color 0.5s;-moz-transition:background-color 0.5s;-o-transition:background-color 0.5s;transition:background-color 0.5s;}.contribution img.loading,.comic img.loading{background:#ccc;}
 .contribution.single,.comic.single{width:1000px;margin:0 auto;position:relative;}.contribution.single h1,.comic.single h1{display:none;}
 #flonav{position:absolute;width:200px;height:200px;background:#666;-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px;padding:20px;text-align:center;z-index:10001;}
-#contributions #content{max-width:1000px;margin:10px auto;}
-#contributions ul{display:block;clear:left;overflow:hidden;}
-#contributions .comic{margin-bottom:20px;}#contributions .comic h1{font:12px/1.2em 'Arbutus Slab',serif;}
-#contributions .comic img{width:250px;height:250px;-moz-opacity:0.5;-khtml-opacity:0.5;-webkit-opacity:0.5;opacity:0.5;-ms-filter:progid:DXImageTransform.Microsoft.Alpha(opacity=50);filter:alpha(opacity=50);}
-#contributions .queue{-webkit-transition:all 1s;-moz-transition:all 1s;-o-transition:all 1s;transition:all 1s;margin-bottom:60px;}#contributions .queue.voted{-moz-opacity:0.2;-khtml-opacity:0.2;-webkit-opacity:0.2;opacity:0.2;-ms-filter:progid:DXImageTransform.Microsoft.Alpha(opacity=20);filter:alpha(opacity=20);}#contributions .queue.voted img{-moz-opacity:0.5;-khtml-opacity:0.5;-webkit-opacity:0.5;opacity:0.5;-ms-filter:progid:DXImageTransform.Microsoft.Alpha(opacity=50);filter:alpha(opacity=50);}
-#contributions .queue.voted.yea{background:#1ccc24;}
-#contributions .queue.voted.nay{background:#fc6048;}
-#contributions .actions{background:#eee;padding:20px;text-align:center;}#contributions .actions .button{font-size:35px;color:#fff;}#contributions .actions .button.yea{background:#1ccc24;}#contributions .actions .button.yea:hover{background:#21e12a;}
-#contributions .actions .button.nay{background:#fc6048;}#contributions .actions .button.nay:hover{background:#fc7661;}
-#contributions #rules{display:none;background:#ed1846;color:#fff;padding:10px 20px;text-align:left;}#contributions #rules a.button{color:#eee;font-size:14px;float:left;}
-#contributions #rules li{overflow:hidden;margin-bottom:10px;}
-#contributions #rules input,#contributions #rules span{display:block;margin-left:100px;}
-#contributions #rules input{width:60%;font-size:14px;padding:4px;border:none;}
-#contributions #rules.active{display:block;height:auto;}
+#graveyard #content,#contributions #content{max-width:1000px;margin:10px auto;}
+#graveyard ul,#contributions ul{display:block;clear:left;overflow:hidden;}
+#graveyard .comic,#contributions .comic{padding-left:20px;border-left:60px solid #ccc;margin-bottom:20px;}#graveyard .comic h1,#contributions .comic h1{font:12px/1.2em 'Arbutus Slab',serif;color:#ccc;}
+#graveyard .comic img,#contributions .comic img{width:200px;height:200px;-moz-opacity:0.5;-khtml-opacity:0.5;-webkit-opacity:0.5;opacity:0.5;-ms-filter:progid:DXImageTransform.Microsoft.Alpha(opacity=50);filter:alpha(opacity=50);}
+#graveyard .contribution h1,#contributions .contribution h1{font:16px/1.2em 'Arbutus Slab',serif;margin:12px 0 8px;}
+#graveyard .queue,#contributions .queue{-webkit-transition:all 1s;-moz-transition:all 1s;-o-transition:all 1s;transition:all 1s;margin-bottom:60px;}#graveyard .queue.voted,#contributions .queue.voted{-moz-opacity:0.2;-khtml-opacity:0.2;-webkit-opacity:0.2;opacity:0.2;-ms-filter:progid:DXImageTransform.Microsoft.Alpha(opacity=20);filter:alpha(opacity=20);}#graveyard .queue.voted img,#contributions .queue.voted img{-moz-opacity:0.5;-khtml-opacity:0.5;-webkit-opacity:0.5;opacity:0.5;-ms-filter:progid:DXImageTransform.Microsoft.Alpha(opacity=50);filter:alpha(opacity=50);}
+#graveyard .queue.voted.yea,#contributions .queue.voted.yea{background:#1ccc24;}
+#graveyard .queue.voted.nay,#contributions .queue.voted.nay{background:#fc6048;}
+#graveyard .actions,#contributions .actions{background:#eee;padding:20px;text-align:center;}#graveyard .actions .button,#contributions .actions .button{font-size:35px;color:#fff;}#graveyard .actions .button.yea,#contributions .actions .button.yea{background:#1ccc24;}#graveyard .actions .button.yea:hover,#contributions .actions .button.yea:hover{background:#21e12a;}
+#graveyard .actions .button.nay,#contributions .actions .button.nay{background:#fc6048;}#graveyard .actions .button.nay:hover,#contributions .actions .button.nay:hover{background:#fc7661;}
+#graveyard #rules,#contributions #rules{display:none;background:#ed1846;color:#fff;padding:10px 20px;text-align:left;}#graveyard #rules a.button,#contributions #rules a.button{color:#eee;font-size:14px;float:left;}
+#graveyard #rules li,#contributions #rules li{overflow:hidden;margin-bottom:10px;}
+#graveyard #rules input,#contributions #rules input,#graveyard #rules span,#contributions #rules span{display:block;margin-left:100px;}
+#graveyard #rules input,#contributions #rules input{width:60%;font-size:14px;padding:4px;border:none;}
+#graveyard #rules.active,#contributions #rules.active{display:block;height:auto;}
+#graveyard .queue{border-bottom:1px dashed #666;padding-bottom:60px;}
 #catacombs{margin:4px auto;min-height:660px;max-width:1000px;}#catacombs.one-comic-showing{min-height:350px;}
 h1.comic_1,h1.comic_2{position:absolute;-webkit-transform:rotate(270deg);-moz-transform:rotate(270deg);-o-transform:rotate(270deg);-ms-transform:rotate(270deg);transform:rotate(270deg);-webkit-transform-origin:left top;transform-origin:left top;white-space:nowrap;left:0;top:0;font:14px/1.2em 'Arbutus Slab',serif;}h1.comic_1 a,h1.comic_2 a{color:#222;}
 #contribute-page #content{width:800px;margin:0 auto;}

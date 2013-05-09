@@ -139,6 +139,16 @@ def contributions(request):
         'contributions': contributions,
         }, RequestContext(request))
 
+@login_required()
+def graveyard(request):
+    """Mass graveyard of rejected contributions."""
+    user_votes = Vote.objects.filter(user_id=request.user.id)
+    graves = Contribution.objects.filter(pending=False, has_panels=True, accepted=False)
+
+    return render_to_response('comics/graveyard.html',  {
+        'graves': graves,
+        }, RequestContext(request))
+
 def contribute(request):
     """Reserve a spot to contribute after a comic."""
     from corpsey.apps.comics.forms import ContributeForm

@@ -38,11 +38,11 @@ class Comic(MPTTModel):
 
     def __unicode__(self):
         return u"%s - %s" % (self.artist, self.date.strftime('%b %d \'%y'))
+
     def valid_to_follow(self):
         pending_contributions = len(Contribution.objects.filter(comic_id=self.id, pending=True))
         comic_children = len(self.get_children())
         return pending_contributions + comic_children < settings.MAX_COMIC_CHILDREN
-            
 
     def prev_sib(self):
         # root nodes infinite linkage, if first, link to last

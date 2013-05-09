@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+
+{% block body_id %}graveyard{% endblock %}
+{% block title %}Contribution Graveyard{% endblock %}
+
+{% block content %}
+  <h2>Contribution Graveyard</h2>
+  {% for contribution in graves %}
+  <div class="queue" data-contribution-id="{{ contribution.id }}" id="contribution-{{ contribution.id }}">
+    <article class="comic" data-comic-id="{{ contribution.comic.id }}">
+      <h1>Following {{ contribution.comic.artist.name }}</h1>
+      <ul>
+        <li>{% if contribution.comic.panel1 %}<img class="panel" src="{{ contribution.comic.panel1.midsize.url }}">{% endif %}</li>
+        <li>{% if contribution.comic.panel2 %}<img class="panel" src="{{ contribution.comic.panel2.midsize.url }}">{% endif %}</li>
+        <li>{% if contribution.comic.panel3 %}<img class="panel" src="{{ contribution.comic.panel3.midsize.url }}">{% endif %}</li>
+      </ul>
+    </article>
+
+    <article class="contribution" data-contribution-id="{{ contribution.id }}">
+      <h1>Contribution from: {{ contribution.name }} &lt;{{ contribution.email }}&gt;</h1>
+      <ul>
+        <li>{% if contribution.panel1 %}<img class="panel" src="{{ contribution.panel1.midsize.url }}" width="{{ contribution.panel1.midsize.width }}" height="{{ contribution.panel1.midsize.height }}">{% else %}No image for panel 1{% endif %}</li>
+        <li>{% if contribution.panel2 %}<img class="panel" src="{{ contribution.panel2.midsize.url }}" width="{{ contribution.panel1.midsize.width }}" height="{{ contribution.panel1.midsize.height }}">{% else %}No image for panel 2{% endif %}</li>
+        <li>{% if contribution.panel3 %}<img class="panel" src="{{ contribution.panel3.midsize.url }}" width="{{ contribution.panel1.midsize.width }}" height="{{ contribution.panel1.midsize.height }}">{% else %}No image for panel 3{% endif %}</li>
+      </ul>
+    </article>
+
+    <div class="rules-broke">
+    <h2>Nay Votes:</h2>
+    <ul class="bullets">
+    {% for vote in contribution.votes.all %}
+        {% if vote.rule_broke %}
+            <li>{{ vote.rule_broke }}</li>
+        {% elif vote.notes %}
+            <li>{{ vote.notes }}</li>
+        {% endif %}
+    {% endfor %}
+    </ul>
+    </div>
+  </div>
+  {% endfor %}
+{% endblock content %}

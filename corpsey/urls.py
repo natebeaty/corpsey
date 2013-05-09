@@ -30,6 +30,7 @@ urlpatterns = patterns('',
     url(r'^contribute/upload/$', lambda x: redirect('/')),
     url(r'^contribute/$', 'corpsey.apps.comics.views.contribute', name='contribute'),
     url(r'^contributions/$', 'corpsey.apps.comics.views.contributions', name='contributions'),
+    url(r'^graveyard/$', 'corpsey.apps.comics.views.graveyard', name='graveyard'),
     url(r'^accounts/login/$', 'django.contrib.auth.views.login'),
     # url(r'^contributions/vote/(?P<contribution_id>[\d]+)/(?P<vote>[\d]+)/$', 'corpsey.apps.comics.views.contribution_vote', name='contribution_vote'),
     

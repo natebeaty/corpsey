@@ -21,6 +21,12 @@ a {
     }
     text-decoration: none; 
 }
+ul.bullets {
+    padding-left: 1.2em;
+    li {
+        list-style: disc;
+    }
+}
 .notice {
     background: #fff189;
     width: 500px;
@@ -497,6 +503,7 @@ footer.main {
     text-align: center; 
     z-index: 10001;
 }
+#graveyard,
 #contributions {
     #content {
         max-width: 1000px;
@@ -508,14 +515,23 @@ footer.main {
         overflow: hidden;
     }
     .comic {
+        padding-left: 20px;
+        border-left: 60px solid #ccc;
         h1 {
             font: 12px/1.2em 'Arbutus Slab', serif;
+            color: #ccc;
         }
         margin-bottom: 20px;
         img {
-            width: 250px;
-            height: 250px;
+            width: 200px;
+            height: 200px;
             .opacity(.5);
+        }
+    }
+    .contribution {
+        h1 {
+            font: 16px/1.2em 'Arbutus Slab', serif;
+            margin: 12px 0 8px;
         }
     }
     .queue {
@@ -585,6 +601,12 @@ footer.main {
             display: block;
             height: auto;
         }
+    }
+}
+#graveyard {
+    .queue {
+        border-bottom: 1px dashed #666;
+        padding-bottom: 60px;
     }
 }
 
