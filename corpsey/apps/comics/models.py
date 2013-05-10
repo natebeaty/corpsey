@@ -148,4 +148,7 @@ class Vote(models.Model):
         if self.approve:
             return u"Yea Vote for %s" % (self.contribution.name)
         else:
-            return u"Nay Vote for %s : %s" % (self.contribution.name, self.rule_broke)
+            if self.rule_broke:
+                return u"Nay Vote for %s : %s" % (self.contribution.name, self.rule_broke)
+            else:
+                return u"Nay Vote for %s : %s" % (self.contribution.name, self.notes)
