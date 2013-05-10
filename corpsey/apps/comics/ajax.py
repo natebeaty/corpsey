@@ -59,7 +59,9 @@ def contribution_vote(request, contribution_id, yea, rule_broke=0, notes=''):
     contribution = Contribution.objects.get(pk=contribution_id)
     # has this already been approved?
     if contribution.pending == False:
-        return
+        return simplejson.dumps({ 
+            'message' : "This contribution is not in the queue any longer."
+        })
     approve = True if yea == 1 else False
     message = ''
 
