@@ -76,8 +76,10 @@ footer.main ul a#twitter{width:70px;height:93px;padding-top:50px;background:url(
 #graveyard .queue.voted.nay,#contributions .queue.voted.nay{background:#fc6048;}
 #graveyard .actions,#contributions .actions{background:#eee;padding:20px;text-align:center;}#graveyard .actions .button,#contributions .actions .button{font-size:35px;color:#fff;}#graveyard .actions .button.yea,#contributions .actions .button.yea{background:#1ccc24;}#graveyard .actions .button.yea:hover,#contributions .actions .button.yea:hover{background:#21e12a;}
 #graveyard .actions .button.nay,#contributions .actions .button.nay{background:#fc6048;}#graveyard .actions .button.nay:hover,#contributions .actions .button.nay:hover{background:#fc7661;}
-#graveyard #rules,#contributions #rules{display:none;background:#ed1846;color:#fff;padding:10px 20px;text-align:left;}#graveyard #rules a.button,#contributions #rules a.button{color:#eee;font-size:14px;float:left;}
-#graveyard #rules li,#contributions #rules li{overflow:hidden;margin-bottom:10px;}
+#graveyard #rules,#contributions #rules{display:none;overflow:hidden;background:#fc6048;color:#fff;padding:10px 20px;text-align:left;}#graveyard #rules a.button,#contributions #rules a.button{color:#eee;font-size:14px;float:left;}
+#graveyard #rules ul,#contributions #rules ul{list-style:disc;padding-left:1.2em;color:#eee;}#graveyard #rules ul li,#contributions #rules ul li{list-style:disc;margin-bottom:10px;line-height:1.3em;}
+#graveyard #rules p.note,#contributions #rules p.note{font-size:16px;line-height:1.3em;margin-top:16px;}
+#graveyard #rules #notes,#contributions #rules #notes{width:100%;height:60px;font-size:16px;line-height:1.3em;}
 #graveyard #rules input,#contributions #rules input,#graveyard #rules span,#contributions #rules span{display:block;margin-left:100px;}
 #graveyard #rules input,#contributions #rules input{width:60%;font-size:14px;padding:4px;border:none;}
 #graveyard #rules.active,#contributions #rules.active{display:block;height:auto;}

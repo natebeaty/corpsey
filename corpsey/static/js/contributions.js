@@ -31,7 +31,7 @@ $.corpsey.contributions = (function() {
             if ($(this).hasClass('other')) {
                 notes = $('#notes').val();
                 if (notes=='') {
-                    alert('Please enter a reason for Other!');
+                    alert('Please write one or two sentences about what could make their piece better.');
                     return false;
                 }
             } else {
@@ -52,7 +52,7 @@ $.corpsey.contributions = (function() {
         if (data.message!='') {
             alert(data.message);
         }
-        $('#rules').slideUp();
+        $('#rules').slideUp().find('#notes').val('');
         $('.queue[data-contribution-id='+data.contribution_id+']').addClass('voted').toggleClass('yea',data.yea==1).toggleClass('nay',data.yea==0).find('.actions').slideUp();
     }
 

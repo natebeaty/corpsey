@@ -12,13 +12,19 @@
   	<p>No contributions found that you ({{ user.username }}) haven't voted on.</p>
   {% endfor %}
   <div id="rules">
-  <h2>Select one rule for your NAY:</h2>
-  	<ul class="rules">
-  	  {% for rule in rules %}
-	  	  <li><a data-rule-id="{{ rule.id }}" href="#" class="button rule">BROKE</a> <span>{{ rule|safe }}</span></li>
-  	  {% endfor %}
-  	  <li><a class="button rule other" href="#">Other:</a> <input type="text" id="notes" size="80"/></li>
+    <h2>For reference, these are the seven rules:</h2>
+  	<ul>
+      <li>The actions within the panels must be clear, and easy to read.</li>
+      <li>Three perfectly square panels which directly follow the previous artist's panels, in your own style, in your own palette. Draw Corpsey how you would draw him, not necessarily how the artist before you did. Black and white or color are both encouraged. We'd love it to be a wonderful patchwork of all sorts of things, but no halftones please.</li>
+      <li>The main character Corpsey must always be in the comic. He is already dead, so you cannot kill him. Your panels cannot be the end of the comic.</li>
+      <li>Keep it PG-13.</li>
+      <li>Panels must be RGB, at least 1200x1200 pixels, and saved as JPGs.</li>
+      <li>Please DO NOT include characters from your own comics, or others already created. We want this to be 100% original.</li>
   	</ul>
+      <p class="note">Write one or two sentences about what could make their piece better. Try to put yourself into their shoes, and try not to be mean:</p>
+      <textarea id="notes"></textarea>
+      <p><a class="button rule other">Submit NAY Vote</a></p>
+
   </div>
 {% endblock content %}
 
