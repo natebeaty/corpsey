@@ -154,6 +154,9 @@ def contribution_vote(request, contribution_id, yea, rule_broke=0, notes=''):
         phrase = random.choice(
             (
                 'New panels posted by',
+                'The catacombs are chattering with panels by',
+                'What\'s this? New panels by',
+                'Holy smokes, new panels by',
                 'Fresh panels in the catacombs by',
                 'Oh look! Brand new panels by',
                 'Shazam! Panels by',
