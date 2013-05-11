@@ -285,7 +285,7 @@ def contribute_upload(request, upload_code):
                 from django.contrib.auth.models import User, Group
                 mail_subject = 'New Infinite Corpse submission from %s!' % contribution.name
                 mail_body = 'OMG LOOK:\n\n%s\n\nGo forth Trubblers and cast your Yea or Nay: http://%s/contributions/#contribution-%s\n' % (contribution, request.META['HTTP_HOST'], contribution.id)
-                voters = User.objects.all() # .filter(groups__name='voters')
+                voters = User.objects.filter(groups__name='voters')
                 emails = ()
                 # build tuple of emails to send
                 for voter in voters:
