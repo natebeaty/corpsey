@@ -6,6 +6,7 @@ from django.core.mail import EmailMultiAlternatives
 from django.template.loader import get_template
 from django.template import Context
 import twitter
+import random
 
 @dajaxice_register(method='GET')
 def get_uturn_panel(request, uturn_id, direction, hdpi_enabled):
@@ -150,9 +151,18 @@ def contribution_vote(request, contribution_id, yea, rule_broke=0, notes=''):
             message = 'There was an error sending the approval email to %s. Please write Nate and mock him.' % contribution.email
 
         # post link to twitter
+        phrase = random.choice(
+            (
+                'New panels posted by',
+                'Fresh panels in the catacombs by',
+                'Oh look! Brand new panels by',
+                'Shazam! Panels by',
+                'This just keeps getting better. New panels by',
+            )
+        )
         twitter_api = twitter.Api(consumer_key='sWbjCg9mlxZFcGw4IyJIQ', consumer_secret='pzMuKLqi8kFaui1dbrp5LOfy4coVt9PSPkv3dfo7XLw', access_token_key='1151394914-0wUR5btzDOt3BDe6exE78QqHoJaha6tBPGkP9c4', access_token_secret='lvbST9oyvVQAO5uJ8P2SgGzs27wgkakkvUeW2wGzYc')
         try:
-            twitter_api.PostUpdate("New panels posted from %s, following %s: http://%s/catacombs/%s/%s/" % (comic.artist, comic.parent.artist, request.META['HTTP_HOST'], comic.parent.id, comic.id))
+            twitter_api.PostUpdate("%s %s, following %s: http://%s/catacombs/%s/%s/" % (phrase, comic.artist, comic.parent.artist, request.META['HTTP_HOST'], comic.parent.id, comic.id))
         except:
             message = 'There was an error posting to twitter. Please write Nate and mock him.'
 
