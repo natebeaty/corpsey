@@ -1,3 +1,4 @@
+
 {% extends "base.html" %}
 
 {% block body_id %}artists{% endblock %}
@@ -13,7 +14,7 @@
     <ul>
     {% for artist in artist_set %}
       {% ifchanged %}
-        {% if artist.first_name %}
+        {% if artist.last_name %}
           <li class="letter"><h2>{{ artist.last_name|slice:"1"|upper }}</h2></li>
         {% endif %}
       {% endifchanged %}
