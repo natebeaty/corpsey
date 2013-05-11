@@ -146,9 +146,9 @@ class Vote(models.Model):
 
     def __unicode__(self):
         if self.approve:
-            return u"Yea Vote for %s" % (self.contribution.name)
+            return u"Yea Vote for %s (by %s)" % (self.contribution, self.user.username)
         else:
             if self.rule_broke:
-                return u"Nay Vote for %s : %s" % (self.contribution.name, self.rule_broke)
+                return u"Nay Vote for %s : %s (by %s)" % (self.contribution, self.rule_broke,self.user.username)
             else:
-                return u"Nay Vote for %s : %s" % (self.contribution.name, self.notes)
+                return u"Nay Vote for %s : %s (by %s)" % (self.contribution, self.notes, self.user.username)

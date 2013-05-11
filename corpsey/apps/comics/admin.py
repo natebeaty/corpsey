@@ -1,7 +1,7 @@
 from django.contrib import admin
 # from treeadmin import admin as tree_admin
 from treeadmin.admin import TreeAdmin
-from corpsey.apps.comics.models import Comic,Uturn,Contribution,Rule
+from corpsey.apps.comics.models import Comic,Uturn,Contribution,Rule,Vote
 from django import forms
 
 class ComicAdmin(TreeAdmin):
@@ -22,10 +22,14 @@ class ContributionAdmin(admin.ModelAdmin):
 class UturnAdmin(admin.ModelAdmin):
     form = UturnForm
 
+class VoteAdmin(admin.ModelAdmin):
+    pass
+
 class RuleAdmin(admin.ModelAdmin):
     pass
 
 admin.site.register(Comic, ComicAdmin)
 admin.site.register(Uturn, UturnAdmin)
+admin.site.register(Vote, RuleAdmin)
 admin.site.register(Rule, RuleAdmin)
 admin.site.register(Contribution, ContributionAdmin)
