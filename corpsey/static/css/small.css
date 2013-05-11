@@ -24,7 +24,7 @@ nav.main h1#textlogo a{float:none;margin:0 auto;height:34px;}
 ul.ui-autocomplete{width:100% !important;left:0 !important;}ul.ui-autocomplete li{font:16px/1.5em 'Orienta',sans-serif;}ul.ui-autocomplete li a{font:14px/1.3em 'Orienta',sans-serif;padding:12px;}
 #artists #content{width:300px;}#artists #content h3.name{width:200px;}
 body.static #content{width:85%;}
-#contribute-page form.contribute button{width:250px;}
+#contribute-page form.contribute p.note,#contribute-page form.contribute input[type=text],#contribute-page form.contribute input[type=password],#contribute-page form.contribute button{width:250px;}
 #contribute-page #content{width:85%;}
 #about #content{width:85%;}
 .notice{width:250px;}
