@@ -275,7 +275,7 @@ def contribute_upload(request, upload_code):
                 contribution.name = form.cleaned_data['name']
                 contribution.email = form.cleaned_data['email']
                 contribution.website = form.cleaned_data['website']
-                if not "http" in contribution.website:
+                if contribution.website and not "http" in contribution.website:
                     contribution.website = 'http://%s/' % contribution.website
                 contribution.has_panels = True
                 contribution.save()
