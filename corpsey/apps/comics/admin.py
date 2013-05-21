@@ -5,7 +5,7 @@ from corpsey.apps.comics.models import Comic,Uturn,Contribution,Rule,Vote
 from django import forms
 
 class ComicAdmin(TreeAdmin):
-    list_display = ('__unicode__', 'active', 'starter', 'notes')
+    list_display = ('__unicode__', 'active', 'starter', 'featured', 'notes')
     search_fields = ['artist__name']
     # active_toggle = tree_admin.ajax_editable_boolean('active', 'is active')
     exclude = ('full_image',)
