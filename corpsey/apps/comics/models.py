@@ -24,6 +24,7 @@ class Comic(MPTTModel):
     date = models.DateTimeField(auto_now_add=True, blank=True)
     active = models.BooleanField(default=False)
     starter = models.BooleanField(default=False)
+    featured = models.BooleanField(default=False)
     full_image = ThumbnailerImageField(upload_to='comics', blank=True)
     panel1 = ThumbnailerImageField(upload_to='comics', blank=True)
     panel2 = ThumbnailerImageField(upload_to='comics', blank=True)

@@ -53,6 +53,13 @@ def tree_json(request):
     }
     return HttpResponse(json.dumps(root, indent=4), mimetype="application/json")
 
+@cache_page(60 * 15)
+def featured(request):
+    comic_set = Comic.objects.filter(active=True,featured=True).order_by('-date')[:10]
+    return render_to_response('featured.html',  {
+        'comic_set': comic_set,
+        }, RequestContext(request))
+
 def random(request):
     """Return a random comic that's not a root."""
     comic_leaf = Comic.objects.filter(level__gt=0).order_by('?')[0]

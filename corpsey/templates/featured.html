@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+
+{% block body_id %}homepage{% endblock %}
+
+{% block content %}
+  <div class="recent-contributors" id="recent-contributors">
+    <h2>Featured Contributions</h2>
+    {% for comic in comic_set %}
+      {% include "comics/listing.html" %}
+      {% if not forloop.last %}
+        <div class="bone-divider {% cycle 'odd' 'even' %}"></div>
+      {% endif %}
+    {% endfor %}
+  </div>
+{% endblock content %}
+
+{% block extra_javascript %}
+  <script src="{{ STATIC_URL }}js/jquery.lazyload.min.js" type="text/javascript"></script>
+  <script src="{{ STATIC_URL }}js/home.js?v2" type="text/javascript"></script>
+{% endblock extra_javascript %}
