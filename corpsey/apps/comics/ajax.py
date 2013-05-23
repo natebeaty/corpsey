@@ -95,6 +95,7 @@ def contribution_vote(request, contribution_id, yea, rule_broke=0, notes=''):
 
         d = Context({ 
             'votes': contribution.votes.filter(approve=False),
+            'parent_id': contribution.comic.id,
             'name': contribution.name,
             })
 
