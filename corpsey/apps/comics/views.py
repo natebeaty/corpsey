@@ -12,6 +12,7 @@ from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from datetime import datetime, timedelta
 from django.utils import timezone
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 def recursive_node_to_dict(node):
     result = {
@@ -150,7 +151,16 @@ def contributions(request):
 def graveyard(request):
     """Mass graveyard of rejected contributions."""
     user_votes = Vote.objects.filter(user_id=request.user.id)
-    graves = Contribution.objects.filter(pending=False, has_panels=True, accepted=False).order_by('-date')
+    graves_list = Contribution.objects.filter(pending=False, has_panels=True, accepted=False).order_by('-date')
+    paginator = Paginator(graves_list, 10)
+    page = request.GET.get('page')
+
+    try:
+        graves = paginator.page(page)
+    except PageNotAnInteger:
+        graves = paginator.page(1)
+    except EmptyPage:
+        graves = paginator.page(paginator.num_pages)
 
     return render_to_response('comics/graveyard.html',  {
         'graves': graves,
