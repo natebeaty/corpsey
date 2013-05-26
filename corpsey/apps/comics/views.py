@@ -150,7 +150,7 @@ def contributions(request):
 def graveyard(request):
     """Mass graveyard of rejected contributions."""
     user_votes = Vote.objects.filter(user_id=request.user.id)
-    graves = Contribution.objects.filter(pending=False, has_panels=True, accepted=False)
+    graves = Contribution.objects.filter(pending=False, has_panels=True, accepted=False).order_by('-date')
 
     return render_to_response('comics/graveyard.html',  {
         'graves': graves,
