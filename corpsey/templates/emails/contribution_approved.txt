@@ -1,10 +1,14 @@
 Hello {{ name }}!
 
-Thanks for contributing to The Infinite Corpse!
+Thanks for contributing to The Infinite Corpse! We're really happy to have you included in the story.
 
 Your strip has been approved and can be found here:
 
 http://corpsey.trubbleclub.com{{ comic_url }}
 
-High five to you,
+We'd love it if you could help spread the word. Do you know an artist you'd like to follow you? It'd be great if you could ask them to follow your comic! Send them this link http://corpsey.trubbleclub.com/contribute/?parent={{ comic.id }}
+
+And remember you can contribute as many times as you like. We'd love to have more repeat authors involved.
+
+Thank you, 
 Trubble Club

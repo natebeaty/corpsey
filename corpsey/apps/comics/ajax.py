@@ -138,6 +138,7 @@ def contribution_vote(request, contribution_id, yea, rule_broke=0, notes=''):
 
         d = Context({ 
             'comic_url': "/catacombs/%s/%s/" % (contribution.comic.id, comic.id),
+            'comic': comic,
             'name': contribution.name,
             })
 
@@ -157,7 +158,13 @@ def contribution_vote(request, contribution_id, yea, rule_broke=0, notes=''):
                 'New panels posted by',
                 'The catacombs are chattering with panels by',
                 'What\'s this? New panels by',
+                'And you don\'t stop, new panels by',
+                'You better believe it, new panels by',
+                'Hey-oh! Fresh panels by',
+                'Hot diggety! New panels by',
                 'Holy smokes, new panels by',
+                'Stop the presses! new panels by',
+                'Ain\'t no half steppin\', new panels by',
                 'Fresh panels in the catacombs by',
                 'Oh look! Brand new panels by',
                 'Shazam! Panels by',
