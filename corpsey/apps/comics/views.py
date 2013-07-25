@@ -176,11 +176,17 @@ def contribute(request):
     # ?parent=x
     if request.GET.get('parent', False):
         try:
-            parent_comic = Comic.objects.get(pk=request.GET['parent'])
-            if not parent_comic.valid_to_follow():
+            parent_id = int(request.GET['parent'])
+            try:
+                parent_comic = Comic.objects.get(pk=parent_id)
+                if not parent_comic.valid_to_follow():
+                    message = 'Sorry, comic #%s is not valid to follow, random one chosen.' % request.GET['parent']
+                    parent_comic = find_comic_to_follow()
+            except Comic.DoesNotExist:
+                message = 'Unable to locate comic #%s for parent, random one chosen.' % request.GET['parent']
                 parent_comic = find_comic_to_follow()
-        except Comic.DoesNotExist:
-            message = 'Unable to locate comic #%s for parent, random one chosen.' % request.GET['parent']
+        except ValueError:
+            message = '"%s" doesn\'t seem to be a number.' % request.GET['parent']
             parent_comic = find_comic_to_follow()
     elif request.session.get('last_comic_id', False):
         parent_comic = Comic.objects.get(pk=request.session['last_comic_id'])
