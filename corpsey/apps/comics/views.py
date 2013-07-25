@@ -170,10 +170,17 @@ def contribute(request):
     """Reserve a spot to contribute after a comic."""
     from corpsey.apps.comics.forms import ContributeForm
 
+    step = 1
+    message = ''
+
     # ?parent=x
     if request.GET.get('parent', False):
-        parent_comic = Comic.objects.get(pk=request.GET['parent'])
-        if not parent_comic.valid_to_follow():
+        try:
+            parent_comic = Comic.objects.get(pk=request.GET['parent'])
+            if not parent_comic.valid_to_follow():
+                parent_comic = find_comic_to_follow()
+        except Comic.DoesNotExist:
+            message = 'Unable to locate comic #%s for parent, random one chosen.' % request.GET['parent']
             parent_comic = find_comic_to_follow()
     elif request.session.get('last_comic_id', False):
         parent_comic = Comic.objects.get(pk=request.session['last_comic_id'])
@@ -184,8 +191,6 @@ def contribute(request):
     else:
         parent_comic = find_comic_to_follow()
     
-    step = 1
-    message = ''
     # form sent!
     if request.method == 'POST':
         form = ContributeForm(request.POST)
