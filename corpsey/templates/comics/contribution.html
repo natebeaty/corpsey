@@ -20,6 +20,13 @@
 	  </ul>
 	</article>
 
+	{% if user.username == 'nate' and contribution.votes.all %}
+		<h2>Votes:</h2>
+		{% for vote in contribution.votes.all %}
+	        <li>{{ vote }}</li>
+		{% endfor %}
+	{% endif %}
+
 	<div class="actions">
 		<a class="button yea" href="/contributions/vote/{{ contribution.id }}/1/">Yea</a>
 		<a class="button nay" href="/contributions/vote/{{ contribution.id }}/0/">Nay</a>
