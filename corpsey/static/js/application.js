@@ -1,4 +1,4 @@
-// trubble club codes for pleasure
+// Trubble Club Codes for Pleasure
 
 $.corpsey = (function() {
     var _hdpi_enabled;

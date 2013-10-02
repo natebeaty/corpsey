@@ -1,5 +1,5 @@
 // Infinite Corpse js brains for catacombs
-// nate beaty @ clixel 2013
+// Nate Beaty @ Clixel 2013
 
 $.corpsey = $.corpsey || {};
 
