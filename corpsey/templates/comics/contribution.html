@@ -17,11 +17,13 @@
 	  </ul>
 	</article>
 
-	{% if user.username == 'nate' and contribution.votes.all %}
-		<h2>Votes:</h2>
-		{% for vote in contribution.votes.all %}
-	        <li>{{ vote }}</li>
-		{% endfor %}
+	{% if user.username == 'nate' or user.username == 'aaron' %}
+		{% if contribution.votes.all %}
+			<h2>Votes:</h2>
+			{% for vote in contribution.votes.all %}
+		        <li>{{ vote }}</li>
+			{% endfor %}
+		{% endif %}
 	{% endif %}
 
 	<div class="actions">
