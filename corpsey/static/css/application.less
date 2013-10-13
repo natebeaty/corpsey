@@ -517,15 +517,24 @@ footer.main {
     .comic {
         padding-left: 20px;
         border-left: 60px solid #ccc;
+        overflow: hidden;
         h1 {
             font: 12px/1.2em 'Arbutus Slab', serif;
             color: #ccc;
         }
         margin-bottom: 20px;
         img {
-            width: 200px;
-            height: 200px;
+            .transition(all 1s);
+            width: 250px;
+            height: 250px;
             .opacity(.5);
+        }
+        &:hover {
+            img {
+                width: 300px;
+                height: 300px;
+                .opacity(1);
+            }
         }
     }
     .contribution {
