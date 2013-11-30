@@ -37,9 +37,10 @@ $.corpsey.catacombs = (function() {
         }
         $('<div id="flonav" />').appendTo('body').hide();
 
-        History.replaceState({
-            'direction': ''
-            }, document.title, window.location.pathname );
+        History.replaceState(
+            { 'direction': '' }, 
+            document.title, 
+            window.location.pathname );
 
         // bind to state change
         History.Adapter.bind(window,'statechange',function(){
@@ -59,12 +60,10 @@ $.corpsey.catacombs = (function() {
                     build_titles_timer = setTimeout(function() { $.corpsey.catacombs.build_titles(); }, 450);
                 }
             });
-            setTimeout(function() {
-                $('#catacombs').isotope({ filter: (small_width) ? '.comic.active .panel:not(.uturn-pad),.comic.active h1' : (medium_width) ? '.comic.active .panel:not(.uturn-pad)' : '.comic.active .panel' });
-            }, 250);
+            $('#catacombs').isotope({ filter: (small_width) ? '.comic.active .panel:not(.uturn-pad),.comic.active h1' : (medium_width) ? '.comic.active .panel:not(.uturn-pad)' : '.comic.active .panel' });
         });
 
-        $('.comic-nav .next, .comic-nav .prev').live('click',function(e) {
+        $('#content').on('click', 'a.prev,a.next', function(e) {
             e.preventDefault();
 
             if ($('.comic-nav').hasClass('loading')) { return false; }
@@ -78,7 +77,7 @@ $.corpsey.catacombs = (function() {
             return false;
         });
 
-        $('.comic-nav').on('click', '.up', function(e) {
+        $('#content').on('click', 'a.up', function(e) {
             e.preventDefault();
 
             if ($('.comic-nav').hasClass('loading')) { return false; }
@@ -204,7 +203,9 @@ $.corpsey.catacombs = (function() {
         var uturn = ich.uturn_single(data.uturn);
         
         // uturn is only ever from Next
-        $('#catacombs').isotope('insert', uturn);
+        $('#catacombs').imagesLoaded(function() {
+            $('#catacombs').isotope('insert', uturn);
+        });
 
         _filter_panels();
     }
@@ -225,7 +226,9 @@ $.corpsey.catacombs = (function() {
 
         // drop in comic
         if (data.direction==='next') {
-            $('#catacombs').isotope('insert', comic);
+            $('#catacombs').imagesLoaded(function() {
+                $('#catacombs').isotope('insert', comic);
+            });
         } else {
             $('#catacombs').find('.comic.single.active:first').before(comic);
         }
@@ -258,7 +261,9 @@ $.corpsey.catacombs = (function() {
         }
 
         // reset sort order for isotope using DOM order
-        $('#catacombs').isotope('reloadItems').isotope({ sortBy: 'original-order' });
+        $('#catacombs').imagesLoaded(function() {
+            $('#catacombs').isotope('reloadItems').isotope({ sortBy: 'original-order' });
+        });
 
         // hide strips not in new url
         $('#catacombs .comic.single').each(function(){
@@ -278,7 +283,9 @@ $.corpsey.catacombs = (function() {
         });
 
         // set isotope to filter visible comics
-        $('#catacombs').isotope({ filter: (small_width) ? '.comic.active .panel:not(.uturn-pad),.comic.active h1' : (medium_width) ? '.comic.active .panel:not(.uturn-pad)' : '.comic.active .panel' });
+        $('#catacombs').imagesLoaded(function() {
+            $('#catacombs').isotope({ filter: (small_width) ? '.comic.active .panel:not(.uturn-pad),.comic.active h1' : (medium_width) ? '.comic.active .panel:not(.uturn-pad)' : '.comic.active .panel' });
+        });
 
         // if med/small screen, scroll up to comic we just loaded
         if (medium_width || small_width) {
