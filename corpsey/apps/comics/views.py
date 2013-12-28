@@ -111,6 +111,19 @@ def entry(request, comic_1, comic_2=None):
         'prev_comic_links': prev_comic_links,
         }, RequestContext(request))
 
+def pad_panels(request, contribution):
+    """Add 40px of white padding to comic panels."""
+    import subprocess
+    contribution = get_object_or_404(Contribution,pk=contribution)
+
+    command = "convert -bordercolor White -border 20 %s%s %s%s " % (settings.MEDIA_ROOT, contribution.panel1, settings.MEDIA_ROOT, contribution.panel1)
+    command += "&& convert -bordercolor White -border 20 %s%s %s%s " % (settings.MEDIA_ROOT, contribution.panel2, settings.MEDIA_ROOT, contribution.panel2)
+    command += "&& convert -bordercolor White -border 20 %s%s %s%s " % (settings.MEDIA_ROOT, contribution.panel3, settings.MEDIA_ROOT, contribution.panel3)
+    proc = subprocess.Popen(command, shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, )
+    stdout_value = proc.communicate()[0]
+
+    return HttpResponse('20px of white padding added to contribution panels ok!');
+
 @cache_page(60 * 15)
 def uturn(request, uturn, comic=None):
     """Motherfucking uturns."""
