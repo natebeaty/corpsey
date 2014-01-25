@@ -122,7 +122,7 @@ def pad_panels(request, contribution):
     proc = subprocess.Popen(command, shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, )
     stdout_value = proc.communicate()[0]
 
-    return HttpResponse('20px of white padding added to contribution panels ok!');
+    return HttpResponse('20px of white padding added to contribution panels ok!')
 
 @cache_page(60 * 15)
 def uturn(request, uturn, comic=None):
@@ -222,7 +222,11 @@ def contribute(request):
             comic_id = form.cleaned_data['comic_id']
             email = form.cleaned_data['email']
             name = form.cleaned_data['name']
-            parent_comic = Comic.objects.get(pk=comic_id)
+            try:
+                parent_comic = Comic.objects.get(pk=comic_id)
+            except Comic.DoesNotExist:
+                return HttpResponse('Unable to locate comic #%s for parent. You broke HAL!' % comic_id)
+
             code = base64.urlsafe_b64encode(hashlib.md5(str(time.time())).digest())[:15]
 
             # check if email has pending contributions
