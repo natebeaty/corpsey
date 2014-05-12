@@ -1,4 +1,3 @@
-### Trubble Club Presents
 # The Infinite Corpse
 
 The Infinite Corpse is an online collaborative comic that is open to everyone in the world who makes or wants to make comics. 
