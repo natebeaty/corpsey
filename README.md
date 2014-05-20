@@ -1,4 +1,7 @@
-# The Infinite Corpse
+The Infinite Corpse
+-------------------
+
+![The Infinite Corpse](https://raw.githubusercontent.com/natebeaty/corpsey/master/corpsey/static/img/logo.gif)
 
 The Infinite Corpse is an online collaborative comic that is open to everyone in the world who makes or wants to make comics. 
 
