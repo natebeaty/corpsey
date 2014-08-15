@@ -17,13 +17,18 @@
 	  </ul>
 	</article>
 
+	{% if contribution.votes.all %}
+		<h2>Votes so far:</h2>
+		{% for vote in contribution.votes.all %}
+			{% if vote.approve %}
+				<li>Yea vote</li>
+			{% else %}
+				<li>Nay vote: <em>{{ vote.notes }}</em></li>
+			{% endif %}
+		{% endfor %}
+	{% endif %}
+
 	{% if user.username == 'nate' or user.username == 'aaron' %}
-		{% if contribution.votes.all %}
-			<h2>Votes:</h2>
-			{% for vote in contribution.votes.all %}
-		        <li>{{ vote }}</li>
-			{% endfor %}
-		{% endif %}
 		<p><a onclick="return confirm('Are you sure? This alters the original images and adds 20px of white padding.')" target="_blank" href="/pad_panels/{{ contribution.id }}/">Add Padding to Panels</a></p>
 	{% endif %}
 
