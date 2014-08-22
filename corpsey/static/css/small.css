@@ -1,32 +1,204 @@
-#catacombs{min-height:1868px;max-width:300px;}#catacombs.one-comic-showing{min-height:928px;}
-#catacombs.is-uturn{min-height:1278px;}
-.button{letter-spacing:.3em;}
-#homepage #mobile-nav{display:none;}
-#homepage .bone-divider{width:330px;height:94px;background-size:330px 94px;}#homepage .bone-divider.odd{background-image:url('/static/img/bone-divider-2.png');}
-#homepage header .buttons{overflow:hidden;padding:0;}#homepage header .buttons li{width:auto;display:block;float:none;margin:10px auto;}#homepage header .buttons li a{height:24px;font:14px/1.2em 'Orienta',sans-serif;}
-#homepage header.main{padding-top:0;}#homepage header.main .wrap{padding:20px 10px 10px;margin-bottom:0;}
-#homepage header.main .intro{width:300px;font:14px/1.3em 'Arbutus Slab',helvetica,sans-serif;}
-#homepage #logo{width:300px;height:130px;background-size:300px 130px;}
-#homepage .recent-contributors{width:auto;}
-#homepage .comic{margin-bottom:30px;}#homepage .comic img{width:300px;height:300px;display:block;float:none;margin:4px auto;}
-#homepage .comic h1{text-align:center;}#homepage .comic h1 small{font:10px/1.2em 'Arbutus Slab',helvetica,sans-serif;display:block;margin-top:4px;}
-.comic img{width:300px;height:300px;}
-.comic.single h1{display:block;text-align:center;font:18px/1.2em 'Arbutus Slab',helvetica,sans-serif;width:300px;margin:12px 0 4px;}
-h1.comic_1,h1.comic_2{display:none !important;}
-.comic-nav{position:static;right:auto;top:auto;}.comic-nav.prev{top:auto;}.comic-nav.prev.stuck{top:auto;}
-.comic-nav.next.stuck{top:auto;}
-.comic-nav.loading{opacity:.3;}
-.comic-nav .button{width:106px;}
-.comic-nav.stuck{position:static;}
-nav.main{height:34px;}nav.main ul{top:34px;left:0;width:100%;z-index:10000;background:#989eaa;padding:15px 0;}nav.main ul li{display:block;width:100%;text-align:center;height:40px;}nav.main ul li a{font:16px/26px 'Orienta',sans-serif;}
-nav.main ul li #get-artist{font:16px/26px 'Orienta',sans-serif;width:130px;text-align:center;}
-nav.main h1#textlogo a{float:none;margin:0 auto;height:34px;}
-ul.ui-autocomplete{width:100% !important;left:0 !important;}ul.ui-autocomplete li{font:16px/1.5em 'Orienta',sans-serif;}ul.ui-autocomplete li a{font:14px/1.3em 'Orienta',sans-serif;padding:12px;}
-#artists #content{width:300px;}#artists #content h3.name{width:200px;}
-body.static #content{width:85%;}
-#contribute-page form.contribute p.note,#contribute-page form.contribute input[type=text],#contribute-page form.contribute input[type=password],#contribute-page form.contribute button{width:250px;}
-#contribute-page #content{width:85%;}
-#about #content{width:85%;}
-.notice{width:250px;}
-#mobile-nav{display:block;}
-#nav-random{display:block;}
+/*
+Corpsey smaller
+*/
+#catacombs {
+  min-height: 1868px;
+  max-width: 300px;
+}
+#catacombs.one-comic-showing {
+  min-height: 928px;
+}
+#catacombs.is-uturn {
+  min-height: 1278px;
+}
+.button {
+  letter-spacing: .3em;
+}
+#homepage #mobile-nav {
+  display: none;
+}
+#homepage .bone-divider {
+  width: 330px;
+  height: 94px;
+  background-size: 330px 94px;
+}
+#homepage .bone-divider.odd {
+  background-image: url('/static/img/bone-divider-2.png');
+}
+#homepage header .buttons {
+  overflow: hidden;
+  padding: 0;
+}
+#homepage header .buttons li {
+  width: auto;
+  display: block;
+  float: none;
+  margin: 10px auto;
+}
+#homepage header .buttons li a {
+  height: 24px;
+  font: 14px/1.2em 'Orienta', sans-serif;
+}
+#homepage header.main {
+  padding-top: 0;
+}
+#homepage header.main .wrap {
+  padding: 20px 10px 10px;
+  margin-bottom: 0;
+}
+#homepage header.main .intro {
+  width: 300px;
+  font: 14px/1.3em 'Arbutus Slab', helvetica, sans-serif;
+}
+#homepage #logo {
+  width: 300px;
+  height: 130px;
+  background-size: 300px 130px;
+}
+#homepage .recent-contributors {
+  width: auto;
+}
+#homepage .comic {
+  margin-bottom: 30px;
+}
+#homepage .comic img {
+  width: 300px;
+  height: 300px;
+  display: block;
+  float: none;
+  margin: 4px auto;
+}
+#homepage .comic h1 {
+  text-align: center;
+}
+#homepage .comic h1 small {
+  font: 10px/1.2em 'Arbutus Slab', helvetica, sans-serif;
+  display: block;
+  margin-top: 4px;
+}
+.contribution img,
+.comic img {
+  width: 300px;
+  height: 300px;
+}
+.contribution.single h1,
+.comic.single h1 {
+  display: block;
+  text-align: center;
+  font: 18px/1.2em 'Arbutus Slab', helvetica, sans-serif;
+  width: 300px;
+  margin: 12px 0 4px;
+}
+h1.comic_1,
+h1.comic_2 {
+  display: none !important;
+}
+.comic-nav {
+  position: static;
+  right: auto;
+  top: auto;
+}
+.comic-nav.prev {
+  top: auto;
+}
+.comic-nav.prev.stuck {
+  top: auto;
+}
+.comic-nav.next.stuck {
+  top: auto;
+}
+.comic-nav.loading {
+  opacity: .3;
+}
+.comic-nav .button {
+  width: 106px;
+}
+.comic-nav.stuck {
+  position: static;
+}
+nav.main {
+  height: 34px;
+}
+nav.main ul {
+  top: 34px;
+  left: 0;
+  width: 100%;
+  z-index: 10000;
+  background: #989eaa;
+  padding: 15px 0;
+}
+nav.main ul li {
+  display: block;
+  width: 100%;
+  text-align: center;
+  height: 40px;
+}
+nav.main ul li a {
+  font: 16px/26px 'Orienta', sans-serif;
+}
+nav.main ul li #get-artist {
+  font: 16px/26px 'Orienta', sans-serif;
+  width: 130px;
+  text-align: center;
+}
+nav.main h1#textlogo a {
+  float: none;
+  margin: 0 auto;
+  height: 34px;
+}
+ul.ui-autocomplete {
+  width: 100% !important;
+  left: 0 !important;
+}
+ul.ui-autocomplete li {
+  font: 16px/1.5em 'Orienta', sans-serif;
+}
+ul.ui-autocomplete li a {
+  font: 14px/1.3em 'Orienta', sans-serif;
+  padding: 12px;
+}
+#artists #content {
+  width: 300px;
+}
+#artists #content h3.name {
+  width: 200px;
+}
+body.static #content {
+  width: 85%;
+}
+#contribute-page form.contribute p.note,
+#contribute-page form.contribute input[type=text],
+#contribute-page form.contribute input[type=password],
+#contribute-page form.contribute button {
+  width: 250px;
+}
+#contribute-page #content {
+  width: 85%;
+}
+/* about */
+#about #content {
+  width: 85%;
+}
+.notice {
+  width: 250px;
+}
+#mobile-nav {
+  display: block;
+}
+#nav-random {
+  display: block;
+}
+/* contributions */
+#contributions #content {
+  padding: 10px;
+  text-align: center;
+}
+#contributions .comic {
+  padding: 0;
+  border: none;
+}
+#contributions .comic img,
+#contributions .contribution img {
+  margin: 4px auto;
+  float: none;
+}
