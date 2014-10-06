@@ -5,6 +5,7 @@ from easy_thumbnails.files import get_thumbnailer
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import get_template
 from django.template import Context
+from django.conf import settings
 import twitter
 import random
 
@@ -171,7 +172,7 @@ def contribution_vote(request, contribution_id, yea, rule_broke=0, notes=''):
                 'This just keeps getting better. New panels by',
             )
         )
-        twitter_api = twitter.Api(consumer_key='sWbjCg9mlxZFcGw4IyJIQ', consumer_secret='pzMuKLqi8kFaui1dbrp5LOfy4coVt9PSPkv3dfo7XLw', access_token_key='1151394914-0wUR5btzDOt3BDe6exE78QqHoJaha6tBPGkP9c4', access_token_secret='lvbST9oyvVQAO5uJ8P2SgGzs27wgkakkvUeW2wGzYc')
+        twitter_api = twitter.Api(consumer_key=settings.TWITTER_CONSUMER_KEY, consumer_secret=settings.TWITTER_CONSUMER_SECRET, access_token_key=settings.TWITTER_ACCESS_TOKEN_KEY, access_token_secret=settings.TWITTER_ACCESS_TOKEN_SECRET)
         try:
             twitter_api.PostUpdate("%s %s, following %s: http://%s/catacombs/%s/%s/" % (phrase, comic.artist, comic.parent.artist, request.META['HTTP_HOST'], comic.parent.id, comic.id))
         except:
