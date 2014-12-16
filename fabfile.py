@@ -1,6 +1,7 @@
 from fabric.api import *
 
 env.hosts = ['corpsey.trubbleclub.com']
+env.user = 'natebeaty'
 env.warn_only = True
 
 def deploy():
