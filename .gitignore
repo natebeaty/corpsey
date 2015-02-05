@@ -8,5 +8,5 @@ src/
 .DS_Store
 codekit-config.json
 build/*
-settings_production.py
-
+corpsey/settings_production.py
+corpsey/settings_local.py
