@@ -19,7 +19,7 @@ def recursive_node_to_dict(node):
         'id': node.pk,
         'size': node.pk*100,
         'url': node.get_absolute_url(),
-        'image': get_thumbnailer(node.panel1)['midsize'].url,
+        # 'image': get_thumbnailer(node.panel1)['midsize'].url,
         'name': node.artist.name,
     }
     children = [recursive_node_to_dict(c) for c in node.get_children()]
