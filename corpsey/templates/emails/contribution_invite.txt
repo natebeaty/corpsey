@@ -33,7 +33,7 @@ So in addition to outstanding effort, we also need these seven rules followed.
 
 - The main character Corpsey must always be somewhere in the comic. He is already dead, so you cannot kill him. Your panels cannot be the end of the story.
 
-- Keep it PG-13. (We'd like this to be a place where anybody can come and draw and contribute. What PG-13 means http://bit.ly/d1XveM)
+- Keep it PG-13. (We'd like this to be a place where anybody can come and draw and contribute. What PG-13 means http://www.mpaa.org/film-ratings/)
 
 - Panels must be RGB, square, and at least 1200px by 1200px. Save files as JPG.
 
