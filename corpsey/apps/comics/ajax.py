@@ -1,4 +1,3 @@
-from django.utils import simplejson
 from corpsey.apps.comics.models import *
 from dajaxice.decorators import dajaxice_register
 from easy_thumbnails.files import get_thumbnailer
@@ -6,6 +5,7 @@ from django.core.mail import EmailMultiAlternatives
 from django.template.loader import get_template
 from django.template import Context
 from django.conf import settings
+import json
 import twitter
 import random
 
@@ -23,7 +23,7 @@ def get_uturn_panel(request, uturn_id, direction, hdpi_enabled):
     else:
         uturn_obj = {}
 
-    return simplejson.dumps({ 
+    return json.dumps({ 
         'direction' : direction,
         'uturn' : uturn_obj
     })
@@ -50,7 +50,7 @@ def get_comic_panels(request, comic_id, direction, hdpi_enabled):
     # store comic_id for /contribute/
     request.session['last_comic_id'] = comic_id
 
-    return simplejson.dumps({ 
+    return json.dumps({ 
         'direction' : direction,
         'comic' : comic_obj
     })
@@ -61,7 +61,7 @@ def contribution_vote(request, contribution_id, yea, rule_broke=0, notes=''):
     contribution = Contribution.objects.get(pk=contribution_id)
     # has this already been approved?
     if contribution.pending == False:
-        return simplejson.dumps({ 
+        return json.dumps({ 
             'message' : "This contribution is not in the queue any longer."
         })
     approve = True if yea == 1 else False
@@ -178,7 +178,7 @@ def contribution_vote(request, contribution_id, yea, rule_broke=0, notes=''):
         except:
             message = 'There was an error posting to twitter. Please write Nate and mock him.'
 
-    return simplejson.dumps({ 
+    return json.dumps({ 
         'contribution_id' : contribution_id,
         'yea' : yea,
         'message' : message
@@ -200,7 +200,7 @@ def get_new_leaf(request, comic_id, hdpi_enabled):
         'name' : comic.artist.name,
         'url' : comic.artist.url,
     }
-    return simplejson.dumps({ 
+    return json.dumps({ 
         'comic' : comic_obj
     })
 
@@ -296,7 +296,7 @@ def get_nav_links(request, comic_id_arr, is_uturn):
                         'last_name': 'Club',
                     }]
 
-    return simplejson.dumps({ 
+    return json.dumps({ 
         'prev_comic_links' : prev_comic_links_arr,
         'next_comic_links' : next_comic_links_arr,
         'uturn_links' : uturn_links,

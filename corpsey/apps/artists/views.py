@@ -1,7 +1,7 @@
 from corpsey.apps.artists.models import *
 from corpsey.apps.comics.models import *
 from django.http import HttpResponse
-from django.utils import simplejson as json
+import json
 
 def entry(request, artist_id):
     pass
