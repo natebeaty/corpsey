@@ -1,5 +1,4 @@
 from django.contrib import admin
-# from treeadmin import admin as tree_admin
 from treeadmin.admin import TreeAdmin
 from corpsey.apps.comics.models import Comic,Uturn,Contribution,Rule,Vote
 from django import forms

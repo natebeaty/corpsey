@@ -77,7 +77,6 @@ STATICFILES_DIRS = (
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    'dajaxice.finders.DajaxiceFinder',
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
     'compressor.finders.CompressorFinder',
 )
@@ -122,6 +121,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.debug',
     'django.core.context_processors.i18n',
     'django.core.context_processors.media',
+    'django.core.context_processors.request',
     'django.core.context_processors.static',
     'django.core.context_processors.tz',
     'django.contrib.messages.context_processors.messages',
@@ -144,11 +144,8 @@ INSTALLED_APPS = (
     'django_cleanup',
     'mptt',
     'treeadmin',
-    'south',
     'corpsey.apps.comics',
     'corpsey.apps.artists',
-    'dajaxice',
-    'dajax',
     'icanhaz',
     'flatpages_x',
     'markitup',

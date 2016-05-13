@@ -9,7 +9,6 @@ import json
 import twitter
 import random
 
-@dajaxice_register(method='GET')
 def get_uturn_panel(request, uturn_id, direction, hdpi_enabled):
     """The wacky uturn anomaly that turned Nate super bald."""
     uturn = Uturn.objects.get(pk=uturn_id)
@@ -28,7 +27,6 @@ def get_uturn_panel(request, uturn_id, direction, hdpi_enabled):
         'uturn' : uturn_obj
     })
 
-@dajaxice_register(method='GET')
 def get_comic_panels(request, comic_id, direction, hdpi_enabled):
     """Ajaxtastic catacombs browsing magic."""
     comic = Comic.objects.get(pk=comic_id)
@@ -55,7 +53,6 @@ def get_comic_panels(request, comic_id, direction, hdpi_enabled):
         'comic' : comic_obj
     })
 
-@dajaxice_register(method='GET')
 def contribution_vote(request, contribution_id, yea, rule_broke=0, notes=''):
     """The elders voting YAY OR NAY on freshly contributed strips."""
     contribution = Contribution.objects.get(pk=contribution_id)
@@ -184,7 +181,6 @@ def contribution_vote(request, contribution_id, yea, rule_broke=0, notes=''):
         'message' : message
     })
 
-@dajaxice_register(method='GET')
 def get_new_leaf(request, comic_id, hdpi_enabled):
     """Pull another random strip to follow for /contribute/ page."""
     from corpsey.apps.comics.views import find_comic_to_follow
@@ -204,7 +200,6 @@ def get_new_leaf(request, comic_id, hdpi_enabled):
         'comic' : comic_obj
     })
 
-@dajaxice_register(method='GET')
 def get_nav_links(request, comic_id_arr, is_uturn):
     """Ajaxtastic next/prev links, overly verbose at the moment just so they work."""
     next_comic_links_arr = []

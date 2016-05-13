@@ -15,7 +15,6 @@ $.corpsey.catacombs = (function() {
 
     var medium_width = false,
         small_width = false,
-        delayed_resize_timer = false,
         build_titles_timer;
 
     function _init() {
@@ -48,7 +47,9 @@ $.corpsey.catacombs = (function() {
             _get_comics_showing();
             _garbage_collection();
             _build_panels();
-            if (typeof _gaq != 'undefined') _gaq.push(['_trackPageview', window.location.pathname]);
+            if (typeof _gaq !== 'undefined') {
+                _gaq.push(['_trackPageview', window.location.pathname]);
+            }
         });
 
         // isotopize
@@ -103,14 +104,14 @@ $.corpsey.catacombs = (function() {
        // mobile nerds
         $('#catacombs').bind('swipeone', function (e, obj) {
             return; // disabling for now
-            var direction = obj.description.split(":")[2]
-            if (obj.delta[0].moved > 200) {
-                if (direction === "left") {
-                    $('.prev.button:first').trigger('click');
-                } else if (direction === "right") {
-                    $('.next.button:first').trigger('click');
-                }
-            }
+            // var direction = obj.description.split(":")[2]
+            // if (obj.delta[0].moved > 200) {
+            //     if (direction === "left") {
+            //         $('.prev.button:first').trigger('click');
+            //     } else if (direction === "right") {
+            //         $('.next.button:first').trigger('click');
+            //     }
+            // }
         });
         $('#catacombs').bind('swipetwo', function (e, obj) {
             return; // disabling for now
@@ -173,20 +174,24 @@ $.corpsey.catacombs = (function() {
         // check for comic panels to load
         for(var i=0; i<comics_showing.length; i++) {
             if (is_uturn && (i===0 && uturns_shown.indexOf(comics_showing[i]) < 0)) {
-                Dajaxice.corpsey.apps.comics.get_uturn_panel($.corpsey.catacombs.show_uturn, {
+                $.get('/get_uturn_panel/', {
                     'uturn_id': comics_showing[i],
                     'direction': State.data.direction,
                     'hdpi_enabled': $.corpsey.hdpi_enabled()
+                }).done(function(data) {
+                    _show_uturn(data);
                 });
             } else if (
                 // motherfucking uturns breaking my brain
                 (is_uturn && i===1 && comics_shown.indexOf(comics_showing[i]) < 0) || 
                 (!is_uturn && comics_shown.indexOf(comics_showing[i]) < 0)
             ){
-                Dajaxice.corpsey.apps.comics.get_comic_panels($.corpsey.catacombs.show_panels, {
+                $.get('/get_comic_panels/', {
                     'comic_id': comics_showing[i],
                     'direction': State.data.direction,
                     'hdpi_enabled': $.corpsey.hdpi_enabled()
+                }).done(function(data) {
+                    _show_panels(data);
                 });
             } else {
                 $('.comic.single[data-comic-id='+comics_showing[i]+']').addClass('active');
@@ -252,11 +257,11 @@ $.corpsey.catacombs = (function() {
 
         // if you've looped through from last comic to first comic, make sure the URL matches visible order of comics
         // or if uturn and we're out of sync, swap em around!
-        if ((!is_uturn && visible_comics[0]!=comics_showing[0]) ||
-            (is_uturn && uturn_single && visible_comics[0]!=comics_showing[0])
+        if ((!is_uturn && visible_comics[0]!==comics_showing[0]) ||
+            (is_uturn && uturn_single && visible_comics[0]!==comics_showing[0])
             ) {
             $('.comic.active[data-comic-id='+comics_showing[0]+']:first').after($('.comic.active[data-comic-id='+comics_showing[1]+']:first'));
-        } else if (is_uturn && !uturn_single && visible_comics[0]==comics_showing[0]) {
+        } else if (is_uturn && !uturn_single && visible_comics[0]===comics_showing[0]) {
             $('.comic.active[data-comic-id='+comics_showing[1]+']:first').after($('.comic.active[data-comic-id='+comics_showing[0]+']:first'));
         }
 
@@ -270,8 +275,8 @@ $.corpsey.catacombs = (function() {
             // uturn pages have different 
             if (is_uturn) {
                 if (
-                    ($(this).hasClass('uturn') && $(this).data('comic-id')!=comics_showing[0]) || 
-                    (!$(this).hasClass('uturn') && $(this).data('comic-id')!=comics_showing[1]))
+                    ($(this).hasClass('uturn') && $(this).data('comic-id')!==comics_showing[0]) || 
+                    (!$(this).hasClass('uturn') && $(this).data('comic-id')!==comics_showing[1]))
                     {
                         $(this).removeClass('active');
                     }
@@ -289,7 +294,7 @@ $.corpsey.catacombs = (function() {
 
         // if med/small screen, scroll up to comic we just loaded
         if (medium_width || small_width) {
-            if (State.data.direction=='next') {
+            if (State.data.direction==='next') {
                 var scrollTo = small_width ? 960 : 320;
                 // for small_width single uturns (only has single first TC panel, scroll to panel 2 on page)
                 if (small_width && is_uturn && uturn_single) {
@@ -310,7 +315,12 @@ $.corpsey.catacombs = (function() {
     }
 
     function _get_nav_links() {
-        Dajaxice.corpsey.apps.comics.get_nav_links($.corpsey.catacombs.show_nav_links, { 'comic_id_arr': comics_showing, 'is_uturn': is_uturn });
+        $.get('/get_nav_links/', { 
+                'comic_id_arr': comics_showing, 
+                'is_uturn': is_uturn 
+            }).done(function(data) {
+                _show_nav_links(data);
+            });
     }
 
     function _show_nav_links(data) {
@@ -349,7 +359,9 @@ $.corpsey.catacombs = (function() {
             // figure out which comic panel to position next to
             var c = (i===1 && $('#catacombs').width()<980) ? '1' : '0';
             // todo: put this damn title to the right of the strip, ugh
-            if (is_uturn && $(this).hasClass('uturn') && $('#catacombs').width()<980) c = '1';
+            if (is_uturn && $(this).hasClass('uturn') && $('#catacombs').width()<980) {
+                c = '1';
+            }
             var $img = $(this).find('img:eq('+c+')');
             var pos = $img.offset();
             var $h1 = $('h1.comic_'+(i+1));
