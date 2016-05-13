@@ -5,6 +5,7 @@ from django import forms
 class ArtistForm(forms.ModelForm):
     class Meta:
         model = Artist
+        fields = '__all__'
 
 class ArtistAdmin(admin.ModelAdmin):
     list_display = ('__unicode__', 'email', 'url')
