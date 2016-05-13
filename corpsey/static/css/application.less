@@ -29,9 +29,11 @@ ul.bullets {
 }
 .notice {
     background: #fff189;
-    width: 500px;
+    width: 300px;
     margin: 0 auto;
-    padding: 10px;
+    padding: 20px;
+    text-align: center;
+    
     overflow: hidden;
     p {
         font: 14px/1.2em 'Orienta', sans-serif;
@@ -752,30 +754,32 @@ form {
         margin: 1em 0 0;
     }
     input[type=text],
+    input[type=email],
     input[type=password], {
         font: 18px/1.2em 'Arbutus Slab', serif;
         color: #222;
-        width: 300px;
+        width: 100%;
         background: none;
         border:0;
-        padding: 10px 6px 4px 6px; 
-        border-bottom: 1px dashed #ccc;
-        text-align: center;
+        margin: 6px 0 0;
+        padding: 6px; 
+        background: lighten(@olive, 35%);
         outline: none;
         &:focus {
-            border-bottom: 1px dashed #666;
+            outline: 1px solid @olive;
         }
     }
     input[type=submit] {
         font: 16px/1em "Orienta", sans-serif;
-        padding: 10px 60px 8px;
-        background: #666;
+        padding: 10px 10px 8px;
+        background: @olive;
         color: #fff;
         border: 0;
         text-transform: uppercase;
         margin: 1em 0;
+        cursor: pointer;
         &:hover {
-            background: #7a7a7a;
+            background: darken(@olive, 5%);
         }
     }
 }
@@ -919,7 +923,7 @@ ul.ui-autocomplete {
         }
     }
 }
-#login {
+body.user {
     form {
         width: 400px;
         margin: 40px auto;

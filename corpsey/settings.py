@@ -101,6 +101,7 @@ MIDDLEWARE_CLASSES = (
 )
 
 ROOT_URLCONF = 'corpsey.urls'
+LOGIN_URL = '/user/login/'
 
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'corpsey.wsgi.application'
@@ -204,8 +205,8 @@ GOOGLE_ANALYTICS_KEY = ''
 EMAIL_HOST = ''
 EMAIL_HOST_USER = ''
 EMAIL_HOST_PASSWORD = ''
-DEFAULT_FROM_EMAIL = ''
-SERVER_EMAIL = ''
+DEFAULT_FROM_EMAIL = 'hal@trubbleclub.com'
+SERVER_EMAIL = 'hal@trubbleclub.com'
 
 SECRET_KEY = ''
 DKIM_DOMAIN = ''

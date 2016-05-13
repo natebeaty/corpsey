@@ -18,6 +18,11 @@
 {% endblock header %}
 
 {% block content %}
+
+  {% if request.GET.logged_out_ok %}  
+    <div class="notice"><h1>Logged out OK!</h1></div>
+  {% endif %}
+
   <div class="recent-contributors" id="recent-contributors">
     <h2>Most Recent Contributors</h2>
     {% for comic in comic_set %}

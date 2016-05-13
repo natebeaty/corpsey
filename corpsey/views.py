@@ -1,9 +1,17 @@
 from apps.comics.models import *
 from apps.artists.models import *
-from django.shortcuts import get_object_or_404, render_to_response
+from django.shortcuts import get_object_or_404, render_to_response, redirect
 from django.contrib.flatpages.models import FlatPage
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
 from django.template import RequestContext
 from django.views.decorators.cache import cache_page
+
+@login_required()
+def logout_view(request):
+    """Custom logout with redirect."""
+    logout(request)
+    return redirect('/?logged_out_ok=1')
 
 @cache_page(60 * 15)
 def home(request):

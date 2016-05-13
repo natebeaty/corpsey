@@ -5,11 +5,12 @@
 {% block title %}Pending Contributions{% endblock %}
 
 {% block content %}
-  <h2>Pending Contributions</h2>
+  <h1>Pending Contributions</h1>
+  <p style="margin:-15px 0 20px">Signed in as {{ user.username }}. <a href="/user/logout/">Log Out</a></p>
   {% for contribution in contributions %}
     {% include "comics/contribution.html" with contribution=contribution comic=contribution.comic %}
   {% empty %}
-  	<p>No contributions found that you ({{ user.username }}) haven't voted on.</p>
+  	<p>No pending contributions found that you haven't voted on. They may have already been approved or rejected.</p>
   {% endfor %}
   <div id="rules">
     <h2>For reference, these are the seven rules:</h2>

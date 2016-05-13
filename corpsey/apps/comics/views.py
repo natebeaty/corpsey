@@ -9,6 +9,7 @@ from easy_thumbnails.files import get_thumbnailer
 from django.http import HttpResponse
 from django.views.decorators.cache import cache_page
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
 from django.conf import settings
 from datetime import datetime, timedelta
 from django.utils import timezone
