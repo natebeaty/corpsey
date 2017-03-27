@@ -226,7 +226,7 @@ def get_nav_links(request):
     if is_uturn:
         uturn = Uturn.objects.get(pk=comic_id_arr[0])
         # /catacombs/uturn/uturn_id/ (comic_id_arr[1] is sent along by js magic, taken from uturn's data-portal-id)
-        if comic_id_arr[1] == uturn.portal_to.id:
+        if int(comic_id_arr[1]) == uturn.portal_to.id:
             next_comic_links = uturn.portal_to.get_next_comic_links()
             if next_comic_links:
                 for link in next_comic_links:
