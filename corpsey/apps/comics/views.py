@@ -337,7 +337,7 @@ def contribute_upload(request, upload_code):
                 emails = ()
                 # build tuple of emails to send
                 for voter in voters:
-                    emails = emails + ((mail_subject, mail_body, 'hal@trubbleclub.com', [voter.email]),)
+                    emails = emails + ((mail_subject, mail_body, 'hal@trubble.club', [voter.email]),)
                 send_mass_mail(emails)
             else:
                 message = "Oh no! Something went wrong and broke Corpsey's robot brain."
