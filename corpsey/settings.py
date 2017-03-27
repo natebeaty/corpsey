@@ -69,7 +69,7 @@ STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    '/home/natebeaty/webapps/django15/corpsey/corpsey/static',
+    '/home/natebeaty/webapps/django18/corpsey/corpsey/static',
 )
 
 # List of finder classes that know how to find static files in
@@ -78,7 +78,6 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
-    'compressor.finders.CompressorFinder',
 )
 
 # List of callables that know how to import templates from various sources.
@@ -106,14 +105,14 @@ LOGIN_URL = '/user/login/'
 WSGI_APPLICATION = 'corpsey.wsgi.application'
 
 ICANHAZ_DIRS = (
-    '/home/natebeaty/webapps/django15/corpsey/corpsey/templates/icanhaz',
+    '/home/natebeaty/webapps/django18/corpsey/corpsey/templates/icanhaz',
 )
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    '/home/natebeaty/webapps/django15/corpsey/corpsey/templates',
+    '/home/natebeaty/webapps/django18/corpsey/corpsey/templates',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
@@ -150,7 +149,6 @@ INSTALLED_APPS = (
     'markitup',
     'clear_cache',
     'cronjobs',
-    'compressor',
 )
 
 MARKITUP_SET = 'markitup/sets/markdown'
@@ -225,7 +223,7 @@ MAX_COMIC_CHILDREN = 3
 
 # Import settings information based on node
 STAGING_HOST = "corpsey-staging"
-PRODUCTION_HOST = "web376.webfaction.com"
+PRODUCTION_HOST = "web591.webfaction.com"
 
 from platform import node
 

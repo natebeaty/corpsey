@@ -16,16 +16,16 @@ framework.
 import os, sys, site
 
 # Tell wsgi to add the Python site-packages to its path. 
-site.addsitedir('/home/natebeaty/.virtualenvs/corpsey/lib/python2.7/site-packages')
+site.addsitedir('/home/natebeaty/.virtualenvs/corpsey_18/lib/python2.7/site-packages')
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "corpsey.settings")
 # os.environ['DJANGO_SETTINGS_MODULE'] = 'corpsey.settings'
 
-activate_this = os.path.expanduser("~/.virtualenvs/corpsey/bin/activate_this.py")
+activate_this = os.path.expanduser("~/.virtualenvs/corpsey_18/bin/activate_this.py")
 execfile(activate_this, dict(__file__=activate_this))
 
 # Calculate the path based on the location of the WSGI script
-project = '/home/natebeaty/webapps/django15/corpsey/'
+project = '/home/natebeaty/webapps/django18/corpsey/'
 workspace = os.path.dirname(project)
 sys.path.append(workspace)
 
