@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load thumbnail mptt_tags icanhaz %}
+{% load thumbnail mptt_tags %}
 
 {% block title %}{{ comic_1.artist.name }}{% if comic_2 %} / {{ comic_2.artist.name }}{% endif %}{% endblock %}
 
@@ -40,9 +40,9 @@
   <script src="{{ STATIC_URL }}js/catacombs.js?v4" type="text/javascript"></script>
 {% endblock extra_javascript %}
 {% block icanhaz_templates %}
-  {% icanhaz "next_comic_nav" %}
-  {% icanhaz "prev_comic_nav" %}
-  {% icanhaz "comic_single" %}
-  {% icanhaz "uturn_nav" %}
-  {% icanhaz "uturn_single" %}
+  {% include "js/next_comic_nav.html" %}
+  {% include "js/prev_comic_nav.html" %}
+  {% include "js/comic_single.html" %}
+  {% include "js/uturn_nav.html" %}
+  {% include "js/uturn_single.html" %}
 {% endblock icanhaz_templates %}

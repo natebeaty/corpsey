@@ -4,6 +4,7 @@ from django.conf import settings
 from django.shortcuts import redirect
 from . import views
 from corpsey.apps.comics import views as comics_views
+from corpsey.apps.comics import ajax as comics_ajax
 from corpsey.apps.artists import views as artists_views
 from django.contrib.auth import views as auth_views
 from django import views as django_views
@@ -45,9 +46,13 @@ urlpatterns = patterns('',
         {'post_reset_redirect' : '/user/password/done/'}),
     url(r'^user/password/done/$', 
         auth_views.password_reset_complete),
-    # url(r'^contributions/vote/(?P<contribution_id>[\d]+)/(?P<vote>[\d]+)/$', comics_views.contribution_vote, name='contribution_vote'),
+
     # AJAX
-    url(r'^ajax/get_uturn/(?P<uturn>[\d]+)/$', comics_views.uturn, name='uturn'),
+    url(r'^ajax/get_comic_panels/$', comics_ajax.get_comic_panels),
+    url(r'^ajax/get_uturn_panel/$', comics_ajax.get_uturn_panel),
+    url(r'^ajax/get_nav_links/$', comics_ajax.get_nav_links),
+    url(r'^ajax/get_new_leaf/$', comics_ajax.get_new_leaf),
+    url(r'^contribution_vote/$', comics_ajax.contribution_vote),
 
     url(r'^artist/([\d]+)/$', artists_views.entry, name='artist'),
     url(r'^get_artists/$', artists_views.get_artists, name='get_artists'),

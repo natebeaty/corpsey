@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load thumbnail icanhaz %}
+{% load thumbnail %}
 
 {% block body_id %}contribute-page{% endblock %}
 {% block title %}Contribute to The Infinite Corpse!{% endblock %}
@@ -24,7 +24,7 @@
             {% include "comics/strip.html" with comic=parent_comic %}
         </div>
 
-        <form class="contribute" action="{% url contribute_upload upload_code %}" method="post" enctype="multipart/form-data">
+        <form class="contribute" action="{% url 'contribute_upload' upload_code %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
                 {{ form.non_field_errors }}
                 <fieldset class="images">
@@ -91,5 +91,5 @@
 {% endblock extra_javascript %}
 
 {% block icanhaz_templates %}
-  {% icanhaz "comic_single" %}
+  {% include "js/comic_single.html" %}
 {% endblock icanhaz_templates %}

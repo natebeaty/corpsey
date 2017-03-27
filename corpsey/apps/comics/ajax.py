@@ -1,17 +1,19 @@
 from corpsey.apps.comics.models import *
-from dajaxice.decorators import dajaxice_register
 from easy_thumbnails.files import get_thumbnailer
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import get_template
 from django.template import Context
 from django.conf import settings
+from django.http import HttpResponse
 import json
 import twitter
 import random
 
-def get_uturn_panel(request, uturn_id, direction, hdpi_enabled):
+def get_uturn_panel(request):
     """The wacky uturn anomaly that turned Nate super bald."""
+    uturn_id = request.GET.get('uturn_id')
     uturn = Uturn.objects.get(pk=uturn_id)
+    hdpi_enabled = request.GET.get('hdpi_enabled')
     size = 'midsize_hd' if hdpi_enabled else 'midsize'
     if uturn:
         uturn_obj = {
@@ -22,14 +24,17 @@ def get_uturn_panel(request, uturn_id, direction, hdpi_enabled):
     else:
         uturn_obj = {}
 
-    return json.dumps({ 
-        'direction' : direction,
+    data = json.dumps({ 
+        'direction' : request.GET.get('direction'),
         'uturn' : uturn_obj
     })
+    return HttpResponse(data, content_type = "application/json")
 
-def get_comic_panels(request, comic_id, direction, hdpi_enabled):
+def get_comic_panels(request):
     """Ajaxtastic catacombs browsing magic."""
+    comic_id = request.GET.get('comic_id')
     comic = Comic.objects.get(pk=comic_id)
+    hdpi_enabled = request.GET.get('hdpi_enabled')
     size = 'midsize_hd' if hdpi_enabled else 'midsize'
     if comic:
         comic_obj = {
@@ -48,32 +53,38 @@ def get_comic_panels(request, comic_id, direction, hdpi_enabled):
     # store comic_id for /contribute/
     request.session['last_comic_id'] = comic_id
 
-    return json.dumps({ 
-        'direction' : direction,
+    data = json.dumps({ 
+        'direction' : request.GET.get('direction'),
         'comic' : comic_obj
     })
+    return HttpResponse(data, content_type = "application/json")
 
-def contribution_vote(request, contribution_id, yea, rule_broke=0, notes=''):
-    """The elders voting YAY OR NAY on freshly contributed strips."""
+def contribution_vote(request):
+    """The elders voting YEA OR NAY on freshly contributed strips."""
+    contribution_id = request.GET.get('contribution_id')
+    # rule_broke = request.GET.get('rule_broke', 0)
+    notes = request.GET.get('notes', '')
+    yea = request.GET.get('yea')
+
     contribution = Contribution.objects.get(pk=contribution_id)
     # has this already been approved?
     if contribution.pending == False:
-        return json.dumps({ 
+        return HttpResponse(json.dumps({ 
             'message' : "This contribution is not in the queue any longer."
-        })
-    approve = True if yea == 1 else False
+        }), content_type = "application/json")
+    approve = True if yea == '1' else False
     message = ''
 
-    if rule_broke == 0:
-        rule_broke = None
-    else:
-        rule_broke = Rule.objects.get(pk=rule_broke)
+    # if rule_broke == 0:
+    #     rule_broke = None
+    # else:
+    #     rule_broke = Rule.objects.get(pk=rule_broke)
 
     vote = Vote(
         contribution = contribution,
         user = request.user,
         approve = approve,
-        rule_broke = rule_broke,
+        # rule_broke = rule_broke,
         notes = notes,
         )
     vote.save()
@@ -175,15 +186,18 @@ def contribution_vote(request, contribution_id, yea, rule_broke=0, notes=''):
         except:
             message = 'There was an error posting to twitter. Please write Nate and mock him.'
 
-    return json.dumps({ 
+    data = json.dumps({ 
         'contribution_id' : contribution_id,
         'yea' : yea,
         'message' : message
     })
+    return HttpResponse(data, content_type = "application/json")
 
-def get_new_leaf(request, comic_id, hdpi_enabled):
+def get_new_leaf(request):
     """Pull another random strip to follow for /contribute/ page."""
     from corpsey.apps.comics.views import find_comic_to_follow
+    comic_id = request.GET.get('comic_id')
+    hdpi_enabled = request.GET.get('hdpi_enabled')
     comic = find_comic_to_follow(comic_id)
     size = 'midsize_hd' if hdpi_enabled else 'midsize'
     comic_obj = {
@@ -196,14 +210,17 @@ def get_new_leaf(request, comic_id, hdpi_enabled):
         'name' : comic.artist.name,
         'url' : comic.artist.url,
     }
-    return json.dumps({ 
+    data = json.dumps({ 
         'comic' : comic_obj
     })
+    return HttpResponse(data, content_type = "application/json")
 
-def get_nav_links(request, comic_id_arr, is_uturn):
+def get_nav_links(request):
     """Ajaxtastic next/prev links, overly verbose at the moment just so they work."""
     next_comic_links_arr = []
     prev_comic_links_arr = []
+    comic_id_arr = request.GET.getlist('comic_id_arr[]')
+    is_uturn = request.GET.get('is_uturn')
     uturn_links = []
 
     if is_uturn:
@@ -291,8 +308,9 @@ def get_nav_links(request, comic_id_arr, is_uturn):
                         'last_name': 'Club',
                     }]
 
-    return json.dumps({ 
+    data = json.dumps({ 
         'prev_comic_links' : prev_comic_links_arr,
         'next_comic_links' : next_comic_links_arr,
         'uturn_links' : uturn_links,
     })
+    return HttpResponse(data, content_type = "application/json")

@@ -1,3 +1,5 @@
+{% verbatim %}
+<script id="comic_single" type="text/html">
 <article class="comic single {{ extra_class }} active" data-comic-id="{{ comic_id }}">
   <h1>{{#url}}<a href="{{ url }}" target="_blank">{{ name }}</a>{{/url}}{{^url}}{{ name }}{{/url}}</h1>
   <ul>
@@ -6,3 +8,5 @@
     <li><img class="panel" src="{{ panel3 }}"></li>
   </ul>
 </article>
+</script>
+{% endverbatim %}

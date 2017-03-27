@@ -20,9 +20,11 @@ $.corpsey.contribute = (function() {
         $('.new-leaf').click(function(e) {
             e.preventDefault();
             comic_id = $('.comic.single').attr('data-comic-id');
-            Dajaxice.corpsey.apps.comics.get_new_leaf($.corpsey.contribute.show_new_leaf, {
+            $.get('/ajax/get_new_leaf/', {
                 'comic_id': comic_id,
-                'hdpi_enabled': $.corpsey.hdpi_enabled()
+                'hdpi_enabled': ($.corpsey.hdpi_enabled() ? 1 : '')
+            }).done(function(data) {
+                _show_new_leaf(data);
             });
         });
 
@@ -34,7 +36,9 @@ $.corpsey.contribute = (function() {
         $('#parent_comic').empty().append(comic);
         $('#id_comic_id').val(data.comic.comic_id);
         comic_id = data.comic.comic_id;
-        if (typeof _gaq != 'undefined') _gaq.push(['_trackEvent', 'Contribute', 'New Leaf']);
+        if (typeof _gaq !== 'undefined') {
+            _gaq.push(['_trackEvent', 'Contribute', 'New Leaf']);
+        }
     }
 
     // public methods

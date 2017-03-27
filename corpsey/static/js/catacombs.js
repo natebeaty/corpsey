@@ -141,7 +141,7 @@ $.corpsey.catacombs = (function() {
         for(var i=0; i<comics_showing.length; i++) comics_showing[i] = +comics_showing[i];
 
         // is this a uturn page?
-        is_uturn = State.url.match(/uturn/);
+        is_uturn = (State.url.match(/uturn/) !== null);
 
         // for /catacombs/uturn/5/ URLs
         if (is_uturn && comics_showing.length==1) {
@@ -155,7 +155,7 @@ $.corpsey.catacombs = (function() {
         $('#catacombs').toggleClass('one-comic-showing', (comics_showing.length===1));
 
         // add .is-uturn class for small.less to shorten min-height
-        $('#catacombs').toggleClass('is-uturn', (is_uturn!==null));
+        $('#catacombs').toggleClass('is-uturn', is_uturn);
     }
 
     // try to keep memory use not insane (was getting up to 900mb for one tab)
@@ -174,10 +174,10 @@ $.corpsey.catacombs = (function() {
         // check for comic panels to load
         for(var i=0; i<comics_showing.length; i++) {
             if (is_uturn && (i===0 && uturns_shown.indexOf(comics_showing[i]) < 0)) {
-                $.get('/get_uturn_panel/', {
+                $.get('/ajax/get_uturn_panel/', {
                     'uturn_id': comics_showing[i],
                     'direction': State.data.direction,
-                    'hdpi_enabled': $.corpsey.hdpi_enabled()
+                    'hdpi_enabled': ($.corpsey.hdpi_enabled() ? 1 : '')
                 }).done(function(data) {
                     _show_uturn(data);
                 });
@@ -186,10 +186,10 @@ $.corpsey.catacombs = (function() {
                 (is_uturn && i===1 && comics_shown.indexOf(comics_showing[i]) < 0) || 
                 (!is_uturn && comics_shown.indexOf(comics_showing[i]) < 0)
             ){
-                $.get('/get_comic_panels/', {
+                $.get('/ajax/get_comic_panels/', {
                     'comic_id': comics_showing[i],
                     'direction': State.data.direction,
-                    'hdpi_enabled': $.corpsey.hdpi_enabled()
+                    'hdpi_enabled': ($.corpsey.hdpi_enabled() ? 1 : '')
                 }).done(function(data) {
                     _show_panels(data);
                 });
@@ -315,9 +315,9 @@ $.corpsey.catacombs = (function() {
     }
 
     function _get_nav_links() {
-        $.get('/get_nav_links/', { 
+        $.get('/ajax/get_nav_links/', { 
                 'comic_id_arr': comics_showing, 
-                'is_uturn': is_uturn 
+                'is_uturn': (is_uturn ? 1 : '')
             }).done(function(data) {
                 _show_nav_links(data);
             });
