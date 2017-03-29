@@ -64,8 +64,7 @@ STATIC_ROOT = '/home/natebeaty/webapps/django14_static/'
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
-    '/Users/natebeaty/Sites/corpsey/corpsey/static',
+    os.path.join(BASE_DIR, 'corpsey', 'static'),
 ]
 
 # List of finder classes that know how to find static files in
