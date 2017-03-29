@@ -3,8 +3,6 @@ import os
 DEBUG = False
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-GRAPPELLI_ADMIN_TITLE = 'Infinitely Corpsey'
-
 # SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
 
 ALLOWED_HOSTS = []
@@ -119,7 +117,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.humanize',
     'django.contrib.sites',
-    'grappelli',
     'django.contrib.admin',
     'django.contrib.flatpages',
     'easy_thumbnails',

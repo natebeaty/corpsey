@@ -58,7 +58,6 @@ urlpatterns = [
 
     # Django and apps
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^grappelli/', include('grappelli.urls')),
     url(r'^markitup/', include('markitup.urls')),
     url(r'^media/(?P<path>.*)$', django_views.static.serve, {'document_root': settings.MEDIA_ROOT}),
 ]
