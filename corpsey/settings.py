@@ -94,7 +94,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            '/home/natebeaty/webapps/django18/corpsey/corpsey/templates',
+            os.path.join(BASE_DIR, 'corpsey', 'templates'),
         ],
         'APP_DIRS': True,
         'OPTIONS': {
