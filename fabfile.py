@@ -5,7 +5,7 @@ env.user = 'natebeaty'
 env.warn_only = True
 
 def deploy():
-    with cd('/home/natebeaty/webapps/django18/corpsey/'):
+    with cd('/home/natebeaty/webapps/django110/corpsey/'):
         # run('/home/natebeaty/.virtualenvs/corpsey_110/bin/activate_this.py')
         run('git pull origin master')
         run('/home/natebeaty/.virtualenvs/corpsey_110/bin/python2.7 manage.py collectstatic --noinput')
@@ -13,14 +13,14 @@ def deploy():
         restart()
 
 def syncdb():
-    with cd('/home/natebeaty/webapps/django18/corpsey/'):
+    with cd('/home/natebeaty/webapps/django110/corpsey/'):
         run('/home/natebeaty/.virtualenvs/corpsey_110/bin/python2.7 manage.py syncdb')
         restart()
 
 def migrate():
-    with cd('/home/natebeaty/webapps/django18/corpsey/'):
+    with cd('/home/natebeaty/webapps/django110/corpsey/'):
         run('/home/natebeaty/.virtualenvs/corpsey_110/bin/python2.7 manage.py migrate')
         restart()
 
 def restart():
-    run('/home/natebeaty/webapps/django18/apache2/bin/restart')
+    run('/home/natebeaty/webapps/django110/apache2/bin/restart')
