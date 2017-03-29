@@ -113,7 +113,6 @@ TEMPLATES = [
 ]
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -122,6 +121,7 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
     'django.contrib.sites',
     'grappelli',
+    'django.contrib.admin',
     'django.contrib.flatpages',
     'easy_thumbnails',
     'django_cleanup',
