@@ -1,7 +1,13 @@
-# Django settings
+import os
 
 DEBUG = False
-TEMPLATE_DEBUG = DEBUG
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+GRAPPELLI_ADMIN_TITLE = 'Infinitely Corpsey'
+
+# SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
+
+ALLOWED_HOSTS = []
 
 ADMINS = (
     ('Nate Beaty', 'nate@clixel.com'),
@@ -22,21 +28,14 @@ DATABASES = {
     }
 }
 
-# Local time zone for this installation. Choices can be found here:
-# http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
-# although not all choices may be available on all operating systems.
-# In a Windows environment this must be set to your system time zone.
 TIME_ZONE = 'America/Chicago'
-
-# Language code for this installation. All choices can be found here:
-# http://www.i18nguy.com/unicode/language-identifiers.html
 LANGUAGE_CODE = 'en-us'
 
 SITE_ID = 1
 
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
-USE_I18N = True
+USE_I18N = False
 
 # If you set this to False, Django will not format dates, numbers and
 # calendars according to the current locale.
@@ -64,39 +63,26 @@ STATIC_ROOT = '/home/natebeaty/webapps/django14_static/'
 # Example: "http://media.lawrence.com/static/"
 STATIC_URL = '/static/'
 
-# Additional locations of static files
-STATICFILES_DIRS = (
-    # Put strings here, like "/home/html/static" or "C:/www/django/static".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
-    '/home/natebeaty/webapps/django18/corpsey/corpsey/static',
-)
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+    '/Users/natebeaty/Sites/corpsey/corpsey/static',
+]
 
 # List of finder classes that know how to find static files in
 # various locations.
-STATICFILES_FINDERS = (
+STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-#    'django.contrib.staticfiles.finders.DefaultStorageFinder',
-)
+]
 
-# List of callables that know how to import templates from various sources.
-TEMPLATE_LOADERS = (
-    'django.template.loaders.filesystem.Loader',
-    'django.template.loaders.app_directories.Loader',
-    'django.template.loaders.eggs.Loader',
-)
-
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE_CLASSES = [
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
-    # Uncomment the next line for simple clickjacking protection:
-    # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
-)
+]
 
 ROOT_URLCONF = 'corpsey.urls'
 LOGIN_URL = '/user/login/'
@@ -104,40 +90,38 @@ LOGIN_URL = '/user/login/'
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'corpsey.wsgi.application'
 
-ICANHAZ_DIRS = (
-    '/home/natebeaty/webapps/django18/corpsey/corpsey/templates/icanhaz',
-)
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [
+            '/home/natebeaty/webapps/django18/corpsey/corpsey/templates',
+        ],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.contrib.auth.context_processors.auth',
+                'django.template.context_processors.debug',
+                'django.template.context_processors.i18n',
+                'django.template.context_processors.media',
+                'django.template.context_processors.static',
+                'django.template.context_processors.tz',
+                'django.contrib.messages.context_processors.messages',
+                'corpsey.context_processors.analytics',
+            ],
+        },
+    },
+]
 
-TEMPLATE_DIRS = (
-    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
-    '/home/natebeaty/webapps/django18/corpsey/corpsey/templates',
-)
-
-TEMPLATE_CONTEXT_PROCESSORS = (
-    'django.contrib.auth.context_processors.auth',
-    'django.core.context_processors.debug',
-    'django.core.context_processors.i18n',
-    'django.core.context_processors.media',
-    'django.core.context_processors.request',
-    'django.core.context_processors.static',
-    'django.core.context_processors.tz',
-    'django.contrib.messages.context_processors.messages',
-    'corpsey.context_processors.analytics',
-)
-
-INSTALLED_APPS = (
+INSTALLED_APPS = [
+    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
-    'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.humanize',
+    'django.contrib.sites',
     'grappelli',
-    'django.contrib.admin',
-    'django.contrib.admindocs',
     'django.contrib.flatpages',
     'easy_thumbnails',
     'django_cleanup',
@@ -149,18 +133,8 @@ INSTALLED_APPS = (
     'markitup',
     'clear_cache',
     'cronjobs',
-)
+]
 
-MARKITUP_SET = 'markitup/sets/markdown'
-MARKITUP_SKIN = 'markitup/skins/simple'
-MARKITUP_FILTER = ('markdown.markdown', {'safe_mode': True})
-FLATPAGES_X_PARSER= ["flatpages_x.markdown_parser.parse", {}]
-
-# A sample logging configuration. The only tangible logging
-# performed by this configuration is to send an email to
-# the site admins on every HTTP 500 error when DEBUG=False.
-# See http://docs.djangoproject.com/en/dev/topics/logging for
-# more details on how to customize your logging configuration.
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -192,22 +166,22 @@ CACHES = {
     }
 }
 
+AUTH_PASSWORD_VALIDATORS = [
+    {
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    },
+]
 
-# override these in settings_production.py & settings_local.py
-GOOGLE_ANALYTICS_KEY = ''
-
-EMAIL_HOST = ''
-EMAIL_HOST_USER = ''
-EMAIL_HOST_PASSWORD = ''
-DEFAULT_FROM_EMAIL = 'hal@trubbleclub.com'
-SERVER_EMAIL = 'hal@trubbleclub.com'
-
-SECRET_KEY = ''
-DKIM_DOMAIN = ''
-DKIM_SELECTOR = ''
-DKIM_PRIVATE_KEY = ''
-
-GRAPPELLI_ADMIN_TITLE = 'Infinitely Corpsey'
+# Various app settings
 THUMBNAIL_ALIASES = {
     '': {
         'midsize': {'size': (330, 330), 'crop': True, 'quality': 90},
@@ -219,7 +193,27 @@ THUMBNAIL_BASEDIR = 'thumbs'
 THUMBNAIL_DEBUG = True
 THUMBNAIL_PRESERVE_EXTENSIONS = ('png',)
 
+MARKITUP_SET = 'markitup/sets/markdown'
+MARKITUP_SKIN = 'markitup/skins/simple'
+MARKITUP_FILTER = ('markdown.markdown', {'safe_mode': True})
+FLATPAGES_X_PARSER= ["flatpages_x.markdown_parser.parse", {}]
+
+# How many contributions can follow a comic
 MAX_COMIC_CHILDREN = 3
+
+# Override these in settings_production.py & settings_local.py
+GOOGLE_ANALYTICS_KEY = ''
+
+EMAIL_HOST = ''
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
+DEFAULT_FROM_EMAIL = 'hal@trubble.club'
+SERVER_EMAIL = 'hal@trubble.club'
+
+SECRET_KEY = ''
+DKIM_DOMAIN = ''
+DKIM_SELECTOR = ''
+DKIM_PRIVATE_KEY = ''
 
 # Import settings information based on node
 STAGING_HOST = "corpsey-staging"

@@ -108,7 +108,7 @@ def contribution_vote(request):
             'name': contribution.name,
             })
 
-        subject, from_email, to = 'Your Infinite Corpse contribution', 'corpsey@trubbleclub.com', contribution.email
+        subject, from_email, to = 'Your Infinite Corpse contribution', 'corpsey@trubble.club', contribution.email
         text_content = plaintext.render(d)
         html_content = htmly.render(d)
         try:
@@ -151,7 +151,7 @@ def contribution_vote(request):
             'name': contribution.name,
             })
 
-        subject, from_email, to = 'Your Infinite Corpse contribution is live!', 'corpsey@trubbleclub.com', contribution.email
+        subject, from_email, to = 'Your Infinite Corpse contribution is live!', 'corpsey@trubble.club', contribution.email
         text_content = plaintext.render(d)
         html_content = htmly.render(d)
         try:

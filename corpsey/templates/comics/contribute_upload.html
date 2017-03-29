@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load thumbnail %}
+{% load thumbnail static %}
 
 {% block body_id %}contribute-page{% endblock %}
 {% block title %}Contribute to The Infinite Corpse!{% endblock %}
@@ -24,42 +24,42 @@
             {% include "comics/strip.html" with comic=parent_comic %}
         </div>
 
-        <form class="contribute" action="{% url 'contribute_upload' upload_code %}" method="post" enctype="multipart/form-data">
+        <form class="contribute" action="{% url 'contribute-upload' upload_code %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
                 {{ form.non_field_errors }}
                 <fieldset class="images">
-                    <label for="id_panel1" class="required">{{ form.panel1.label_tag }}</label> 
+                    <label for="id_panel1" class="required">{{ form.panel1.label_tag }}</label>
                     {{ form.panel1 }}
                     {% if form.panel1.errors %}
                        <div class="field-error">{{ form.panel1.errors }}</div>
                     {% endif %}
 
-                    <label for="id_panel2" class="required">{{ form.panel2.label_tag }}</label> 
+                    <label for="id_panel2" class="required">{{ form.panel2.label_tag }}</label>
                     {{ form.panel2 }}
                     {% if form.panel2.errors %}
                        <div class="field-error">{{ form.panel2.errors }}</div>
                     {% endif %}
 
-                    <label for="id_panel3" class="required">{{ form.panel3.label_tag }}</label> 
+                    <label for="id_panel3" class="required">{{ form.panel3.label_tag }}</label>
                     {{ form.panel3 }}
                     {% if form.panel3.errors %}
                        <div class="field-error">{{ form.panel3.errors }}</div>
                     {% endif %}
                 </fieldset>
                 <fieldset class="info">
-                    <label for="id_name" class="required">{{ form.name.label_tag }}</label> 
+                    <label for="id_name" class="required">{{ form.name.label_tag }}</label>
                     {{ form.name }}
                     {% if form.name.errors %}
                        <div class="field-error">{{ form.name.errors }}</div>
                     {% endif %}
 
-                    <label for="id_email" class="required">{{ form.email.label_tag }}</label> 
+                    <label for="id_email" class="required">{{ form.email.label_tag }}</label>
                     {{ form.email }}
                     {% if form.email.errors %}
                        <div class="field-error">{{ form.email.errors }}</div>
                     {% endif %}
 
-                    <label for="id_website">{{ form.website.label_tag }}</label> 
+                    <label for="id_website">{{ form.website.label_tag }}</label>
                     {{ form.website }}
                   {% if form.website.errors %}
                      <div class="field-error">{{ form.website.errors }}</div>
@@ -80,14 +80,14 @@
         {{ page2.content|safe }}
     </div>
 
-</section>    
+</section>
 {% endif %}
 {% endblock content %}
 
 {% block extra_javascript %}
-  <script src="{{ STATIC_URL }}js/icanhaz.min.js" type="text/javascript"></script>
-  <script src="{{ STATIC_URL }}js/jquery.validate.min.js" type="text/javascript"></script>
-  <script src="{{ STATIC_URL }}js/contribute.js" type="text/javascript"></script>
+  <script src="{% static "js/icanhaz.min.js" %}" type="text/javascript"></script>
+  <script src="{% static "js/jquery.validate.min.js" %}" type="text/javascript"></script>
+  <script src="{% static "js/contribute.js" %}" type="text/javascript"></script>
 {% endblock extra_javascript %}
 
 {% block icanhaz_templates %}

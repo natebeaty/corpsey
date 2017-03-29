@@ -3,7 +3,7 @@ from corpsey.apps.artists.models import Artist
 from easy_thumbnails.fields import ThumbnailerImageField
 from mptt.models import MPTTModel, TreeForeignKey
 from django.contrib.auth.models import User
-from django.core import urlresolvers
+from django.urls import reverse
 from datetime import datetime, timedelta
 from django.conf import settings
 
@@ -15,7 +15,6 @@ from easy_thumbnails.signals import saved_file
 from easy_thumbnails.signal_handlers import generate_aliases_global
 saved_file.connect(generate_aliases_global)
 
-# Create your models here.
 class Comic(MPTTModel):
     parent = TreeForeignKey('self', null=True, blank=True, related_name='children')
     artist = models.ForeignKey(Artist, null=True, blank=True, related_name='comics')
@@ -33,9 +32,11 @@ class Comic(MPTTModel):
     class Meta:
         ordering = ['tree_id', 'lft']
 
-    @models.permalink
     def get_absolute_url(self):
-        return ('corpsey.apps.comics.views.entry', [str(self.id)])
+        if self.parent:
+            return reverse('comic-entry', kwargs={'comic_1': self.parent.id, 'comic_2': self.id})
+        else:
+            return reverse('comic-entry-single', kwargs={'comic_1': self.id})
 
     def __unicode__(self):
         return u"%s - %s" % (self.artist, self.date.strftime('%b %d \'%y'))
@@ -46,14 +47,14 @@ class Comic(MPTTModel):
         return pending_contributions + comic_children < settings.MAX_COMIC_CHILDREN
 
     def prev_sib(self):
-        # root nodes infinite linkage, if first, link to last
+        """Root nodes infinite linkage, if first, link to last"""
         if self.is_root_node() and not self.get_previous_sibling(active=True):
             return Comic.objects.root_nodes().filter(active=True).reverse()[0]
         else:
             return self.get_previous_sibling(active=True)
 
     def next_sib(self):
-        # root nodes infinite linkage, if last, link to first
+        """Root nodes infinite linkage, if last, link to first"""
         if self.is_root_node() and not self.get_next_sibling(active=True):
             return Comic.objects.root_nodes().filter(active=True)[0]
         else:
@@ -116,11 +117,11 @@ class Contribution(models.Model):
     accepted = models.BooleanField(default=False)
     notes = models.TextField(blank=True)
 
-    def admin_url(self):
-        return urlresolvers.reverse('admin:comics_contribution_change', args=(self.id,))
+    # def admin_url(self):
+    #     return reverse('admin:comics_contribution_change', args=[self.id])
 
-    # list of votes for admin view
     def votes_list(self):
+        """List of votes for admin view"""
         votes_list = ''
         if self.votes:
             values = []

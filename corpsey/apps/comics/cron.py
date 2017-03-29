@@ -58,7 +58,7 @@ def send_html_email(email_data):
     d = Context(email_data['context'])
 
     subject = email_data['subject']
-    from_email = 'corpsey@trubbleclub.com'
+    from_email = 'corpsey@trubble.club'
     text_content = plaintext.render(d)
     html_content = htmly.render(d)
     try:

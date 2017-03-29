@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load thumbnail humanize %}
+{% load thumbnail humanize static %}
 
 {% block body_id %}contribute-page{% endblock %}
 {% block title %}Contribute!{% endblock %}
@@ -54,9 +54,9 @@
 {% endblock content %}
 
 {% block extra_javascript %}
-  <script src="{{ STATIC_URL }}js/icanhaz.min.js" type="text/javascript"></script>
-  <script src="{{ STATIC_URL }}js/jquery.validate.min.js" type="text/javascript"></script>
-  <script src="{{ STATIC_URL }}js/contribute.js?v2" type="text/javascript"></script>
+  <script src="{% static "js/icanhaz.min.js" %}" type="text/javascript"></script>
+  <script src="{% static "js/jquery.validate.min.js" %}" type="text/javascript"></script>
+  <script src="{% static "js/contribute.js" %}" type="text/javascript"></script>
 {% endblock extra_javascript %}
 {% block icanhaz_templates %}
   {% include "js/comic_single.html" %}

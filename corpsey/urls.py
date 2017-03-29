@@ -1,4 +1,4 @@
-from django.conf.urls import patterns, include, url
+from django.conf.urls import include, url
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.conf import settings
 from django.shortcuts import redirect
@@ -11,23 +11,22 @@ from django import views as django_views
 from django.contrib import admin
 admin.autodiscover()
 
-urlpatterns = patterns('',
-    # Examples:
+urlpatterns = [
     url(r'^$', views.home, name='home'),
     url(r'^artists/$', views.artists, name='artists'),
     url(r'^about/$', views.about, name='about'),
     url(r'^catacombs/featured/$', comics_views.featured, name='featured'),
-    url(r'^catacombs/uturn/(?P<uturn>[\d]+)/(?P<comic>\d+)/$', comics_views.uturn, name='uturn'),
-    url(r'^catacombs/uturn/(?P<uturn>[\d]+)/$', comics_views.uturn, name='uturn'),
-    url(r'^catacombs/(?P<comic_1>[\d]+)/(?P<comic_2>\d+)/$', comics_views.entry, name='comic'),
-    url(r'^catacombs/(?P<comic_1>[\d]+)/$', comics_views.entry, name='comic'),
+    url(r'^catacombs/uturn/(?P<uturn>[\d]+)/(?P<comic>\d+)/$', comics_views.uturn, name='comic-uturn'),
+    url(r'^catacombs/uturn/(?P<uturn>[\d]+)/$', comics_views.uturn, name='comic-uturn-single'),
+    url(r'^catacombs/(?P<comic_1>[\d]+)/(?P<comic_2>\d+)/$', comics_views.entry, name='comic-entry'),
+    url(r'^catacombs/(?P<comic_1>[\d]+)/$', comics_views.entry, name='comic-entry-single'),
     url(r'^catacombs/$', lambda x: redirect('/')),
-    url(r'^random/$', comics_views.random, name='random'),
-    url(r'^enter_the_catacombs/$', comics_views.enter_the_catacombs, name='enter_the_catacombs'),
+    url(r'^random/$', comics_views.random, name='random-comic'),
+    url(r'^enter_the_catacombs/$', comics_views.enter_the_catacombs, name='enter-the-catacombs'),
     url(r'^tree/$', comics_views.tree, name='tree'),
-    url(r'^tree_json/$', comics_views.tree_json, name='tree_json'),
-    url(r'^artist_in_catacombs/(?P<artist>\d+)/$', comics_views.artist_in_catacombs, name='artists_in_catacombs'),
-    url(r'^contribute/upload/(?P<upload_code>[\w\-=_]+)/$', comics_views.contribute_upload, name='contribute_upload'),
+    url(r'^tree_json/$', comics_views.tree_json, name='tree-json'),
+    url(r'^artist_in_catacombs/(?P<artist>\d+)/$', comics_views.artist_in_catacombs, name='artist-in-catacombs'),
+    url(r'^contribute/upload/(?P<upload_code>[\w\-=_]+)/$', comics_views.contribute_upload, name='contribute-upload'),
     url(r'^contribute/upload/$', lambda x: redirect('/')),
     url(r'^contribute/$', comics_views.contribute, name='contribute'),
     url(r'^contributions/$', comics_views.contributions, name='contributions'),
@@ -35,16 +34,16 @@ urlpatterns = patterns('',
     url(r'^graveyard/$', comics_views.graveyard, name='graveyard'),
     url(r'^user/login/$', auth_views.login, name="user_login"),
     url(r'^user/logout/$', views.logout_view, name="user_logout"),
-    url(r'^user/password/reset/$', 
+    url(r'^user/password/reset/$',
         auth_views.password_reset,
         {'post_reset_redirect' : '/user/password/reset/done/'},
         name="password_reset"),
     url(r'^user/password/reset/done/$',
         auth_views.password_reset_done),
-    url(r'^user/password/reset/(?P<uidb64>[0-9A-Za-z]+)-(?P<token>.+)/$', 
+    url(r'^user/password/reset/(?P<uidb64>[0-9A-Za-z]+)-(?P<token>.+)/$',
         auth_views.password_reset_confirm,
         {'post_reset_redirect' : '/user/password/done/'}),
-    url(r'^user/password/done/$', 
+    url(r'^user/password/done/$',
         auth_views.password_reset_complete),
 
     # AJAX
@@ -56,15 +55,12 @@ urlpatterns = patterns('',
 
     url(r'^artist/([\d]+)/$', artists_views.entry, name='artist'),
     url(r'^get_artists/$', artists_views.get_artists, name='get_artists'),
-            
+
+    # Django and apps
     url(r'^admin/', include(admin.site.urls)),
-
     url(r'^grappelli/', include('grappelli.urls')),
-
     url(r'^markitup/', include('markitup.urls')),
-)
+    url(r'^media/(?P<path>.*)$', django_views.static.serve, {'document_root': settings.MEDIA_ROOT}),
+]
 
-urlpatterns += patterns('',
-    (r'^media/(?P<path>.*)$', django_views.static.serve, {'document_root': settings.MEDIA_ROOT}),
-)
-urlpatterns += staticfiles_urlpatterns()
+# urlpatterns += staticfiles_urlpatterns()

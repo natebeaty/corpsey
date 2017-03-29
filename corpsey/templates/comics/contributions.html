@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load thumbnail %}
+{% load thumbnail static %}
 
 {% block body_id %}contributions{% endblock %}
 {% block title %}Pending Contributions{% endblock %}
@@ -30,5 +30,5 @@
 {% endblock content %}
 
 {% block extra_javascript %}
-  <script src="{{ STATIC_URL }}js/contributions.js" type="text/javascript"></script>
+  <script src="{% static "js/contributions.js" %}" type="text/javascript"></script>
 {% endblock extra_javascript %}

@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load thumbnail mptt_tags %}
+{% load thumbnail mptt_tags static %}
 
 {% block title %}Trubble Club{% if comic %} / {{ comic.artist.name }}{% else %} / {{ uturn.portal_to.artist.name }}{% endif %}{% endblock %}
 
@@ -12,9 +12,9 @@
 <article class="comic single uturn active" data-comic-id="{{ uturn.id }}" data-portal-to-id="{{ uturn.portal_to.id }}">
   <h1>Trubble Club</h1>
   <ul>
-    <li><img class="panel uturn-pad" src="/static/img/uturn-pad-1.png" width="{{ uturn.panel.midsize.width }}" height="{{ uturn.panel.midsize.height }}" data-hd-src="/static/img/uturn-pad-1.png"></li>
+    <li><img class="panel uturn-pad" src="{% static "/img/uturn-pad-1.png" %}" width="{{ uturn.panel.midsize.width }}" height="{{ uturn.panel.midsize.height }}" data-hd-src="{% static "/img/uturn-pad-1.png" %}"></li>
     <li><img class="panel" src="{{ uturn.panel.midsize.url }}" width="{{ uturn.panel.midsize.width }}" height="{{ uturn.panel.midsize.height }}" data-hd-src="{{ uturn.panel.midsize_hd.url }}"></li>
-    <li><img class="panel uturn-pad" src="/static/img/uturn-pad-2.png" width="{{ uturn.panel.midsize.width }}" height="{{ uturn.panel.midsize.height }}" data-hd-src="/static/img/uturn-pad-2.png"></li>
+    <li><img class="panel uturn-pad" src="{% static "/img/uturn-pad-2.png" %}" width="{{ uturn.panel.midsize.width }}" height="{{ uturn.panel.midsize.height }}" data-hd-src="{% static "/img/uturn-pad-2.png" %}"></li>
   </ul>
 </article>
 
@@ -43,12 +43,12 @@
 {% endblock content %}
 
 {% block extra_javascript %}
-  <script src="{{ STATIC_URL }}js/jquery.imagesloaded.min.js" type="text/javascript"></script>
-  <script src="{{ STATIC_URL }}js/icanhaz.min.js" type="text/javascript"></script>
-  <script src="{{ STATIC_URL }}js/jquery.isotope.min.js" type="text/javascript"></script>
-  <script src="{{ STATIC_URL }}js/jquery.history.js" type="text/javascript"></script>
-  <script src="{{ STATIC_URL }}js/jgestures.min.js" type="text/javascript"></script>
-  <script src="{{ STATIC_URL }}js/catacombs.js?v4" type="text/javascript"></script>
+  <script src="{% static "js/jquery.imagesloaded.min.js" %}" type="text/javascript"></script>
+  <script src="{% static "js/icanhaz.min.js" %}" type="text/javascript"></script>
+  <script src="{% static "js/jquery.isotope.min.js" %}" type="text/javascript"></script>
+  <script src="{% static "js/jquery.history.js" %}" type="text/javascript"></script>
+  <script src="{% static "js/jgestures.min.js" %}" type="text/javascript"></script>
+  <script src="{% static "js/catacombs.js" %}" type="text/javascript"></script>
 {% endblock extra_javascript %}
 
 {% block icanhaz_templates %}

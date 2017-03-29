@@ -1,6 +1,6 @@
 from corpsey.apps.comics.models import *
 from corpsey.apps.artists.models import *
-from django.shortcuts import get_object_or_404, render_to_response, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.flatpages.models import FlatPage
 from django.template import RequestContext
 from django.core.mail import send_mass_mail
@@ -14,6 +14,7 @@ from django.conf import settings
 from datetime import datetime, timedelta
 from django.utils import timezone
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.urls import reverse
 
 def recursive_node_to_dict(node):
     result = {
@@ -34,10 +35,10 @@ def tree(request):
     """Fancy tree browsing."""
     page = get_object_or_404(FlatPage,url='/tree/')
 
-    return render_to_response('comics/tree.html',  {
+    return render(request, 'comics/tree.html',  {
         'page': page,
         'comics': Comic.objects.filter(active=True),
-        }, RequestContext(request))
+    })
 
 @cache_page(60 * 15)
 def tree_json(request):
@@ -53,18 +54,19 @@ def tree_json(request):
         'name': 'corpsey',
         'children': dicts,
     }
-    return HttpResponse(json.dumps(root, indent=4), mimetype="application/json")
+    return HttpResponse(json.dumps(root, indent=4), mimetype='application/json')
 
 @cache_page(60 * 15)
 def featured(request):
     comic_set = Comic.objects.filter(active=True,featured=True).order_by('-date')[:10]
-    return render_to_response('featured.html',  {
+    return render(request, 'featured.html',  {
         'comic_set': comic_set,
-        }, RequestContext(request))
+    })
 
 def random(request):
     """Return a random comic that's not a root."""
     comic_leaf = Comic.objects.filter(level__gt=0).order_by('?')[0]
+    request.session['last_comic_id'] = comic_leaf.id
     return redirect('/catacombs/%d/%d/' % (comic_leaf.parent.id, comic_leaf.id,))
 
 def enter_the_catacombs(request):
@@ -77,10 +79,10 @@ def artist_in_catacombs(request, artist):
     artist = get_object_or_404(Artist,pk=artist)
     try:
         comic_to = Comic.objects.filter(artist_id=artist.id).order_by('?')[0]
-        if not comic_to.is_root_node():
-            url = '/catacombs/%d/%d/' % (comic_to.parent.id, comic_to.id)
-        else:
-            url = comic_to.get_absolute_url()
+        # if not comic_to.is_root_node():
+        #     url = '/catacombs/%d/%d/' % (comic_to.parent.id, comic_to.id)
+        # else:
+        url = comic_to.get_absolute_url()
     except:
         url = '/artists/'
     return redirect(url)
@@ -90,10 +92,15 @@ def entry(request, comic_1, comic_2=None):
     """Page in the catacombs, one or two comics."""
     next_comic_links = []
     uturn = []
+
+    # store comic_id for /contribute/
+    request.session['last_comic_id'] = comic_1
+
     comic_1 = get_object_or_404(Comic,pk=comic_1)
-    
+
     # build next/child comic nav if possible
     if comic_2:
+        request.session['last_comic_id'] = comic_2
         comic_2 = get_object_or_404(Comic,pk=comic_2)
         next_comic_links.extend(comic_2.get_next_comic_links())
     else:
@@ -104,13 +111,13 @@ def entry(request, comic_1, comic_2=None):
     if not next_comic_links and comic_2:
         uturn = comic_2.get_uturn()
 
-    return render_to_response('comics/entry.html',  {
+    return render(request, 'comics/entry.html',  {
         'comic_1': comic_1,
         'comic_2': comic_2,
         'uturn': uturn,
         'next_comic_links': next_comic_links,
         'prev_comic_links': prev_comic_links,
-        }, RequestContext(request))
+    })
 
 def pad_panels(request, contribution):
     """Add 40px of white padding to comic panels."""
@@ -131,7 +138,7 @@ def uturn(request, uturn, comic=None):
     uturn = get_object_or_404(Uturn,pk=uturn)
     prev_comic_links = []
     next_comic_links = []
-    
+
     if comic:
         comic = get_object_or_404(Comic,pk=comic)
         prev_comic_links.extend(comic.get_prev_comic_links())
@@ -140,12 +147,12 @@ def uturn(request, uturn, comic=None):
         next_comic_links.extend(uturn.portal_to.get_next_comic_links())
 
 
-    return render_to_response('comics/uturn_entry.html',  {
+    return render(request, 'comics/uturn_entry.html',  {
         'uturn': uturn,
         'comic': comic,
         'next_comic_links': next_comic_links,
         'prev_comic_links': prev_comic_links,
-        }, RequestContext(request))
+    })
 
 @login_required()
 def contributions(request):
@@ -155,11 +162,11 @@ def contributions(request):
     contributions = Contribution.objects.filter(pending=True, has_panels=True).exclude(id__in=user_votes.values_list('contribution_id', flat=True))
     rules = Rule.objects.all().order_by('-id')
 
-    return render_to_response('comics/contributions.html',  {
+    return render(request, 'comics/contributions.html',  {
         'user_votes': user_votes,
         'rules': rules,
         'contributions': contributions,
-        }, RequestContext(request))
+    })
 
 @login_required()
 def graveyard(request):
@@ -176,9 +183,9 @@ def graveyard(request):
     except EmptyPage:
         graves = paginator.page(paginator.num_pages)
 
-    return render_to_response('comics/graveyard.html',  {
+    return render(request, 'comics/graveyard.html',  {
         'graves': graves,
-        }, RequestContext(request))
+    })
 
 def contribute(request):
     """Reserve a spot to contribute after a comic."""
@@ -210,7 +217,7 @@ def contribute(request):
             parent_comic = find_comic_to_follow()
     else:
         parent_comic = find_comic_to_follow()
-    
+
     # form sent!
     if request.method == 'POST':
         form = ContributeForm(request.POST)
@@ -248,14 +255,14 @@ def contribute(request):
                 plaintext = get_template('emails/contribution_invite.txt')
                 htmly     = get_template('emails/contribution_invite.html')
 
-                d = Context({ 
+                d = Context({
                     'comic': parent_comic,
                     'parent_comic_url': parent_comic.get_absolute_url(),
                     'code': code,
                     })
 
                 subject = 'Infinite Corpse Confirmation'
-                from_email = 'corpsey@trubbleclub.com'
+                from_email = 'corpsey@trubble.club'
                 text_content = plaintext.render(d)
                 html_content = htmly.render(d)
                 try:
@@ -265,7 +272,7 @@ def contribute(request):
 
                     message = 'Email sent to %s ok!' % email
                 except:
-                    message = 'There was an error sending your confirmation email. Please write nate@trubbleclub.com for help.'
+                    message = 'There was an error sending your confirmation email. Please write nate@trubble.club for help.'
                 step = 2
         else:
             message = "Oh no! Corpsey robot brain broke with your data."
@@ -276,18 +283,15 @@ def contribute(request):
     page2 = FlatPage.objects.get(url='/contribute/ok/')
     deadline = timezone.now()+timedelta(days=7)
 
-    return render_to_response(
-        'comics/contribute.html',
-        {
-            'message': message,
-            'deadline': deadline,
-            'step': step,
-            'page': page,
-            'page2': page2,
-            'parent_comic': parent_comic,
-            'contribute_form': form
-        },
-        context_instance=RequestContext(request))
+    return render(request, 'comics/contribute.html', {
+        'message': message,
+        'deadline': deadline,
+        'step': step,
+        'page': page,
+        'page2': page2,
+        'parent_comic': parent_comic,
+        'contribute_form': form
+    })
 
 def find_comic_to_follow(exclude=0):
     """Loop through comic leafs to find one with less than MAX_COMIC_CHILDREN children + pending contributions."""
@@ -299,8 +303,6 @@ def find_comic_to_follow(exclude=0):
 
 def contribute_upload(request, upload_code):
     """Upload panels for a reserved contribution."""
-    from django.http import HttpResponseRedirect
-    from django.core.urlresolvers import reverse
     from corpsey.apps.comics.forms import UploadForm
 
     message = ''
@@ -343,31 +345,23 @@ def contribute_upload(request, upload_code):
                 message = "Oh no! Something went wrong and broke Corpsey's robot brain."
     except Contribution.DoesNotExist:
         message = 'Contribution code <strong>%s</strong> was not found!' % upload_code
-        return render_to_response(
-            'comics/contribute_upload.html', 
-            { 'message': message },
-            context_instance=RequestContext(request)
-        )
+        return render(request, 'comics/contribute_upload.html', {
+            'message': message
+        })
 
     if not contribution.pending:
         message = 'Contribution code <strong>%s</strong> has expired.' % upload_code
-        return render_to_response(
-            'comics/contribute_upload.html', 
-            { 'message': message },
-            context_instance=RequestContext(request)
-        )
-
-    return render_to_response(
-        'comics/contribute_upload.html',
-        {
-            'upload_code': upload_code,
-            'step': step,
-            'contribution': contribution,
-            'form': form,
-            'page': page,
-            'page2': page2,
-            'parent_comic': parent_comic,
+        return render(request, 'comics/contribute_upload.html', {
             'message': message
-        },
-        context_instance=RequestContext(request)
-    )
+        })
+
+    return render(request, 'comics/contribute_upload.html', {
+        'upload_code': upload_code,
+        'step': step,
+        'contribution': contribution,
+        'form': form,
+        'page': page,
+        'page2': page2,
+        'parent_comic': parent_comic,
+        'message': message
+    })

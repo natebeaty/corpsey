@@ -1,12 +1,11 @@
 from django.db import models
 from easy_thumbnails.fields import ThumbnailerImageField
-import re 
-
+from django.urls import reverse
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.core.cache import cache
+import re
 
-# Create your models here.
 class Artist(models.Model):
     name = models.CharField(max_length=250, blank=True)
     first_name = models.CharField(max_length=250, blank=True)
@@ -14,7 +13,7 @@ class Artist(models.Model):
     email = models.CharField(max_length=250, blank=True)
     url = models.URLField(max_length=250, blank=True)
     image = ThumbnailerImageField(upload_to='artists', blank=True)
-    
+
     def __unicode__(self):
         return self.name
 
@@ -27,9 +26,8 @@ class Artist(models.Model):
     class Meta:
         ordering = ['last_name', 'first_name']
 
-    @models.permalink
     def get_absolute_url(self):
-        return ('artist.views.entry', [str(self.slug)])
+        return reverse('artist', args=[self.id])
 
     def save(self, *args, **kwargs):
 		# generate first/last name from full name
