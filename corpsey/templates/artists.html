@@ -18,7 +18,15 @@
           <li class="letter"><h2>{{ artist.last_name|slice:"1"|upper }}</h2></li>
         {% endif %}
       {% endifchanged %}
-      <li><h3 class="name"><a title="View in Catacombs" href="{% url 'artist-in-catacombs' artist.id %}">{{ artist.name_reversed }}</a></h3>
+      <li><h3 class="name"><a title="View in Catacombs" href="{% url 'artist-in-catacombs' artist.id 1 %}">{{ artist.name_reversed }}</a>
+      {% if artist.num_comics > 1 %}
+        {% for comic in artist.comics.all %}
+          {% if forloop.counter > 1 %}
+            <a class="button bubble" title="View in Catacombs" href="{% url 'artist-in-catacombs' artist.id forloop.counter %}">{{ forloop.counter }}</a>
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+      </h3>
         {% if artist.url %}
           <a class="button artist-url" target="_blank" href="{{ artist.url }}">Website</a>
         {% endif %}

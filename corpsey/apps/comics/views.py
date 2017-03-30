@@ -27,7 +27,7 @@ def recursive_node_to_dict(node):
     children = [recursive_node_to_dict(c) for c in node.get_children()]
     if children:
         result['children'] = children
-        # todo: add uturn to end of children
+        # TODO: add uturn to end of children
     return result
 
 @cache_page(60 * 15)
@@ -74,14 +74,11 @@ def enter_the_catacombs(request):
     comic_to = Comic.objects.filter(starter=True).order_by('?')[0]
     return redirect(comic_to)
 
-def artist_in_catacombs(request, artist):
-    """Return a random contribution for an artist."""
+def artist_in_catacombs(request, artist, num):
+    """Redirect to a comic for an artist."""
     artist = get_object_or_404(Artist,pk=artist)
     try:
-        comic_to = Comic.objects.filter(artist_id=artist.id).order_by('?')[0]
-        # if not comic_to.is_root_node():
-        #     url = '/catacombs/%d/%d/' % (comic_to.parent.id, comic_to.id)
-        # else:
+        comic_to = artist.comics.all()[int(num) - 1]
         url = comic_to.get_absolute_url()
     except:
         url = '/artists/'
@@ -93,12 +90,12 @@ def entry(request, comic_1, comic_2=None):
     next_comic_links = []
     uturn = []
 
-    # store comic_id for /contribute/
+    # Store comic_id for /contribute/
     request.session['last_comic_id'] = comic_1
 
     comic_1 = get_object_or_404(Comic,pk=comic_1)
 
-    # build next/child comic nav if possible
+    # Build next/child comic nav if possible
     if comic_2:
         request.session['last_comic_id'] = comic_2
         comic_2 = get_object_or_404(Comic,pk=comic_2)
@@ -158,7 +155,7 @@ def uturn(request, uturn, comic=None):
 def contributions(request):
     """Page for the elders to vote YAY or NAY on contributions."""
     user_votes = Vote.objects.filter(user_id=request.user.id)
-    # omit contributions user has already voted on AND contributions that have no panels yet (todo: has_uploaded boolean field?)
+    # Omit contributions user has already voted on AND contributions that have no panels yet (todo: has_uploaded boolean field?)
     contributions = Contribution.objects.filter(pending=True, has_panels=True).exclude(id__in=user_votes.values_list('contribution_id', flat=True))
     rules = Rule.objects.all().order_by('-id')
 
@@ -211,14 +208,14 @@ def contribute(request):
             parent_comic = find_comic_to_follow()
     elif request.session.get('last_comic_id', False):
         parent_comic = Comic.objects.get(pk=request.session['last_comic_id'])
-        # only use last_comic_id once
+        # Only use last_comic_id once
         request.session['last_comic_id'] = None
         if not parent_comic.valid_to_follow():
             parent_comic = find_comic_to_follow()
     else:
         parent_comic = find_comic_to_follow()
 
-    # form sent!
+    # Form sent!
     if request.method == 'POST':
         form = ContributeForm(request.POST)
         if form.is_valid():
@@ -237,12 +234,12 @@ def contribute(request):
 
             code = base64.urlsafe_b64encode(hashlib.md5(str(time.time())).digest())[:15]
 
-            # check if email has pending contributions
+            # Check if email has pending contributions
             try:
                 existing_contribution = Contribution.objects.get(email=email,pending=True)
                 message = 'The email %s already has a pending contribution. Please check your email for instructions on uploading your panels.' % email
             except:
-                # store contribution in db
+                # Store contribution in db
                 contribution = Contribution(
                     code = code,
                     email = email,
@@ -337,7 +334,7 @@ def contribute_upload(request, upload_code):
                 mail_body = 'OMG LOOK:\n\n%s\n\nGo forth Trubblers and cast your Yea or Nay: http://%s/contributions/#contribution-%s\n' % (contribution, request.META['HTTP_HOST'], contribution.id)
                 voters = User.objects.filter(groups__name='voters')
                 emails = ()
-                # build tuple of emails to send
+                # Build tuple of emails to send
                 for voter in voters:
                     emails = emails + ((mail_subject, mail_body, 'hal@trubble.club', [voter.email]),)
                 send_mass_mail(emails)

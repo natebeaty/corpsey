@@ -7,7 +7,7 @@ from django.urls import reverse
 from datetime import datetime, timedelta
 from django.conf import settings
 
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save,pre_save
 from django.dispatch import receiver
 from django.core.cache import cache
 
@@ -89,6 +89,17 @@ class Comic(MPTTModel):
 def clear_cache(sender, instance, created, **kwargs):
     """Clear homepage cache on comic save."""
     cache.delete('/')
+
+@receiver(pre_save, sender=Comic)
+def update_num_comics(sender, instance, **kwargs):
+    """ Update num_comics for comic artists """
+    old = Comic.objects.filter(pk=instance.pk)
+    old = len(old) > 0 and old.get() or None
+    if old:
+        old.artist.num_comics = old.artist.num_comics - 1
+        old.artist.save()
+    instance.artist.num_comics = instance.artist.num_comics + 1
+    instance.artist.save()
 
 class Uturn(models.Model):
     portal_to = models.ForeignKey(Comic, related_name='uturn')

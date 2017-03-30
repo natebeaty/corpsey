@@ -13,6 +13,7 @@ class Artist(models.Model):
     email = models.CharField(max_length=250, blank=True)
     url = models.URLField(max_length=250, blank=True)
     image = ThumbnailerImageField(upload_to='artists', blank=True)
+    num_comics = models.IntegerField(default=0)
 
     def __unicode__(self):
         return self.name
@@ -22,6 +23,10 @@ class Artist(models.Model):
             return "%s, %s" % (self.last_name, self.first_name)
         else:
             return self.name
+
+    def update_num_comics(self):
+        self.num_comics = self.comics.count()
+        self.save()
 
     class Meta:
         ordering = ['last_name', 'first_name']
@@ -41,4 +46,3 @@ class Artist(models.Model):
 def clear_cache(sender, instance, created, **kwargs):
     """Clear artists page cache on artist save."""
     cache.delete('/artists/')
-

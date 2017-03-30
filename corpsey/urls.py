@@ -26,7 +26,7 @@ urlpatterns = [
     url(r'^enter_the_catacombs/$', comics_views.enter_the_catacombs, name='enter-the-catacombs'),
     url(r'^tree/$', comics_views.tree, name='tree'),
     url(r'^tree_json/$', comics_views.tree_json, name='tree-json'),
-    url(r'^artist_in_catacombs/(?P<artist>\d+)/$', comics_views.artist_in_catacombs, name='artist-in-catacombs'),
+    url(r'^artist_in_catacombs/(?P<artist>\d+)/(?P<num>\d+)/$', comics_views.artist_in_catacombs, name='artist-in-catacombs'),
     url(r'^contribute/upload/(?P<upload_code>[\w\-=_]+)/$', comics_views.contribute_upload, name='contribute-upload'),
     url(r'^contribute/upload/$', lambda x: redirect('/')),
     url(r'^contribute/$', comics_views.contribute, name='contribute'),
