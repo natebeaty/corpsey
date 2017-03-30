@@ -2,7 +2,7 @@
 
 <article class="comic">
   <h1>{{ comic.artist }} {% if comic.parent %}<small>following {{ comic.parent.artist }}</small>{% endif %}</h1>
-  <a href="{{ comic.get_absolute_url }}">{% if comic.panel1 %}<img class="panel" src="{% static "/img/panel-placeholder.png" %}" data-original="{{ comic.panel1.midsize.url }}" width="{{ comic.panel1.midsize.width }}" height="{{ comic.panel1.midsize.height }}" data-original-hd="{{ comic.panel1.midsize_hd.url }}">{% endif %}
-  {% if comic.panel2 %}<img class="panel" src="{% static "/img/panel-placeholder.png" %}" data-original="{{ comic.panel2.midsize.url }}" width="{{ comic.panel1.midsize.width }}" height="{{ comic.panel1.midsize.height }}" data-original-hd="{{ comic.panel2.midsize_hd.url }}">{% endif %}
-  {% if comic.panel3 %}<img class="panel" src="{% static "/img/panel-placeholder.png" %}" data-original="{{ comic.panel3.midsize.url }}" width="{{ comic.panel1.midsize.width }}" height="{{ comic.panel1.midsize.height }}" data-original-hd="{{ comic.panel3.midsize_hd.url }}">{% endif %}</a>
+  <a href="{{ comic.get_absolute_url }}">{% if comic.panel1 %}<img class="panel" src="{% static "img/panel-placeholder.png" %}" data-original="{{ comic.panel1.midsize.url }}" width="{{ comic.panel1.midsize.width }}" height="{{ comic.panel1.midsize.height }}" data-original-hd="{{ comic.panel1.midsize_hd.url }}">{% endif %}
+  {% if comic.panel2 %}<img class="panel" src="{% static "img/panel-placeholder.png" %}" data-original="{{ comic.panel2.midsize.url }}" width="{{ comic.panel1.midsize.width }}" height="{{ comic.panel1.midsize.height }}" data-original-hd="{{ comic.panel2.midsize_hd.url }}">{% endif %}
+  {% if comic.panel3 %}<img class="panel" src="{% static "img/panel-placeholder.png" %}" data-original="{{ comic.panel3.midsize.url }}" width="{{ comic.panel1.midsize.width }}" height="{{ comic.panel1.midsize.height }}" data-original-hd="{{ comic.panel3.midsize_hd.url }}">{% endif %}</a>
 </article>
