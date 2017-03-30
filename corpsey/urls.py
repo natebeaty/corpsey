@@ -10,6 +10,7 @@ from django.contrib.auth import views as auth_views
 from django import views as django_views
 from django.contrib import admin
 admin.autodiscover()
+admin.site.site_header = 'Infinitely Corpsey'
 
 urlpatterns = [
     url(r'^$', views.home, name='home'),
@@ -61,5 +62,3 @@ urlpatterns = [
     url(r'^markitup/', include('markitup.urls')),
     url(r'^media/(?P<path>.*)$', django_views.static.serve, {'document_root': settings.MEDIA_ROOT}),
 ]
-
-# urlpatterns += staticfiles_urlpatterns()
