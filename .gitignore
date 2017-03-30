@@ -10,3 +10,4 @@ codekit-config.json
 build/*
 corpsey/settings_production.py
 corpsey/settings_local.py
+config.codekit3
