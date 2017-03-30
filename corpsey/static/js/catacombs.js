@@ -140,7 +140,9 @@ $.corpsey.catacombs = (function() {
         comics_showing = State.url.replace(location.host,'').match(/\d+/g);
 
         // build id arr and convert to int
-        for(var i=0; i<comics_showing.length; i++) comics_showing[i] = +comics_showing[i];
+        for(var i=0; i<comics_showing.length; i++) {
+            comics_showing[i] = +comics_showing[i];
+        }
 
         // is this a uturn page?
         is_uturn = (State.url.match(/uturn/) !== null);
@@ -173,7 +175,7 @@ $.corpsey.catacombs = (function() {
     function _build_panels(){
         _hide_titles();
 
-        // check for comic panels to load
+        // Check for comic panels to load
         for(var i=0; i<comics_showing.length; i++) {
             if (is_uturn && (i===0 && uturns_shown.indexOf(comics_showing[i]) < 0)) {
                 $.get('/ajax/get_uturn_panel/', {
@@ -184,7 +186,7 @@ $.corpsey.catacombs = (function() {
                     _show_uturn(data);
                 });
             } else if (
-                // motherfucking uturns breaking my brain
+                // Uturns breaking my brain
                 (is_uturn && i===1 && comics_shown.indexOf(comics_showing[i]) < 0) ||
                 (!is_uturn && comics_shown.indexOf(comics_showing[i]) < 0)
             ){
@@ -197,9 +199,9 @@ $.corpsey.catacombs = (function() {
                 });
             } else {
                 $('.comic.single[data-comic-id='+comics_showing[i]+']').addClass('active');
-                _filter_panels();
             }
         }
+        _filter_panels();
     }
 
     function _show_uturn(data) {
@@ -214,7 +216,7 @@ $.corpsey.catacombs = (function() {
             $('#catacombs').isotope('insert', uturn);
         });
 
-        _filter_panels();
+        // _filter_panels();
     }
 
     function _show_panels(data) {
@@ -239,7 +241,7 @@ $.corpsey.catacombs = (function() {
         } else {
             $('#catacombs').find('.comic.single.active:first').before(comic);
         }
-        _filter_panels();
+        // _filter_panels();
     }
 
     function _filter_panels() {
