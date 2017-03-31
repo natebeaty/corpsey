@@ -6,7 +6,7 @@ from django.template import RequestContext
 from django.core.mail import send_mass_mail
 from django.core import urlresolvers
 from easy_thumbnails.files import get_thumbnailer
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.views.decorators.cache import cache_page
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
@@ -43,7 +43,6 @@ def tree(request):
 @cache_page(60 * 15)
 def tree_json(request):
     """Json view for the tree page."""
-    import json
     from mptt.templatetags.mptt_tags import cache_tree_children
 
     root_nodes = cache_tree_children(Comic.objects.filter(active=True))
@@ -54,7 +53,7 @@ def tree_json(request):
         'name': 'corpsey',
         'children': dicts,
     }
-    return HttpResponse(json.dumps(root, indent=4), mimetype='application/json')
+    return JsonResponse(root)
 
 @cache_page(60 * 15)
 def featured(request):
