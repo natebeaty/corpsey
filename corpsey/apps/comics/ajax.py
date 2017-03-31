@@ -33,6 +33,9 @@ def get_uturn_panel(request):
 def get_comic_panels(request):
     """Ajaxtastic catacombs browsing magic."""
     comic_id = request.GET.get('comic_id')
+    # Bad request
+    if not comic_id.isdigit():
+        return HttpResponse(json.dumps({ 'success': False }), content_type = "application/json")
     comic = Comic.objects.get(pk=comic_id)
     hdpi_enabled = request.GET.get('hdpi_enabled')
     size = 'midsize_hd' if hdpi_enabled else 'midsize'
@@ -54,6 +57,7 @@ def get_comic_panels(request):
     request.session['last_comic_id'] = comic_id
 
     data = json.dumps({
+        'success': True,
         'direction' : request.GET.get('direction'),
         'comic' : comic_obj
     })

@@ -196,7 +196,9 @@ $.corpsey.catacombs = (function() {
                     'direction': State.data.direction,
                     'hdpi_enabled': ($.corpsey.hdpi_enabled() ? 1 : '')
                 }).done(function(data) {
-                    _show_panels(data);
+                    if (data.success) {
+                        _show_panels(data);
+                    }
                 });
             } else {
                 $('.comic.single[data-comic-id='+comics_showing[i]+']').addClass('active');
