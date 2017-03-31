@@ -8,6 +8,7 @@ $.corpsey.catacombs = (function() {
     var State = History.getState();
     var comics_showing = [];
     var comics_shown = [];
+    var nav_cache = [];
     var max_comics_loaded = 15;
     var uturns_shown = [];
     var is_uturn = false; // true when on a uturn page
@@ -199,9 +200,9 @@ $.corpsey.catacombs = (function() {
                 });
             } else {
                 $('.comic.single[data-comic-id='+comics_showing[i]+']').addClass('active');
+                _filter_panels();
             }
         }
-        _filter_panels();
     }
 
     function _show_uturn(data) {
@@ -216,7 +217,7 @@ $.corpsey.catacombs = (function() {
             $('#catacombs').isotope('insert', uturn);
         });
 
-        // _filter_panels();
+        _filter_panels();
     }
 
     function _show_panels(data) {
@@ -241,7 +242,7 @@ $.corpsey.catacombs = (function() {
         } else {
             $('#catacombs').find('.comic.single.active:first').before(comic);
         }
-        // _filter_panels();
+        _filter_panels();
     }
 
     function _filter_panels() {
@@ -251,7 +252,7 @@ $.corpsey.catacombs = (function() {
         var visible_comics = [];
         $('.comic.single.active').each(function() {
             var id = $(this).data('comic-id');
-            // somehow comics are duplicating sometimes?
+            // Somehow comics are duplicating sometimes?
             if ($.inArray(id,visible_comics)>-1 && !$(this).hasClass('uturn')) {
                 $(this).remove();
             } else {
@@ -259,7 +260,7 @@ $.corpsey.catacombs = (function() {
             }
         });
 
-        // if you've looped through from last comic to first comic, make sure the URL matches visible order of comics
+        // If you've looped through from last comic to first comic, make sure the URL matches visible order of comics
         // or if uturn and we're out of sync, swap em around!
         if ((!is_uturn && visible_comics[0]!==comics_showing[0]) ||
             (is_uturn && uturn_single && visible_comics[0]!==comics_showing[0])
@@ -269,12 +270,12 @@ $.corpsey.catacombs = (function() {
             $('.comic.active[data-comic-id='+comics_showing[1]+']:first').after($('.comic.active[data-comic-id='+comics_showing[0]+']:first'));
         }
 
-        // reset sort order for isotope using DOM order
+        // Reset sort order for isotope using DOM order
         $('#catacombs').imagesLoaded(function() {
             $('#catacombs').isotope('reloadItems').isotope({ sortBy: 'original-order' });
         });
 
-        // hide strips not in new url
+        // Hide strips not in new url
         $('#catacombs .comic.single').each(function(){
             // uturn pages have different
             if (is_uturn) {
@@ -291,12 +292,12 @@ $.corpsey.catacombs = (function() {
             }
         });
 
-        // set isotope to filter visible comics
+        // Set isotope to filter visible comics
         $('#catacombs').imagesLoaded(function() {
             $('#catacombs').isotope({ filter: (small_width) ? '.comic.active .panel:not(.uturn-pad),.comic.active h1' : (medium_width) ? '.comic.active .panel:not(.uturn-pad)' : '.comic.active .panel' });
         });
 
-        // if med/small screen, scroll up to comic we just loaded
+        // If med/small screen, scroll up to comic we just loaded
         if (medium_width || small_width) {
             if (State.data.direction==='next') {
                 var scrollTo = small_width ? 960 : 320;
@@ -319,12 +320,17 @@ $.corpsey.catacombs = (function() {
     }
 
     function _get_nav_links() {
-        $.get('/ajax/get_nav_links/', {
+        if (nav_cache[comics_showing.join('-')]) {
+            _show_nav_links(nav_cache[comics_showing.join('-')]);
+        } else {
+            $.get('/ajax/get_nav_links/', {
                 'comic_id_arr': comics_showing,
                 'is_uturn': (is_uturn ? 1 : '')
             }).done(function(data) {
+                nav_cache[comics_showing.join('-')] = data;
                 _show_nav_links(data);
             });
+        }
     }
 
     function _show_nav_links(data) {
