@@ -42,9 +42,7 @@ $.corpsey = (function() {
                 return false;
             },
             search: function( event, ui ) {
-                if (typeof _gaq !== 'undefined') {
-                    _gaq.push(['_trackEvent', 'Search', $('#get-artist').val() ]);
-                }
+                _trackEvent('Search', $('#get-artist').val())
             },
             select: function( event, ui ) {
                 location.href = ui.item.url;
@@ -86,13 +84,27 @@ $.corpsey = (function() {
         }
     }
 
+    // Track AJAX pages in Analytics
+    function _trackPage() {
+      if (typeof ga !== 'undefined') {
+        ga('send', 'pageview', location.pathname);
+      }
+    }
+
+    // Track events in Analytics
+    function _trackEvent(category, action) {
+      if (typeof ga !== 'undefined') {
+        ga('send', 'event', category, action);
+      }
+    }
+
     // Public methods
     return {
-        init: function() {
-            _init();
-        },
-        resize: function() {
-            _resize();
+        init: _init,
+        resize: _resize,
+        trackPage: _trackPage,
+        trackEvent: function(category, action) {
+            _trackEvent(category, action);
         },
         hdpi_enabled: function() {
             return _hdpi_enabled;

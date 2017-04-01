@@ -48,9 +48,7 @@ $.corpsey.catacombs = (function() {
             _get_comics_showing();
             _garbage_collection();
             _build_panels();
-            if (typeof _gaq !== 'undefined') {
-                _gaq.push(['_trackPageview', window.location.pathname]);
-            }
+            $.corpsey.trackPage();
         });
 
         // isotopize
@@ -368,9 +366,9 @@ $.corpsey.catacombs = (function() {
 
     function _move_titles() {
         $('.comic.single.active').each(function(i) {
-            // figure out which comic panel to position next to
+            // Figure out which comic panel to position next to
             var c = (i===1 && $('#catacombs').width()<980) ? '1' : '0';
-            // todo: put this damn title to the right of the strip, ugh
+            // Todo: put this damn title to the right of the strip, ugh
             if (is_uturn && $(this).hasClass('uturn') && $('#catacombs').width()<980) {
                 c = '1';
             }
@@ -402,7 +400,7 @@ $.corpsey.catacombs = (function() {
     }
 
     function _retinize() {
-        // reload @2x images
+        // Reload @2x images
         if ($.corpsey.hdpi_enabled()) {
             $('img.panel').each(function() {
                 $(this).attr('src', $(this).attr('data-hd-src'));
@@ -410,28 +408,18 @@ $.corpsey.catacombs = (function() {
         }
     }
 
-    // public methods
+    // Public methods
     return {
-        init: function() {
-            _init();
-        },
+        init: _init,
+        resize: _resize,
+        retinize: _retinize,
+        delayed_resize: _delayed_resize,
+        build_titles: _build_titles,
         show_panels: function(data) {
             _show_panels(data);
         },
         show_uturn: function(data) {
             _show_uturn(data);
-        },
-        resize: function() {
-            _resize();
-        },
-        retinize: function() {
-            _retinize();
-        },
-        delayed_resize: function() {
-          _delayed_resize();
-        },
-        build_titles: function() {
-            _build_titles();
         },
         show_nav_links: function(data) {
             _show_nav_links(data);
@@ -439,7 +427,7 @@ $.corpsey.catacombs = (function() {
     };
 })();
 
-// fire up the mothership
+// Fire up the mothership
 $(window).ready(function(){
     $.corpsey.catacombs.init();
 });
@@ -451,9 +439,9 @@ $(window).load(function(){
 $(window).resize(function(){
     $.corpsey.catacombs.resize();
 
-  // delayed resize for more intensive tasks
-  if($.corpsey.catacombs.delayed_resize_timer !== false) {
-    clearTimeout($.corpsey.catacombs.delayed_resize_timer);
-  }
-  $.corpsey.catacombs.delayed_resize_timer = setTimeout($.corpsey.catacombs.delayed_resize, 200);
+    // Delayed resize for more intensive tasks
+    if($.corpsey.catacombs.delayed_resize_timer !== false) {
+      clearTimeout($.corpsey.catacombs.delayed_resize_timer);
+    }
+    $.corpsey.catacombs.delayed_resize_timer = setTimeout($.corpsey.catacombs.delayed_resize, 200);
 });
