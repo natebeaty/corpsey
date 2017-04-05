@@ -25,17 +25,18 @@
         <p><a class="new-leaf refresh" href="#">Give me another random strip to follow</a></p>
 
         <fieldset class="info">
+            <label for="id_name" class="required">{{ contribute_form.name.label_tag }}</label>
+            {{ contribute_form.name }}
+            {% if contribute_form.name.errors %}
+                <div class="field-error">{{ contribute_form.name.errors }}</div>
+            {% endif %}
+
             <label for="id_email" class="required">{{ contribute_form.email.label_tag }}</label>
             {{ contribute_form.email }}
             {% if contribute_form.email.errors %}
                 <div class="field-error">{{ contribute_form.email.errors }}</div>
             {% endif %}
 
-            <label for="id_name" class="required">{{ contribute_form.name.label_tag }}</label>
-            {{ contribute_form.name }}
-            {% if contribute_form.name.errors %}
-                <div class="field-error">{{ contribute_form.name.errors }}</div>
-            {% endif %}
             <div class="hidden">{{ contribute_form.comic_id }}</div>
             {% csrf_token %}
         </fieldset>
