@@ -1,1 +1,0 @@
-$.corpsey=$.corpsey||{},$.corpsey.home=function(){function o(){$("li.recent a").click(function(){return $("html,body").animate({scrollTop:$("#recent-contributors").offset().top},"fast"),!1}),$("img.panel").lazyload({threshold:250,hidpi_support:!0})}return{init:function(){o()}}}(),$(window).ready(function(){$.corpsey.home.init()});

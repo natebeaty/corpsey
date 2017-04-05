@@ -1,9 +1,9 @@
-/*
-Corpsey
-*/
+// Corpsey!
+// nate@clixel.com
 
-@import 'reset.less';
-@import 'mixins.less';
+@import 'partials/_reset';
+@import 'partials/_mixins';
+@import 'partials/_dropzone';
 
 html, body { height: 100%; }
 body {
@@ -12,9 +12,7 @@ body {
     color: #222;
     position: relative;
 }
-.clearfix:before, .clearfix:after { content: ""; display: table; }
-.clearfix:after { clear: both; }
-.clearfix { zoom: 1; }
+
 a {
     img {
         border: 0;
@@ -48,7 +46,7 @@ ul.bullets {
     color: #888;
 }
 
-/* general typography */
+// General typography
 
 h1 {
     font: 24px/1.2em 'Arbutus Slab', serif;
@@ -81,7 +79,7 @@ p {
     }
 }
 
-/* multiple usables */
+// Multiple usables
 
 .button,
 nav li a {
@@ -92,18 +90,15 @@ nav li a {
     color: #eee;
     padding: 6px 12px;
     white-space: nowrap;
-    display:inline-block;
-    margin-bottom:4px;
+    display: inline-block;
+    margin-bottom: 4px;
     text-decoration: none;
-    border:0;
-    cursor:pointer;
+    border: 0;
+    cursor: pointer;
     &:hover {
-        text-decoration:none;
+        text-decoration: none;
         background: lighten(@graygreen, 5%);
     }
-}
-.actions {
-    margin: 10px 0;
 }
 
 ul.tree {
@@ -140,8 +135,7 @@ ul.tree {
 }
 .hidden { display: none; }
 
-/* general layout */
-
+// General layout
 #wrapper {
     overflow: hidden;
     min-height: 660px;
@@ -149,6 +143,12 @@ ul.tree {
 body.static #content,
 #contribute-page #content {
     width: 800px;
+}
+.step {
+    display: none;
+    &.active {
+        display: block;
+    }
 }
 nav.main {
     background: @bluegray;
@@ -171,11 +171,7 @@ nav.main {
                 border: 0;
                 width: 89px;
                 padding: 4px 16px 2px 16px;
-                &::-webkit-input-placeholder { color: #eee; }
-                &::-moz-placeholder { color: #eee; opacity: 1; } // Firefox 19+
-                &:-moz-placeholder { color: #eee; opacity: 1; } // Firefox 18-
-                &:-ms-input-placeholder { color: #eee; }
-
+                &::placeholder { color: #eee; }
                 &:hover {
                     background: lighten(@bluegray, 5%);
                 }
@@ -243,7 +239,7 @@ nav.main {
             background-image: url('/static/img/logo@2x.gif');
     }
     text-indent: -9999em;
-    margin:8px auto;
+    margin: 8px auto;
     a {
         display: block;
         width: 100%;
@@ -273,10 +269,10 @@ footer.main {
                     background-image: url('/static/img/facebook@2x.png');
             }
             text-indent: -9999em;
-            .transition(all .3s);
+            transition: all .3s;
             margin-right: 10px;
             &:hover {
-                .rotation(6deg);
+                translate: rotate(6deg);
             }
             &#clixel {
                 width: 82px;
@@ -290,7 +286,7 @@ footer.main {
                         background-image: url('/static/img/clixel@2x.png');
                 }
                 &:hover {
-                    .rotation(-6deg);
+                    translate: rotate(-6deg);
                 }
             }
             &#twitter {
@@ -305,7 +301,7 @@ footer.main {
                         background-image: url('/static/img/twitter@2x.png');
                 }
                 &:hover {
-                    .rotation(-6deg);
+                    translate: rotate(-6deg);
                 }
             }
         }
@@ -324,7 +320,7 @@ footer.main {
 
 .comic-nav {
     position: absolute;
-    right:0;
+    right: 0;
     top: 380px;
     width: 130px;
     z-index: 10000;
@@ -357,8 +353,7 @@ footer.main {
     }
 }
 
-/* homepage */
-
+// Homepage
 #homepage {
     #content { margin-left: 0; }
     .bone-divider {
@@ -416,8 +411,8 @@ footer.main {
             float: none;
             width: auto;
             .wrap {
-                margin:0 auto 40px;
-                padding:20px;
+                margin: 0 auto 40px;
+                padding: 20px;
                 text-align: center;
             }
             h2 {
@@ -435,7 +430,7 @@ footer.main {
         }
     }
     #logo {
-        margin:0 auto;
+        margin: 0 auto;
     }
     .recent-contributors {
         padding-top: 20px;
@@ -463,8 +458,7 @@ footer.main {
     }
 }
 
-/* catacombs */
-
+// Catacombs
 .contribution,
 .comic {
     h1 {
@@ -481,7 +475,7 @@ footer.main {
         width: 330px;
         height: 330px;
         background-size: 330px 330px;
-        .transition(background-color .5s);
+        transition: background-color .5s;
         &.loading {
             background: #ccc;
         }
@@ -500,7 +494,7 @@ footer.main {
     width: 200px;
     height: 200px;
     background: #666;
-    .rounded-corners(4px);
+    border-radius: 4px;
     padding: 20px;
     text-align: center;
     z-index: 10001;
@@ -515,6 +509,15 @@ footer.main {
         display: block;
         clear: left;
         overflow: hidden;
+        &.votes {
+            overflow: visible;
+            li {
+                list-style: disc;
+                padding-left: .5em;
+                max-width: 600px;
+                margin: 0 0 1em 1.5em;
+            }
+        }
     }
     .comic {
         padding-left: 20px;
@@ -526,7 +529,7 @@ footer.main {
         }
         margin-bottom: 20px;
         img {
-            .transition(all 1s);
+            transition: all 1s;
             width: 250px;
             height: 250px;
             opacity: .5;
@@ -544,7 +547,7 @@ footer.main {
         }
     }
     .queue {
-        .transition(all 1s);
+        transition: all 1s;
         margin-bottom: 60px;
         &.voted {
             opacity: .2;
@@ -603,7 +606,7 @@ footer.main {
             }
         }
         p.note {
-            font-size:16px;
+            font-size: 16px;
             line-height: 1.3em;
             margin-top: 16px;
         }
@@ -648,7 +651,7 @@ footer.main {
 h1.comic_1,
 h1.comic_2 {
     position: absolute;
-    .rotation(270deg);
+    translate: rotate(270deg);
     transform-origin: left top;
     white-space: nowrap;
     left: 0;
@@ -659,8 +662,7 @@ h1.comic_2 {
     }
 }
 
-/* contribute */
-
+// Contribute
 #contribute-page {
     #content {
         width: 800px;
@@ -668,14 +670,34 @@ h1.comic_2 {
     }
     form.contribute {
         background: #eee;
-        .rounded-corners(4px);
+        &.dz-drag-hover {
+            fieldset,
+            .actions {
+                opacity: .25;
+            }
+          .dropzone .dz-message {
+              background: #ddd;
+              border-color: darken(@bluegray, 25%);
+          }
+        }
+        &.images-uploading {
+            fieldset,
+            .actions {
+                opacity: .25;
+            }
+            .dz-drag-message,
+            .dz-remove {
+                display: none;
+            }
+        }
+
+        border-radius: 4px;
         text-align: center;
         margin: 40px auto;
         padding: 2px 10px 6px;
         button,
         input[type=text] {
             display: block;
-            margin: 4px auto;
         }
         button {
             width: 300px;
@@ -694,15 +716,17 @@ h1.comic_2 {
         fieldset {
             border: none;
             padding: 0;
-            margin: 0;
+            margin: 10px;
             &.images {
                 width: 250px;
                 margin: 0 auto;
             }
             &.info {
-                margin-top: 40px;
+                max-width: 300px;
+                margin: 10px auto;
                 label {
-                    display: none;
+                    color: @bluegray;
+                    text-align: left;
                 }
             }
         }
@@ -734,21 +758,26 @@ h1.comic_2 {
 
 label.error,
 .errorlist li {
-    margin-top: 6px;
     .cursive-gray;
+    background: @red;
+    color: @white !important;
+    margin-top: 0;
+    padding: 4px;
+    letter-spacing: 0;
     text-transform: none;
 }
 
 .refresh {
     padding-left: 20px;
     background: url('/static/img/refresh.png') no-repeat;
-    font: 12px/1.2em "Orienta", sans-serif;
+    font: 12px/1.2em 'Orienta', sans-serif;
 }
 
 form {
     label {
         display: block;
-        font: 14px/1.2em "Orienta", sans-serif;
+        font: 12px/1.2em 'Orienta', sans-serif;
+        letter-spacing: .2em;
         text-transform: uppercase;
         margin: 1em 0 0;
     }
@@ -756,74 +785,65 @@ form {
     input[type=email],
     input[type=password], {
         font: 18px/1.2em 'Arbutus Slab', serif;
-        color: #222;
+        color: @black;
         width: 100%;
         background: none;
-        border:0;
+        border: 0;
         margin: 6px 0 0;
         padding: 6px;
         background: lighten(@olive, 35%);
         outline: none;
+        border: 1px solid transparent;
+
+        &::placeholder {
+            .smooth;
+            color: #eee;
+        }
+        &.error {
+            border: 1px solid @red;
+        }
         &:focus {
-            outline: 1px solid @olive;
+            border-bottom: 1px solid @olive;
         }
     }
-    input[type=submit] {
-        font: 16px/1em "Orienta", sans-serif;
-        padding: 10px 10px 8px;
-        background: @olive;
-        color: #fff;
-        border: 0;
-        text-transform: uppercase;
-        margin: 1em 0;
-        cursor: pointer;
-        &:hover {
-            background: darken(@olive, 5%);
-        }
+    button[type=submit] {
+        font: 14px/1.2em 'Orienta', sans-serif;
+        padding: 10px;
     }
 }
 
-/**** Isotope Filtering ****/
-
+// Isotope
 .isotope-item {
-  z-index: 2;
+    z-index: 2;
 }
-
 .isotope-hidden.isotope-item {
-  pointer-events: none;
-  z-index: 1;
+    pointer-events: none;
+    z-index: 1;
 }
-
-/**** Isotope CSS3 transitions ****/
 .isotope,
 .isotope .isotope-item {
-          transition-duration: 0.6s;
+    transition-duration: 0.6s;
 }
-
 .isotope {
-          transition-property: height, width;
+    transition-property: height, width;
 }
-
 .isotope .isotope-item {
-          transition-property:         transform, opacity;
+    transition-property: transform, opacity;
 }
-
-/**** disabling Isotope CSS3 transitions ****/
-
 .isotope.no-transition,
 .isotope.no-transition .isotope-item,
 .isotope .isotope-item.no-transition {
-          transition-duration: 0s;
+    transition-duration: 0s;
 }
 
-/* autocomplete */
+// Autocomplete
 .ui-helper-hidden-accessible { display: none; }
 ul.ui-autocomplete {
     background: @olive;
     z-index: 99999 !important;
     width: 250px !important;
     li {
-        a {
+        div {
             font: 12px/1.3em 'Orienta', sans-serif;
             display: block;
             cursor: pointer;
@@ -838,17 +858,16 @@ ul.ui-autocomplete {
     }
 }
 
-/* tree page */
-
+// Tree page
 #tree {
     #content {
         margin: 20px;
         overflow: hidden;
         svg { margin-left: -47px; }
         .node circle {
-          fill: @olive;
-          stroke: @olive;
-          stroke-width: 1px;
+            fill: @olive;
+            stroke: @olive;
+            stroke-width: 1px;
         }
 
         .node {
@@ -863,7 +882,7 @@ ul.ui-autocomplete {
     }
 }
 
-/* artists */
+// Artists
 #artists {
     #content {
         width: 850px;
@@ -919,11 +938,11 @@ body.user {
         margin: 40px auto;
     }
     input[type=submit] {
-        margin:20px auto;
+        margin: 20px auto;
     }
 }
 
-/* about */
+// About
 #about {
     #content {
         width: 600px;
@@ -952,7 +971,7 @@ body.user {
     }
 }
 
-/* simple pagination */
+// Simple pagination
 .pagination {
     margin: 20px 0;
     ul {
@@ -963,12 +982,13 @@ body.user {
     }
 }
 
+// Media queries
 @media screen and (max-width: 1260px) {
-    @import "midsize-nav.less";
+    @import 'midsize-nav';
 }
 @media screen and (max-width: 1020px) {
-    @import "midsize.less";
+    @import 'midsize';
 }
 @media screen and (max-width: 700px) {
-    @import "small.less";
+    @import 'small';
 }

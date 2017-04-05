@@ -4,8 +4,7 @@ from django.core.mail import EmailMultiAlternatives
 from django.template.loader import get_template
 from django.template import Context
 from django.conf import settings
-from django.http import HttpResponse
-import json
+from django.http import JsonResponse
 import twitter
 import random
 
@@ -24,18 +23,17 @@ def get_uturn_panel(request):
     else:
         uturn_obj = {}
 
-    data = json.dumps({
+    return JsonResponse({
         'direction' : request.GET.get('direction'),
         'uturn' : uturn_obj
     })
-    return HttpResponse(data, content_type = "application/json")
 
 def get_comic_panels(request):
     """Ajaxtastic catacombs browsing magic."""
     comic_id = request.GET.get('comic_id')
     # Bad request
     if not comic_id.isdigit():
-        return HttpResponse(json.dumps({ 'success': False }), content_type = "application/json")
+        return JsonResponse({ 'success': False })
     comic = Comic.objects.get(pk=comic_id)
     hdpi_enabled = request.GET.get('hdpi_enabled')
     size = 'midsize_hd' if hdpi_enabled else 'midsize'
@@ -56,12 +54,11 @@ def get_comic_panels(request):
     # Store comic_id for /contribute/
     request.session['last_comic_id'] = comic_id
 
-    data = json.dumps({
+    return JsonResponse({
         'success': True,
         'direction' : request.GET.get('direction'),
         'comic' : comic_obj
     })
-    return HttpResponse(data, content_type = "application/json")
 
 def contribution_vote(request):
     """The elders voting YEA OR NAY on freshly contributed strips."""
@@ -73,9 +70,7 @@ def contribution_vote(request):
     contribution = Contribution.objects.get(pk=contribution_id)
     # Has this already been approved?
     if contribution.pending == False:
-        return HttpResponse(json.dumps({
-            'message' : "This contribution is not in the queue any longer."
-        }), content_type = "application/json")
+        return JsonResponse({'message' : 'This contribution is not in the queue any longer.'})
     approve = True if yea == '1' else False
     message = ''
 
@@ -129,9 +124,9 @@ def contribution_vote(request):
         contribution.save()
         # Look for artist or add new
         try:
-            artist = Artist.objects.get(name=contribution.name)
+            artist = Artist.objects.get(email=contribution.email)
         except:
-            artist = Artist(name=contribution.name)
+            artist = Artist(email=contribution.email)
         artist.email = contribution.email
         artist.url = contribution.website
         artist.save()
@@ -191,12 +186,11 @@ def contribution_vote(request):
         except:
             message = 'There was an error posting to twitter. Please write Nate and mock him.'
 
-    data = json.dumps({
+    return JsonResponse({
         'contribution_id' : contribution_id,
         'yea' : yea,
         'message' : message
     })
-    return HttpResponse(data, content_type = "application/json")
 
 def get_new_leaf(request):
     """Pull another random strip to follow for /contribute/ page."""
@@ -215,10 +209,7 @@ def get_new_leaf(request):
         'name' : comic.artist.name,
         'url' : comic.artist.url,
     }
-    data = json.dumps({
-        'comic' : comic_obj
-    })
-    return HttpResponse(data, content_type = "application/json")
+    return JsonResponse({ 'comic' : comic_obj })
 
 def get_nav_links(request):
     """Ajaxtastic next/prev links, overly verbose at the moment just so they work."""
@@ -313,9 +304,8 @@ def get_nav_links(request):
                         'last_name': 'Club',
                     }]
 
-    data = json.dumps({
+    return JsonResponse({
         'prev_comic_links' : prev_comic_links_arr,
         'next_comic_links' : next_comic_links_arr,
         'uturn_links' : uturn_links,
     })
-    return HttpResponse(data, content_type = "application/json")

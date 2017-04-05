@@ -1,15 +1,16 @@
-// Trubble Club Codes for Pleasure
+// Infinite Corpse js brains
 // nate@clixel.com 2013
 
-// @codekit-prepend "jquery-1.7.2.min.js"
-// @codekit-prepend "jquery-ui-1.10.0.custom.min.js"
-// @codekit-prepend "jquery.lazyload.min.js"
-// @codekit-prepend "jquery.imagesloaded.min.js"
-// @codekit-prepend "icanhaz.min.js"
-// @codekit-prepend "jquery.isotope.min.js"
-// @codekit-prepend "jquery.history.js"
-// @codekit-prepend "jgestures.min.js"
-// @codekit-prepend "jquery.validate.min.js"
+// @codekit-prepend "libs/jquery-3.2.0.js"
+// @codekit-prepend "libs/jquery-ui-1.12.1.js"
+// @codekit-prepend "libs/jquery.lazyload.min.js"
+// @codekit-prepend "libs/jquery.imagesloaded.min.js"
+// @codekit-prepend "libs/icanhaz.min.js"
+// @codekit-prepend "libs/jquery.isotope.min.js"
+// @codekit-prepend "libs/jquery.history.js"
+// @codekit-prepend "libs/jgestures.min.js"
+// @codekit-prepend "libs/jquery.validate.min.js"
+// @codekit-prepend "libs/jquery.ui.touch-punch.min.js"
 
 $.corpsey = (function() {
     var _hdpi_enabled;
@@ -37,8 +38,8 @@ $.corpsey = (function() {
             source: "/get_artists/",
             minLength: 2,
             focus: function( event, ui ) {
-                $('.ui-autocomplete a').removeClass('active');
-                $('.ui-autocomplete a:contains('+ui.item.value+')').addClass('active');
+                $('.ui-autocomplete div').removeClass('active');
+                $('.ui-autocomplete div:contains('+ui.item.value+')').addClass('active');
                 return false;
             },
             search: function( event, ui ) {

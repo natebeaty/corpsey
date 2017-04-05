@@ -1,7 +1,6 @@
 from corpsey.apps.artists.models import *
 from corpsey.apps.comics.models import *
-from django.http import HttpResponse
-import json
+from django.http import JsonResponse
 
 def entry(request, artist_id):
     pass
@@ -22,8 +21,15 @@ def get_artists(request):
             artist_json['url'] = url
             artist_json['value'] = artist.name
             results.append(artist_json)
-        data = json.dumps(results)
+
+            # artist_json['comics'] = []
+            # if artist.num_comics > 1:
+            #   for comic in artist.comics.all()[1:]:
+            #     artist_json['comic_urls']
+            #   endfor
+            # endif
+
+        data = results
     else:
         data = 'fail'
-    mimetype = 'application/json'
-    return HttpResponse(data, mimetype)
+    return JsonResponse(data, safe=False)

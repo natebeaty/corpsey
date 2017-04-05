@@ -1,0 +1,99 @@
+.dz-remove {
+  .button;
+  margin-top: 8px;
+  font: 10px/1em 'Orienta', sans-serif;
+}
+// hide dz-message until .active
+.dropzone {
+  .dz-drag-message,
+  .dz-message {
+    display: none;
+  }
+}
+.dz-max-files-reached .dropzone.active {
+  .dz-message {
+    display: none;
+  }
+  .dz-drag-message {
+    display: block;
+    padding: 10px;
+  }
+}
+
+.dropzone.active {
+  position: relative;
+  .dz-previews {
+    position: relative;
+    margin: 10px 0;
+  }
+  img {
+    display: block;
+  }
+  .portrait img {
+    width: 100%;
+  }
+  .landscape img {
+    height: 100%;
+  }
+  .dz-message {
+    display: block;
+    border: 1px dashed @bluegray;
+    padding: 40px 20px;
+    margin: 10px;
+  }
+  fieldset {
+    transition: all .25s;
+  }
+
+  .dz-preview {
+    position: relative;
+    .dz-image {
+      width: 100%;
+      height: 100%;
+    }
+    display: inline-block;
+    width: 250px;
+    height: 250px;
+    margin: 10px 0 40px;
+    .dz-progress {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      .dz-upload {
+        display: block;
+        height: 100%;
+        width: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background: fade(@olive, 50%);
+      }
+    }
+    .dz-error-message {
+      color: @red;
+      display: none;
+    }
+    .dz-details {
+      display: none;
+    }
+    &.dz-error .dz-error-message,
+    &.dz-error .dz-error-mark {
+      display: block;
+    }
+    &.dz-success .dz-success-mark {
+      display: block;
+    }
+    .dz-error-mark,
+    .dz-success-mark {
+      position: absolute;
+      display: none;
+      top: 50%;
+      width: 54px;
+      height: 58px;
+      left: 50%;
+      margin-left: -27px;
+    }
+  }
+}

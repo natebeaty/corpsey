@@ -51,7 +51,7 @@ class Migration(migrations.Migration):
                 ('name', models.CharField(blank=True, max_length=250)),
                 ('email', models.CharField(blank=True, max_length=250)),
                 ('website', models.URLField(blank=True, max_length=250)),
-                ('code', models.CharField(blank=True, help_text=b'Upload link is http://corpsey.trubbleclub.com/contribute/upload/CODE_HERE/', max_length=250)),
+                ('code', models.CharField(blank=True, help_text=b'Upload link is http://corpsey.trubble.club/contribute/upload/CODE_HERE/', max_length=250)),
                 ('date', models.DateTimeField(auto_now_add=True)),
                 ('deadline', models.DateTimeField(blank=True)),
                 ('panel1', easy_thumbnails.fields.ThumbnailerImageField(blank=True, upload_to=b'contributions')),

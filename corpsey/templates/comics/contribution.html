@@ -19,6 +19,7 @@
 
 	{% if contribution.votes.all %}
 		<h2>Votes so far:</h2>
+		<ul class="votes">
 		{% for vote in contribution.votes.all %}
 			{% if vote.approve %}
 				<li>Yea vote</li>
@@ -26,6 +27,7 @@
 				<li>Nay vote: <em>{{ vote.notes }}</em></li>
 			{% endif %}
 		{% endfor %}
+		</ul>
 	{% endif %}
 
 	{% if user.username == 'nate' or user.username == 'aaron' %}

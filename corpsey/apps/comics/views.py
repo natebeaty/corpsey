@@ -49,11 +49,10 @@ def tree_json(request):
     dicts = []
     for n in root_nodes:
         dicts.append(recursive_node_to_dict(n))
-    root = {
+    return JsonResponse({
         'name': 'corpsey',
         'children': dicts,
-    }
-    return JsonResponse(root)
+    })
 
 @cache_page(60 * 15)
 def featured(request):
@@ -154,7 +153,7 @@ def uturn(request, uturn, comic=None):
 def contributions(request):
     """Page for the elders to vote YAY or NAY on contributions."""
     user_votes = Vote.objects.filter(user_id=request.user.id)
-    # Omit contributions user has already voted on AND contributions that have no panels yet (todo: has_uploaded boolean field?)
+    # Omit contributions user has already voted on AND contributions that have no panels yet
     contributions = Contribution.objects.filter(pending=True, has_panels=True).exclude(id__in=user_votes.values_list('contribution_id', flat=True))
     rules = Rule.objects.all().order_by('-id')
 
@@ -235,7 +234,7 @@ def contribute(request):
 
             # Check if email has pending contributions
             try:
-                existing_contribution = Contribution.objects.get(email=email,pending=True)
+                existing_contribution = Contribution.objects.get(email=email, pending=True)
                 message = 'The email %s already has a pending contribution. Please check your email for instructions on uploading your panels.' % email
             except:
                 # Store contribution in db
@@ -273,7 +272,7 @@ def contribute(request):
         else:
             message = "Oh no! Corpsey robot brain broke with your data."
     else:
-        form = ContributeForm(initial={ 'comic_id': parent_comic.id })
+        form = ContributeForm(initial={'comic_id': parent_comic.id})
 
     page = FlatPage.objects.get(url='/contribute/')
     page2 = FlatPage.objects.get(url='/contribute/ok/')
@@ -308,23 +307,32 @@ def contribute_upload(request, upload_code):
     try:
         contribution = Contribution.objects.get(code=upload_code)
         parent_comic = contribution.comic
-        form = UploadForm(initial = {'name': contribution.name, 'email': contribution.email})
+        form = UploadForm(initial = {'name': contribution.name, 'email': contribution.email, 'website': contribution.website})
+        num_panels_uploaded = 0
 
         if request.method == 'POST':
             form = UploadForm(request.POST, request.FILES)
             if form.is_valid():
-                contribution.panel1 = request.FILES['panel1']
-                contribution.panel2 = request.FILES['panel2']
-                contribution.panel3 = request.FILES['panel3']
+                for i in xrange(0,3):
+                    if ("comic_panels[%d]" % i in request.FILES):
+                        setattr(contribution, 'panel' + str(i+1), request.FILES["comic_panels[%d]" % i])
+                        num_panels_uploaded = num_panels_uploaded + 1
+
+                if num_panels_uploaded < 3:
+                    return JsonResponse({
+                        'success' : 0,
+                        'message' : "You must upload 3 panels."
+                    })
+
                 contribution.name = form.cleaned_data['name']
                 contribution.email = form.cleaned_data['email']
                 contribution.website = form.cleaned_data['website']
-                if contribution.website and not "http" in contribution.website:
+                if contribution.website and not 'http' in contribution.website:
                     contribution.website = 'http://%s/' % contribution.website
                 contribution.has_panels = True
                 contribution.save()
 
-                message = "Contribution uploaded ok!"
+                message = 'Contribution uploaded ok!'
                 step = 2
 
                 # Email voters about new submission
@@ -337,8 +345,15 @@ def contribute_upload(request, upload_code):
                 for voter in voters:
                     emails = emails + ((mail_subject, mail_body, 'hal@trubble.club', [voter.email]),)
                 send_mass_mail(emails)
+
+                return JsonResponse({ 'success': 1 })
+
             else:
-                message = "Oh no! Something went wrong and broke Corpsey's robot brain."
+                return JsonResponse({
+                    'success' : 0,
+                    'form_errors' : form.errors,
+                    'message' : "Oh no! Something went wrong and broke Corpsey's robot brain."
+                })
     except Contribution.DoesNotExist:
         message = 'Contribution code <strong>%s</strong> was not found!' % upload_code
         return render(request, 'comics/contribute_upload.html', {
@@ -350,6 +365,8 @@ def contribute_upload(request, upload_code):
         return render(request, 'comics/contribute_upload.html', {
             'message': message
         })
+    elif contribution.has_panels:
+        message = 'Oops! You\'ve already uploaded your panels.'
 
     return render(request, 'comics/contribute_upload.html', {
         'upload_code': upload_code,

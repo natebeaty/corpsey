@@ -1,5 +1,5 @@
 // Infinite Corpse js brains for voting on contributions
-// nate beaty @ clixel 2013
+// nate@clixel.com
 
 $.corpsey = $.corpsey || {};
 
@@ -10,9 +10,9 @@ $.corpsey.contributions = (function() {
 
             var $queue = $(this).parents('.queue:first');
             var contribution_id = $queue.attr('data-contribution-id');
-            
+
             $.get('/contribution_vote/', {
-                'contribution_id': contribution_id, 
+                'contribution_id': contribution_id,
                 'yea': 1
             }).done(function(data) {
                 _after_vote(data);
@@ -42,7 +42,7 @@ $.corpsey.contributions = (function() {
                 rule_broke = $(this).attr('data-rule-id');
             }
             $.get('/contribution_vote/', {
-                'contribution_id': contribution_id, 
+                'contribution_id': contribution_id,
                 'yea': '',
                 'rule_broke': rule_broke,
                 'notes': notes
