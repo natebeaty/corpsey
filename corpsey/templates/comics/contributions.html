@@ -6,7 +6,7 @@
 
 {% block content %}
   <h1>Pending Contributions</h1>
-  <p style="margin:-15px 0 20px">Signed in as {{ user.username }}. <a href="/user/logout/">Log Out</a></p>
+  <p style="margin:-15px 0 20px">Signed in as {{ user.username }}. <a class="button" href="{% url 'user-logout' %}">Log Out</a></p>
   {% for contribution in contributions %}
     {% include "comics/contribution.html" with contribution=contribution comic=contribution.comic %}
   {% empty %}

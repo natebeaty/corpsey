@@ -7,6 +7,6 @@ class UploadForm(forms.Form):
     website = forms.CharField(label='Your website', required=False, widget=forms.TextInput(attrs={'placeholder': 'corpsey.trubble.club'}))
 
 class ContributeForm(forms.Form):
-    email = forms.EmailField(label='Your name', widget=forms.TextInput(attrs={'placeholder': 'Corpsey Infinitus', 'class': 'email required'}))
-    name = forms.CharField(label='Your email', widget=forms.TextInput(attrs={'placeholder': 'corpsey@aol.com', 'class': 'required'}))
+    name = forms.CharField(label='Your name', widget=forms.TextInput(attrs={'placeholder': 'Corpsey Infinitus', 'class': 'required'}))
+    email = forms.EmailField(label='Your email', widget=forms.TextInput(attrs={'placeholder': 'corpsey@aol.com', 'class': 'email required'}))
     comic_id = forms.CharField()
