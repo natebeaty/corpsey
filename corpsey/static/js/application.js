@@ -10,7 +10,7 @@
 // @codekit-prepend "libs/jquery.history.js"
 // @codekit-prepend "libs/jgestures.min.js"
 // @codekit-prepend "libs/jquery.validate.min.js"
-// @codekit-prepend "libs/jquery.ui.touch-punch.min.js"
+// @codekit-prepend "libs/jquery.ui.touch-punch.js"
 
 $.corpsey = (function() {
     var _hdpi_enabled;
