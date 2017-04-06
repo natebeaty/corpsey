@@ -23,13 +23,12 @@
     <div class="notice"><h1>Logged out OK!</h1></div>
   {% endif %}
 
-  <div class="recent-contributors" id="recent-contributors">
+  <section id="recent-contributors">
     <h2>Most Recent Contributors</h2>
-    {% for comic in comic_set %}
-      {% include "comics/listing.html" %}
-      {% if not forloop.last %}
-        <div class="bone-divider {% cycle 'odd' 'even' %}"></div>
-      {% endif %}
-    {% endfor %}
-  </div>
+    <div class="listing-block load-more-container">
+      {% include "comics/listing_block.html" %}
+    </div>
+
+    <div class="load-more" data-page-at="1" data-per-page="10" data-total-pages="{{ total_pages }}"><a href="#" class="button">Load More</a></div>
+  </section>
 {% endblock content %}

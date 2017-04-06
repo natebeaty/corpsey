@@ -1,0 +1,9 @@
+{% if extra_divider != None %}
+    <div class="bone-divider even"></div>
+{% endif %}
+{% for comic in comic_set %}
+    {% include "comics/listing.html" %}
+    {% if not forloop.last %}
+        <div class="bone-divider {% cycle 'odd' 'even' %}"></div>
+    {% endif %}
+{% endfor %}

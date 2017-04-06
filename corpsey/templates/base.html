@@ -18,10 +18,9 @@
     {% block header %}
         {% include "shared/header.html" %}
     {% endblock header %}
-    <div id="content">
-        {% block content %}
-        {% endblock content %}
-    </div>
+    <main id="content">
+        {% block content %}{% endblock content %}
+    </main>
 </div>
 {% block footer %}
     {% include "shared/footer.html" %}

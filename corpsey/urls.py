@@ -52,6 +52,7 @@ urlpatterns = [
     url(r'^ajax/get_uturn_panel/$', comics_ajax.get_uturn_panel),
     url(r'^ajax/get_nav_links/$', comics_ajax.get_nav_links),
     url(r'^ajax/get_new_leaf/$', comics_ajax.get_new_leaf),
+    url(r'^ajax/load_more/$', comics_ajax.load_more),
     url(r'^contribution_vote/$', comics_ajax.contribution_vote),
 
     url(r'^artist/([\d]+)/$', artists_views.entry, name='artist'),

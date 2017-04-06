@@ -65,14 +65,12 @@ $.corpsey = (function() {
                 return false;
             });
 
-            // Lazy load images
-            $('img.panel').lazyload({
-                threshold: 250,
-                hidpi_support: true
-            });
+            _initLazyLoad();
+            _initLoadMore();
         }
     }
 
+    // Quick resize functions
     function _resize() {
         var screen_width = document.documentElement.clientWidth;
         medium_width = screen_width <= 1020;
@@ -84,6 +82,45 @@ $.corpsey = (function() {
             $('nav.main ul').show();
             $('#mobile-nav').hide();
         }
+    }
+
+    // Init Lazyload images
+    function _initLazyLoad() {
+        $('img.panel').lazyload({
+            threshold: 250,
+            hidpi_support: true
+        });
+    }
+
+    // Load More handler
+    function _initLoadMore() {
+      $(document).on('click', '.load-more a', function(e) {
+        e.preventDefault();
+        var $load_more = $(this).closest('.load-more'),
+            page = parseInt($load_more.attr('data-page-at')),
+            per_page = parseInt($load_more.attr('data-per-page')),
+            $more_container = $load_more.parents('section,main').find('.load-more-container');
+
+        $.ajax({
+            url: '/ajax/load_more/',
+            method: 'get',
+            data: {
+                page: page+1,
+                per_page: per_page
+            },
+            success: function(data) {
+              $more_container.append(data);
+              $load_more.attr('data-page-at', page+1);
+              $.corpsey.checkLoadMore();
+              _initLazyLoad();
+            }
+        });
+      });
+    }
+
+    // Hide "Load More" if there are no more pages
+    function _checkLoadMore() {
+      $('.load-more').toggleClass('hide', parseInt($('.load-more').attr('data-page-at')) >= parseInt($('.load-more').attr('data-total-pages')));
     }
 
     // Track AJAX pages in Analytics
@@ -105,6 +142,7 @@ $.corpsey = (function() {
         init: _init,
         resize: _resize,
         trackPage: _trackPage,
+        checkLoadMore: _checkLoadMore,
         trackEvent: function(category, action) {
             _trackEvent(category, action);
         },

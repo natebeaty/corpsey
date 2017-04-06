@@ -1,5 +1,6 @@
 from corpsey.apps.comics.models import *
 from easy_thumbnails.files import get_thumbnailer
+from django.shortcuts import render
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import get_template
 from django.template import Context
@@ -7,6 +8,18 @@ from django.conf import settings
 from django.http import JsonResponse
 import twitter
 import random
+
+def load_more(request):
+    """Load more button on homepage"""
+    page = int(request.GET.get('page'))
+    per_page = int(request.GET.get('per_page'))
+    start = (page-1) * per_page
+    comic_set = Comic.objects.filter(active=True).order_by('-date')[start:(start+per_page)]
+
+    return render(request, 'comics/listing_block.html',  {
+        'comic_set': comic_set,
+        'extra_divider': 1
+    })
 
 def get_uturn_panel(request):
     """The wacky uturn anomaly that turned Nate super bald."""
