@@ -3,7 +3,7 @@
 
 // @codekit-prepend "libs/jquery-3.2.0.js"
 // @codekit-prepend "libs/jquery-ui-1.12.1.js"
-// @codekit-prepend "bower_components/jquery-lazyload/jquery.lazyload.js"
+// @codekit-prepend "libs/jquery.lazyload.min.js"
 // @codekit-prepend "bower_components/imagesloaded/imagesloaded.pkgd.js"
 // @codekit-prepend "bower_components/icanhaz/ICanHaz.js"
 // @codekit-prepend "libs/jquery.isotope.min.js"
