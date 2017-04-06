@@ -20,8 +20,8 @@ $.corpsey = (function() {
     function _init() {
         // Are we on a retina display?
         _hdpi_enabled = (window.devicePixelRatio >= 2);
-        _touch_enabled = (window.DocumentTouch && document instanceof DocumentTouch);
-        $('html').toggleClass('no-touchevents', _touch_enabled);
+        _touch_enabled = ('ontouchstart' in window);
+        $('html').toggleClass('no-touchevents', !_touch_enabled);
 
         // Get screen width and roll up nav if mobile
         _resize();
