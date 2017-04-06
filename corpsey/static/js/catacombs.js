@@ -42,7 +42,7 @@ $.corpsey.catacombs = (function() {
             window.location.pathname );
 
         // bind to state change
-        History.Adapter.bind(window,'statechange',function(){
+        History.Adapter.bind(window, 'statechange', function(){
             State = History.getState();
             _get_comics_showing();
             _garbage_collection();
@@ -87,7 +87,7 @@ $.corpsey.catacombs = (function() {
         });
 
         // keyboard nerds
-        $(document).bind('keydown',function(e) {
+        $(document).on('keydown',function(e) {
             if (!e.metaKey) {
                 if (e.keyCode === 39) {
                     $('.next.button:first').trigger('click');
@@ -102,23 +102,23 @@ $.corpsey.catacombs = (function() {
         });
 
        // mobile nerds
-        $('#catacombs').bind('swipeone', function (e, obj) {
-            return; // disabling for now
-            // var direction = obj.description.split(":")[2]
-            // if (obj.delta[0].moved > 200) {
-            //     if (direction === "left") {
-            //         $('.prev.button:first').trigger('click');
-            //     } else if (direction === "right") {
-            //         $('.next.button:first').trigger('click');
-            //     }
-            // }
-        });
-        $('#catacombs').bind('swipetwo', function (e, obj) {
-            return; // disabling for now
-            var direction = obj.description.split(":")[2]
-            // todo, send along next or prev dir to show appropriate nav
-            _show_flonav(e);
-        });
+        // $('#catacombs').on('swipeone', function (e, obj) {
+        //     return; // disabling for now
+        //     // var direction = obj.description.split(":")[2]
+        //     // if (obj.delta[0].moved > 200) {
+        //     //     if (direction === "left") {
+        //     //         $('.prev.button:first').trigger('click');
+        //     //     } else if (direction === "right") {
+        //     //         $('.next.button:first').trigger('click');
+        //     //     }
+        //     // }
+        // });
+        // $('#catacombs').on('swipetwo', function (e, obj) {
+        //     return; // disabling for now
+        //     var direction = obj.description.split(":")[2]
+        //     // todo, send along next or prev dir to show appropriate nav
+        //     _show_flonav(e);
+        // });
 
         // init isotope filter based on window size
         _delayed_resize();
@@ -400,18 +400,21 @@ $.corpsey.catacombs = (function() {
 
     function _retinize() {
         // Reload @2x images
-        if ($.corpsey.hdpi_enabled()) {
-            $('img.panel').each(function() {
-                $(this).attr('src', $(this).attr('data-hd-src'));
-            });
-        }
+        // console.log($.corpsey.hdpi_enabled());
+        // if ($.corpsey.hdpi_enabled()) {
+        //     $('img.panel').each(function() {
+        //         $(this).attr('src', $(this).attr('data-hd-src'));
+        //     });
+        // }
     }
 
     // Public methods
     return {
         init: _init,
         resize: _resize,
-        retinize: _retinize,
+        retinize: function() {
+            _retinize();
+        },
         delayed_resize: _delayed_resize,
         build_titles: _build_titles,
         show_panels: function(data) {
@@ -427,10 +430,10 @@ $.corpsey.catacombs = (function() {
 })();
 
 // Fire up the mothership
-$(window).ready(function(){
+$(document).ready(function(){
     $.corpsey.catacombs.init();
 });
-$(window).load(function(){
+$(window).on('load', function(){
     $.corpsey.catacombs.retinize();
 });
 

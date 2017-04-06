@@ -74,6 +74,6 @@ $.corpsey.contributions = (function() {
 })();
 
 // fire up the mothership
-$(window).ready(function(){
+$(document).ready(function(){
     $.corpsey.contributions.init();
 });

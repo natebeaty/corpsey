@@ -1909,7 +1909,7 @@ $.corpsey.contribute = (function() {
 })();
 
 // fire up the mothership
-$(window).ready(function(){
+$(document).ready(function(){
     $.corpsey.contribute.init();
 });
 

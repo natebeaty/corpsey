@@ -3,24 +3,25 @@
 
 // @codekit-prepend "libs/jquery-3.2.0.js"
 // @codekit-prepend "libs/jquery-ui-1.12.1.js"
-// @codekit-prepend "libs/jquery.lazyload.min.js"
-// @codekit-prepend "libs/jquery.imagesloaded.min.js"
-// @codekit-prepend "libs/icanhaz.min.js"
+// @codekit-prepend "bower_components/jquery-lazyload/jquery.lazyload.js"
+// @codekit-prepend "bower_components/imagesloaded/imagesloaded.pkgd.js"
+// @codekit-prepend "bower_components/icanhaz/ICanHaz.js"
 // @codekit-prepend "libs/jquery.isotope.min.js"
-// @codekit-prepend "libs/jquery.history.js"
-// @codekit-prepend "libs/jgestures.min.js"
-// @codekit-prepend "libs/jquery.validate.min.js"
+// @codekit-prepend "bower_components/history.js/scripts/bundled-uncompressed/html5/jquery.history.js"
+// @codekit-prepend "bower_components/jquery-validation/dist/jquery.validate.js"
 // @codekit-prepend "libs/jquery.ui.touch-punch.js"
 
 $.corpsey = (function() {
-    var _hdpi_enabled;
-
-    var medium_width,
-        small_width;
+    var _hdpi_enabled,
+        medium_width,
+        small_width,
+        _touch_enabled;
 
     function _init() {
         // Are we on a retina display?
         _hdpi_enabled = (window.devicePixelRatio >= 2);
+        _touch_enabled = (window.DocumentTouch && document instanceof DocumentTouch);
+        $('html').toggleClass('no-touchevents', _touch_enabled);
 
         // Get screen width and roll up nav if mobile
         _resize();
@@ -109,6 +110,9 @@ $.corpsey = (function() {
         },
         hdpi_enabled: function() {
             return _hdpi_enabled;
+        },
+        touch_enabled: function() {
+            return _touch_enabled;
         }
     };
 })();
