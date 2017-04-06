@@ -1,0 +1,30 @@
+{
+  "name": "Infinite Corpse",
+  "homepage": "https://github.com/natebeaty/corpsey",
+  "authors": [
+    "Nate Beaty <nate@clixel.com>"
+  ],
+  "description": "infinite comic jam",
+  "main": [
+    "./bower_components/jquery-validation/dist/jquery.validate.js"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "dropzone": "^4.3.0",
+    "imagesloaded": "^4.1.1",
+    "history.js": "^1.8.0",
+    "icanhaz": "^0.10.3",
+    "isotope": "^3.0.3",
+    "jquery-lazyload": "^1.0.1",
+    "jquery": "^3.2.1",
+    "jquery-validation": "jquery-validate#^1.16.0"
+  }
+}
