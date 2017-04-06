@@ -19,21 +19,21 @@
     padding: 10px;
   }
 }
+// Show progress only when uploading
+.images-uploading .dropzone.active .dz-preview .dz-progress {
+  display: block;
+}
 
 .dropzone.active {
   position: relative;
   .dz-previews {
     position: relative;
-    margin: 10px 0;
+    margin: 10px auto;
+    max-width: 750px;
+    .clearfix;
   }
   img {
     display: block;
-  }
-  .portrait img {
-    width: 100%;
-  }
-  .landscape img {
-    height: 100%;
   }
   .dz-message {
     display: block;
@@ -46,16 +46,17 @@
   }
 
   .dz-preview {
+    width: 250px;
     position: relative;
+    display: block;
+    float: left;
+
     .dz-image {
       width: 100%;
-      height: 100%;
+      height: auto;
     }
-    display: inline-block;
-    width: 250px;
-    height: 250px;
-    margin: 10px 0 40px;
     .dz-progress {
+      display: none;
       position: absolute;
       top: 0;
       left: 0;
