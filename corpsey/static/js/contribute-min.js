@@ -1868,11 +1868,8 @@ $.corpsey.contribute = (function() {
         // Ability to drag to reorder panels before upload
         $('.dropzone').sortable({
             items: '.dz-preview',
-            cursor: 'move',
-            opacity: 0.5,
             containment: '.dropzone',
-            distance: 20,
-            tolerance: 'pointer',
+            tolerance: 'touch',
             stop: function (){
                 // Reorder dropzone file queue to match custom DOM order
                 var newQueue = [],
