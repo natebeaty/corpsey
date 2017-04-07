@@ -140,7 +140,7 @@ def contribution_vote(request):
             artist = Artist.objects.get(email=contribution.email)
         except:
             artist = Artist(email=contribution.email)
-        artist.email = contribution.email
+        artist.name = contribution.name
         artist.url = contribution.website
         artist.save()
 

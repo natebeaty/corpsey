@@ -113,6 +113,7 @@ $.corpsey = (function() {
               $load_more.attr('data-page-at', page+1);
               $.corpsey.checkLoadMore();
               _initLazyLoad();
+              $(window).trigger('scroll');
             }
         });
       });

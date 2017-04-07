@@ -164,9 +164,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Various app settings
 THUMBNAIL_ALIASES = {
     '': {
-        'midsize': {'size': (330, 330), 'crop': True, 'quality': 90},
-        'midsize_hd': {'size': (660, 660), 'crop': True, 'quality': 85},
-        'tree': {'size': (100, 100), 'crop': True, 'quality': 75},
+        'midsize': {'size': (330, 330), 'crop': True, 'quality': 85},
+        'midsize_hd': {'size': (660, 660), 'crop': True, 'quality': 80},
+        'tree': {'size': (100, 100), 'crop': True, 'quality': 70},
     },
 }
 THUMBNAIL_BASEDIR = 'thumbs'
