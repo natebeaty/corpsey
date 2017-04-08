@@ -3,11 +3,11 @@
 
 // @codekit-prepend "libs/jquery-3.2.0.js"
 // @codekit-prepend "libs/jquery.lazyload.min.js"
-// @codekit-prepend "libs/jquery.isotope.min.js"
 // @codekit-prepend "bower_components/imagesloaded/imagesloaded.pkgd.js"
 // @codekit-prepend "bower_components/icanhaz/ICanHaz.js"
 // @codekit-prepend "bower_components/Sortable/Sortable.js"
 // @codekit-prepend "bower_components/history.js/scripts/bundled-uncompressed/html5/jquery.history.js"
+// @codekit-prepend "libs/jquery.isotope.min.js"
 // @codekit-prepend "bower_components/jquery-validation/dist/jquery.validate.js"
 // @codekit-prepend "bower_components/jquery.quicksearch/dist/jquery.quicksearch.js"
 
