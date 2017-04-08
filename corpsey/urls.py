@@ -14,7 +14,8 @@ admin.site.site_header = 'Infinitely Corpsey'
 
 urlpatterns = [
     url(r'^$', views.home, name='home'),
-    url(r'^artists/$', views.artists, name='artists'),
+    url(r'^artists/$', artists_views.artists, name='artists'),
+    url(r'^artist/([\d]+)/$', artists_views.entry, name='artist'),
     url(r'^about/$', views.about, name='about'),
     url(r'^catacombs/featured/$', comics_views.featured, name='featured'),
     url(r'^catacombs/uturn/(?P<uturn>[\d]+)/(?P<comic>\d+)/$', comics_views.uturn, name='comic-uturn'),
@@ -53,10 +54,6 @@ urlpatterns = [
     url(r'^ajax/get_nav_links/$', comics_ajax.get_nav_links),
     url(r'^ajax/get_new_leaf/$', comics_ajax.get_new_leaf),
     url(r'^ajax/load_more/$', comics_ajax.load_more),
-    url(r'^contribution_vote/$', comics_ajax.contribution_vote),
-
-    url(r'^artist/([\d]+)/$', artists_views.entry, name='artist'),
-    url(r'^get_artists/$', artists_views.get_artists, name='get_artists'),
 
     # Django and apps
     url(r'^admin/', include(admin.site.urls)),

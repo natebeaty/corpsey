@@ -8,7 +8,8 @@ Dropzone.autoDiscover = false;
 $.corpsey.contribute = (function() {
     var comic_id,
         contribute_form,
-        my_dropzone;
+        my_dropzone,
+        my_sortable;
 
     function _init() {
         // add .required to inputs
@@ -67,9 +68,8 @@ $.corpsey.contribute = (function() {
                 this.on('sendingmultiple', function() {
                     contribute_form.addClass('images-uploading');
                 });
-                this.on('cancelmultiple', function() {
-                    contribute_form.removeClass('images-uploading');
-                    my_dropzone.removeAllFiles(true);
+                this.on('addedfile', function() {
+                    _initSortable();
                 });
                 $('#contribute [type=submit]').click(function(e) {
                     e.preventDefault();
@@ -80,7 +80,7 @@ $.corpsey.contribute = (function() {
                         alert('You must upload 3 panels. You only have ' + my_dropzone.files.length + ' queued for upload.');
                         return false;
                     }
-                    $('.dropzone').sortable('disable');
+                    my_sortable.option('disabled', true);
                     my_dropzone.processQueue();
                 });
                 this.on('successmultiple', function(files) {
@@ -90,19 +90,23 @@ $.corpsey.contribute = (function() {
                             $('#contribute-ok').fadeIn('slow');
                         });
                     } else {
-                        $('.dropzone').sortable('enable');
+                        my_sortable.option('disabled', false);
                         alert('There was an error uploading all 3 files. Please try again.');
                     }
                 });
             }
         });
-
+        _initSortable();
+    }
+    function _initSortable() {
+        if (my_sortable) {
+            my_sortable.destroy();
+        }
         // Ability to drag to reorder panels before upload
-        $('.dropzone').sortable({
-            items: '.dz-preview',
-            containment: '.dropzone',
-            tolerance: 'touch',
-            stop: function (){
+        my_sortable = Sortable.create($('.dz-previews')[0], {
+            draggable: '.dz-preview',
+            animation: 250,
+            onEnd: function (){
                 // Reorder dropzone file queue to match custom DOM order
                 var newQueue = [],
                     queue = my_dropzone.files;

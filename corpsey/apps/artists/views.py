@@ -1,9 +1,27 @@
 from corpsey.apps.artists.models import *
 from corpsey.apps.comics.models import *
 from django.http import JsonResponse
+from django.views.decorators.cache import cache_page
+from django.contrib.flatpages.models import FlatPage
+from django.shortcuts import render
 
 def entry(request, artist_id):
     pass
+
+@cache_page(60 * 15)
+def artists(request):
+    q = request.GET.get('term', '')
+    if q:
+        artist_set = Artist.objects.exclude(comics=None).filter(name__icontains = q )
+    else:
+        artist_set = Artist.objects.exclude(comics=None).order_by('last_name')
+    page = FlatPage.objects.get(url='/artists/')
+    return render(request, 'artists.html',  {
+        'title': page.title,
+        'page': page,
+        'q': q,
+        'artist_set': artist_set,
+        })
 
 def get_artists(request):
     if request.is_ajax():

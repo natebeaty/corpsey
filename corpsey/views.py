@@ -29,16 +29,6 @@ def home(request):
         })
 
 @cache_page(60 * 15)
-def artists(request):
-    artist_set = Artist.objects.exclude(comics=None).order_by('last_name')
-    page = FlatPage.objects.get(url='/artists/')
-    return render(request, 'artists.html',  {
-        'title': page.title,
-        'page': page,
-        'artist_set': artist_set,
-        })
-
-@cache_page(60 * 15)
 def about(request):
     page = FlatPage.objects.get(url='/about/')
     return render(request, 'about.html',  {

@@ -18,6 +18,9 @@ a {
         border: 0;
     }
     text-decoration: none;
+    &.plain {
+        color: inherit;
+    }
 }
 ul.bullets {
     padding-left: 1.2em;
@@ -671,6 +674,9 @@ h1.comic_2 {
 }
 
 // Contribute
+.sortable-ghost {
+    opacity: .5;
+}
 #contribute-page {
     #content {
         width: 800px;
@@ -845,28 +851,6 @@ form {
     transition-duration: 0s;
 }
 
-// Autocomplete
-.ui-helper-hidden-accessible { display: none; }
-ul.ui-autocomplete {
-    background: @olive;
-    z-index: 99999 !important;
-    width: 250px !important;
-    li {
-        div {
-            font: 12px/1.3em 'Orienta', sans-serif;
-            display: block;
-            cursor: pointer;
-            padding: 6px 8px;
-            color: #fff;
-            &:hover,
-            &.active,
-            &:focus {
-                background: lighten(@olive, 5%);
-            }
-        }
-    }
-}
-
 // Tree page
 #tree {
     #content {
@@ -892,6 +876,10 @@ ul.ui-autocomplete {
 }
 
 // Artists
+.artist-search {
+    max-width: 330px;
+    margin: -20px 0 0;
+}
 #artists {
     #content {
         width: 850px;
@@ -920,6 +908,12 @@ ul.ui-autocomplete {
                     text-align: center;
                     letter-spacing: 0;
                 }
+            }
+        }
+        // Hide letter headers when doing quicksearch
+        .artists-list.searching {
+            li.letter {
+                display: none;
             }
         }
         li {

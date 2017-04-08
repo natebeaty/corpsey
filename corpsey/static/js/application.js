@@ -2,14 +2,14 @@
 // nate@clixel.com 2013
 
 // @codekit-prepend "libs/jquery-3.2.0.js"
-// @codekit-prepend "libs/jquery-ui-1.12.1.js"
 // @codekit-prepend "libs/jquery.lazyload.min.js"
+// @codekit-prepend "libs/jquery.isotope.min.js"
 // @codekit-prepend "bower_components/imagesloaded/imagesloaded.pkgd.js"
 // @codekit-prepend "bower_components/icanhaz/ICanHaz.js"
-// @codekit-prepend "libs/jquery.isotope.min.js"
+// @codekit-prepend "bower_components/Sortable/Sortable.js"
 // @codekit-prepend "bower_components/history.js/scripts/bundled-uncompressed/html5/jquery.history.js"
 // @codekit-prepend "bower_components/jquery-validation/dist/jquery.validate.js"
-// @codekit-prepend "libs/jquery.ui.touch-punch.js"
+// @codekit-prepend "bower_components/jquery.quicksearch/dist/jquery.quicksearch.js"
 
 $.corpsey = (function() {
     var _hdpi_enabled,
@@ -33,31 +33,10 @@ $.corpsey = (function() {
             $('nav.main ul').slideToggle('fast');
         });
 
-        // Search-o-rama
-        $('<li><input id="get-artist" placeholder="SEARCH" autocomplete="off" autocorrect="off" autocapitalize="off"></li>').prependTo('nav.main ul');
-        $('#get-artist').autocomplete({
-            source: "/get_artists/",
-            minLength: 2,
-            focus: function( event, ui ) {
-                $('.ui-autocomplete div').removeClass('active');
-                $('.ui-autocomplete div:contains('+ui.item.value+')').addClass('active');
-                return false;
-            },
-            search: function( event, ui ) {
-                _trackEvent('Search', $('#get-artist').val())
-            },
-            select: function( event, ui ) {
-                location.href = ui.item.url;
-                return false;
-            }
-         }).on('blur', function() {
-            $(this).val('');
-         });
-
         // Focus on login form if present
         $('#id_username').focus();
 
-        // Homepage?
+        // Homepage
         if ($('body#homepage').length) {
             // Scroll down to recent contributors from homepage button
             $('li.recent a').click(function() {
@@ -68,6 +47,25 @@ $.corpsey = (function() {
             _initLazyLoad();
             _initLoadMore();
         }
+
+        // Artist page
+        if ($('body#artists').length) {
+            // Kill form submit that we don't really need (just quicksearch)
+            $('.artist-search').on('submit', function(e) {
+                e.preventDefault();
+            }).find('input[name="term"]').focus();
+            // Add "no results" li for quicksearch
+            $('<li class="no-results hidden">None found.</li>').appendTo('.artists-list ul');
+            $(document).on('keydown',function(e) {
+                // Escape clears out search
+                if (e.keyCode === 27) {
+                    $('.artist-search input[name="term"]').val('');
+                }
+            });
+            _initQuickSearch();
+
+        }
+
     }
 
     // Quick resize functions
@@ -89,6 +87,16 @@ $.corpsey = (function() {
         $('img.panel').lazyload({
             threshold: 250,
             hidpi_support: true
+        });
+    }
+
+    // Quick search on top of /artists/ page
+    function _initQuickSearch() {
+        $('.artist-search input[name="term"]').quicksearch('.artists-list ul li:not(.letter)', {
+            onAfter: function () {
+                $('.artists-list').toggleClass('searching', $('.artist-search input[name="term"]').val()!=='');
+            },
+            noResults: '.no-results'
         });
     }
 

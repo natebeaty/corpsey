@@ -7,17 +7,22 @@
 {% block content %}
   <div class="user-content">
       <h1>{{ page.title }}</h1>
-      {# {{ page.content|safe }} #}
+      <form action="{% url 'artists' %}" class="artist-search">
+        <input type="text" name="term" autocomplete="off" autocorrect="off" autocapitalize="off" placeholder="Quick search...">
+        {% csrf_token %}
+      </form>
     </div>
 
   <div class="artists-list">
     <ul>
     {% for artist in artist_set %}
-      {% ifchanged %}
-        {% if artist.last_name %}
-          <li class="letter"><h2>{{ artist.last_name|slice:"1"|upper }}</h2></li>
-        {% endif %}
-      {% endifchanged %}
+      {% if q == '' %}
+        {% ifchanged %}
+          {% if artist.last_name %}
+            <li class="letter"><h2>{{ artist.last_name|slice:"1"|upper }}</h2></li>
+          {% endif %}
+        {% endifchanged %}
+      {% endif %}
       <li><h3 class="name"><a title="View in Catacombs" href="{% url 'artist-in-catacombs' artist.id 1 %}">{{ artist.name_reversed }}</a>
       {% if artist.num_comics > 1 %}
         {% for comic in artist.comics.all %}
