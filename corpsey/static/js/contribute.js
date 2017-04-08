@@ -2,7 +2,7 @@
 // nate@clixel.com
 $.corpsey = $.corpsey || {};
 
-// @codekit-prepend "libs/dropzone.js"
+// @codekit-prepend "bower_components/dropzone/dist/dropzone.js"
 Dropzone.autoDiscover = false;
 
 $.corpsey.contribute = (function() {
