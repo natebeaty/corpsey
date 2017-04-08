@@ -17,6 +17,7 @@ urlpatterns = [
     url(r'^artists/$', artists_views.artists, name='artists'),
     url(r'^artist/([\d]+)/$', artists_views.entry, name='artist'),
     url(r'^about/$', views.about, name='about'),
+
     url(r'^catacombs/featured/$', comics_views.featured, name='featured'),
     url(r'^catacombs/uturn/(?P<uturn>[\d]+)/(?P<comic>\d+)/$', comics_views.uturn, name='comic-uturn'),
     url(r'^catacombs/uturn/(?P<uturn>[\d]+)/$', comics_views.uturn, name='comic-uturn-single'),
@@ -28,12 +29,16 @@ urlpatterns = [
     url(r'^tree/$', comics_views.tree, name='tree'),
     url(r'^tree_json/$', comics_views.tree_json, name='tree-json'),
     url(r'^artist_in_catacombs/(?P<artist>\d+)/(?P<num>\d+)/$', comics_views.artist_in_catacombs, name='artist-in-catacombs'),
+
     url(r'^contribute/upload/(?P<upload_code>[\w\-=_]+)/$', comics_views.contribute_upload, name='contribute-upload'),
     url(r'^contribute/upload/$', lambda x: redirect('/')),
     url(r'^contribute/$', comics_views.contribute, name='contribute'),
-    url(r'^contributions/$', comics_views.contributions, name='contributions'),
+    url(r'^contribution_vote/$', comics_ajax.contribution_vote),
     url(r'^pad_panels/(?P<contribution>[\d]+)/$', comics_views.pad_panels, name='pad'),
+
+    url(r'^contributions/$', comics_views.contributions, name='contributions'),
     url(r'^graveyard/$', comics_views.graveyard, name='graveyard'),
+
     url(r'^user/login/$', auth_views.login, name='user-login'),
     url(r'^user/logout/$', views.logout_view, name='user-logout'),
     url(r'^user/password/reset/$',
