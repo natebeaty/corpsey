@@ -15,6 +15,7 @@ from datetime import datetime, timedelta
 from django.utils import timezone
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.urls import reverse
+from mptt.templatetags.mptt_tags import cache_tree_children
 
 def recursive_node_to_dict(node):
     result = {
@@ -33,7 +34,7 @@ def recursive_node_to_dict(node):
 @cache_page(60 * 15)
 def tree(request):
     """Fancy tree browsing."""
-    page = get_object_or_404(FlatPage,url='/tree/')
+    page = get_object_or_404(FlatPage, url='/tree/')
 
     return render(request, 'comics/tree.html',  {
         'page': page,
@@ -41,9 +42,19 @@ def tree(request):
     })
 
 @cache_page(60 * 15)
+def tree_css(request):
+    """Less fancy tree browsing."""
+    page = get_object_or_404(FlatPage, url='/tree/')
+    nodes = Comic.objects.filter(active=True)
+
+    return render(request, 'comics/tree-css.html',  {
+        'page': page,
+        'nodes': nodes,
+    })
+
+@cache_page(60 * 15)
 def tree_json(request):
     """Json view for the tree page."""
-    from mptt.templatetags.mptt_tags import cache_tree_children
 
     root_nodes = cache_tree_children(Comic.objects.filter(active=True))
     dicts = []

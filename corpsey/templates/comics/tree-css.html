@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load thumbnail mptt_tags util_tags %}
+
+{% block body_id %}tree{% endblock %}
+
+{% block content %}
+<h1>Tree of Heroes</h1>
+<div class="tree">
+{% for comic,structure in nodes|tree_info %}
+    {% if structure.new_level %}<ul><li>{% else %}</li><li>{% endif %}
+        <a href="{{ comic.get_absolute_url }}">{{ comic.artist }}</a>
+    {% for level in structure.closed_levels %}</li></ul>{% endfor %}
+{% endfor %}
+</div>
+
+{% endblock content %}

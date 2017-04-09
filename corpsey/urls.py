@@ -27,6 +27,7 @@ urlpatterns = [
     url(r'^random/$', comics_views.random, name='random-comic'),
     url(r'^enter_the_catacombs/$', comics_views.enter_the_catacombs, name='enter-the-catacombs'),
     url(r'^tree/$', comics_views.tree, name='tree'),
+    url(r'^tree_css/$', comics_views.tree_css, name='tree-css'),
     url(r'^tree_json/$', comics_views.tree_json, name='tree-json'),
     url(r'^artist_in_catacombs/(?P<artist>\d+)/(?P<num>\d+)/$', comics_views.artist_in_catacombs, name='artist-in-catacombs'),
 
