@@ -21,6 +21,7 @@ def recursive_node_to_dict(node):
     result = {
         'id': node.pk,
         'size': node.pk*100,
+        'parent': node.parent.id if node.parent else '',
         'url': node.get_absolute_url(),
         # 'image': get_thumbnailer(node.panel1)['midsize'].url,
         'name': node.artist.name,
@@ -37,6 +38,16 @@ def tree(request):
     page = get_object_or_404(FlatPage, url='/tree/')
 
     return render(request, 'comics/tree.html',  {
+        'page': page,
+        'comics': Comic.objects.filter(active=True),
+    })
+
+@cache_page(60 * 15)
+def tree_circle(request):
+    """Fancy tree browsing."""
+    page = get_object_or_404(FlatPage, url='/tree/')
+
+    return render(request, 'comics/tree_circle.html',  {
         'page': page,
         'comics': Comic.objects.filter(active=True),
     })
