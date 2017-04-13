@@ -5,9 +5,7 @@
     "Nate Beaty <nate@clixel.com>"
   ],
   "description": "infinite comic jam",
-  "main": [
-    "./bower_components/jquery-validation/dist/jquery.validate.js"
-  ],
+  "main": [],
   "license": "MIT",
   "private": true,
   "ignore": [
@@ -19,17 +17,12 @@
   ],
   "devDependencies": {
     "dropzone": "^4.3.0",
-    "imagesloaded": "^4.1.1",
     "history.js": "^1.8.0",
-    "icanhaz": "^0.10.3",
     "isotope": "^3.0.3",
-    "jquery-lazyload": "^1.0.1",
     "jquery": "^3.2.1",
     "jquery-validation": "jquery-validate#^1.16.0",
     "vanilla-lazyload": "^6.1.2",
-    "jquery-sortable": "^0.9.13"
-  },
-  "dependencies": {
-    "Sortable": "sortablejs#^1.5.1"
+    "Sortable": "sortablejs#^1.5.1",
+    "mustache.js": "^2.3.0"
   }
 }

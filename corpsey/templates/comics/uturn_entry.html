@@ -12,9 +12,9 @@
 <article class="comic single uturn active" data-comic-id="{{ uturn.id }}" data-portal-to-id="{{ uturn.portal_to.id }}">
   <h1>Trubble Club</h1>
   <ul>
-    <li><img class="panel uturn-pad" src="{% static "img/uturn-pad-1.png" %}" width="{{ uturn.panel.midsize.width }}" height="{{ uturn.panel.midsize.height }}" data-hd-src="{% static "img/uturn-pad-1.png" %}"></li>
-    <li><img class="panel" src="{{ uturn.panel.midsize.url }}" width="{{ uturn.panel.midsize.width }}" height="{{ uturn.panel.midsize.height }}" data-hd-src="{{ uturn.panel.midsize_hd.url }}"></li>
-    <li><img class="panel uturn-pad" src="{% static "img/uturn-pad-2.png" %}" width="{{ uturn.panel.midsize.width }}" height="{{ uturn.panel.midsize.height }}" data-hd-src="{% static "img/uturn-pad-2.png" %}"></li>
+    <li class="panel-wrap"><img class="panel uturn-pad" src="{% static "img/uturn-pad-1.png" %}" data-hd-src="{% static "img/uturn-pad-1.png" %}"></li>
+    <li class="panel-wrap"><img class="panel" src="{{ uturn.panel.midsize.url }}" srcset="{{ uturn.panel.midsize.url }} 1x, {{ uturn.panel.midsize_hd.url }} 2x"></li>
+    <li class="panel-wrap"><img class="panel uturn-pad" src="{% static "img/uturn-pad-2.png" %}" data-hd-src="{% static "img/uturn-pad-2.png" %}"></li>
   </ul>
 </article>
 
@@ -43,7 +43,7 @@
 {% endblock content %}
 
 {% block extra_javascript %}
-  <script src="{% static "js/catacombs.js" %}" type="text/javascript"></script>
+  <script src="{% static "js/catacombs-min.js" %}" type="text/javascript"></script>
 {% endblock extra_javascript %}
 
 {% block icanhaz_templates %}

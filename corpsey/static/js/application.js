@@ -1,27 +1,29 @@
 // Infinite Corpse js brains
 // nate@clixel.com 2013
 
-// @codekit-prepend "libs/jquery-3.2.0.js"
-// @codekit-prepend "libs/jquery.lazyload.min.js"
-// @codekit-prepend "bower_components/imagesloaded/imagesloaded.pkgd.js"
-// @codekit-prepend "bower_components/icanhaz/ICanHaz.js"
-// @codekit-prepend "bower_components/Sortable/Sortable.js"
-// @codekit-prepend "bower_components/history.js/scripts/bundled-uncompressed/html5/jquery.history.js"
+// @codekit-prepend "../bower_components/jquery/dist/jquery.js"
+// @codekit-prepend "../bower_components/Sortable/Sortable.js"
+// @codekit-prepend "../bower_components/history.js/scripts/bundled-uncompressed/html5/jquery.history.js"
+// #codekit-prepend "../bower_components/isotope/dist/isotope.pkgd.js"
 // @codekit-prepend "libs/jquery.isotope.min.js"
-// @codekit-prepend "bower_components/jquery-validation/dist/jquery.validate.js"
-// @codekit-prepend "bower_components/jquery.quicksearch/dist/jquery.quicksearch.js"
+// @codekit-prepend "../bower_components/jquery-validation/dist/jquery.validate.js"
+// @codekit-prepend "../bower_components/jquery.quicksearch/dist/jquery.quicksearch.js"
+// @codekit-prepend "../bower_components/vanilla-lazyload/dist/lazyload.transpiled.js"
+// @codekit-prepend "../bower_components/mustache.js/mustache.js"
+
 
 $.corpsey = (function() {
-    var _hdpi_enabled,
+    var lazyloader,
         medium_width,
         small_width,
-        _touch_enabled;
+        _touch_enabled,
+        _mustache_templates = [];
 
     function _init() {
-        // Are we on a retina display?
-        _hdpi_enabled = (window.devicePixelRatio >= 2);
         _touch_enabled = ('ontouchstart' in window);
         $('html').toggleClass('no-touchevents', !_touch_enabled);
+
+        Mustache.escape = function(value){ return value; };
 
         // Get screen width and roll up nav if mobile
         _resize();
@@ -36,6 +38,9 @@ $.corpsey = (function() {
         // Focus on login form if present
         $('#id_username').focus();
 
+        // Lazyload images
+        _initLazyLoad();
+
         // Homepage
         if ($('body#homepage').length) {
             // Scroll down to recent contributors from homepage button
@@ -43,8 +48,6 @@ $.corpsey = (function() {
                 $('html,body').animate({scrollTop:$('#recent-contributors').offset().top }, 'fast');
                 return false;
             });
-
-            _initLazyLoad();
             _initLoadMore();
         }
 
@@ -84,10 +87,16 @@ $.corpsey = (function() {
 
     // Init Lazyload images
     function _initLazyLoad() {
-        $('img.panel').lazyload({
-            threshold: 250,
-            hidpi_support: true
-        });
+        if (typeof LazyLoad !== 'undefined') {
+            lazyloader = new LazyLoad({
+              threshold: 250,
+              elements_selector: 'img.panel',
+              callback_load: function(el) {
+                // Add class to wrap to remove loading display
+                $(el).parents('.panel-wrap').addClass('loaded');
+              }
+            });
+        }
     }
 
     // Quick search on top of /artists/ page
@@ -120,7 +129,7 @@ $.corpsey = (function() {
               $more_container.append(data);
               $load_more.attr('data-page-at', page+1);
               $.corpsey.checkLoadMore();
-              _initLazyLoad();
+              lazyloader.update();
               $(window).trigger('scroll');
             }
         });
@@ -145,6 +154,14 @@ $.corpsey = (function() {
         ga('send', 'event', category, action);
       }
     }
+    function _render_template(template, data) {
+        if (!_mustache_templates[template]) {
+            var t = $('#' + template).html();
+            Mustache.parse(t); // optional, speeds up future uses
+            _mustache_templates[template] = t;
+        }
+        return Mustache.render(_mustache_templates[template], data);
+    }
 
     // Public methods
     return {
@@ -155,8 +172,8 @@ $.corpsey = (function() {
         trackEvent: function(category, action) {
             _trackEvent(category, action);
         },
-        hdpi_enabled: function() {
-            return _hdpi_enabled;
+        render_template: function(template, data) {
+            return _render_template(template, data);
         },
         touch_enabled: function() {
             return _touch_enabled;

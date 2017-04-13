@@ -25,11 +25,10 @@ def get_uturn_panel(request):
     """The wacky uturn anomaly that turned Nate super bald."""
     uturn_id = request.GET.get('uturn_id')
     uturn = Uturn.objects.get(pk=uturn_id)
-    hdpi_enabled = request.GET.get('hdpi_enabled')
-    size = 'midsize_hd' if hdpi_enabled else 'midsize'
     if uturn:
         uturn_obj = {
-            'panel' : get_thumbnailer(uturn.panel)[size].url,
+            'panel' : get_thumbnailer(uturn.panel)['midsize'].url,
+            'panel_hd' : get_thumbnailer(uturn.panel)['midsize_hd'].url,
             'uturn_id' : uturn.id,
             'portal_to_id' : uturn.portal_to.id,
         }
@@ -48,13 +47,14 @@ def get_comic_panels(request):
     if not comic_id.isdigit():
         return JsonResponse({ 'success': False })
     comic = Comic.objects.get(pk=comic_id)
-    hdpi_enabled = request.GET.get('hdpi_enabled')
-    size = 'midsize_hd' if hdpi_enabled else 'midsize'
     if comic:
         comic_obj = {
-            'panel1' : get_thumbnailer(comic.panel1)[size].url,
-            'panel2' : get_thumbnailer(comic.panel2)[size].url,
-            'panel3' : get_thumbnailer(comic.panel3)[size].url,
+            'panel1' : get_thumbnailer(comic.panel1)['midsize'].url,
+            'panel2' : get_thumbnailer(comic.panel2)['midsize'].url,
+            'panel3' : get_thumbnailer(comic.panel3)['midsize'].url,
+            'panel1_hd' : get_thumbnailer(comic.panel1)['midsize_hd'].url,
+            'panel2_hd' : get_thumbnailer(comic.panel2)['midsize_hd'].url,
+            'panel3_hd' : get_thumbnailer(comic.panel3)['midsize_hd'].url,
             'comic_id' : comic.id,
             'first_name' : comic.artist.first_name,
             'last_name' : comic.artist.last_name,
@@ -209,13 +209,14 @@ def get_new_leaf(request):
     """Pull another random strip to follow for /contribute/ page."""
     from corpsey.apps.comics.views import find_comic_to_follow
     comic_id = request.GET.get('comic_id')
-    hdpi_enabled = request.GET.get('hdpi_enabled')
     comic = find_comic_to_follow(comic_id)
-    size = 'midsize_hd' if hdpi_enabled else 'midsize'
     comic_obj = {
-        'panel1' : get_thumbnailer(comic.panel1)[size].url,
-        'panel2' : get_thumbnailer(comic.panel2)[size].url,
-        'panel3' : get_thumbnailer(comic.panel3)[size].url,
+        'panel1' : get_thumbnailer(comic.panel1)['midsize'].url,
+        'panel2' : get_thumbnailer(comic.panel2)['midsize'].url,
+        'panel3' : get_thumbnailer(comic.panel3)['midsize'].url,
+        'panel1_hd' : get_thumbnailer(comic.panel1)['midsize_hd'].url,
+        'panel2_hd' : get_thumbnailer(comic.panel2)['midsize_hd'].url,
+        'panel3_hd' : get_thumbnailer(comic.panel3)['midsize_hd'].url,
         'comic_id' : comic.id,
         'first_name' : comic.artist.first_name,
         'last_name' : comic.artist.last_name,

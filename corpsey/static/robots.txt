@@ -1,2 +1,4 @@
 User-agent: *
-Disallow: /media/
+Allow: /
+Disallow: /admin/
+Disallow: /contributions/

@@ -30,8 +30,7 @@ $.corpsey.contribute = (function() {
             e.preventDefault();
             comic_id = $('.comic.single').attr('data-comic-id');
             $.get('/ajax/get_new_leaf/', {
-                'comic_id': comic_id,
-                'hdpi_enabled': ($.corpsey.hdpi_enabled() ? 1 : '')
+                'comic_id': comic_id
             }).done(function(data) {
                 _show_new_leaf(data);
             });
