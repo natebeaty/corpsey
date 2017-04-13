@@ -53,9 +53,10 @@ $.corpsey.catacombs = (function() {
         // isotopize
         $('#catacombs').isotope({
             itemSelector: 'img,h1',
-        }).on('layoutComplete', function() {
-            if (build_titles_timer) { clearTimeout(build_titles_timer); }
-            build_titles_timer = setTimeout($.corpsey.catacombs.build_titles, 450);
+            onLayout: function() {
+                if (build_titles_timer) { clearTimeout(build_titles_timer); }
+                build_titles_timer = setTimeout($.corpsey.catacombs.build_titles, 450);
+            }
         });
         var panel_filter = '.comic.active img';
         if (small_width) {
@@ -63,12 +64,7 @@ $.corpsey.catacombs = (function() {
         } else if (medium_width) {
             panel_filter = '.comic.active img:not(.uturn-pad)';
         }
-        $('#catacombs').isotope({
-            filter: panel_filter,
-            masonry: {
-              columnWidth: 330
-            }
-        });
+        $('#catacombs').isotope({ filter: panel_filter });
 
         $('#content').on('click', 'a.prev,a.next', function(e) {
             e.preventDefault();
