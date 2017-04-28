@@ -42,10 +42,9 @@ def get_uturn_panel(request):
 
 def get_comic_panels(request):
     """Ajaxtastic catacombs browsing magic."""
-    comic_id = request.GET.get('comic_id')
-    # Bad request
-    if not comic_id.isdigit():
+    if 'comic_id' not in request.GET or not comic_id.isdigit():
         return JsonResponse({ 'success': False })
+    comic_id = request.GET.get('comic_id')
     comic = Comic.objects.get(pk=comic_id)
     if comic:
         comic_obj = {
@@ -227,6 +226,10 @@ def get_new_leaf(request):
 
 def get_nav_links(request):
     """Ajaxtastic next/prev links, overly verbose at the moment just so they work."""
+
+    if 'comic_id_arr[]' not in request.GET:
+        return JsonResponse({ 'success': False })
+
     next_comic_links_arr = []
     prev_comic_links_arr = []
     comic_id_arr = request.GET.getlist('comic_id_arr[]')
