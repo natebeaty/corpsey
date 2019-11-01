@@ -1,6 +1,6 @@
 from corpsey.apps.comics.models import *
 from easy_thumbnails.files import get_thumbnailer
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import get_template
 from django.template import Context
@@ -23,6 +23,9 @@ def load_more(request):
 
 def get_uturn_panel(request):
     """The wacky uturn anomaly that turned Nate super bald."""
+    # redirect if bad request
+    if request.method != 'GET' or 'uturn_id' not in request.GET:
+        return redirect('home')
     uturn_id = request.GET.get('uturn_id')
     uturn = Uturn.objects.get(pk=uturn_id)
     if uturn:
@@ -235,6 +238,10 @@ def get_nav_links(request):
     comic_id_arr = request.GET.getlist('comic_id_arr[]')
     is_uturn = request.GET.get('is_uturn')
     uturn_links = []
+
+    # Not sure how these are getting through, but keep getting 500 errors from bad requests
+    if comic_id_arr[0] == 'NaN' or comic_id_arr[1] == 'NaN':
+        return JsonResponse({ 'success': False })
 
     if is_uturn:
         uturn = Uturn.objects.get(pk=comic_id_arr[0])
