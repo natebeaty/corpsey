@@ -45,9 +45,11 @@ def get_uturn_panel(request):
 
 def get_comic_panels(request):
     """Ajaxtastic catacombs browsing magic."""
-    if 'comic_id' not in request.GET or not comic_id.isdigit():
+    if 'comic_id' not in request.GET:
         return JsonResponse({ 'success': False })
     comic_id = request.GET.get('comic_id')
+    if not comic_id.isdigit():
+        return JsonResponse({ 'success': False })
     comic = Comic.objects.get(pk=comic_id)
     if comic:
         comic_obj = {
