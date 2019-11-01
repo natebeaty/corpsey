@@ -13,3 +13,4 @@ corpsey/settings_local.py
 config.codekit3
 *.map
 bower_components
+logfile
