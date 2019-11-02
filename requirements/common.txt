@@ -23,7 +23,7 @@ oauthlib==2.0.2
 olefile==0.44
 packaging==16.8
 paramiko==2.1.2
-Pillow==4.0.0
+Pillow==6.2.0
 psycopg2==2.7.1
 pyasn1==0.2.3
 pycparser==2.17
