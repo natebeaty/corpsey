@@ -2,7 +2,7 @@
 // nate@clixel.com
 $.corpsey = $.corpsey || {};
 
-// @codekit-prepend "bower_components/dropzone/dist/dropzone.js"
+// @codekit-prepend "../bower_components/dropzone/dist/dropzone.js"
 Dropzone.autoDiscover = false;
 
 $.corpsey.contribute = (function() {
@@ -123,7 +123,7 @@ $.corpsey.contribute = (function() {
     }
 
     function _show_new_leaf(data) {
-        var comic = ich.comic_single(data.comic);
+        var comic = $($.corpsey.render_template('comic_single', data.comic));
         $('#parent_comic').empty().append(comic);
         $('#id_comic_id').val(data.comic.comic_id);
         comic_id = data.comic.comic_id;
