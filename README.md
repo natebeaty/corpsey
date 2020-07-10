@@ -11,4 +11,4 @@ Each contribution is moderated by panel of artists from the Chicago artist colle
 
 Built using the Django framework.
 
-http://corpsey.trubble.club/
+https://corpsey.trubble.club/

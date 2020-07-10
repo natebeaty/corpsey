@@ -1,5 +1,5 @@
-from apps.comics.models import *
-from apps.artists.models import *
+from corpsey.apps.comics.models import *
+from corpsey.apps.artists.models import *
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.flatpages.models import FlatPage
 from django.contrib.auth.decorators import login_required

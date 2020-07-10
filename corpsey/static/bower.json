@@ -16,13 +16,13 @@
     "tests"
   ],
   "devDependencies": {
-    "dropzone": "^4.3.0",
+    "dropzone": "^5.2.0",
     "history.js": "^1.8.0",
-    "isotope": "^3.0.3",
-    "jquery": "^3.2.1",
-    "jquery-validation": "jquery-validate#^1.16.0",
-    "vanilla-lazyload": "^6.1.2",
-    "Sortable": "sortablejs#^1.5.1",
-    "mustache.js": "^2.3.0"
+    "jquery": "^3.4.1",
+    "jquery-validation": "jquery-validate#^1.19.1",
+    "vanilla-lazyload": "^12.4.0",
+    "Sortable": "sortablejs#^1.10.2",
+    "mustache.js": "^3.1.0",
+    "isotope-layout": "^3.0.6"
   }
 }

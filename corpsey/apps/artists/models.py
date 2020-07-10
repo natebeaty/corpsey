@@ -15,7 +15,7 @@ class Artist(models.Model):
     image = ThumbnailerImageField(upload_to='artists', blank=True)
     num_comics = models.IntegerField(default=0)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
     def name_reversed(self):
@@ -35,11 +35,11 @@ class Artist(models.Model):
         return reverse('artist', args=[self.id])
 
     def save(self, *args, **kwargs):
-		# generate first/last name from full name
+        # generate first/last name from full name
         if self.name and not self.first_name and not self.last_name:
-			foo = self.name.split(' ');
-			self.last_name = foo[-1]
-			self.first_name = re.sub(foo[-1], "",self.name).strip()
+            foo = self.name.split(' ');
+            self.last_name = foo[-1]
+            self.first_name = re.sub(foo[-1], "",self.name).strip()
         super(Artist, self).save(*args, **kwargs)
 
 @receiver(post_save, sender=Artist)

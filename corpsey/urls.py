@@ -41,20 +41,20 @@ urlpatterns = [
     url(r'^contributions/$', comics_views.contributions, name='contributions'),
     url(r'^graveyard/$', comics_views.graveyard, name='graveyard'),
 
-    url(r'^user/login/$', auth_views.login, name='user-login'),
+    url(r'^user/login/$', auth_views.LoginView.as_view(), name='user-login'),
     url(r'^user/logout/$', views.logout_view, name='user-logout'),
     url(r'^user/password/reset/$',
-        auth_views.password_reset,
+        auth_views.PasswordResetView.as_view(),
         {'post_reset_redirect' : '/user/password/reset/done/'},
         name='password_reset'),
     url(r'^user/password/reset/done/$',
-        auth_views.password_reset_done),
+        auth_views.PasswordResetDoneView.as_view()),
     url(r'^user/password/reset/(?P<uidb64>[0-9A-Za-z]+)-(?P<token>.+)/$',
-        auth_views.password_reset_confirm,
+        auth_views.PasswordResetConfirmView.as_view(),
         {'post_reset_redirect' : '/user/password/done/'},
         name='password_reset_confirm'),
     url(r'^user/password/done/$',
-        auth_views.password_reset_complete),
+        auth_views.PasswordResetCompleteView.as_view()),
 
     # AJAX
     url(r'^ajax/get_comic_panels/$', comics_ajax.get_comic_panels),
@@ -64,7 +64,7 @@ urlpatterns = [
     url(r'^ajax/load_more/$', comics_ajax.load_more),
 
     # Django and apps
-    url(r'^admin/', include(admin.site.urls)),
-    url(r'^markitup/', include('markitup.urls')),
+    url(r'^admin/', admin.site.urls),
+    # url(r'^markitup/', markitup.urls),
     url(r'^media/(?P<path>.*)$', django_views.static.serve, {'document_root': settings.MEDIA_ROOT}),
 ]

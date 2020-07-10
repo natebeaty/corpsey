@@ -16,9 +16,9 @@ from easy_thumbnails.signal_handlers import generate_aliases_global
 saved_file.connect(generate_aliases_global)
 
 class Comic(MPTTModel):
-    parent = TreeForeignKey('self', null=True, blank=True, related_name='children')
-    artist = models.ForeignKey(Artist, null=True, blank=True, related_name='comics')
-    portal_to = models.ForeignKey('self', null=True, blank=True, related_name='portal')
+    parent = TreeForeignKey('self', null=True, blank=True, related_name='children', on_delete=models.CASCADE)
+    artist = models.ForeignKey(Artist, null=True, blank=True, related_name='comics', on_delete=models.CASCADE)
+    portal_to = models.ForeignKey('self', null=True, blank=True, related_name='portal', on_delete=models.CASCADE)
     notes = models.TextField(blank=True)
     date = models.DateTimeField(auto_now_add=True, blank=True)
     active = models.BooleanField(default=False)
@@ -38,7 +38,7 @@ class Comic(MPTTModel):
         else:
             return reverse('comic-entry-single', kwargs={'comic_1': self.id})
 
-    def __unicode__(self):
+    def __str__(self):
         return u"%s - %s" % (self.artist, self.date.strftime('%b %d \'%y'))
 
     def valid_to_follow(self):
@@ -102,24 +102,23 @@ def update_num_comics(sender, instance, **kwargs):
     instance.artist.save()
 
 class Uturn(models.Model):
-    portal_to = models.ForeignKey(Comic, related_name='uturn')
+    portal_to = models.ForeignKey(Comic, related_name='uturn', on_delete=models.CASCADE)
     panel = ThumbnailerImageField(upload_to='comics', blank=True)
 
-    @models.permalink
     def get_absolute_url(self):
-        return ('corpsey.apps.comics.views.uturn', [str(self.id)])
+        return reverse('corpsey.apps.comics.views.uturn', [str(self.id)])
 
-    def __unicode__(self):
+    def __str__(self):
         return u"Uturn to %s" % (self.portal_to.artist)
 
 class Contribution(models.Model):
     name = models.CharField(max_length=250, blank=True)
     email = models.CharField(max_length=250, blank=True)
     website = models.URLField(max_length=250, blank=True)
-    code = models.CharField(max_length=250, blank=True, help_text="Upload link is http://corpsey.trubbleclub.com/contribute/upload/CODE_HERE/")
+    code = models.CharField(max_length=250, blank=True, help_text="Upload link is https://corpsey.trubble.club/contribute/upload/CODE_HERE/")
     date = models.DateTimeField(auto_now_add=True, blank=True)
     deadline = models.DateTimeField(blank=True)
-    comic = models.ForeignKey(Comic, related_name='contributions')
+    comic = models.ForeignKey(Comic, related_name='contributions', on_delete=models.CASCADE)
     panel1 = ThumbnailerImageField(upload_to='contributions', blank=True)
     panel2 = ThumbnailerImageField(upload_to='contributions', blank=True)
     panel3 = ThumbnailerImageField(upload_to='contributions', blank=True)
@@ -141,23 +140,23 @@ class Contribution(models.Model):
             votes_list = ', '.join(values)
         return votes_list
 
-    def __unicode__(self):
-        return u"Contribution from %s -- following %s" % (self.name, self.comic.artist)
+    def __str__(self):
+        return u"Contribution from %s (following %s)" % (self.name, self.comic.artist)
 
 class Rule(models.Model):
     text = models.TextField()
-    def __unicode__(self):
+    def __str__(self):
         return u"%s" % self.text
 
 class Vote(models.Model):
     date = models.DateTimeField(auto_now_add=True, blank=True)
-    contribution = models.ForeignKey(Contribution, related_name='votes')
-    user = models.ForeignKey(User, related_name='votes')
+    contribution = models.ForeignKey(Contribution, related_name='votes', on_delete=models.CASCADE)
+    user = models.ForeignKey(User, related_name='votes', on_delete=models.CASCADE)
     approve = models.BooleanField(default=False)
-    rule_broke = models.ForeignKey(Rule, null=True, blank=True, related_name='rules_broke', default=None)
+    rule_broke = models.ForeignKey(Rule, null=True, blank=True, related_name='rules_broke', default=None, on_delete=models.CASCADE)
     notes = models.TextField(blank=True)
 
-    def __unicode__(self):
+    def __str__(self):
         if self.approve:
             return u"Yea Vote for %s (by %s)" % (self.contribution, self.user.username)
         else:
