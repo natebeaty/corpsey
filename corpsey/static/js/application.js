@@ -1,16 +1,14 @@
 // Infinite Corpse js brains
-// nate@clixel.com 2013
+// nate@clixel.com 2013-?
 
 // @codekit-prepend "../bower_components/jquery/dist/jquery.js"
 // @codekit-prepend "../bower_components/Sortable/Sortable.js"
+// @codekit-prepend "../bower_components/isotope/dist/isotope.pkgd.js"
 // @codekit-prepend "../bower_components/history.js/scripts/bundled-uncompressed/html5/jquery.history.js"
-// #codekit-prepend "../bower_components/isotope/dist/isotope.pkgd.js"
-// @codekit-prepend "libs/jquery.isotope.min.js"
 // @codekit-prepend "../bower_components/jquery-validation/dist/jquery.validate.js"
 // @codekit-prepend "../bower_components/jquery.quicksearch/dist/jquery.quicksearch.js"
-// @codekit-prepend "../bower_components/vanilla-lazyload/dist/lazyload.transpiled.js"
+// #codekit-prepend "../bower_components/vanilla-lazyload/dist/lazyload.js"
 // @codekit-prepend "../bower_components/mustache.js/mustache.js"
-
 
 $.corpsey = (function() {
     var lazyloader,
@@ -39,7 +37,7 @@ $.corpsey = (function() {
         $('#id_username').focus();
 
         // Lazyload images
-        _initLazyLoad();
+        // _initLazyLoad();
 
         // Homepage
         if ($('body#homepage').length) {
