@@ -242,7 +242,7 @@ def get_nav_links(request):
     uturn_links = []
 
     # Not sure how these are getting through, but keep getting 500 errors from bad requests
-    if comic_id_arr[0] == 'NaN' or comic_id_arr[1] == 'NaN':
+    if comic_id_arr[0] == 'NaN' or (len(comic_id_arr) > 1 and comic_id_arr[1] == 'NaN'):
         return JsonResponse({ 'success': False })
 
     if is_uturn:

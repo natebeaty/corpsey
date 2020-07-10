@@ -253,10 +253,10 @@ $.corpsey.catacombs = (function() {
 
         // If you've looped through from last comic to first comic, make sure the URL matches visible order of comics
         // or if uturn and we're out of sync, swap em around!
-        if ((!is_uturn && visible_comics[0]!==comics_showing[0]) ||
-            (is_uturn && uturn_single && visible_comics[0]!==comics_showing[0])) {
+        if ((!is_uturn && visible_comics[0] !== comics_showing[0]) ||
+            (is_uturn && uturn_single && visible_comics[0] !== comics_showing[0])) {
             $('.comic.active[data-comic-id='+comics_showing[0]+']:first').after($('.comic.active[data-comic-id='+comics_showing[1]+']:first'));
-        } else if (is_uturn && !uturn_single && visible_comics[0]===comics_showing[0]) {
+        } else if (is_uturn && !uturn_single && visible_comics[0] === comics_showing[0]) {
             $('.comic.active[data-comic-id='+comics_showing[1]+']:first').after($('.comic.active[data-comic-id='+comics_showing[0]+']:first'));
         }
 
@@ -306,14 +306,15 @@ $.corpsey.catacombs = (function() {
     }
 
     function _get_nav_links() {
-        if (nav_cache[comics_showing.join('-')]) {
-            _show_nav_links(nav_cache[comics_showing.join('-')]);
+        var cache_key = comics_showing.join('-') + (is_uturn ? '-uturn' : '');
+        if (nav_cache[cache_key]) {
+            _show_nav_links(nav_cache[cache_key]);
         } else {
             $.get('/ajax/get_nav_links/', {
                 'comic_id_arr': comics_showing,
                 'is_uturn': (is_uturn ? 1 : '')
             }).done(function(data) {
-                nav_cache[comics_showing.join('-')] = data;
+                nav_cache[cache_key] = data;
                 _show_nav_links(data);
             });
         }
