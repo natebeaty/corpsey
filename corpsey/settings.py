@@ -1,6 +1,6 @@
 import os
 
-DEBUG = False
+DEBUG = True
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 ADMINS = (
@@ -13,12 +13,12 @@ MANAGERS = (
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'corpsey_dev',                      # Or path to database file if using sqlite3.
-        'USER': 'root',                      # Not used with sqlite3.
-        'PASSWORD': 'root',                  # Not used with sqlite3.
-        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'corpsey_dev',
+        'USER': 'natebeaty',
+        'PASSWORD': '',
+        'HOST': '',
+        'PORT': '',
     }
 }
 
@@ -56,10 +56,10 @@ STATICFILES_FINDERS = [
 # Version assets
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
 
-MIDDLEWARE_CLASSES = [
+MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
@@ -80,8 +80,9 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
-                'django.contrib.auth.context_processors.auth',
                 'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
                 'django.template.context_processors.i18n',
                 'django.template.context_processors.media',
                 'django.template.context_processors.static',
@@ -106,13 +107,13 @@ INSTALLED_APPS = [
     'easy_thumbnails',
     'django_cleanup',
     'mptt',
-    'treeadmin',
+    # 'treeadmin',
     'corpsey.apps.comics',
     'corpsey.apps.artists',
-    'flatpages_x',
-    'markitup',
-    'clear_cache',
-    'cronjobs',
+    # 'flatpages_x',
+    # 'markitup',
+    # 'clear_cache',
+    # 'cronjobs',
 ]
 
 LOGGING = {
@@ -176,7 +177,7 @@ THUMBNAIL_PRESERVE_EXTENSIONS = ('png',)
 MARKITUP_SET = 'markitup/sets/markdown'
 MARKITUP_SKIN = 'markitup/skins/simple'
 MARKITUP_FILTER = ('markdown.markdown', {'safe_mode': True})
-FLATPAGES_X_PARSER= ["flatpages_x.markdown_parser.parse", {}]
+FLATPAGES_X_PARSER= ['flatpages_x.markdown_parser.parse', {}]
 
 # How many contributions can follow a comic
 MAX_COMIC_CHILDREN = 3
@@ -191,7 +192,7 @@ EMAIL_HOST_PASSWORD = ''
 DEFAULT_FROM_EMAIL = 'hal@trubble.club'
 SERVER_EMAIL = 'hal@trubble.club'
 
-SECRET_KEY = ''
+SECRET_KEY = 'test'
 DKIM_DOMAIN = ''
 DKIM_SELECTOR = ''
 DKIM_PRIVATE_KEY = ''
@@ -203,11 +204,11 @@ PRODUCTION_HOST = "web591.webfaction.com"
 from platform import node
 
 if node() == STAGING_HOST:
-    from settings_staging import *
+    from .settings_staging import *
 elif node() == PRODUCTION_HOST:
-    from settings_production import *
+    from .settings_production import *
 else:
     try:
-        from settings_local import *
+        from .settings_local import *
     except ImportError:
         pass

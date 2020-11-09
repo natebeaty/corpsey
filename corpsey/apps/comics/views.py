@@ -4,7 +4,7 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.flatpages.models import FlatPage
 from django.template import RequestContext
 from django.core.mail import send_mass_mail
-from django.core import urlresolvers
+from django.urls import get_resolver
 from easy_thumbnails.files import get_thumbnailer
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.cache import cache_page

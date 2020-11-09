@@ -1,10 +1,11 @@
 from django.contrib import admin
-from treeadmin.admin import TreeAdmin
+# from treeadmin.admin import TreeAdmin
+from mptt.admin import DraggableMPTTAdmin
 from corpsey.apps.comics.models import Comic,Uturn,Contribution,Rule,Vote
 from django import forms
 
-class ComicAdmin(TreeAdmin):
-    list_display = ('__unicode__', 'active', 'starter', 'featured', 'notes')
+class ComicAdmin(DraggableMPTTAdmin):
+    list_display = ('tree_actions', 'indented_title', 'active', 'starter', 'featured', 'notes')
     search_fields = ['artist__name']
     # active_toggle = tree_admin.ajax_editable_boolean('active', 'is active')
     exclude = ('full_image',)
@@ -14,7 +15,7 @@ class UturnForm(forms.ModelForm):
     portal_to = forms.ModelChoiceField(queryset=Comic.objects.filter(lft=1))
 
 class ContributionAdmin(admin.ModelAdmin):
-    list_display = ('__unicode__', 'pending', 'has_panels', 'accepted', 'date', 'deadline', 'votes_list')
+    list_display = ('__str__', 'pending', 'has_panels', 'accepted', 'date', 'deadline', 'votes_list')
     list_filter = ('pending', 'has_panels', 'accepted')
     search_fields = ['name', 'email']
 

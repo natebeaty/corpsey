@@ -6,26 +6,26 @@
     <h2>Hello!</h2>
 
     <p>Thanks for wanting to contribute to The Infinite Corpse!</p>
- 
+
     <p>You have 7 days to draw your panels and upload them for review. Included in this email you'll find the panels you're following, the original character design (just so we all see where he started), and the rules.</p>
- 
+
     <p>Once you have your panels ready for upload, go to this link:</p>
 
-    <p><a href="http://corpsey.trubbleclub.com/contribute/upload/{{ code }}">http://corpsey.trubbleclub.com/contribute/upload/{{ code }}</a></p>
+    <p><a href="https://corpsey.trubble.club/contribute/upload/{{ code }}">https://corpsey.trubble.club/contribute/upload/{{ code }}</a></p>
 
     <p>We're excited to see what you come up with!</p>
 
     <h2>Your parent strip:</h2>
 
     <h3>{{ comic.artist.name }}</h3>
-    <p><a href="http://corpsey.trubbleclub.com/catacombs/{{ comic.parent.id }}/{{ comic.id }}/">
-        {% if comic.panel1 %}<img class="panel" src="http://corpsey.trubbleclub.com{{ comic.panel1.midsize.url }}" width="{{ comic.panel1.midsize.width }}" height="{{ comic.panel1.midsize.height }}">{% endif %}
-        {% if comic.panel2 %}<img class="panel" src="http://corpsey.trubbleclub.com{{ comic.panel2.midsize.url }}" width="{{ comic.panel1.midsize.width }}" height="{{ comic.panel1.midsize.height }}">{% endif %}
-        {% if comic.panel3 %}<img class="panel" src="http://corpsey.trubbleclub.com{{ comic.panel3.midsize.url }}" width="{{ comic.panel1.midsize.width }}" height="{{ comic.panel1.midsize.height }}">{% endif %}
+    <p><a href="https://corpsey.trubble.club/catacombs/{{ comic.parent.id }}/{{ comic.id }}/">
+        {% if comic.panel1 %}<img class="panel" src="https://corpsey.trubble.club{{ comic.panel1.midsize.url }}" width="{{ comic.panel1.midsize.width }}" height="{{ comic.panel1.midsize.height }}">{% endif %}
+        {% if comic.panel2 %}<img class="panel" src="https://corpsey.trubble.club{{ comic.panel2.midsize.url }}" width="{{ comic.panel1.midsize.width }}" height="{{ comic.panel1.midsize.height }}">{% endif %}
+        {% if comic.panel3 %}<img class="panel" src="https://corpsey.trubble.club{{ comic.panel3.midsize.url }}" width="{{ comic.panel1.midsize.width }}" height="{{ comic.panel1.midsize.height }}">{% endif %}
     </a></p>
 
     <h2>Corpsey character design</h2>
-    <p><a href="http://corpsey.trubbleclub.com/static/img/corpsey-character-design.jpg"><img src="http://corpsey.trubbleclub.com/static/img/corpsey-character-design.jpg" style="width:420px;"></a></p>
+    <p><a href="https://corpsey.trubble.club/static/img/corpsey-character-design.jpg"><img src="https://corpsey.trubble.club/static/img/corpsey-character-design.jpg" style="width:420px;"></a></p>
 
     <h2>The Seven Rules:</h2>
     <p>The Infinite Corpse is an online collaborative comic that has an open call for submissions. Everyone in the world can participate. We're particularly looking for outstanding efforts in humor, creativity and/or draftsmanship. We want this to be open to everyone, but in order to keep it going it has to be outstanding, and all contributions will need to pass a degree of quality control.</p>
@@ -36,7 +36,7 @@
         <li style="margin: 5px 0;">The actions within the panels must be clear and easy to read.</li>
         <li style="margin: 5px 0;">Three perfectly square panels which directly follow the previous artist's panels, in your own style, in your own palette. Paint/sculpt/photograph/sew/draw Corpsey how YOU would represent him, not necessarily how the artist before you did. (He's a skeleton with ripped pants! That's it!) Black and white or color are both encouraged. We'd love it to be a wonderful patchwork of all sorts of things, but no <a href="http://bit.ly/x7fwbv">halftones</a> please. Leave a small margin of white space around each panel like so:</li>
     </ul>
-    <p><img src="http://corpsey.trubbleclub.com/media/flatpage/2013/06/17/panel-example.gif"></p>
+    <p><img src="https://corpsey.trubble.club/media/flatpage/2013/06/17/panel-example.gif"></p>
     <ul>
         <li style="margin: 5px 0;">The main character Corpsey must always be in the comic. He is already dead, so you cannot kill him. Your panels cannot be the end of the comic.</li>
         <li style="margin: 5px 0;">Keep it <a href="http://www.mpaa.org/film-ratings/">PG-13</a>. (We'd like this to be a place where anybody can come and draw and contribute.</li>
@@ -51,5 +51,5 @@
 
     <p>If our panel of judges have any problems with your submission, your comic will not be posted and you will get a message briefly explaining why. Good luck!</p>
 
-    <p><b><i>- Trubble Club</i></b></p>	
+    <p><b><i>- Trubble Club</i></b></p>
 {% endblock body %}

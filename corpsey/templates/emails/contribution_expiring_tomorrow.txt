@@ -4,6 +4,6 @@ The deadline to submit your panels will expire tomorrow at midnight CST!
 
 To upload your panels for review, go to this link:
 
-http://corpsey.trubbleclub.com/contribute/upload/{{ contribution.code }}
+https://corpsey.trubble.club/contribute/upload/{{ contribution.code }}
 
-- Trubble Club	
+- Trubble Club

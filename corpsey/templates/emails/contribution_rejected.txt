@@ -15,8 +15,8 @@ The following rules were marked as having issues:
 We hope you submit again.
 
 If the feedback suggests adjustments and resubmitting, here's a direct link to follow the same strip:
-    
-http://corpsey.trubbleclub.com/contribute/?parent={{ parent_id }}
+
+https://corpsey.trubble.club/contribute/?parent={{ parent_id }}
 
 Thank you,
 Trubble Club

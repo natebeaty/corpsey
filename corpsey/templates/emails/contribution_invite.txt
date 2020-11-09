@@ -2,19 +2,19 @@ Hello!
 
 Thanks for wanting to contribute to The Infinite Corpse!
 
-You have 7 days to draw your panels and upload them for review. 
+You have 7 days to draw your panels and upload them for review.
 
-Here is a link to the original character design (just so we all see where he started): 
+Here is a link to the original character design (just so we all see where he started):
 
-http://corpsey.trubbleclub.com/pdf/corpsey-character-design.pdf
+https://corpsey.trubble.club/pdf/corpsey-character-design.pdf
 
 You can view the panels you're following here:
 
-http://corpsey.trubbleclub.com{{ parent_comic_url }}
+https://corpsey.trubble.club{{ parent_comic_url }}
 
 Once you have your panels ready for upload, go to this link:
 
-http://corpsey.trubbleclub.com/contribute/upload/{{ code }}
+https://corpsey.trubble.club/contribute/upload/{{ code }}
 
 We're excited to see what you come up with!
 

@@ -54,7 +54,6 @@ $.corpsey.contributions = (function() {
     } // end _init()
 
     function _after_vote(data) {
-        // console.log(data);
         if (data.message!=='') {
             alert(data.message);
         }
