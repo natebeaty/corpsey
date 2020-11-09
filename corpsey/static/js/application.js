@@ -7,12 +7,10 @@
 // @codekit-prepend "../bower_components/history.js/scripts/bundled-uncompressed/html5/jquery.history.js"
 // @codekit-prepend "../bower_components/jquery-validation/dist/jquery.validate.js"
 // @codekit-prepend "../bower_components/jquery.quicksearch/dist/jquery.quicksearch.js"
-// #codekit-prepend "../bower_components/vanilla-lazyload/dist/lazyload.js"
 // @codekit-prepend "../bower_components/mustache.js/mustache.js"
 
 $.corpsey = (function() {
-    var lazyloader,
-        medium_width,
+    var medium_width,
         small_width,
         _touch_enabled,
         _mustache_templates = [];
@@ -20,7 +18,6 @@ $.corpsey = (function() {
     function _init() {
         _touch_enabled = ('ontouchstart' in window);
         $('html').toggleClass('no-touchevents', !_touch_enabled);
-
         Mustache.escape = function(value){ return value; };
 
         // Get screen width and roll up nav if mobile
@@ -35,9 +32,6 @@ $.corpsey = (function() {
 
         // Focus on login form if present
         $('#id_username').focus();
-
-        // Lazyload images
-        // _initLazyLoad();
 
         // Homepage
         if ($('body#homepage').length) {
@@ -83,20 +77,6 @@ $.corpsey = (function() {
         }
     }
 
-    // Init Lazyload images
-    function _initLazyLoad() {
-        if (typeof LazyLoad !== 'undefined') {
-            lazyloader = new LazyLoad({
-              threshold: 250,
-              elements_selector: 'img.panel',
-              callback_load: function(el) {
-                // Add class to wrap to remove loading display
-                $(el).parents('.panel-wrap').addClass('loaded');
-              }
-            });
-        }
-    }
-
     // Quick search on top of /artists/ page
     function _initQuickSearch() {
         $('.artist-search input[name="term"]').quicksearch('.artists-list ul li:not(.letter)', {
@@ -127,7 +107,6 @@ $.corpsey = (function() {
               $more_container.append(data);
               $load_more.attr('data-page-at', page+1);
               $.corpsey.checkLoadMore();
-              lazyloader.update();
               $(window).trigger('scroll');
             }
         });

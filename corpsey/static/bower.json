@@ -20,9 +20,9 @@
     "history.js": "^1.8.0",
     "jquery": "^3.4.1",
     "jquery-validation": "jquery-validate#^1.19.1",
-    "vanilla-lazyload": "^12.4.0",
     "Sortable": "sortablejs#^1.10.2",
     "mustache.js": "^3.1.0",
-    "isotope-layout": "^3.0.6"
+    "isotope-layout": "^3.0.6",
+    "lazysizes": "^5.2.2"
   }
 }

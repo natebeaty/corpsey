@@ -32,3 +32,7 @@
     <div class="load-more" data-page-at="1" data-per-page="10" data-total-pages="{{ total_pages }}"><a href="#" class="button">Load More</a></div>
   </section>
 {% endblock content %}
+
+{% block extra_javascript %}
+<script src="{% static "js/lib/lazysizes.min.js" %}" type="text/javascript"></script>
+{% endblock extra_javascript %}
