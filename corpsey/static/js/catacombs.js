@@ -35,7 +35,6 @@ $.corpsey.catacombs = (function() {
         comics_shown.push(comics_showing[i]);
       }
     }
-    $('<div id="flonav" />').appendTo('body').hide();
 
     History.replaceState(
       { 'direction': '' },
@@ -54,11 +53,14 @@ $.corpsey.catacombs = (function() {
     // Isotopize
     $catacombs.isotope({
       itemSelector: 'img,h1',
-      transitionDuration: 0
+      transitionDuration: 300,
+      stagger: 35,
     }).on('layoutComplete', function() {
       if (build_titles_timer) { clearTimeout(build_titles_timer); }
-      build_titles_timer = setTimeout($.corpsey.catacombs.build_titles, 450);
-    }).isotope({ filter: (small_width) ? '.comic.active img:not(.uturn-pad),.comic.active h1' : (medium_width) ? '.comic.active img:not(.uturn-pad)' : '.comic.active img' });
+      build_titles_timer = setTimeout($.corpsey.catacombs.build_titles, 300);
+    }).isotope({
+      filter: _getComicFilter()
+    });
     _build_titles();
 
     // Next/prev buttons
@@ -96,42 +98,23 @@ $.corpsey.catacombs = (function() {
         } else if (e.keyCode === 37) {
           $('.prev.button:first').trigger('click');
           e.preventDefault();
-        } else if (e.keyCode === 27) {
-          _hide_flonav();
         }
       }
     });
-
-     // Mobile nerds
-    // $catacombs.on('swipeone', function (e, obj) {
-    //     return; // disabling for now
-    //     // var direction = obj.description.split(":")[2]
-    //     // if (obj.delta[0].moved > 200) {
-    //     //     if (direction === "left") {
-    //     //         $('.prev.button:first').trigger('click');
-    //     //     } else if (direction === "right") {
-    //     //         $('.next.button:first').trigger('click');
-    //     //     }
-    //     // }
-    // });
-    // $catacombs.on('swipetwo', function (e, obj) {
-    //     return; // disabling for now
-    //     var direction = obj.description.split(":")[2]
-    //     // todo, send along next or prev dir to show appropriate nav
-    //     _show_flonav(e);
-    // });
 
     // Init isotope filter based on window size
     _delayed_resize();
   }
 
-  function _show_flonav(e) {
-    var nav = $('.next.comic-nav').html();
-    $('#flonav').show().css({left: e.pageX, top: e.pageY}).html(nav);
-  }
-
-  function _hide_flonav() {
-    $('#flonav').hide();
+  function _getComicFilter() {
+    // Filter based on breakpoint
+    var filter = '.comic.active img';
+    if (small_width) {
+      filter = '.comic.active img:not(.uturn-pad),.comic.active h1';
+    } else if (medium_width) {
+      filter = '.comic.active img:not(.uturn-pad)';
+    }
+    return filter;
   }
 
   function _get_comics_showing() {
@@ -140,7 +123,7 @@ $.corpsey.catacombs = (function() {
 
     // Build id arr and convert to int
     for(var i=0; i<comics_showing.length; i++) {
-      comics_showing[i] = +comics_showing[i];
+      comics_showing[i] = parseInt(comics_showing[i]);
     }
 
     // Is this a uturn page?
@@ -148,7 +131,8 @@ $.corpsey.catacombs = (function() {
 
     // For /catacombs/uturn/5/ URLs
     if (is_uturn && comics_showing.length==1) {
-      comics_showing[1] = +$('.comic.uturn.active').attr('data-portal-to-id');
+      var id = parseInt($('.comic.uturn.active').attr('data-portal-to-id'));
+      comics_showing[1] = id;
       uturn_single = true;
     } else {
       uturn_single = false;
@@ -172,7 +156,6 @@ $.corpsey.catacombs = (function() {
   }
 
   function _build_panels(){
-    _hide_titles();
     // Check for comic panels to load
     for(var i=0; i<comics_showing.length; i++) {
       if (is_uturn && (i===0 && uturns_shown.indexOf(comics_showing[i]) < 0)) {
@@ -193,7 +176,6 @@ $.corpsey.catacombs = (function() {
         }).done(function(data) {
           if (data.success) {
             _show_panels(data);
-            _build_titles();
           }
         });
       } else {
@@ -201,7 +183,6 @@ $.corpsey.catacombs = (function() {
         _filter_panels();
       }
     }
-    _build_titles();
   }
 
   function _show_uturn(data) {
@@ -212,15 +193,12 @@ $.corpsey.catacombs = (function() {
     var uturn = $($.corpsey.render_template('uturn_single', data.uturn));
 
     // Uturn is only ever from Next
-    // $catacombs.append(uturn);
+    $catacombs.append(uturn);
     $catacombs.isotope('appended', uturn);
-
     _filter_panels();
   }
 
   function _show_panels(data) {
-    _hide_flonav();
-
     // Cache comic data
     comics_shown.push(data.comic.comic_id);
 
@@ -229,28 +207,24 @@ $.corpsey.catacombs = (function() {
 
     // Drop in comic
     if (data.direction==='next') {
-      $catacombs.append(comic);
-      $catacombs.isotope('appended', comic);
+      $catacombs.append(comic).isotope('appended', comic);
     } else {
-      $('#catacombs .comic.single.active:first').before(comic);
-      $catacombs.isotope('prepended', comic);
+      $catacombs.prepend(comic).isotope('prepended', comic);
     }
-    _filter_panels();
+    // _filter_panels();
   }
 
   function _filter_panels() {
+    $('h1.comic_1,h1.comic_2').removeClass('active');
+
     // I do this a lot. todo: clean this up
     _get_comics_showing();
 
+    // Determine visible comics from URL
     var visible_comics = [];
     $('#catacombs .comic.single.active').each(function() {
-      var id = $(this).data('comic-id');
-      // Somehow comics are duplicating sometimes?
-      if ($.inArray(id,visible_comics)>-1 && !$(this).hasClass('uturn')) {
-        $(this).remove();
-      } else {
-        visible_comics.push(id);
-      }
+      var id = parseInt($(this).data('comic-id'));
+      visible_comics.push(id);
     });
 
     // If you've looped through from last comic to first comic, make sure the URL matches visible order of comics
@@ -263,7 +237,8 @@ $.corpsey.catacombs = (function() {
     }
 
     // Reset sort order for isotope using DOM order
-    $catacombs.isotope('reloadItems').isotope({ sortBy: 'original-order' });
+    // $catacombs.isotope('reloadItems').isotope({ sortBy: 'original-order' });
+    // $catacombs.isotope({ sortBy: 'original-order' });
 
     // Hide strips not in new url
     $('#catacombs .comic.single').each(function(){
@@ -283,7 +258,7 @@ $.corpsey.catacombs = (function() {
     });
 
     // Set isotope to filter visible comics
-    $catacombs.isotope({ filter: (small_width) ? '.comic.active img:not(.uturn-pad),.comic.active h1' : (medium_width) ? '.comic.active img:not(.uturn-pad)' : '.comic.active img' });
+    $catacombs.isotope({ filter: _getComicFilter() });
 
     // If med/small screen, scroll up to comic we just loaded
     if (medium_width || small_width) {
@@ -303,6 +278,10 @@ $.corpsey.catacombs = (function() {
       }
     }
 
+    $catacombs.isotope();
+    // if (is_uturn) {
+    //   $catacombs.isotope('reloadItems').isotope({ sortBy: 'original-order' });
+    // }
     _get_comics_showing();
     _get_nav_links();
   }
@@ -342,15 +321,11 @@ $.corpsey.catacombs = (function() {
     }
   }
 
-  function _hide_titles() {
-    $('h1.comic_1, h1.comic_2').fadeOut();
-  }
-
   function _build_titles() {
     $('h1.comic_1, h1.comic_2').remove();
     $('.comic.single.active').each(function(i) {
       var name = $(this).find('h1').html();
-      $('<h1 />').html(name).addClass('comic_'+(i+1)).appendTo('body').css({ 'top' : -1000 });
+      $('<h1 />').html(name).addClass('comic_'+(i+1)).appendTo('body').css({ 'top' : -1000 }).addClass('active');
     });
     _move_titles();
   }
@@ -367,7 +342,7 @@ $.corpsey.catacombs = (function() {
       var pos = $img.offset();
       var $h1 = $('h1.comic_'+(i+1));
       if ($h1.length>0 && pos!==null) {
-        $h1.css({ 'top' : pos.top+$h1.width(), 'left' : pos.left-16 });
+        $h1.css({ 'top' : pos.top + $h1.width(), 'left' : pos.left-16 });
       }
     });
     $('h1.comic_1, h1.comic_2').show();
@@ -379,7 +354,7 @@ $.corpsey.catacombs = (function() {
   }
 
   function _delayed_resize() {
-    // $catacombs.isotope({ filter: (small_width) ? '.comic.active img:not(.uturn-pad),.comic.active h1' : (medium_width) ? '.comic.active img:not(.uturn-pad)' : '.comic.active img' });
+    // $catacombs.isotope({ filter: _getComicFilter() });
   }
 
   function _get_widths() {
@@ -394,15 +369,6 @@ $.corpsey.catacombs = (function() {
     resize: _resize,
     delayed_resize: _delayed_resize,
     build_titles: _build_titles,
-    show_panels: function(data) {
-      _show_panels(data);
-    },
-    show_uturn: function(data) {
-      _show_uturn(data);
-    },
-    show_nav_links: function(data) {
-      _show_nav_links(data);
-    }
   };
 })();
 

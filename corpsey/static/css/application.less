@@ -442,6 +442,7 @@ footer.main {
 // Catacombs
 .contribution,
 .comic {
+  position: relative;
   h1 {
     font: 14px/1.2em 'Arbutus Slab', serif;
     margin: .5em 0 0;
@@ -449,12 +450,15 @@ footer.main {
       color: #222;
     }
   }
-  display: none;
   ul,
   li {
     display: block;
     position: relative;
-
+  }
+  ul {
+    bottom: 0;
+    left: 0;
+    width: 100%;
   }
   img {
     display: block;
@@ -462,33 +466,16 @@ footer.main {
     width: 330px;
     height: 330px;
     background-size: 330px 330px;
-    // transition: background-color 0.5s;
-    &.loading {
-      background: #ccc;
-    }
   }
   &.active {
-    display: block;
-
   }
   &.single {
-    // width: 1000px;
     margin: 0 auto;
     position: relative;
     h1 {
       display: none;
     }
   }
-}
-#flonav {
-  position: absolute;
-  width: 200px;
-  height: 200px;
-  background: #666;
-  border-radius: 4px;
-  padding: 20px;
-  text-align: center;
-  z-index: 10001;
 }
 #graveyard,
 #contributions {
@@ -648,6 +635,11 @@ h1.comic_2 {
   left: 0;
   top: 0;
   font: 14px/1.2em 'Arbutus Slab', serif;
+  opacity: 0;
+  transition: opacity 0.5s;
+  &.active {
+    opacity: 1;
+  }
   a {
     color: #222;
   }
