@@ -272,11 +272,11 @@ def contribute(request):
                 plaintext = get_template('emails/contribution_invite.txt')
                 htmly     = get_template('emails/contribution_invite.html')
 
-                d = Context({
+                d = {
                     'comic': parent_comic,
                     'parent_comic_url': parent_comic.get_absolute_url(),
                     'code': code,
-                    })
+                    }
 
                 subject = 'Infinite Corpse Confirmation'
                 from_email = 'corpsey@trubble.club'
