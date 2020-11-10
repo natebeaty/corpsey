@@ -199,7 +199,7 @@ DKIM_PRIVATE_KEY = ''
 
 # Import settings information based on node
 STAGING_HOST = "corpsey-staging"
-PRODUCTION_HOST = "web591.webfaction.com"
+PRODUCTION_HOST = "opal3.opalstack.com"
 
 from platform import node
 
