@@ -242,7 +242,7 @@ def contribute(request):
             from django.core.mail import EmailMultiAlternatives
             from django.template.loader import get_template
             from django.template import Context
-            import base64, md5, hashlib, time, os
+            import base64, hashlib, time, os
 
             comic_id = form.cleaned_data['comic_id']
             email = form.cleaned_data['email']
