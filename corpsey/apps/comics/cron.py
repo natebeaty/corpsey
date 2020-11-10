@@ -5,7 +5,6 @@ from datetime import datetime, timedelta
 from django.utils import timezone
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import get_template
-from django.template import Context
 import cronjobs
 
 @cronjobs.register
@@ -54,13 +53,10 @@ def check_contributions():
 def send_html_email(email_data):
     plaintext = get_template('emails/%s.txt' % email_data['template'])
     htmly     = get_template('emails/%s.html' % email_data['template'])
-
-    d = Context(email_data['context'])
-
     subject = email_data['subject']
     from_email = 'corpsey@trubble.club'
-    text_content = plaintext.render(d)
-    html_content = htmly.render(d)
+    text_content = plaintext.render(email_data['context'])
+    html_content = htmly.render(email_data['context'])
     try:
         msg = EmailMultiAlternatives(subject, text_content, from_email, [email_data['email_to']])
         msg.attach_alternative(html_content, "text/html")

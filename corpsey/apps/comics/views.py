@@ -241,7 +241,6 @@ def contribute(request):
         if form.is_valid():
             from django.core.mail import EmailMultiAlternatives
             from django.template.loader import get_template
-            from django.template import Context
             import base64, hashlib, time, os, random
 
             comic_id = form.cleaned_data['comic_id']
@@ -272,7 +271,7 @@ def contribute(request):
                 plaintext = get_template('emails/contribution_invite.txt')
                 htmly     = get_template('emails/contribution_invite.html')
 
-                d = {
+                email_data = {
                     'comic': parent_comic,
                     'parent_comic_url': parent_comic.get_absolute_url(),
                     'code': code,
@@ -280,8 +279,8 @@ def contribute(request):
 
                 subject = 'Infinite Corpse Confirmation'
                 from_email = 'corpsey@trubble.club'
-                text_content = plaintext.render(d)
-                html_content = htmly.render(d)
+                text_content = plaintext.render(email_data)
+                html_content = htmly.render(email_data)
                 try:
                     msg = EmailMultiAlternatives(subject, text_content, from_email, [email])
                     msg.attach_alternative(html_content, "text/html")

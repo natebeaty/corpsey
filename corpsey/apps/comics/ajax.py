@@ -3,7 +3,6 @@ from easy_thumbnails.files import get_thumbnailer
 from django.shortcuts import render, redirect
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import get_template
-from django.template import Context
 from django.conf import settings
 from django.http import JsonResponse
 import twitter
@@ -118,15 +117,15 @@ def contribution_vote(request):
         plaintext = get_template('emails/contribution_rejected.txt')
         htmly     = get_template('emails/contribution_rejected.html')
 
-        d = Context({
+        email_data = {
             'votes': contribution.votes.filter(approve=False),
             'parent_id': contribution.comic.id,
             'name': contribution.name,
-            })
+            }
 
         subject, from_email, to = 'Your Infinite Corpse contribution', 'corpsey@trubble.club', contribution.email
-        text_content = plaintext.render(d)
-        html_content = htmly.render(d)
+        text_content = plaintext.render(email_data)
+        html_content = htmly.render(email_data)
         try:
             msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
             msg.attach_alternative(html_content, "text/html")
@@ -162,15 +161,15 @@ def contribution_vote(request):
         plaintext = get_template('emails/contribution_approved.txt')
         htmly     = get_template('emails/contribution_approved.html')
 
-        d = Context({
+        email_data = {
             'comic_url': "/catacombs/%s/%s/" % (contribution.comic.id, comic.id),
             'comic': comic,
             'name': contribution.name,
-            })
+            }
 
         subject, from_email, to = 'Your Infinite Corpse contribution is live!', 'corpsey@trubble.club', contribution.email
-        text_content = plaintext.render(d)
-        html_content = htmly.render(d)
+        text_content = plaintext.render(email_data)
+        html_content = htmly.render(email_data)
         try:
             msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
             msg.attach_alternative(html_content, "text/html")
