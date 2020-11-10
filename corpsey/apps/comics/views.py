@@ -335,7 +335,7 @@ def contribute_upload(request, upload_code):
         if request.method == 'POST':
             form = UploadForm(request.POST, request.FILES)
             if form.is_valid():
-                for i in xrange(0,3):
+                for i in range(0,3):
                     if ("comic_panels[%d]" % i in request.FILES):
                         setattr(contribution, 'panel' + str(i+1), request.FILES["comic_panels[%d]" % i])
                         num_panels_uploaded = num_panels_uploaded + 1
