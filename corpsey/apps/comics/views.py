@@ -252,7 +252,7 @@ def contribute(request):
             except Comic.DoesNotExist:
                 return HttpResponse('Unable to locate comic #%s for parent. You broke HAL!' % comic_id)
 
-            code = base64.urlsafe_b64encode(hashlib.md5(str(time.time())).digest())[:15]
+            code = hashlib.sha256(str(random.getrandbits(256)).encode('utf-8')).hexdigest()[:15]
 
             # Check if email has pending contributions
             try:
