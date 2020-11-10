@@ -14,7 +14,7 @@ https://corpsey.trubble.club{{ parent_comic_url }}
 
 Once you have your panels ready for upload, go to this link:
 
-https://corpsey.trubble.club/contribute/upload/{{ code }}
+https://corpsey.trubble.club/contribute/upload/{{ code }}/
 
 We're excited to see what you come up with!
 
