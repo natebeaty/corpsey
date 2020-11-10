@@ -1,7 +1,7 @@
 asgiref==3.2.3
 certifi==2019.11.28
 chardet==3.0.4
-Django==3.0.1
+Django==3.0.7
 django-cleanup==4.0.0
 django-flatpages-x==0.1.5
 django-js-asset==1.2.2
@@ -12,7 +12,7 @@ future==0.18.2
 idna==2.8
 mysqlclient==1.4.6
 oauthlib==3.1.0
-Pillow==6.2.1
+Pillow==7.1.0
 psycopg2-binary==2.8.6
 python-memcached==1.59
 python-twitter==3.5
