@@ -83,7 +83,7 @@ def featured(request):
         'comic_set': comic_set,
     })
 
-def random(request):
+def random_comic(request):
     """Return a random comic that's not a root."""
     comic_leaf = Comic.objects.filter(level__gt=0).order_by('?')[0]
     request.session['last_comic_id'] = comic_leaf.id
@@ -242,7 +242,7 @@ def contribute(request):
             from django.core.mail import EmailMultiAlternatives
             from django.template.loader import get_template
             from django.template import Context
-            import base64, hashlib, time, os
+            import base64, hashlib, time, os, random
 
             comic_id = form.cleaned_data['comic_id']
             email = form.cleaned_data['email']

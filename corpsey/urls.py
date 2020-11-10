@@ -24,7 +24,7 @@ urlpatterns = [
     url(r'^catacombs/(?P<comic_1>[\d]+)/(?P<comic_2>\d+)/$', comics_views.entry, name='comic-entry'),
     url(r'^catacombs/(?P<comic_1>[\d]+)/$', comics_views.entry, name='comic-entry-single'),
     url(r'^catacombs/$', lambda x: redirect('/')),
-    url(r'^random/$', comics_views.random, name='random-comic'),
+    url(r'^random/$', comics_views.random_comic, name='random-comic'),
     url(r'^enter_the_catacombs/$', comics_views.enter_the_catacombs, name='enter-the-catacombs'),
     url(r'^tree/$', comics_views.tree, name='tree'),
     url(r'^tree_css/$', comics_views.tree_css, name='tree-css'),
