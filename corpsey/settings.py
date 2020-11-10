@@ -32,13 +32,13 @@ USE_L10N = True
 USE_TZ = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
-MEDIA_ROOT = '/home/natebeaty/webapps/corpsey_media/'
+MEDIA_ROOT = '/home/natebeaty/apps/corpsey_media/'
 
 # URL that handles the media served from MEDIA_ROOT.
 MEDIA_URL = '/media/'
 
 # Absolute path to the directory static files should be collected to.
-STATIC_ROOT = '/home/natebeaty/webapps/django14_static/'
+STATIC_ROOT = '/home/natebeaty/apps/corpsey_static/'
 
 # URL prefix for static files.
 STATIC_URL = '/static/'
