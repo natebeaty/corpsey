@@ -10,7 +10,7 @@ def deploy(assets='n'):
         run('git pull origin master')
         if assets != 'n':
             run('/home/natebeaty/apps/corpsey/env/bin/python manage.py collectstatic --noinput')
-        # run('/home/natebeaty/apps/corpsey/env/bin/python manage.py clear_cache')
+        run('/home/natebeaty/apps/corpsey/env/bin/python manage.py clearcache')
         restart()
 
 def syncdb():
