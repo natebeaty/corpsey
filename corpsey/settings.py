@@ -113,7 +113,6 @@ INSTALLED_APPS = [
     # 'flatpages_x',
     # 'markitup',
     # 'clear_cache',
-    # 'cronjobs',
 ]
 
 LOGGING = {
