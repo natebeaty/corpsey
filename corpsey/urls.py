@@ -64,6 +64,7 @@ urlpatterns = [
     url(r'^ajax/load_more/$', comics_ajax.load_more),
 
     # Django and apps
+    url(r'^admin/clearcache/', include('clearcache.urls')),
     url(r'^admin/', admin.site.urls),
     # url(r'^markitup/', markitup.urls),
     url(r'^media/(?P<path>.*)$', django_views.static.serve, {'document_root': settings.MEDIA_ROOT}),

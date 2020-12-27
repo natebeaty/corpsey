@@ -3,6 +3,7 @@ certifi==2019.11.28
 chardet==3.0.4
 Django==3.0.7
 django-cleanup==4.0.0
+django-clearcache==1.1.1
 django-flatpages-x==0.1.5
 django-js-asset==1.2.2
 django-markitup==3.0.0

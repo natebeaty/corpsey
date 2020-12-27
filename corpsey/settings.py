@@ -102,6 +102,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.humanize',
     'django.contrib.sites',
+    'clearcache',
     'django.contrib.admin',
     'django.contrib.flatpages',
     'easy_thumbnails',
