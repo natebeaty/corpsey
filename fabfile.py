@@ -1,28 +1,43 @@
-from fabric.api import *
+from fabric import task
+from invoke import run as local
 
-env.hosts = ['natebeaty.opalstacked.com']
-env.user = 'natebeaty'
-env.warn_only = True
+remote_path = "/home/natebeaty/apps/corpsey/corpsey/"
+remote_hosts = ["natebeaty@natebeaty.opalstacked.com"]
+git_branch = "master"
 
-def deploy(assets='n'):
-    with cd('/home/natebeaty/apps/corpsey/corpsey/'):
-        # run('/home/natebeaty/.virtualenvs/corpsey_110/bin/activate_this.py')
-        run('git pull origin master')
-        if assets != 'n':
-            run('/home/natebeaty/apps/corpsey/env/bin/python manage.py collectstatic --noinput')
-        run('/home/natebeaty/apps/corpsey/env/bin/python manage.py clearcache')
-        restart()
+# deploy
+@task(hosts=remote_hosts)
+def deploy(c,assets="no"):
+    update(c)
+    # `fab deploy --assets=y` to compile new assets
+    if assets != "no":
+        compile_assets(c)
+    clear_cache(c)
+    restart(c)
 
-def syncdb():
-    with cd('/home/natebeaty/apps/corpsey/corpsey/'):
-        run('/home/natebeaty/apps/corpsey/env/bin/python manage.py syncdb')
-        restart()
+def update(c):
+    c.run("cd {} && git pull origin {}".format(remote_path, git_branch))
 
-def migrate():
-    with cd('/home/natebeaty/apps/corpsey/corpsey/'):
-        run('/home/natebeaty/apps/corpsey/env/bin/python manage.py migrate')
-        restart()
+def compile_assets(c):
+    c.run("cd {} && /home/natebeaty/apps/corpsey/env/bin/python manage.py collectstatic --noinput".format(remote_path))
 
-def restart():
-    run('/home/natebeaty/apps/corpsey/stop')
-    run('/home/natebeaty/apps/corpsey/start')
+def clear_cache(c):
+    c.run("cd {} /home/natebeaty/apps/corpsey/env/bin/python manage.py clearcache".format(remote_path))
+
+def pip(c):
+    c.run("cd {} /home/natebeaty/apps/corpsey/env/bin/python -m pip install -r requirements.txt".format(remote_path))
+
+def syncdb(c):
+    c.run("cd {} /home/natebeaty/apps/corpsey/env/bin/python manage.py syncdb".format(remote_path))
+
+def migrate(c):
+    c.run("cd {} /home/natebeaty/apps/corpsey/env/bin/python manage.py migrate".format(remote_path))
+
+def restart(c):
+    c.run("/home/natebeaty/apps/corpsey/stop")
+    c.run("/home/natebeaty/apps/corpsey/start")
+
+# local commands
+# @task
+# def assets(c):
+#     local("npx gulp --production")
