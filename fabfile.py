@@ -13,6 +13,7 @@ def deploy(c,assets="no"):
     if assets != "no":
         compile_assets(c)
     clear_cache(c)
+    install(c)
     restart(c)
 
 def update(c):
@@ -22,20 +23,23 @@ def compile_assets(c):
     c.run("cd {} && /home/natebeaty/apps/corpsey/env/bin/python manage.py collectstatic --noinput".format(remote_path))
 
 def clear_cache(c):
-    c.run("cd {} /home/natebeaty/apps/corpsey/env/bin/python manage.py clearcache".format(remote_path))
-
-def pip(c):
-    c.run("cd {} /home/natebeaty/apps/corpsey/env/bin/python -m pip install -r requirements.txt".format(remote_path))
-
-def syncdb(c):
-    c.run("cd {} /home/natebeaty/apps/corpsey/env/bin/python manage.py syncdb".format(remote_path))
-
-def migrate(c):
-    c.run("cd {} /home/natebeaty/apps/corpsey/env/bin/python manage.py migrate".format(remote_path))
+    c.run("cd {} && /home/natebeaty/apps/corpsey/env/bin/python manage.py clearcache".format(remote_path))
 
 def restart(c):
     c.run("/home/natebeaty/apps/corpsey/stop")
     c.run("/home/natebeaty/apps/corpsey/start")
+
+def install(c):
+    print("Updating requirements...")
+    c.run("cd {} && /home/natebeaty/apps/corpsey/env/bin/python -m pip install -r requirements.txt".format(remote_path))
+
+@task(hosts=remote_hosts)
+def syncdb(c):
+    c.run("cd {} && /home/natebeaty/apps/corpsey/env/bin/python manage.py syncdb".format(remote_path))
+
+@task(hosts=remote_hosts)
+def migrate(c):
+    c.run("cd {} && /home/natebeaty/apps/corpsey/env/bin/python manage.py migrate".format(remote_path))
 
 # local commands
 # @task
