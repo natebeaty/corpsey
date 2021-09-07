@@ -13,7 +13,6 @@ def deploy(c,assets="no"):
     if assets != "no":
         compile_assets(c)
     clear_cache(c)
-    install(c)
     restart(c)
 
 def update(c):
@@ -29,6 +28,7 @@ def restart(c):
     c.run("/home/natebeaty/apps/corpsey/stop")
     c.run("/home/natebeaty/apps/corpsey/start")
 
+@task(hosts=remote_hosts)
 def install(c):
     print("Updating requirements...")
     c.run("cd {} && /home/natebeaty/apps/corpsey/env/bin/python -m pip install -r requirements.txt".format(remote_path))
