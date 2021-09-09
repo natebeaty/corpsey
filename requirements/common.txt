@@ -7,7 +7,7 @@ django-clearcache==1.1.1
 django-flatpages-x==0.1.5
 django-js-asset==1.2.2
 django-markitup==3.0.0
-django-mptt==0.10.0
+django-mptt==0.13.0
 easy-thumbnails==2.7
 future==0.18.2
 idna==2.8

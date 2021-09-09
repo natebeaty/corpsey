@@ -31,7 +31,7 @@ def restart(c):
 @task(hosts=remote_hosts)
 def install(c):
     print("Updating requirements...")
-    c.run("cd {} && /home/natebeaty/apps/corpsey/env/bin/python -m pip install -r requirements.txt".format(remote_path))
+    c.run("cd {} && /home/natebeaty/apps/corpsey/env/bin/python -m pip install -r requirements.txt --use-deprecated=legacy-resolver".format(remote_path))
 
 @task(hosts=remote_hosts)
 def syncdb(c):
