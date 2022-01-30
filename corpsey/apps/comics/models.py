@@ -16,6 +16,7 @@ from easy_thumbnails.signal_handlers import generate_aliases_global
 saved_file.connect(generate_aliases_global)
 
 class Comic(MPTTModel):
+    id = models.AutoField(primary_key=True)
     parent = TreeForeignKey('self', null=True, blank=True, related_name='children', on_delete=models.CASCADE)
     artist = models.ForeignKey(Artist, null=True, blank=True, related_name='comics', on_delete=models.CASCADE)
     portal_to = models.ForeignKey('self', null=True, blank=True, related_name='portal', on_delete=models.CASCADE)
@@ -102,6 +103,7 @@ def update_num_comics(sender, instance, **kwargs):
     instance.artist.save()
 
 class Uturn(models.Model):
+    id = models.AutoField(primary_key=True)
     portal_to = models.ForeignKey(Comic, related_name='uturn', on_delete=models.CASCADE)
     panel = ThumbnailerImageField(upload_to='comics', blank=True)
 
@@ -112,6 +114,7 @@ class Uturn(models.Model):
         return u"Uturn to %s" % (self.portal_to.artist)
 
 class Contribution(models.Model):
+    id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=250, blank=True)
     email = models.CharField(max_length=250, blank=True)
     website = models.URLField(max_length=250, blank=True)
@@ -144,11 +147,13 @@ class Contribution(models.Model):
         return u"Contribution from %s (following %s)" % (self.name, self.comic.artist)
 
 class Rule(models.Model):
+    id = models.AutoField(primary_key=True)
     text = models.TextField()
     def __str__(self):
         return u"%s" % self.text
 
 class Vote(models.Model):
+    id = models.AutoField(primary_key=True)
     date = models.DateTimeField(auto_now_add=True, blank=True)
     contribution = models.ForeignKey(Contribution, related_name='votes', on_delete=models.CASCADE)
     user = models.ForeignKey(User, related_name='votes', on_delete=models.CASCADE)

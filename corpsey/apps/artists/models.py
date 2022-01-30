@@ -7,6 +7,7 @@ from django.core.cache import cache
 import re
 
 class Artist(models.Model):
+    id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=250, blank=True)
     first_name = models.CharField(max_length=250, blank=True)
     last_name = models.CharField(max_length=250, blank=True)
