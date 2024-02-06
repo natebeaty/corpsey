@@ -11,9 +11,9 @@
 	<article class="contribution" data-contribution-id="{{ contribution.id }}">
 	  <h1>Contribution from: {% if contribution.website %}<a target="_blank" href="{{ contribution.website }}">{{ contribution.name }}</a>{% else %}{{ contribution.name }}{% endif %} &lt;{{ contribution.email }}&gt;</h1>
 	  <ul>
-	    <li>{% if contribution.panel1 %}<img class="panel" src="{{ contribution.panel1.midsize.url }}" width="{{ contribution.panel1.midsize.width }}" height="{{ contribution.panel1.midsize.height }}">{% else %}No image for panel 1{% endif %}</li>
-	    <li>{% if contribution.panel2 %}<img class="panel" src="{{ contribution.panel2.midsize.url }}" width="{{ contribution.panel1.midsize.width }}" height="{{ contribution.panel1.midsize.height }}">{% else %}No image for panel 2{% endif %}</li>
-	    <li>{% if contribution.panel3 %}<img class="panel" src="{{ contribution.panel3.midsize.url }}" width="{{ contribution.panel1.midsize.width }}" height="{{ contribution.panel1.midsize.height }}">{% else %}No image for panel 3{% endif %}</li>
+	    <li>{% if contribution.panel1 %}<img class="panel" src="{{ contribution.panel1.midsize.url }}" srcset="{{ contribution.panel1.midsize.url }} 1x, {{ contribution.panel1.midsize_hd.url }} 2x">{% endif %}>{% else %}No image for panel 1{% endif %}</li>
+	    <li>{% if contribution.panel2 %}<img class="panel" src="{{ contribution.panel2.midsize.url }}" srcset="{{ contribution.panel2.midsize.url }} 1x, {{ contribution.panel2.midsize_hd.url }} 2x">{% endif %}>{% else %}No image for panel 2{% endif %}</li>
+	    <li>{% if contribution.panel3 %}<img class="panel" src="{{ contribution.panel3.midsize.url }}" srcset="{{ contribution.panel3.midsize.url }} 1x, {{ contribution.panel3.midsize_hd.url }} 2x">{% endif %}>{% else %}No image for panel 3{% endif %}</li>
 	  </ul>
 	</article>
 
