@@ -5,7 +5,7 @@ from django.core.mail import EmailMultiAlternatives
 from django.template.loader import get_template
 from django.conf import settings
 from django.http import JsonResponse
-import twitter
+# import twitter
 import random
 
 def load_more(request):
@@ -177,30 +177,30 @@ def contribution_vote(request):
         except:
             message = 'There was an error sending the approval email to %s. Please write Nate and mock him.' % contribution.email
 
-        # Post link to twitter
-        phrase = random.choice(
-            (
-                'New panels posted by',
-                'The catacombs are chattering with panels by',
-                'What\'s this? New panels by',
-                'And you don\'t stop, new panels by',
-                'You better believe it, new panels by',
-                'Hey-oh! Fresh panels by',
-                'Hot diggety! New panels by',
-                'Holy smokes, new panels by',
-                'Stop the presses! new panels by',
-                'Ain\'t no half steppin\', new panels by',
-                'Fresh panels in the catacombs by',
-                'Oh look! Brand new panels by',
-                'Shazam! Panels by',
-                'This just keeps getting better. New panels by',
-            )
-        )
-        twitter_api = twitter.Api(consumer_key=settings.TWITTER_CONSUMER_KEY, consumer_secret=settings.TWITTER_CONSUMER_SECRET, access_token_key=settings.TWITTER_ACCESS_TOKEN_KEY, access_token_secret=settings.TWITTER_ACCESS_TOKEN_SECRET)
-        try:
-            twitter_api.PostUpdate("%s %s, following %s: http://%s/catacombs/%s/%s/" % (phrase, comic.artist, comic.parent.artist, request.META['HTTP_HOST'], comic.parent.id, comic.id))
-        except:
-            message = 'There was an error posting to twitter. Please write Nate and mock him.'
+        # Post link to twitter (disabled 11/12/2024)
+        # phrase = random.choice(
+        #     (
+        #         'New panels posted by',
+        #         'The catacombs are chattering with panels by',
+        #         'What\'s this? New panels by',
+        #         'And you don\'t stop, new panels by',
+        #         'You better believe it, new panels by',
+        #         'Hey-oh! Fresh panels by',
+        #         'Hot diggety! New panels by',
+        #         'Holy smokes, new panels by',
+        #         'Stop the presses! new panels by',
+        #         'Ain\'t no half steppin\', new panels by',
+        #         'Fresh panels in the catacombs by',
+        #         'Oh look! Brand new panels by',
+        #         'Shazam! Panels by',
+        #         'This just keeps getting better. New panels by',
+        #     )
+        # )
+        # twitter_api = twitter.Api(consumer_key=settings.TWITTER_CONSUMER_KEY, consumer_secret=settings.TWITTER_CONSUMER_SECRET, access_token_key=settings.TWITTER_ACCESS_TOKEN_KEY, access_token_secret=settings.TWITTER_ACCESS_TOKEN_SECRET)
+        # try:
+        #     twitter_api.PostUpdate("%s %s, following %s: http://%s/catacombs/%s/%s/" % (phrase, comic.artist, comic.parent.artist, request.META['HTTP_HOST'], comic.parent.id, comic.id))
+        # except:
+        #     message = 'There was an error posting to twitter. Please write Nate and mock him.'
 
     return JsonResponse({
         'contribution_id' : contribution_id,
