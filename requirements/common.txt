@@ -1,5 +1,5 @@
 asgiref==3.5.0
-certifi==2021.10.8
+certifi==2022.12.7
 chardet==4.0.0
 charset-normalizer==2.0.11
 cssselect2==0.4.1
@@ -15,7 +15,7 @@ future==0.18.2
 idna==3.3
 lxml==4.7.1
 oauthlib==3.2.0
-Pillow==9.0.0
+Pillow==9.3.0
 psycopg2-binary==2.9.3
 python-memcached==1.59
 python-twitter==3.5
