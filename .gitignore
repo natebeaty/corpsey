@@ -14,3 +14,4 @@ config.codekit3
 *.map
 bower_components
 logfile
+node_modules
