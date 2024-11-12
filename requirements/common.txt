@@ -28,5 +28,5 @@ sorl-thumbnail==12.7.0
 sqlparse==0.4.2
 svglib==1.2.1
 tinycss2==1.1.1
-urllib3==1.26.8
+urllib3==1.26.19
 webencodings==0.5.1
