@@ -108,12 +108,9 @@ INSTALLED_APPS = [
     'easy_thumbnails',
     'django_cleanup',
     'mptt',
-    # 'treeadmin',
     'corpsey.apps.comics',
     'corpsey.apps.artists',
-    # 'flatpages_x',
-    # 'markitup',
-    # 'clear_cache',
+    'honeypot',
 ]
 
 LOGGING = {
@@ -200,6 +197,8 @@ DKIM_PRIVATE_KEY = ''
 # Import settings information based on node
 STAGING_HOST = "corpsey-staging"
 PRODUCTION_HOST = "opal3.opalstack.com"
+
+HONEYPOT_FIELD_NAME = "phone_number"
 
 from platform import node
 

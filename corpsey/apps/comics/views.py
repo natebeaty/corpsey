@@ -16,6 +16,7 @@ from django.utils import timezone
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.urls import reverse
 from mptt.templatetags.mptt_tags import cache_tree_children
+from honeypot.decorators import check_honeypot
 
 def recursive_node_to_dict(node):
     result = {
@@ -204,6 +205,7 @@ def graveyard(request):
         'graves': graves,
     })
 
+@check_honeypot
 def contribute(request):
     """Reserve a spot to contribute after a comic."""
     from corpsey.apps.comics.forms import ContributeForm
@@ -244,6 +246,7 @@ def contribute(request):
             import base64, hashlib, time, os, random
 
             comic_id = form.cleaned_data['comic_id']
+
             email = form.cleaned_data['email']
             name = form.cleaned_data['name']
             try:

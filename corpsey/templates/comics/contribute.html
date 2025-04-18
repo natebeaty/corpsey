@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load thumbnail humanize static %}
+{% load honeypot %}
 
 {% block body_id %}contribute-page{% endblock %}
 {% block title %}Contribute!{% endblock %}
@@ -39,6 +40,7 @@
 
             <div class="hidden">{{ contribute_form.comic_id }}</div>
             {% csrf_token %}
+            {% render_honeypot_field %}
         </fieldset>
 
         <div class="actions">
