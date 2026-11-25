@@ -15,3 +15,5 @@ config.codekit3
 bower_components
 logfile
 node_modules
+corpsey/settings_sqlite.py
+corpsey/static/dist/
