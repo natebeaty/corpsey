@@ -17,6 +17,8 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.urls import reverse
 from mptt.templatetags.mptt_tags import cache_tree_children
 from honeypot.decorators import check_honeypot
+from django.views.decorators.http import require_POST
+from django import forms
 
 def recursive_node_to_dict(node):
     result = {
@@ -137,16 +139,21 @@ def entry(request, comic_1, comic_2=None):
         'prev_comic_links': prev_comic_links,
     })
 
+@login_required()
+@require_POST
 def pad_panels(request, contribution):
-    """Add 40px of white padding to comic panels."""
-    import subprocess
+    """Add 20px of white padding around each contribution panel (in place, via Pillow)."""
+    from PIL import Image, ImageOps
     contribution = get_object_or_404(Contribution,pk=contribution)
-
-    command = "convert -bordercolor White -border 20 %s%s %s%s " % (settings.MEDIA_ROOT, contribution.panel1, settings.MEDIA_ROOT, contribution.panel1)
-    command += "&& convert -bordercolor White -border 20 %s%s %s%s " % (settings.MEDIA_ROOT, contribution.panel2, settings.MEDIA_ROOT, contribution.panel2)
-    command += "&& convert -bordercolor White -border 20 %s%s %s%s " % (settings.MEDIA_ROOT, contribution.panel3, settings.MEDIA_ROOT, contribution.panel3)
-    proc = subprocess.Popen(command, shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, )
-    stdout_value = proc.communicate()[0]
+    for panel in (contribution.panel1, contribution.panel2, contribution.panel3):
+        if not panel:
+            continue
+        with Image.open(panel.path) as im:
+            fmt = im.format
+            padded = ImageOps.expand(im.convert('RGB'), border=20, fill='white')
+            padded.save(panel.path, format=fmt or 'JPEG', quality=92)
+        # Drop stale thumbnails so the padded version shows up
+        panel.delete_thumbnails()
 
     return HttpResponse('20px of white padding added to contribution panels ok!')
 
@@ -332,21 +339,31 @@ def contribute_upload(request, upload_code):
         contribution = Contribution.objects.get(code=upload_code)
         parent_comic = contribution.comic
         form = UploadForm(initial = {'name': contribution.name, 'email': contribution.email, 'website': contribution.website})
-        num_panels_uploaded = 0
 
         if request.method == 'POST':
+            # Panels can only be (re)uploaded while the spot is pending and before anyone has voted
+            if not contribution.pending or contribution.votes.exists():
+                error = "Your panels are already in front of the judges, so they can't be swapped out now."
+                return JsonResponse({'success' : 0, 'message' : error, 'error' : error}, status=400)
             form = UploadForm(request.POST, request.FILES)
             if form.is_valid():
+                panels = []
                 for i in range(0,3):
                     if ("comic_panels[%d]" % i in request.FILES):
-                        setattr(contribution, 'panel' + str(i+1), request.FILES["comic_panels[%d]" % i])
-                        num_panels_uploaded = num_panels_uploaded + 1
+                        # Make sure each upload really is an image
+                        try:
+                            panels.append(forms.ImageField().clean(request.FILES["comic_panels[%d]" % i]))
+                        except forms.ValidationError:
+                            error = "Panel %d doesn't look like an image file. Please upload JPG or PNG files." % (i+1)
+                            return JsonResponse({'success' : 0, 'message' : error, 'error' : error}, status=400)
 
-                if num_panels_uploaded < 3:
+                if len(panels) < 3:
                     return JsonResponse({
                         'success' : 0,
                         'message' : "You must upload 3 panels."
                     })
+
+                contribution.panel1, contribution.panel2, contribution.panel3 = panels
 
                 contribution.name = form.cleaned_data['name']
                 contribution.email = form.cleaned_data['email']

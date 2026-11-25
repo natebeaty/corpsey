@@ -31,7 +31,7 @@
 	{% endif %}
 
 	{% if user.username == 'nate' or user.username == 'aaron' %}
-		<p><a onclick="return confirm('Are you sure? This alters the original images and adds 20px of white padding.')" target="_blank" href="/pad_panels/{{ contribution.id }}/">Add Padding to Panels</a></p>
+		<form method="post" action="/pad_panels/{{ contribution.id }}/" target="_blank" onsubmit="return confirm('Are you sure? This alters the original images and adds 20px of white padding.')">{% csrf_token %}<p><button type="submit">Add Padding to Panels</button></p></form>
 	{% endif %}
 
 	<div class="actions">

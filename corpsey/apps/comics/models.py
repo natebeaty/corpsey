@@ -65,7 +65,8 @@ class Comic(MPTTModel):
         return self.get_children().filter(active=True)
 
     def get_uturn(self):
-        return self.get_ancestors().all()[0].next_sib().uturn.all()
+        next_root = self.get_root().next_sib()
+        return next_root.uturn.all() if next_root else Uturn.objects.none()
 
     def get_prev_comic_links(self):
         comic_links = []
@@ -94,13 +95,13 @@ def clear_cache(sender, instance, created, **kwargs):
 @receiver(pre_save, sender=Comic)
 def update_num_comics(sender, instance, **kwargs):
     """ Update num_comics for comic artists """
-    old = Comic.objects.filter(pk=instance.pk)
-    old = len(old) > 0 and old.get() or None
-    if old:
-        old.artist.num_comics = old.artist.num_comics - 1
+    old = Comic.objects.filter(pk=instance.pk).select_related('artist').first()
+    if old and old.artist and (not instance.artist or old.artist_id != instance.artist_id):
+        old.artist.num_comics = max(0, old.artist.num_comics - 1)
         old.artist.save()
-    instance.artist.num_comics = instance.artist.num_comics + 1
-    instance.artist.save()
+    if instance.artist and (not old or old.artist_id != instance.artist_id):
+        instance.artist.num_comics = instance.artist.num_comics + 1
+        instance.artist.save()
 
 class Uturn(models.Model):
     id = models.AutoField(primary_key=True)
@@ -108,7 +109,7 @@ class Uturn(models.Model):
     panel = ThumbnailerImageField(upload_to='comics', blank=True)
 
     def get_absolute_url(self):
-        return reverse('corpsey.apps.comics.views.uturn', [str(self.id)])
+        return reverse('comic-uturn-single', kwargs={'uturn': self.id})
 
     def __str__(self):
         return u"Uturn to %s" % (self.portal_to.artist)

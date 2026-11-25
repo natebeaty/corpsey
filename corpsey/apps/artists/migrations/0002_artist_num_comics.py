@@ -21,6 +21,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('artists', '0001_initial'),
+        ('comics', '0001_initial'),  # RunPython below reads comics.Comic
     ]
 
     operations = [

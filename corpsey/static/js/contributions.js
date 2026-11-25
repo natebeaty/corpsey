@@ -11,7 +11,8 @@ $.corpsey.contributions = (function() {
             var $queue = $(this).parents('.queue:first');
             var contribution_id = $queue.attr('data-contribution-id');
 
-            $.get('/contribution_vote/', {
+            $.post('/contribution_vote/', {
+                'csrfmiddlewaretoken': $('[name=csrfmiddlewaretoken]').val(),
                 'contribution_id': contribution_id,
                 'yea': 1
             }).done(function(data) {
@@ -41,7 +42,8 @@ $.corpsey.contributions = (function() {
             } else {
                 rule_broke = $(this).attr('data-rule-id');
             }
-            $.get('/contribution_vote/', {
+            $.post('/contribution_vote/', {
+                'csrfmiddlewaretoken': $('[name=csrfmiddlewaretoken]').val(),
                 'contribution_id': contribution_id,
                 'yea': '',
                 'rule_broke': rule_broke,

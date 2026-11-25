@@ -5,13 +5,18 @@ from django.core.mail import EmailMultiAlternatives
 from django.template.loader import get_template
 from django.conf import settings
 from django.http import JsonResponse
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_POST
 # import twitter
 import random
 
 def load_more(request):
     """Load more button on homepage"""
-    page = int(request.GET.get('page'))
-    per_page = int(request.GET.get('per_page'))
+    try:
+        page = max(1, int(request.GET.get('page', 1)))
+        per_page = min(50, max(1, int(request.GET.get('per_page', 10))))
+    except ValueError:
+        page, per_page = 1, 10
     start = (page-1) * per_page
     comic_set = Comic.objects.filter(active=True).order_by('-date')[start:(start+per_page)]
 
@@ -76,17 +81,24 @@ def get_comic_panels(request):
         'comic' : comic_obj
     })
 
+@login_required()
+@require_POST
 def contribution_vote(request):
     """The elders voting YEA OR NAY on freshly contributed strips."""
-    contribution_id = request.GET.get('contribution_id')
-    # rule_broke = request.GET.get('rule_broke', 0)
-    notes = request.GET.get('notes', '')
-    yea = request.GET.get('yea')
+    contribution_id = request.POST.get('contribution_id')
+    # rule_broke = request.POST.get('rule_broke', 0)
+    notes = request.POST.get('notes', '')
+    yea = request.POST.get('yea')
 
-    contribution = Contribution.objects.get(pk=contribution_id)
+    contribution = Contribution.objects.filter(pk=contribution_id).first()
+    if not contribution:
+        return JsonResponse({'message' : 'Contribution not found.'}, status=404)
     # Has this already been approved?
     if contribution.pending == False:
-        return JsonResponse({'message' : 'This contribution is not in the queue any longer.'})
+        return JsonResponse({'contribution_id' : contribution.id, 'message' : 'This contribution is not in the queue any longer.'})
+    # One vote per judge
+    if contribution.votes.filter(user=request.user).exists():
+        return JsonResponse({'contribution_id' : contribution.id, 'message' : 'You already voted on this one.'})
     approve = True if yea == '1' else False
     message = ''
 

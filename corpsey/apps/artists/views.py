@@ -3,10 +3,11 @@ from corpsey.apps.comics.models import *
 from django.http import JsonResponse
 from django.views.decorators.cache import cache_page
 from django.contrib.flatpages.models import FlatPage
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 def entry(request, artist_id):
-    pass
+    """Old /artist/<id>/ links go to the artist's first comic."""
+    return redirect('artist-in-catacombs', artist=artist_id, num=1)
 
 @cache_page(60 * 15)
 def artists(request):

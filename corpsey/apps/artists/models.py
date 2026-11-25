@@ -4,7 +4,6 @@ from django.urls import reverse
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.core.cache import cache
-import re
 
 class Artist(models.Model):
     id = models.AutoField(primary_key=True)
@@ -38,9 +37,9 @@ class Artist(models.Model):
     def save(self, *args, **kwargs):
         # generate first/last name from full name
         if self.name and not self.first_name and not self.last_name:
-            foo = self.name.split(' ');
-            self.last_name = foo[-1]
-            self.first_name = re.sub(foo[-1], "",self.name).strip()
+            parts = self.name.split()
+            self.last_name = parts[-1]
+            self.first_name = ' '.join(parts[:-1])
         super(Artist, self).save(*args, **kwargs)
 
 @receiver(post_save, sender=Artist)
